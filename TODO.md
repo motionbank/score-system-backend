@@ -1,9 +1,11 @@
-
 General
 =================
 - REMOVE throw() in error for backend
 * CORS exception in app? 
 
+Modules
+=======
+- node-orm @ 2.1.x causes "TypeError: Cannot redefine property: getSets"
 
 Layout editor
 ==================
