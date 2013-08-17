@@ -3,9 +3,10 @@ General
 - REMOVE throw() in error for backend
 * CORS exception in app? 
 
-Modules
+Node / Deployment
 =======
 - node-orm @ 2.1.x causes "TypeError: Cannot redefine property: getSets"
+- make package.json modular start -> script.js -> env? -> env.script.js
 
 Layout editor
 ==================
