@@ -62,7 +62,7 @@ reqLoadUser = function (req, res, next) {
  L + + + + + + + + + + + + + + + + + + + + + + + + */
 
  error = function ( req, res, err ) {
- 	console.log( arguments );
+ 	console.log( err );
  	res.json(500,{
  		status : 'error',
  		error : err.message || 'Error'
@@ -236,11 +236,23 @@ app.get( '/sets', reqAcceptsJson, function ( req, res ) {
 	});
 });
 
-app.get( '/sets/:id', reqAcceptsJson, paramIdIsNumber, function ( req, res ) {
-	req.models.sets.get(req.params['id'],function(err,set){
+app.get( '/sets/:id', reqAcceptsJson, /*paramIdIsNumber,*/ function ( req, res ) {
+	var find_opts = {};
+	if ( isNaN(parseInt(req.params['id'])) ) {
+		find_opts = {path: req.params['id']};
+	} else {
+		find_opts = {id: parseInt(req.params['id'])};
+	}
+	req.models.sets.find(find_opts,function(err,sets){
 		if ( err ) {
 			error(req,res,err);
+		} else if ( !sets || sets.length < 1 ) {
+			res.json(404,{
+				status: 'error',
+				message: 'Not found'
+			});
 		} else {
+			var set = sets[0];
 			set.getCreator(function(err,creator){
 				if ( err ) {
 					error(req,res,err);
