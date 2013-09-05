@@ -7,7 +7,8 @@ var express 	= require('express'),
 	reqAcceptsJson = null,
 	reqLoadUser = null,
 	paramIdIsNumber = null,
-	niy			= null;
+	niy			= null,
+	error 		= null;
 
 // appfog settings
 
@@ -47,13 +48,27 @@ paramIdIsNumber = function ( req, res, next ) {
 reqLoadUser = function (req, res, next) {
 	req.models.users.get(1,function(err,user1){
 		if (err) {
-			console.log(err);
+			error(req,res,err);
 		} else {
 			req.user = user1;
 			next();
 		}
 	});
 }
+
+/*
+ +	Helpers
+ +
+ L + + + + + + + + + + + + + + + + + + + + + + + + */
+
+ error = function ( req, res, err ) {
+ 	console.log( arguments );
+ 	res.json(500,{
+ 		status : 'error',
+ 		error : err.message || 'Error'
+ 	});
+ 	throw(err);
+ }
 
 /*
  +	set up APP
@@ -114,7 +129,7 @@ app.post( '/users', reqAcceptsJson, niy, function ( req, res ) {
 app.get( '/users', reqAcceptsJson, function ( req, res ) {
 	req.models.users.find(function(err,users){
 		if ( err ) {
-			console.log(err);
+			error(req,res,err);
 		} else {
 			users = _.map(users,function(u,i){
 				return u.publicProfile();
@@ -127,7 +142,7 @@ app.get( '/users', reqAcceptsJson, function ( req, res ) {
 app.get( '/users/:id', reqAcceptsJson, paramIdIsNumber, function ( req, res ) {
 	req.models.users.get(req.params['id'], function(err,user){
 		if ( err ) {
-			console.log(err);
+			error(req,res,err);
 		} else {
 			user = user.publicProfile();
 			res.json(user);
@@ -138,7 +153,7 @@ app.get( '/users/:id', reqAcceptsJson, paramIdIsNumber, function ( req, res ) {
 app.get( '/users/:id/sets', reqAcceptsJson, paramIdIsNumber, function ( req, res ) {
 	req.models.users.get(req.params['id'], function(err,user){
 		if (err) {
-			console.log(err);
+			error(req,res,err);
 		} else {
 			user.getSets(function(err, sets){
 				if (err) {
@@ -214,7 +229,7 @@ app.post( '/sets/:id/cells', reqAcceptsJson, niy, reqLoadUser, paramIdIsNumber, 
 app.get( '/sets', reqAcceptsJson, function ( req, res ) {
 	req.models.sets.find(function(err,sets){
 		if ( err ) {
-			console.log(err);
+			error(req,res,err);
 		} else {
 			res.json(sets);
 		}
@@ -224,23 +239,23 @@ app.get( '/sets', reqAcceptsJson, function ( req, res ) {
 app.get( '/sets/:id', reqAcceptsJson, paramIdIsNumber, function ( req, res ) {
 	req.models.sets.get(req.params['id'],function(err,set){
 		if ( err ) {
-			console.log(err);
+			error(req,res,err);
 		} else {
 			set.getCreator(function(err,creator){
 				if ( err ) {
-					console.log(err);
+					error(req,res,err);
 				} else {
 					set.creator = creator && creator.publicProfile();
 					set.getCells(function(err,cells){
 						if ( err ) {
-							console.log(err);
+							error(req,res,err);
 						} else {
 							var cbs = [];
 							_.each(cells,function(c){
 								cbs.push(function(next){
 									c.getFields(function(err,fields){
 										if ( err ) {
-											console.log(err);
+											error(req,res,err);
 										} else {
 											var setFields = [];
 											_.each(fields,function(f){
