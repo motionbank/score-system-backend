@@ -1,7 +1,8 @@
 module.exports = function (db, models) {
 
-	var cellTypes = ['text', 'title', 'recording', 'visualization',
-					 'media', 'context', 'adaptation', 'resources', 'set-link'];
+	var cellTypes = [ 'text', 'title', 'html', 'image',
+ 					  'iframe', 'set-link' ];
+ 	cellTypes.sort();
 
 	var model = db.define('cells',{
 		type: {

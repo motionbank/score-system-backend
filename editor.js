@@ -1503,7 +1503,7 @@ app.get( pathBase + '/vimeo/video/:id/import', idNumeric, vimeoAuthed, function 
 							if ( noError(req,res,err) ) {
 								// if this field was not here assume we need new cell
 								req.models.cells.create([{
-									type: 		 'context',
+									type: 		 'iframe',
 									title: 		 video_title,
 									description: video_description
 								}],function(err,cells){
