@@ -27,7 +27,7 @@ module Admins
       @cell = Cell.new(cell_params)
 
       if @cell.save
-        redirect_to @cell, notice: 'Cell was successfully created.'
+        redirect_to edit_cell_path(@cell), notice: 'Cell was successfully created.'
       else
         render action: 'new'
       end
@@ -36,7 +36,7 @@ module Admins
     # PATCH/PUT /cells/1
     def update
       if @cell.update(cell_params)
-        redirect_to @cell, notice: 'Cell was successfully updated.'
+        redirect_to edit_cell_path(@cell), notice: 'Cell was successfully updated.'
       else
         render action: 'edit'
       end
