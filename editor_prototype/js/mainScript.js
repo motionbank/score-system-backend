@@ -1,0 +1,92 @@
+var currentMousePos = { x: -1, y: -1 };
+var currentCellToEdit;
+
+
+$(document).ready(function() { 
+
+	/*could be used for creating poster image
+	var defaultSrc = '<iframe id="loadedVideo" src="http://player.vimeo.com/video/58098447?title=0&amp;byline=0&amp;portrait=0&amp;color=c9ff23&amp;autoplay=1" width="600" height="337" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+	$("#iframeCell").click(function(){
+		var newCell = new Cell("newCell", "cell", "Lorem Title", "Lorem Ipsum Description", 0, 0, defaultSrc );
+	});*/
+	
+	//TODO: make a table in which several cells are, which all can be dragged into the grid
+	createCellForAdding();
+	//TODO: create div as a border for grid to limit size of grid
+	makeGridResizable();
+	//create Edit Box
+	//TODO: Interface mit Matthias besprechen, modale Box mit background ausgreyen
+	createEditBox();
+	//registrate mouse position and update it in a global variable
+    getMousePosition();
+
+
+	function createCellForAdding(){
+		$( ".addCell" ).draggable({ opacity: 0.7, helper: "clone", revert: false, });
+		$( ".addCell" ).on("dragstop", checkIfInsideGrid);
+	}
+
+	function makeGridResizable(){
+		$("#gridStart").resizable({
+            grid: [ $(".cell").width() , $(".cell").height() ],
+            //containment: "#body",
+        });
+	}
+
+	function createEditBox(){
+		//fade out edit box at start
+		$("#effect").toggle("bind");
+		//register submit event of form
+	    $( "#editCell" ).submit(function( event ) {
+			var newTitle = $("input#editTitle").val();
+			var newDescription = $("input#editDescription").val();
+			//set new content for cell
+			currentCellToEdit.setContent(newTitle, newDescription);
+			$("#effect").toggle("bind");
+			//prevent event from reloading the page
+			event.preventDefault();
+		});
+	}
+
+	function getMousePosition(){
+		$(document).mousemove(function(event) {
+	        currentMousePos.x = event.pageX;
+	        currentMousePos.y = event.pageY;
+	    });
+	}
+
+});
+
+
+
+function checkCollisionsWithOthers(){
+	//remove all current overlap marks
+	$(".overlap").remove();
+	//get all cells and loop through every other cell
+	var cells = $(".cell");
+    $.each(cells, function(index, item1){
+    	$.each(cells, function(index, item2){
+    		//check if it's a different item, so it's not detecting collision with itself
+    		if(item1.id != item2.id){
+	            var overlap = $("#"+item1.id).collision("#"+item2.id, {as: "<div/>", mode:"body"});
+	            if(overlap){
+	            	//if overlap == true, add class and add to body
+	            	overlap.addClass("overlap").appendTo("body");
+	            }
+	        }
+    	})
+    });
+}
+
+
+function checkIfInsideGrid(){
+	var grid = $("#gridStart");
+	var gridPosition = grid.offset();
+	if(gridPosition.left < currentMousePos.x && currentMousePos.x < gridPosition.left + grid.width()){
+		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
+			//TODO: Prepare for reading from Database
+			var newCell = new Cell("newCell", "cell", "Default Title", "Default Description", currentMousePos.x - gridPosition.left, currentMousePos.y - gridPosition.top);
+		}
+	}
+}
+
