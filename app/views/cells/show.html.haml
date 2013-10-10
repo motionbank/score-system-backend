@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Kind:
+  = @cell.kind
+%p
+  %b Title:
+  = @cell.title
+%p
+  %b Description:
+  = @cell.description
+
+= link_to 'Edit', edit_cell_path(@cell)
+\|
+= link_to 'Back', cells_path
