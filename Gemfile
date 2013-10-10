@@ -19,6 +19,10 @@ gem 'carrierwave'
 gem 'mini_magick', '>= 3.4'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
+# AUTH
+gem 'devise'
+gem 'cancan'
+
 # TESTING
 gem 'factory_girl_rails'
 
