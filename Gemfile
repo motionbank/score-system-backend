@@ -5,7 +5,7 @@ gem 'rails', '4.0.0'
 
 
 # PERSISTENCE
-gem 'mongoid', github: 'mongoid/mongoid', ref: 'cc7a0e709066aff444bc21cd9826e1568603934d' # commit from 2013-10-04
+gem 'mongoid', github: 'mongoid/mongoid', ref: '484aa0721e899202cd9579617de1fc0addb1ffbf' # the next commit cc7a0e709066aff444bc21cd9826e1568603934d breaks the rails console and rake invocations
 gem "mongoid-indifferent-access", require: "mongoid_indifferent_access"
 gem "mongoid_slug"
 
