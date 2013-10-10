@@ -7,10 +7,39 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# JetBrains IDEs (e.g. RubyMine)
+/.idea
+
+# Mac files
+.DS_Store
+
+# VIM files
+/tags
+*.swp
+*.swo
+*.*~
+*.vim
+coverage.vim
+
+# markdown README output
+/README.HTM*
+/README.htm*
+
+# rails config
+config/config.yml
+config/mongoid.yml
+
+# carrierwave upload folder
+public/uploads
+public/system
+
+# test data
+test/support/carrierwave
+test/output/*
+
+
+.\#**
