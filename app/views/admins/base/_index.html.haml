@@ -21,10 +21,10 @@
           .record
             .actions
               .btn-group
-                = render 'shared/buttons/edit', url: polymorphic_url([:edit, :admins, resource])
-                = render 'shared/buttons/delete', url: polymorphic_url([:admins, resource])
+                = render 'shared/buttons/edit', url: edit_polymorphic_url(resource)
+                = render 'shared/buttons/delete', url: polymorphic_url(resource)
             %h4
-              = link_to(resource.title, polymorphic_url([:edit, :admins, resource]))
+              = link_to(resource.title, edit_polymorphic_url(resource))
 
             - if resource.respond_to?(:published?)
               .state{title: resource.published? ? t('record.published') : t('record.unpublished') }

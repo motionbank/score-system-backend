@@ -1,12 +1,12 @@
 - content_for :page_title, I18n.record_action(resource, 'new')
 
-= simple_form_for([:admins, resource], :html => { :multipart => true }) do |f|
+= simple_form_for(resource, :html => { :multipart => true }) do |f|
   %header
     .header-inner
       %h1.span7= yield :page_title
       .actions.span5
         = f.button :submit, :class => "btn-primary"
-        = link_to t('back'), polymorphic_path([:admins, resource.class]), :class => 'btn'
+        = link_to t('back'), polymorphic_path(resource.class), :class => 'btn'
 
   #inner
     .main-content-wrapper

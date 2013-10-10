@@ -5,13 +5,13 @@
   if defined?(use_root_naming)
     klass = resource.class.superclass
     model_name = I18n.model_name(klass)
-    form_args.merge!(as: klass.to_s.underscore, url: polymorphic_path([:admins, resource]))
+    form_args.merge!(as: klass.to_s.underscore, url: polymorphic_path(resource))
   end
 
 
 - content_for :page_title, I18n.record_action(resource, 'edit')
 
-= simple_nested_form_for([:admins, resource], form_args) do |f|
+= simple_nested_form_for(resource, form_args) do |f|
 
   %header
     .header-inner
@@ -23,7 +23,7 @@
         - if preview
           = render "admins/shared/buttons/preview", resource: resource
 
-        = link_to "« #{t('record.index')}", polymorphic_path([:admins, resource.class]), :class => "btn"
+        = link_to "« #{t('record.index')}", polymorphic_path(resource.class), :class => "btn"
 
 
   #inner
