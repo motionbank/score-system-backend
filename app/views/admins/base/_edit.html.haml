@@ -11,7 +11,7 @@
 
 - content_for :page_title, I18n.record_action(resource, 'edit')
 
-= simple_nested_form_for(resource, form_args) do |f|
+= simple_form_for(resource, form_args) do |f|
 
   %header
     .header-inner
@@ -21,7 +21,7 @@
                     class: "btn btn-primary"
 
         - if preview
-          = render "admins/shared/buttons/preview", resource: resource
+          = render "admins/shared/buttons/preview", resource: resource, preview: preview
 
         = link_to "« #{t('record.index')}", polymorphic_path(resource.class), :class => "btn"
 

@@ -25,6 +25,8 @@ en:
   my_account: "My account"
   logout: "Logout"
   record:
+    index: "List"
+    show: "Show"
     with_class_name:
       all: "All %{class_name}"
       show: "Show %{class_name}"
