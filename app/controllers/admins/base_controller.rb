@@ -5,6 +5,8 @@ require 'will_paginate/array'
 module Admins
   class BaseController < ApplicationController
 
+    PER_PAGE = 80
+
     layout 'admins'
 
     before_filter :add_admin_view_path
