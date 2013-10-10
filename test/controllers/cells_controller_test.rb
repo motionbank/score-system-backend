@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CellsControllerTest < ActionController::TestCase
   setup do
-    @cell = cells(:one)
+    @cell = FactoryGirl.create(:cell)
   end
 
   test "should get index" do
