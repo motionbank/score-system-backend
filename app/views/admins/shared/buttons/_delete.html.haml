@@ -1,0 +1,18 @@
+- url ||= '#'
+- text ||= t('record.delete')
+- css_class ||= 'btn'
+- remote ||= false
+- title ||= ''
+- disabled ||= false
+
+- link_options = {title: title, :class => css_class}
+
+- if disabled
+  - link_options[:class] += ' disabled'
+  - url = '#'
+- else
+  - link_options.merge!(:confirm => I18n.t('are_you_sure'), :method => :delete, :remote => remote)
+
+= link_to url, link_options do
+  = content_tag(:i, "", :class => 'icon-remove')
+  = text

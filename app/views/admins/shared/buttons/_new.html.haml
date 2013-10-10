@@ -1,0 +1,6 @@
+- url ||= new_polymorphic_path(resource_class)
+- text ||= I18n.record_action(resource_class, 'new')
+
+= link_to url, :class => "btn btn-primary" do
+  %i.icon-plus.icon-white
+    = text

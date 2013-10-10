@@ -24,4 +24,21 @@ en:
     title: "Motion Bank"
   my_account: "My account"
   logout: "Logout"
+  record:
+    with_class_name:
+      all: "All %{class_name}"
+      show: "Show %{class_name}"
+      index: "List %{class_name}"
+      new: "New %{class_name}"
+      create: "New %{class_name}"
+      edit: "Edit %{class_name}"
+      update: "Save %{class_name}"
+      save: "Save %{class_name}"
+      delete: "Delete %{class_name}"
+      created: "%{class_name} was created."
+      not_created: "%{class_name} could not be created."
+      updated: "%{class_name} was saved."
+      not_updated: "%{class_name} could not be saved."
+      deleted: "%{class_name} was deleted."
+      not_deleted: "%{class_name} could not be deleted"
 

@@ -1,0 +1,11 @@
+- if filters.present?
+  - current_filter = params[:filter].presence.try(:to_sym)
+
+  %ul.filters.nav.nav-tabs
+    %li(class="#{current_filter ? nil : 'active'}")
+      = link_to(I18n.t('record.filter.all'), polymorphic_url([:admins, controller.resources_sym]), :"data-toggle" => "tab")
+
+    - filters.each do |filter|
+      - filter_url = polymorphic_url([:admins, controller.resources_sym], filter: filter)
+      %li(class="#{filter == current_filter ? 'active' : nil}")
+        = link_to I18n.t("record.filter.#{filter}"), filter_url, :"data-toggle" => "tab"

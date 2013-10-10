@@ -1,5 +1,7 @@
 module Admins
   class CellsController < BaseController
+    include Concerns::ResourceControllerAccessors
+
     before_action :set_cell, only: [:show, :edit, :update, :destroy]
 
     # GET /cells

@@ -1,0 +1,31 @@
+:ruby
+  preview ||= false
+  form_args = {html: {multipart: true }}
+  model_name = I18n.model_name(resource)
+  if defined?(use_root_naming)
+    klass = resource.class.superclass
+    model_name = I18n.model_name(klass)
+    form_args.merge!(as: klass.to_s.underscore, url: polymorphic_path([:admins, resource]))
+  end
+
+
+- content_for :page_title, I18n.record_action(resource, 'edit')
+
+= simple_nested_form_for([:admins, resource], form_args) do |f|
+
+  %header
+    .header-inner
+      %h1.span7= yield :page_title
+      .actions.span5
+        = f.submit I18n.t('helpers.submit.update', model: model_name),
+                    class: "btn btn-primary"
+
+        - if preview
+          = render "admins/shared/buttons/preview", resource: resource
+
+        = link_to "« #{t('record.index')}", polymorphic_path([:admins, resource.class]), :class => "btn"
+
+
+  #inner
+    %div
+      = render 'form', :f => f
