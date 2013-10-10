@@ -19,16 +19,25 @@ gem 'carrierwave'
 gem 'mini_magick', '>= 3.4'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
+# TESTING
+gem 'factory_girl_rails'
+
 # FRONTEND
 gem 'jquery-rails'
 gem 'haml-rails'
 
-# TESTING
-gem 'factory_girl_rails'
-
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+
+# TWITTER BOOTSTRAP
+gem 'compass_twitter_bootstrap'
+gem "compass-rails", ">= 2.0.alpha.0"
+gem 'compass-960-plugin'
+gem 'bootstrap-will_paginate'
+
+# SIMPLE FORM
+gem 'simple_form', '>= 2.0.3'
+
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
