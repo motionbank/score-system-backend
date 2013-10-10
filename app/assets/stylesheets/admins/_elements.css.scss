@@ -1,0 +1,14 @@
+@import "compass_twitter_bootstrap/variables";
+
+/* STYLING OF HTML ELEMENTS */
+
+::-moz-selection { background: $gray; color: #fff; text-shadow: none; }
+::selection { background: $gray; color: #fff; text-shadow: none; }
+
+time {
+  font-family: $altFontFamily;
+}
+
+html {
+  overflow-y: scroll;
+}

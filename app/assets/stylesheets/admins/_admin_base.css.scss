@@ -1,0 +1,281 @@
+/* CONTAINS IMPORTS, OUR OWN VARIABLES AND MIXINS */
+/* shouldn't contain any actual styling definitions */
+
+@import "compass";
+@import "admins/custom_bootstrap_variables";
+@import "compass_twitter_bootstrap_responsive";
+@import "compass_twitter_bootstrap_awesome";
+
+
+
+
+
+// VARIABLES
+//------------------------------------------
+
+$maxContentWidth: 100%;
+$halfBaseLine: $baseLineHeight / 2;
+$doubleBaseLine: $baseLineHeight * 2;
+
+
+// colors
+$mintyGreen: #9bb0a5;
+$lightGray: #999999;
+$bubbleBorderColor: darken($grayLighter, 10%);
+
+
+
+
+
+// MIXINS
+//------------------------------------------
+
+@mixin navtabs {
+  // tabbed sub menu
+  ul.nav-tabs {
+    background: #eee;
+    border-color: #d4d4d4;
+    margin: 0;
+
+    a {
+      font-weight: bold;
+      font-size: 15px;
+    }
+    .active > a,
+    .active > a:hover {
+      border-color: #d4d4d4 #d4d4d4 transparent;
+    }
+  }
+  .tab-content ul.nav-tabs,
+  .upload ul.nav-tabs {
+    background: $white;
+    margin-bottom: $halfBaseLine;
+
+    a {
+      font-size: $baseFontSize;
+    }
+  }
+  .tab-content {
+    border-top: none;
+  }
+}
+
+@mixin subitems {
+  .groups {
+    list-style: none;
+    margin: 0;
+
+    .group {
+      margin-bottom: 15px;
+
+      a.btn {
+        @extend .btn-mini;
+      }
+    }
+  }
+
+  .subpages ul,
+  .groups .subgroups {
+    margin: 0;
+    list-style: none;
+
+    li {
+      background: $grayLighter;
+      margin: 5px 0;
+      padding: 5px;
+      @include border-radius(3px);
+      border-bottom: 1px solid darken($grayLighter, 10%);
+      border-right: 1px solid darken($grayLighter, 10%);
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+
+      .actions {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: $grayLighter;
+        text-align: left;
+        line-height: 28px;
+        padding-left: 5px;
+      }
+
+      .edit,
+      .delete {
+        padding: 0 3px;
+        border-left: 1px solid darken($grayLighter, 10%);
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+
+@mixin associations {
+  $spacing: 5px;
+
+  .relations-listing {
+    li {
+      position: relative;
+      overflow: hidden;
+      margin: $halfBaseLine 0;
+      padding: $spacing;
+      padding-left: 2*$spacing;
+      background: $mintyGreen;
+      color: $white;
+      font-weight: bold;
+      white-space: nowrap;
+      @include border-radius(2px);
+
+      a {
+        color: $white;
+        text-decoration: none;
+      }
+
+      &:hover {
+        background: darken($mintyGreen, 10%);
+      }
+
+      &:nth-child(n+5) {
+        background: adjust-saturation($mintyGreen, -9%);
+
+        .remove {
+          background: adjust-saturation($mintyGreen, -9%);
+        }
+      }
+      &:nth-child(5) {
+        margin-top: 25px;
+      }
+    }
+
+    .remove {
+      background: $mintyGreen;
+      padding: $spacing;
+      margin-left: $spacing;
+      border-left: 1px solid $white;
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      &:hover {
+        background: darken($mintyGreen, 10%);
+      }
+    }
+
+    &.sortable li {
+      cursor: pointer;
+    }
+  }
+}
+
+
+@mixin page-tree {
+  .child-wrapper {
+    @include clearfix;
+    background: $grayLighter;
+    padding: 0 7px;
+  }
+
+  &:nth-child(odd) .child-wrapper {
+    background: $white;
+  }
+
+  .children {
+    margin-bottom: 0;
+    margin-top: 10px;
+
+    .child {
+      display: inline-block;
+      padding: 15px 0 15px 20px;
+      background: transparent image-url('admins/bg_dotted.png') repeat-x 0 48%;
+    }
+
+    ul {
+      margin-left: 40px;
+    }
+
+    ul, > li {
+      margin-top: -15px;
+    }
+
+    li {
+      // :((((((((((((((((((((((
+      //border-left: 1px dotted $gray;
+      list-style-type: none;
+    }
+
+    li li:nth-child(n+1) {
+      margin-top: -15px;
+    }
+
+    h4, h5,
+    .actions {
+      float: left;
+    }
+
+    .actions {
+      margin-left: 10px;
+    }
+
+    .btn-group {
+      float: none;
+      top: 0;
+    }
+    .btn {
+      @extend .btn-mini;
+      background: none;
+      @include border-radius(0);
+      border: none;
+      border-left: 1px solid $grayLight;
+    }
+  }
+}
+
+
+/* JQUERY UI AUTOCOMPLETE WITH TWITTER BOOTSTRAP STYLING */
+@mixin autocomplete {
+  ul.ui-autocomplete {
+    @extend .dropdown-menu;
+
+    // Links within the dropdown menu
+    a {
+      display: block;
+      padding: 3px 15px;
+      clear: both;
+      font-weight: normal;
+      line-height: $baseLineHeight;
+      color: $dropdownLinkColor;
+      white-space: nowrap;
+    }
+
+    .ui-autocomplete-category {
+      font-weight: bold;
+      padding: .2em .4em;
+      margin: .8em 0 .2em;
+      line-height: 1.5;
+    }
+
+    // Hover state
+    a:hover,
+    a.ui-state-hover {
+      color: $dropdownLinkColorHover;
+      text-decoration: none;
+      background-color: $dropdownLinkBackgroundHover;
+    }
+  }
+}
+
+/* generic tag styling */
+%tag {
+  background: $green;
+  color: #fff;
+  margin-left: $halfBaseLine;
+  padding: 2px 4px;
+  @include border-radius(2px);
+  font-size: $baseFontSize * 3/4;
+  vertical-align: middle;
+}

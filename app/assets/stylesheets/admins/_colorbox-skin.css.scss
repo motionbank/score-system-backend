@@ -1,0 +1,60 @@
+@import "compass/css3";
+@import "compass_twitter_bootstrap/variables";
+/*
+    ColorBox Core Style:
+    The following CSS is consistent between example themes and should not be altered.
+*/
+
+#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:9999; overflow:hidden;}
+#cboxOverlay{position:fixed; width:100%; height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
+#cboxContent{position:relative;}
+#cboxLoadedContent{overflow:auto;}
+#cboxTitle{margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%; height:100%;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
+.cboxPhoto{float:left; margin:auto; border:0; display:block; max-width:none;}
+.cboxIframe{width:100%; height:100%; display:block; border:0;}
+#colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box;}
+
+
+/* cheap twitter-bootstrap lookalike */
+
+#cboxOverlay {
+  @extend .modal-backdrop;
+}
+
+#cboxWrapper {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.3);
+  @include border-radius(6px);
+  @include background-clip(padding-box);
+}
+
+#cboxContent {
+  padding: 9px 15px;
+}
+
+#cboxClose {
+  position: absolute;
+  right: 20px;
+  top: 28px;
+  font-weight: bold;
+  font-size: 24px;
+  color: $grayLight;
+}
+
+#cboxContent #flash {
+  position: relative;
+  margin: 0 25%;
+
+  .alert,
+  .msg {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+}
+
+#cboxLoadingGraphic {
+  background: transparent image-url("admins/processing.gif") no-repeat 50% 50%;
+}

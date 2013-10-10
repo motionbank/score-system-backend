@@ -1,0 +1,24 @@
+// TYPOGRAPHY
+
+$base-font-size: 32px;
+$base-font: 'ReplicaBold', 'Arial', sans-serif;
+$halo-font-path: 'lineto-replica-bold';
+
+@font-face {
+    font-family: 'ReplicaBold';
+    src: asset-url('#{$halo-font-path}.eot','font');
+    src: asset-url('#{$halo-font-path}.eot?#iefix','font') format('embedded-opentype'),
+         asset-url('#{$halo-font-path}.woff','font') format('woff'),
+         asset-url('#{$halo-font-path}.ttf','font') format('truetype'),
+         asset-url('#{$halo-font-path}.svg#ReplicaBold','font') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@mixin repeating-linear-gradient($params...) {
+  background-image: -webkit-repeating-linear-gradient($params);
+  background-image: -moz-repeating-linear-gradient($params);
+  background-image: -ms-repeating-linear-gradient($params);
+  background-image: -o-repeating-linear-gradient($params);
+  background-image: repeating-linear-gradient($params);
+}

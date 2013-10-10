@@ -1,0 +1,176 @@
+@import "compass/css3";
+@import "compass_twitter_bootstrap/variables";
+@import "admin_base";
+@import "helpers";
+@import "elements";
+@import "admins/forms";
+@import "colorbox-skin";
+
+/* MAIN STYLESHEET */
+#inner {
+  margin: auto;
+  padding-top: 3.25 * $navbarHeight;
+  margin-bottom: $baseLineHeight;
+  max-width: $maxContentWidth;
+}
+
+/* Genereic doulbe-gray-border Box Layout style */
+.bubblebox {
+  padding: $halfBaseLine;
+  background: $grayLighter;
+  margin: $baseLineHeight 0;
+}
+.bubble {
+  border: 1px solid $bubbleBorderColor;
+  background: $white;
+  padding: 0 $baseLineHeight $baseLineHeight;
+}
+
+.empty {
+  padding: $baseLineHeight/2;
+  font-family: $altFontFamily;
+  font-style: italic;
+}
+
+
+/* Header Styling */
+header {
+  @extend .row-fluid;
+  background: $mintyGreen;
+  @include background-image(linear-gradient(#bad3c7, $green 70%, $green));
+  @include box-shadow(darken($green, 30%) 0 -10px 10px -8px inset);
+  position: fixed;
+  margin: 0 ($gridGutterWidth * -1);
+  padding: 1.5 * $navbarHeight 0 0 0;
+  z-index:  $zindexFixedNavbar - 1;
+  border-bottom: 1px dotted $grayDark;
+
+  .header-inner {
+    @include clearfix;
+    overflow: visible;
+    margin: auto $gridGutterWidth;
+  }
+
+  h1 {
+    @extend .span8;
+    @include single-text-shadow(darken($green, 40%), 0, 0, 2px);
+    margin-bottom: $halfBaseLine;
+    color: lighten($green, 35%);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+.main-content.listing {
+  padding: 0;
+}
+
+@include navtabs;
+
+.actions {
+  text-align: right;
+
+  .btn-group,
+  > .btn {
+    float: right;
+    margin-left: $baseLineHeight / 2;
+  }
+
+  .dropdown-menu {
+    text-align: left;
+  }
+}
+
+
+.meta {
+  font-family: $altFontFamily;
+  border-bottom: 1px dotted $grayLight;
+  padding-bottom: 2px;
+
+  .icon-eye-open {
+    color: $successText;
+  }
+  .icon-eye-close {
+    color: $grayLight;
+  }
+}
+
+.record {
+  position: relative;
+  overflow: hidden;
+  padding: $halfBaseLine/2 $halfBaseLine;
+  border-bottom: 1px solid $grayLight;
+  border-top: 1px solid $white;
+  background: $grayLighter;
+
+  &:nth-child(odd) {
+    background: $white;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .actions {
+    @extend .btn-group;
+    float: right;
+  }
+
+  .state {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    background: lighten($mintyGreen, 10%);
+    border-right: 1px solid #999;
+    text-align: center;
+    vertical-align: baseline;
+    @include box-shadow(darken($green, 20%) -4px 0 10px -1px inset);
+
+    i {
+      @include text-shadow(#F4F4F4 1px 1px 0px);
+      line-height: 39px;
+    }
+  }
+
+  h4 {
+    margin: 0 0 0 30px;
+    line-height: 30px;
+
+    .label {
+      vertical-align: 3px;
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.visibility {
+  margin-top: $baseLineHeight;
+
+  label.disabled {
+    color: $lightGray;
+  }
+}
+
+
+/* ALERT STYLING */
+#flash {
+  width: 50%;
+  position: fixed;
+  z-index: $zindexFixedNavbar + 1;
+  margin: 3.25% 25%;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+/* bootstrap override for 'general errors' */
+.alert.alert-error .help-inline {
+    margin-bottom: 0px;
+    padding-left: 0px;
+}

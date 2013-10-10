@@ -14,3 +14,14 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+//= require jquery-ui-1.10.3.custom.min
+//= require bootstrap-alert
+//= require bootstrap-dropdown
+//
+//  ***
+//= require initializer.js
+//  ***
+//
+//  *** view/controller centric code
+//= require_tree ./admins
