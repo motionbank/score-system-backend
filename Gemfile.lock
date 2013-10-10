@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/mongoid/mongoid.git
+  revision: cc7a0e709066aff444bc21cd9826e1568603934d
+  ref: cc7a0e709066aff444bc21cd9826e1568603934d
+  specs:
+    mongoid (4.0.0)
+      activemodel (~> 4.0.0)
+      moped (~> 2.0.beta2)
+      origin (~> 1.0)
+      tzinfo (~> 0.3.37)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -27,6 +38,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.0)
     atomic (1.1.14)
+    bson (2.0.0.rc2)
     builder (3.1.4)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -49,7 +61,17 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25)
     minitest (4.7.5)
+    mongoid-indifferent-access (1.0.0)
+      mongoid
+    mongoid_slug (3.1.2)
+      mongoid (> 3.0)
+      stringex (~> 1.4)
+    moped (2.0.0.beta2)
+      bson (~> 2.0.0.rc2)
+      optionable (~> 0.1.1)
     multi_json (1.8.1)
+    optionable (0.1.1)
+    origin (1.1.0)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -88,6 +110,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    stringex (1.5.1)
     thor (0.18.1)
     thread_safe (0.1.3)
       atomic
@@ -111,6 +134,9 @@ PLATFORMS
 
 DEPENDENCIES
   jquery-rails
+  mongoid!
+  mongoid-indifferent-access
+  mongoid_slug
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
   sdoc
