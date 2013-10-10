@@ -1,0 +1,11 @@
+.navbar.navbar-fixed-top.navbar-inverse
+  .navbar-inner
+    %nav.container-fluid
+      = link_to I18n.t('page.title'), admins_root_url, :class => "brand"
+
+      %ul.nav
+        = admin_navigation_left
+
+      %ul.nav.pull-right
+        %li.divider-vertical
+        = admin_navigation_right
