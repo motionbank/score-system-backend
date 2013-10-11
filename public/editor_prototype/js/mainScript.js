@@ -1,12 +1,15 @@
-// TODO Check CSS (position, left, top) of Grid and BoundsForGrid, not clear written
-// .addCell -> .contentCell
-// implement images for cells
-// Klasse .gridCell ohne Content
-// if cell used in grid mark .contentCell as "used", background-color: grey
-// used cells have class .usedCell
-// .usedCells need to have id to mark their equivalents in the grid
-// add "Remove" to graffle table "Used Cell"
-//TODO: Layouts implementieren
+// 	TODO Check CSS (position, left, top) of Grid and BoundsForGrid, not clear written
+//	because e.g. boundaries for grid do not work at the moment
+// 	TODO: implement images for cells + deleting of images
+// 	Klasse .gridCell ohne Content
+// 	TODO: mark used cells and make it reversible if cell gets deleted in grid
+// 	.usedCells need to have id to mark their equivalents in the grid
+// 	--> TODO: check hover state and mark hovered cell in grid and vice versa
+// 	TODO: add "Remove" Button to graffle table "Used Cell" and implement it in table
+//	TODO: Layouts implementieren
+//	TODO: Add Edit Button In Table
+// 	TODO: Rewrite Collision Detection
+//	TODO: resize image src cell when added dynamically
 
 
 
@@ -24,12 +27,12 @@ $(document).ready(function() {
 	//registrate mouse position and update it in a global variable
     getMousePosition();
 
+    //create dummy rows
     for(var i = 0; i < 8; i++){
     	createContentRow(i,"","MyTitle of Cell"+i,"MyDescription");
     }
 
     
-
 	function makeGridResizable(){
 		$("#grid").resizable({
             grid: [ $(".cell").width() , $(".cell").height() ],
@@ -127,7 +130,6 @@ function onDrop(event){
 	if(gridPosition.left < currentMousePos.x && currentMousePos.x < gridPosition.left + grid.width()){
 		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
 			//TODO: Prepare for reading from Database
-			//var imageLink = '<img class="cell" src="http://www.zdf-enterprises.de/de/sites/default/files/imagecache/player_posterframe/catalogue/en/1726/dance_academy.jpg.crop_display.jpg"></img>';
 			var imageLink = "";
 			var newGridCell = new GridCell(	id, title, description, 
 											currentMousePos.x - gridPosition.left, 

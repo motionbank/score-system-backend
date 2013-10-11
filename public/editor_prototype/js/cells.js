@@ -1,10 +1,4 @@
 
-// DONE: rename to gridCell, stays as it is
-// when dropping a .contentCell element, create new gridCell object with title, desc, etc of HTML content
-
-
-
-
 //standard gridCell
 function GridCell(id, title, description, mouseX, mouseY) {
     id = id.split('_');
@@ -32,7 +26,7 @@ function GridCell(id, title, description, mouseX, mouseY, src) {
     this.y = mouseY;
     this.width;
     this.height;
-    if(src != "") this.src = src;
+    if(src) this.src = src;
     else this.src = "";
     this.init();
 }
@@ -44,7 +38,10 @@ GridCell.prototype = {
         this.addEvents();
         this.setPositions();
         //use this later for poster images
-        if(this.src != "") this.setSrc();
+        if(this.src){
+            this.setSrc();
+            alert("settting src as init because: "+ this.src);
+        } 
     },
 
     //add Handlers
@@ -143,7 +140,7 @@ GridCell.prototype = {
         $("#"+this.id+"_content").html("<div><p class='cell-content cell-title'>" + title + "</p><p class='cell-content'>" + description + "</p></div>");
         this.title = title;
         this.description = description;
-        if(imageSrc != ""){
+        if(imageSrc){
             this.src = imageSrc;
             this.setSrc();
         }
