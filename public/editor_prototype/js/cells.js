@@ -23,8 +23,9 @@ function GridCell(id, title, description, mouseX, mouseY) {
 
 //gridCell with iframe/poster image
 function GridCell(id, title, description, mouseX, mouseY, src) {
-    //this.id = id;
-    this.id = id;
+    id = id.split('_');
+    this.id = "gridCell_"+id[1];
+    console.log(this.id);
     this.class = "cell ui-widget-content";
     this.title = title;
     this.description = description;
@@ -133,13 +134,18 @@ GridCell.prototype = {
         this.openEditDialog();
     },
     openEditDialog: function(){
+        $("#dialog-modal #editTitle").val(this.title);
+        $("#dialog-modal #editType").val("");
+        $("#dialog-modal #editDescription").val(this.description);
         $("#dialog-modal").dialog("open");
         currentCellToEdit = this;
     },
 
     //TODO Create Templates for Cells for different types
-    setContent: function(titleHTML, descriptionHTML){
-        $("#"+this.id+"_content").html("<div><p class='cell-content cell-title'>" + titleHTML + "</p><p class='cell-content'>" + descriptionHTML + "</p></div>");
+    setContent: function(title, description){
+        $("#"+this.id+"_content").html("<div><p class='cell-content cell-title'>" + title + "</p><p class='cell-content'>" + description + "</p></div>");
+        this.title = title;
+        this.description = description;
     }
      
 }

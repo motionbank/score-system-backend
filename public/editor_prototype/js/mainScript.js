@@ -86,13 +86,6 @@ $(document).ready(function() {
 
 	function createContentRow(id, src, title, description){
 		var id = "contentCell_" + id;
-		/*var rowID = "<tr id='"+id+"'>";
-		var rowImage = "<td class='contentCellPosterImage'><div class='ui-widget-content contentCell'><h3> Drag into Grid </h3></div></td>";
-		var rowTitle = "<td class='contentCellTitle'></td>";
-		var rowDescription = "<td class='contentCellDescription'></td>";
-		var rowButton = "<td class='contentCellAddButton'></td></tr>";
-		var htmlBasicStructure = rowID + rowImage + rowTitle + rowDescription + rowButton;*/
-
 		var htmlBasicStructure = 	"<tr id='" + id + "'>\
 										<td class='contentCellPosterImage contentCell ui-widget-content'></td>\
 										<td class='contentCellTitle'></td>\
