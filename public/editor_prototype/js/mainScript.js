@@ -86,12 +86,19 @@ $(document).ready(function() {
 
 	function createContentRow(id, src, title, description){
 		var id = "contentCell_" + id;
-		var rowID = "<tr id='"+id+"'>";
+		/*var rowID = "<tr id='"+id+"'>";
 		var rowImage = "<td class='contentCellPosterImage'><div class='ui-widget-content contentCell'><h3> Drag into Grid </h3></div></td>";
 		var rowTitle = "<td class='contentCellTitle'></td>";
 		var rowDescription = "<td class='contentCellDescription'></td>";
 		var rowButton = "<td class='contentCellAddButton'></td></tr>";
-		var htmlBasicStructure = rowID + rowImage + rowTitle + rowDescription + rowButton;
+		var htmlBasicStructure = rowID + rowImage + rowTitle + rowDescription + rowButton;*/
+
+		var htmlBasicStructure = 	"<tr id='" + id + "'>\
+										<td class='contentCellPosterImage contentCell ui-widget-content'></td>\
+										<td class='contentCellTitle'></td>\
+										<td class='contentCellDescription'></td>\
+										<td class='contentCellAddButton'></td>\
+									</tr>";
 		$("#contentCellTable tbody").prepend(htmlBasicStructure);
 		$("#"+id+" .contentCellPosterImage").append(src);
 		$("#"+id+" .contentCellTitle").append(title);
@@ -141,7 +148,7 @@ function onDrop(event){
 			//TODO: Prepare for reading from Database
 			//var imageLink = '<img class="cell" src="http://www.zdf-enterprises.de/de/sites/default/files/imagecache/player_posterframe/catalogue/en/1726/dance_academy.jpg.crop_display.jpg"></img>';
 			var imageLink = "";
-			var newGridCell = new gridCell(	id, title, description, 
+			var newGridCell = new GridCell(	id, title, description, 
 											currentMousePos.x - gridPosition.left, 
 											currentMousePos.y - gridPosition.top, 
 											imageLink);

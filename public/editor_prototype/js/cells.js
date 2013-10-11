@@ -6,9 +6,10 @@
 
 
 //standard gridCell
-function gridCell(id, title, description, mouseX, mouseY) {
+function GridCell(id, title, description, mouseX, mouseY) {
     //this.id = id;
-    this.id = id;
+    this.id = "gridCell_"+id.split('_')[1];
+    console.log(id);
     this.class = "cell ui-widget-content";
     this.title = title;
     this.description = description;
@@ -21,7 +22,7 @@ function gridCell(id, title, description, mouseX, mouseY) {
 }
 
 //gridCell with iframe/poster image
-function gridCell(id, title, description, mouseX, mouseY, src) {
+function GridCell(id, title, description, mouseX, mouseY, src) {
     //this.id = id;
     this.id = id;
     this.class = "cell ui-widget-content";
@@ -37,7 +38,7 @@ function gridCell(id, title, description, mouseX, mouseY, src) {
     this.init();
 }
 
-gridCell.prototype = {
+GridCell.prototype = {
     init: function ()
     {
         this.render();
