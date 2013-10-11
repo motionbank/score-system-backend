@@ -6,6 +6,7 @@
 // used cells have class .usedCell
 // .usedCells need to have id to mark their equivalents in the grid
 // add "Remove" to graffle table "Used Cell"
+//TODO: Layouts implementieren
 
 
 
@@ -15,33 +16,19 @@ var currentCellToEdit;
 
 
 $(document).ready(function() { 
-
-	/*could be used for creating poster image
-	var defaultSrc = '<iframe id="loadedVideo" src="http://player.vimeo.com/video/58098447?title=0&amp;byline=0&amp;portrait=0&amp;color=c9ff23&amp;autoplay=1" width="600" height="337" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
-	$("#iframeCell").click(function(){
-		var newCell = new Cell("newCell", "cell", "Lorem Title", "Lorem Ipsum Description", 0, 0, defaultSrc );
-	});*/
 	
-	//TODO: make a table in which several cells are, which all can be dragged into the grid
-	createCellForAdding();
-	//TODO: create div as a border for grid to limit size of grid
-	//DONE! NEW TODO: Correct CSS and position grid correctly
+	//TODO: Correct CSS and position grid correctly
 	makeGridResizable();
 	//create Edit Box
-	//TODO: Interface mit Matthias besprechen, modale Box mit background ausgreyen
-	//DONE! Modale Box implementiert! Still TODO: Interface mit Matthias besprechen
 	createEditBox();
 	//registrate mouse position and update it in a global variable
     getMousePosition();
+
     for(var i = 0; i < 8; i++){
     	createContentRow(i,"","MyTitle of Cell"+i,"MyDescription");
-    } 
+    }
 
-
-	function createCellForAdding(){
-		/*$( ".contentCell" ).draggable({ opacity: 0.7, helper: "clone", revert: false, });
-		$( ".contentCell" ).on("dragstop", checkIfInsideGrid);*/
-	}
+    
 
 	function makeGridResizable(){
 		$("#grid").resizable({
@@ -68,8 +55,9 @@ $(document).ready(function() {
 	    $( "#editCell" ).submit(function( event ) {
 			var newTitle = $("input#editTitle").val();
 			var newDescription = $("input#editDescription").val();
+			var newSrc = $("input#editImageSrc").val();
 			//set new content for contentCell
-			currentCellToEdit.setContent(newTitle, newDescription);
+			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
 			$("#dialog-modal").dialog("close");
 			$("#editCell")[0].reset();
 			//prevent event from reloading the page
@@ -145,6 +133,7 @@ function onDrop(event){
 											currentMousePos.x - gridPosition.left, 
 											currentMousePos.y - gridPosition.top, 
 											imageLink);
+			droppedCell.addClass("usedCell");
 		}
 	}
 }

@@ -32,6 +32,11 @@ body {
 
 .contentCell{
 	position: relative;
+	border-width: 0;
+}
+
+.usedCell{
+	background-color: orange;
 }
 
 #contentCellTable{

@@ -7,9 +7,8 @@
 
 //standard gridCell
 function GridCell(id, title, description, mouseX, mouseY) {
-    //this.id = id;
-    this.id = "gridCell_"+id.split('_')[1];
-    console.log(id);
+    id = id.split('_');
+    this.id = "gridCell_"+id[1];
     this.class = "cell ui-widget-content";
     this.title = title;
     this.description = description;
@@ -25,7 +24,6 @@ function GridCell(id, title, description, mouseX, mouseY) {
 function GridCell(id, title, description, mouseX, mouseY, src) {
     id = id.split('_');
     this.id = "gridCell_"+id[1];
-    console.log(this.id);
     this.class = "cell ui-widget-content";
     this.title = title;
     this.description = description;
@@ -90,7 +88,6 @@ GridCell.prototype = {
         this.position = position;
         this.save();
          $("#"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
-        
         //this.checkCollisions();
         
     },
@@ -127,7 +124,7 @@ GridCell.prototype = {
 
     //later using for poster image
     setSrc: function(){
-        $("#"+this.id+"_content").html(this.src);     
+        $("#"+this.id+"_content").html("<img src='" + this.src + "'></img>");  
     },
 
     onDblClick: function(){
@@ -142,10 +139,14 @@ GridCell.prototype = {
     },
 
     //TODO Create Templates for Cells for different types
-    setContent: function(title, description){
+    setContent: function(title, description, imageSrc){
         $("#"+this.id+"_content").html("<div><p class='cell-content cell-title'>" + title + "</p><p class='cell-content'>" + description + "</p></div>");
         this.title = title;
         this.description = description;
+        if(imageSrc != ""){
+            this.src = imageSrc;
+            this.setSrc();
+        }
     }
      
 }
