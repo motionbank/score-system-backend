@@ -1,4 +1,13 @@
 
+// rename to gridCell, stays as it is
+// when dropping a .contentCell element, create new gridCell object with title, desc, etc of HTML content
+
+
+
+
+
+
+
 //standard cell
 function Cell(id, theClass, title, description, mouseX, mouseY) {
     //this.id = id;
@@ -27,7 +36,8 @@ function Cell(id, theClass, title, description, mouseX, mouseY, src) {
     this.y = mouseY;
     this.width;
     this.height;
-    this.src = src;
+    if(src != "") this.src = src;
+    else this.src = "";
     this.init();
 }
 
@@ -38,7 +48,7 @@ Cell.prototype = {
         this.addEvents();
         this.setPositions();
         //use this later for poster images
-        //this.setiFrame();
+        if(this.src != "") this.setSrc();
     },
 
     //add Handlers
@@ -47,13 +57,13 @@ Cell.prototype = {
         //makes cells resizable in grid
         $("#"+this.id).resizable({
             grid: [ this.gridSize.width, this.gridSize.height ],
-            containment: "#gridStart",
+            containment: "#grid",
         });
 
         //makes cells draggable in grid
         $("#"+this.id).draggable({ 
             grid: [ this.gridSize.width, this.gridSize.height ],
-            containment: "#gridStart",
+            containment: "#grid",
         });
 
         //update cell content with X and Y position
@@ -67,9 +77,8 @@ Cell.prototype = {
     render: function(){
         this.html = "<div id='" + this.id + "' class='" + this.class + "'><span id='" + this.id + "_content'></span></div>";
         $("#" + this.id).html(this.html);
-        $("#" + this.id + "_content").html("<h3>" + this.title + "</h3><br>" + this.description + "<br>");
-        $("#gridStart").append(this.html);
-
+        $("#grid").append(this.html);
+        this.setContent(this.title, this.description);
         //get the gridsize and set the size of the cell
         this.gridSize = $("#" + this.id).css(["width", "height"]);
         this.gridSize.width = parseInt(this.gridSize.width);
@@ -95,9 +104,9 @@ Cell.prototype = {
         this.height = $("#"+this.id).height()/this.gridSize.height;
 
         //for testing inserting data into cell, normally writing to database
-        var titleHTML = "Position X: " + this.x/this.gridSize.width + "<br>Position Y: " + this.y/this.gridSize.height;
+        /*var titleHTML = "Position X: " + this.x/this.gridSize.width + "<br>Position Y: " + this.y/this.gridSize.height;
         var descriptionHTML = "Width: " + this.width + "<br>Height: " + this.height;
-        $("#" + this.id + "_content").html(titleHTML + "<br>" + descriptionHTML + "</div>");
+        $("#" + this.id + "_content").html(titleHTML + "<br>" + descriptionHTML + "</div>");*/
     },
 
     checkCollisions: function(){
@@ -106,7 +115,7 @@ Cell.prototype = {
 
     //set position of cell when inserting into grid
     setPositions: function(){
-        var grid = $("#gridStart");
+        var grid = $("#grid");
         var gridPosition = grid.offset();
 
         //calculate position in grid
@@ -116,28 +125,27 @@ Cell.prototype = {
         this.update();
     },
 
-    /*later using for poster image
-    setiFrame: function(){
+    //later using for poster image
+    setSrc: function(){
         $("#"+this.id).html(this.src);
-        $("#loadedVideo").css({"width":this.width*this.gridSize.width, "height": this.height* this.gridSize.height });
         //makes cells draggable in grid
         $("#"+this.id).draggable({ 
             grid: [ this.gridSize.width, this.gridSize.height ],
-            containment: "#gridStart",
+            containment: "#grid",
         });
-    },*/
+    },
 
     onDblClick: function(){
         this.openEditDialog();
     },
     openEditDialog: function(){
-        $("#effect").toggle("bind");
+        $("#dialog-modal").dialog("open");
         currentCellToEdit = this;
     },
 
     //TODO Create Templates for Cells for different types
     setContent: function(titleHTML, descriptionHTML){
-        $("#"+this.id+"_content").html("<h2>" + titleHTML + "</h2><h3>" + descriptionHTML + "</h3></div>");
+        $("#"+this.id+"_content").html("<div><p class='cell-content cell-title'>" + titleHTML + "</p><p class='cell-content'>" + descriptionHTML + "</p></div>");
     }
      
 }

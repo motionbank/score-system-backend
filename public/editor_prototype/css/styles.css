@@ -5,45 +5,61 @@ body {
 
 .cell {
 	position: absolute !important;
-	width: 200px; 
-	height: 200px; 
+	width: 100px; 
+	height: 100px; 
 	background-color: orange;
 	opacity:1;
-	z-index:15;
 	border-width: 0px !important;
 }
 
 
 .cell h3{ 
-	text-align: center; 
-	margin: 0; 
+	/*text-align: center;*/ 
+	padding: 5px 0px 5px 5px; 
 	position: absolute;
-	z-index:15;
+}
+
+.cell-content{
+	padding: 1px 0px 1px 20px;
+	font-size: 12px;
+}
+
+.cell-title{
+	font-weight: 700;
 }
 
 
 
 .addCell{
 	position: absolute;
-	right:0px;
 }
 
 #normalCell{
-	top:0px;
+	top:500px;
+	left:100px;
 }
 
 #iframeCell{
 	top:300px;
 }
 
+#boundsForGrid{
+	position: :absolute;
+	margin-top: -8px;
+	margin-left: 100px;
+	width:1000px;
+	height:400px;
+	background-color: #444444;
+	opacity: 0.9;
 
+}
 
-#gridStart{
+#grid{
 	position: absolute;
 	left: 100px;
     top: 100px;
-    width: 1000px;
-    height: 400px;
+    width: 600px;
+    height: 300px;
     background-color: #cccccc;
     opacity: 0.8;
 }
@@ -58,25 +74,4 @@ h2 {
 	position: absolute !important;
 	opacity:0.3;
 	z-index:-1;
-}
-
-
-
-
-/*toggle styles*/
- .toggler {
-width: 500px;
-height: 200px;
-margin-top:500px;
-margin-left: 300px;
-}
-#button {
-padding: .5em 1em;
-text-decoration: none;
-}
-#effect {
-position: relative;
-width: 240px;
-height: 400px;
-padding: 0.4em;
 }

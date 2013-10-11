@@ -9,38 +9,37 @@
 		<script src="js/jquerycollision1.0.2min/jquery-collision.min.js"></script>
 		<script src="js/mainScript.js"></script>
 		<script src="js/cells.js"></script>
-		<link rel="stylesheet" href="css/resizeStyles.css"></link>
+		<link rel="stylesheet" href="css/styles.css"></link>
 		<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.3.custom.min.css"></link>
 	</head>
 	<body>
 		<h2>Motion Bank Project Editor</h2>
-		<div id="gridStart"></div>
+		<div id="boundsForGrid">
+			<div id="grid"></div>
+		</div>
 		<div id="normalCell" class="cell ui-widget-content addCell">
-			<h3> Drag or Click </h3>
+			<h3> Drag into Grid </h3>
 		</div>
 		<!-- testing iframes / poster images
 		<div id="iframeCell" class="cell ui-widget-content addCell">
 			<h3> Click for iFrame </h3>
 		</div>-->
-		<div class="toggler">
-			<div id="effect" class="ui-widget-content ui-corner-all">
-				<h3 class="ui-widget-header ui-corner-all">Toggle</h3>
-				<p>
-				<form id="editCell">
-					<p>Title</p>
-					<p><input id="editTitle" type="text" name="title"></p>
-					<p>Type</p>
-					<p><input id="editType" type="text" name="type"></p>
-					<p>Description</p>
-					<p><input id="editDescription" type="text" name="description"></p>
-					<p>Poster Image</p>
-					<p>Additional Fields</p>
-					<p><input="type" name ="key"><input="type" name="value"></p>
-					<p><input type="submit" value="Submit"></p>
-				</form>
-				</p>
-			</div>
+	
+		<div id="dialog-modal" class="Basic modal dialog" title="Edit Cell">
+			<form id="editCell">
+				<p>Title</p>
+				<p><input id="editTitle" type="text" name="title"></p>
+				<p>Type</p>
+				<p><input id="editType" type="text" name="type"></p>
+				<p>Description</p>
+				<p><input id="editDescription" type="text" name="description"></p>
+				<p>Poster Image</p>
+				<p>Additional Fields</p>
+				<p><input="type" name ="key"><input="type" name="value"></p>
+				<p><input type="submit" value="Save"></p>
+			</form>
 		</div>
+
 
 	</body>
 </html>

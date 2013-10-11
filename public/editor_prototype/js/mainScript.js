@@ -1,3 +1,15 @@
+// TODO Check CSS (position, left, top) of Grid and BoundsForGrid, not clear written
+// .addCell -> .contentCell
+// implement images for cells
+// Klasse .gridCell ohne Content
+// if cell used in grid mark .contentCell as "used", background-color: grey
+// used cells have class .usedCell
+// .usedCells need to have id to mark their equivalents in the grid
+// add "Remove" to graffle table "Used Cell"
+
+
+
+
 var currentMousePos = { x: -1, y: -1 };
 var currentCellToEdit;
 
@@ -13,9 +25,11 @@ $(document).ready(function() {
 	//TODO: make a table in which several cells are, which all can be dragged into the grid
 	createCellForAdding();
 	//TODO: create div as a border for grid to limit size of grid
+	//DONE! NEW TODO: Correct CSS and position grid correctly
 	makeGridResizable();
 	//create Edit Box
 	//TODO: Interface mit Matthias besprechen, modale Box mit background ausgreyen
+	//DONE! Modale Box implementiert! Still TODO: Interface mit Matthias besprechen
 	createEditBox();
 	//registrate mouse position and update it in a global variable
     getMousePosition();
@@ -27,22 +41,34 @@ $(document).ready(function() {
 	}
 
 	function makeGridResizable(){
-		$("#gridStart").resizable({
+		$("#grid").resizable({
             grid: [ $(".cell").width() , $(".cell").height() ],
-            //containment: "#body",
+            containment: "#boundsForGrid",
         });
 	}
 
 	function createEditBox(){
-		//fade out edit box at start
-		$("#effect").toggle("bind");
+		$("#dialog-modal").dialog({
+			height: 500,
+			autoOpen: false,
+			show: {
+				effect:"blind",
+				duration: 800
+			},
+			hide: {
+				effect:"blind",
+				duration:400
+			},
+			modal:true
+		});
 		//register submit event of form
 	    $( "#editCell" ).submit(function( event ) {
 			var newTitle = $("input#editTitle").val();
 			var newDescription = $("input#editDescription").val();
 			//set new content for cell
 			currentCellToEdit.setContent(newTitle, newDescription);
-			$("#effect").toggle("bind");
+			$("#dialog-modal").dialog("close");
+			$("#editCell")[0].reset();
 			//prevent event from reloading the page
 			event.preventDefault();
 		});
@@ -58,7 +84,7 @@ $(document).ready(function() {
 });
 
 
-
+//TODO rewrite code, currently red cell is behind everything, because cells weren't draggable anymore
 function checkCollisionsWithOthers(){
 	//remove all current overlap marks
 	$(".overlap").remove();
@@ -80,11 +106,12 @@ function checkCollisionsWithOthers(){
 
 
 function checkIfInsideGrid(){
-	var grid = $("#gridStart");
+	var grid = $("#grid");
 	var gridPosition = grid.offset();
 	if(gridPosition.left < currentMousePos.x && currentMousePos.x < gridPosition.left + grid.width()){
 		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
 			//TODO: Prepare for reading from Database
+
 			var newCell = new Cell("newCell", "cell", "Default Title", "Default Description", currentMousePos.x - gridPosition.left, currentMousePos.y - gridPosition.top);
 		}
 	}
