@@ -1,18 +1,15 @@
 
-// rename to gridCell, stays as it is
+// DONE: rename to gridCell, stays as it is
 // when dropping a .contentCell element, create new gridCell object with title, desc, etc of HTML content
 
 
 
 
-
-
-
-//standard cell
-function Cell(id, theClass, title, description, mouseX, mouseY) {
+//standard gridCell
+function gridCell(id, title, description, mouseX, mouseY) {
     //this.id = id;
-    this.id = 1 + Math.floor(Math.random()*200);
-    this.class = theClass + " ui-widget-content";
+    this.id = id;
+    this.class = "cell ui-widget-content";
     this.title = title;
     this.description = description;
     this.html; 
@@ -23,12 +20,11 @@ function Cell(id, theClass, title, description, mouseX, mouseY) {
     this.init();
 }
 
-//TODO: Creating classes for different cells / create one class which can handle all types of cells
-//cell with iframe/poster image
-function Cell(id, theClass, title, description, mouseX, mouseY, src) {
+//gridCell with iframe/poster image
+function gridCell(id, title, description, mouseX, mouseY, src) {
     //this.id = id;
-    this.id = 1 + Math.floor(Math.random()*200);
-    this.class = theClass + " ui-widget-content";
+    this.id = id;
+    this.class = "cell ui-widget-content";
     this.title = title;
     this.description = description;
     this.html; 
@@ -41,7 +37,7 @@ function Cell(id, theClass, title, description, mouseX, mouseY, src) {
     this.init();
 }
 
-Cell.prototype = {
+gridCell.prototype = {
     init: function ()
     {
         this.render();

@@ -30,16 +30,31 @@ body {
 	font-weight: 700;
 }
 
-
-
-.addCell{
-	position: absolute;
+.contentCell{
+	position: relative;
 }
 
+#contentCellTable{
+	margin-left:100px;
+	margin-top:100px;
+	padding: 5px;
+	border-width: 3px;
+	border-style: solid;
+}
+
+#contentCellTable td{
+	padding: 10px;
+}
+#contentCellTable tr{
+	border-width: 1px;
+	border-style: solid;
+}
+
+/*
 #normalCell{
 	top:500px;
 	left:100px;
-}
+}*/
 
 #iframeCell{
 	top:300px;

@@ -33,11 +33,14 @@ $(document).ready(function() {
 	createEditBox();
 	//registrate mouse position and update it in a global variable
     getMousePosition();
+    for(var i = 0; i < 8; i++){
+    	createContentRow(i,"","MyTitle of Cell"+i,"MyDescription");
+    } 
 
 
 	function createCellForAdding(){
-		$( ".addCell" ).draggable({ opacity: 0.7, helper: "clone", revert: false, });
-		$( ".addCell" ).on("dragstop", checkIfInsideGrid);
+		/*$( ".contentCell" ).draggable({ opacity: 0.7, helper: "clone", revert: false, });
+		$( ".contentCell" ).on("dragstop", checkIfInsideGrid);*/
 	}
 
 	function makeGridResizable(){
@@ -65,7 +68,7 @@ $(document).ready(function() {
 	    $( "#editCell" ).submit(function( event ) {
 			var newTitle = $("input#editTitle").val();
 			var newDescription = $("input#editDescription").val();
-			//set new content for cell
+			//set new content for contentCell
 			currentCellToEdit.setContent(newTitle, newDescription);
 			$("#dialog-modal").dialog("close");
 			$("#editCell")[0].reset();
@@ -79,6 +82,24 @@ $(document).ready(function() {
 	        currentMousePos.x = event.pageX;
 	        currentMousePos.y = event.pageY;
 	    });
+	}
+
+	function createContentRow(id, src, title, description){
+		var id = "contentCell_" + id;
+		var rowID = "<tr id='"+id+"'>";
+		var rowImage = "<td class='contentCellPosterImage'><div class='ui-widget-content contentCell'><h3> Drag into Grid </h3></div></td>";
+		var rowTitle = "<td class='contentCellTitle'></td>";
+		var rowDescription = "<td class='contentCellDescription'></td>";
+		var rowButton = "<td class='contentCellAddButton'></td></tr>";
+		var htmlBasicStructure = rowID + rowImage + rowTitle + rowDescription + rowButton;
+		$("#contentCellTable tbody").prepend(htmlBasicStructure);
+		$("#"+id+" .contentCellPosterImage").append(src);
+		$("#"+id+" .contentCellTitle").append(title);
+		$("#"+id+" .contentCellDescription").append(description);
+
+		$( "#" + id ).draggable({ opacity: 0.7, helper: "clone", revert: false, });
+		$( "#" + id ).on("dragstop", onDrop);
+
 	}
 
 });
@@ -107,14 +128,23 @@ function checkCollisionsWithOthers(){
 }
 
 
-function checkIfInsideGrid(){
+function onDrop(event){
+	var droppedCell = $(event.target);
+	var id = droppedCell.attr("id");
+	var title = droppedCell.find(".contentCellTitle").html();
+	var description = droppedCell.find(".contentCellDescription").html();
+
 	var grid = $("#grid");
 	var gridPosition = grid.offset();
 	if(gridPosition.left < currentMousePos.x && currentMousePos.x < gridPosition.left + grid.width()){
 		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
 			//TODO: Prepare for reading from Database
-			var imageLink = '<img class="cell" src="http://www.zdf-enterprises.de/de/sites/default/files/imagecache/player_posterframe/catalogue/en/1726/dance_academy.jpg.crop_display.jpg"></img>';
-			var newCell = new Cell("newCell", "cell", "Default Title", "Default Description", currentMousePos.x - gridPosition.left, currentMousePos.y - gridPosition.top, imageLink);
+			//var imageLink = '<img class="cell" src="http://www.zdf-enterprises.de/de/sites/default/files/imagecache/player_posterframe/catalogue/en/1726/dance_academy.jpg.crop_display.jpg"></img>';
+			var imageLink = "";
+			var newGridCell = new gridCell(	id, title, description, 
+											currentMousePos.x - gridPosition.left, 
+											currentMousePos.y - gridPosition.top, 
+											imageLink);
 		}
 	}
 }
