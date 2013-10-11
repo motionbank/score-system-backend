@@ -8,8 +8,10 @@ body {
 	width: 100px; 
 	height: 100px; 
 	background-color: orange;
-	opacity:1;
+	opacity:0.6;
 	border-width: 0px !important;
+	z-index: 3;
+
 }
 
 
@@ -61,7 +63,8 @@ body {
     width: 600px;
     height: 300px;
     background-color: #cccccc;
-    opacity: 0.8;
+    opacity: 1;
+    z-index:1;
 }
 
 
@@ -72,6 +75,6 @@ h2 {
 .overlap{
 	background-color: red;
 	position: absolute !important;
-	opacity:0.3;
-	z-index:-1;
+	opacity:0.5;
+	z-index:2;
 }

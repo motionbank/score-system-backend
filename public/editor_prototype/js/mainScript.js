@@ -94,10 +94,12 @@ function checkCollisionsWithOthers(){
     	$.each(cells, function(index, item2){
     		//check if it's a different item, so it's not detecting collision with itself
     		if(item1.id != item2.id){
-	            var overlap = $("#"+item1.id).collision("#"+item2.id, {as: "<div/>", mode:"body"});
+    			var $item1 = $("#"+item1.id);
+	            var overlap = $item1.collision("#"+item2.id, {as: "<div/>", mode:"body"});
 	            if(overlap){
 	            	//if overlap == true, add class and add to body
-	            	overlap.addClass("overlap").appendTo("body");
+	            	overlap.addClass("overlap").appendTo("#grid");
+	            	overlap.css("z-index", $item1.css("z-index")-1);
 	            }
 	        }
     	})
@@ -111,8 +113,8 @@ function checkIfInsideGrid(){
 	if(gridPosition.left < currentMousePos.x && currentMousePos.x < gridPosition.left + grid.width()){
 		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
 			//TODO: Prepare for reading from Database
-
-			var newCell = new Cell("newCell", "cell", "Default Title", "Default Description", currentMousePos.x - gridPosition.left, currentMousePos.y - gridPosition.top);
+			var imageLink = '<img class="cell" src="http://www.zdf-enterprises.de/de/sites/default/files/imagecache/player_posterframe/catalogue/en/1726/dance_academy.jpg.crop_display.jpg"></img>';
+			var newCell = new Cell("newCell", "cell", "Default Title", "Default Description", currentMousePos.x - gridPosition.left, currentMousePos.y - gridPosition.top, imageLink);
 		}
 	}
 }

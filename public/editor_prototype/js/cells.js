@@ -91,7 +91,9 @@ Cell.prototype = {
         var position = $("#"+this.id).position();
         this.position = position;
         this.save();
-        this.checkCollisions();
+         $("#"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
+        
+        //this.checkCollisions();
         
     },
     onMouseUp: function(){
@@ -127,12 +129,7 @@ Cell.prototype = {
 
     //later using for poster image
     setSrc: function(){
-        $("#"+this.id).html(this.src);
-        //makes cells draggable in grid
-        $("#"+this.id).draggable({ 
-            grid: [ this.gridSize.width, this.gridSize.height ],
-            containment: "#grid",
-        });
+        $("#"+this.id+"_content").html(this.src);     
     },
 
     onDblClick: function(){
