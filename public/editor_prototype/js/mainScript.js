@@ -88,7 +88,7 @@ $(document).ready(function() {
 										<td class='contentCellTitle'></td>\
 										<td class='contentCellDescription'></td>\
 										<td id='add_" + id + "' class='contentCellAddButton'>Add</td>\
-										<td id='edit_" + id + "' class='contentCellEditButton'><a href=''>Edit</a></td>\
+										<td id='edit_" + id + "' class='contentCellEditButton'>Edit</td>\
 									</tr>";
 		$("#contentCellTable tbody").prepend(htmlBasicStructure);
 		$("#contentCell_"+id+" .contentCellPosterImage").append(src);
@@ -98,6 +98,7 @@ $(document).ready(function() {
 		$( "#contentCell_" + id ).draggable({ opacity: 0.7, helper: "clone", revert: false, });
 		$( "#contentCell_" + id ).on("dragstop", onDrop);
 		$( "#add_"+id).on("click", addOrRemoveButton);
+		$( "#edit_"+id).on("click", editCellInformation);
 
 	}
 
@@ -152,6 +153,19 @@ function onDrop(event){
 }
 
 
+
+function onDrop(addedCell){
+	var id = addedCell.attr("id");
+	var title = addedCell.find(".contentCellTitle").html();
+	var description = addedCell.find(".contentCellDescription").html();
+	var imageLink = "";
+	id = id.split('_')[1];
+	var newGridCell = new GridCell(	id, title, description, 0, 0, imageLink);
+	addedCell.addClass("usedCell");
+	addedCell.find(".contentCellAddButton").html("Remove");
+}
+
+
 function removeCellFromGrid(){
 	$("#gridCell_"+currentCellToEdit.id).slideUp();
 	$("#contentCell_"+currentCellToEdit.id).removeClass("usedCell");
@@ -168,7 +182,7 @@ function hideCellFromGrid(clickedObject){
 }
 
 function addOrRemoveButton(){
-	console.log($(this).html());
+	//console.log($(this).html());
 	if($(this).html() == "Add"){
 		addCellToGrid(this);
 	}
@@ -182,12 +196,18 @@ function addCellToGrid(clickedObject){
 	var id = clickedObject.id.split("_")[1];
 	$("#contentCell_"+id).addClass("usedCell");
 	if($("#gridCell_"+id).length == 0 ){
-		console.log("add new one!");
+		//console.log("add new one!");
+		onDrop($(clickedObject).parent());
+
 	}
 	else{
 		$("#gridCell_"+id).slideDown();
 	}
 	$("#contentCell_"+ id + " .contentCellAddButton").html("Remove");
-	
+}
+
+function editCellInformation(){
+	console.log(this.id);
+	//currentCellToEdit = 
 }
 
