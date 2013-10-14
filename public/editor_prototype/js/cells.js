@@ -62,6 +62,9 @@ GridCell.prototype = {
 
         //register event for opening edit dialog
         $("#gridCell_"+this.id).on("dblclick", $.proxy(this.onDblClick, this));
+
+        //register hover
+        $("#gridCell_"+this.id).hover($.proxy(this.onMouseIn, this), $.proxy(this.onMouseOut, this));
     },
 
     //build the html of the object
@@ -147,13 +150,21 @@ GridCell.prototype = {
     },
 
     updateGridCell: function(){
-        $("#gridCell_"+this.id+"_content .cell-title").html(this.title);
-        $("#gridCell_"+this.id+"_content .cell-content").html(this.description);
+        $("#gridCell_" + this.id + "_content .cell-title").html(this.title);
+        $("#gridCell_" + this.id + "_content .cell-content").html(this.description);
     },
 
     updateContentCell:function(){
-        $("#contentCell_"+this.id+" .contentCellTitle").html(this.title);
-        $("#contentCell_"+this.id+" .contentCellDescription").html(this.description);
+        $("#contentCell_" + this.id + " .contentCellTitle").html(this.title);
+        $("#contentCell_" + this.id + " .contentCellDescription").html(this.description);
+    },
+
+    onMouseIn: function(){
+        $("#contentCell_"+this.id).css({"background-color":"orange"});
+    },
+
+    onMouseOut: function(){
+        $("#contentCell_"+this.id).css({"background-color":"white"});
     }
      
 }

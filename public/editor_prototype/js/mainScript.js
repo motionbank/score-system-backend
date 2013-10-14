@@ -1,8 +1,8 @@
 // 	TODO Check CSS (position, left, top) of Grid and BoundsForGrid, not clear written
 //	because e.g. boundaries for grid do not work at the moment
-// 	DONE ////// 	TODO: implement deleting of images
+// 	DONE 	//////	implement deleting of images
 //  TODO: Difference between poster Image in Grid and poster image in Table? Same? Wie wird Removement angezeigt?
-//  TODO: Sync gridCell mit contentCell
+//  DONE	//////	Sync gridCell mit contentCell
 // 	TODO: mark used cells and make it reversible if cell gets deleted in grid
 // 	.usedCells need to have id to mark their equivalents in the grid
 // 	--> TODO: check hover state and mark hovered cell in grid and vice versa
@@ -12,8 +12,6 @@
 
 // 	TODO: Rewrite Collision Detection
 //	TODO: Layouts implementieren
-
-
 
 
 
@@ -85,6 +83,7 @@ $(document).ready(function() {
 										<td class='contentCellTitle'></td>\
 										<td class='contentCellDescription'></td>\
 										<td class='contentCellAddButton'></td>\
+										<td class='editButton'><a class='contentCellEditButton' href='#' title='Edit'></a></td>\
 									</tr>";
 		$("#contentCellTable tbody").prepend(htmlBasicStructure);
 		$("#"+id+" .contentCellPosterImage").append(src);
