@@ -56,7 +56,7 @@ module Admins
 
     # Only allow a trusted parameter "white list" through.
     def cell_params
-      params.require(:cell).permit(:kind, :title, :description)
+      params.require(:cell).permit(:kind, :title, :description, :poster_image)
     end
   end
 end

@@ -5,6 +5,8 @@ class Cell
   field :title, type: String
   field :description, type: String
 
+  mount_uploader :poster_image, ImageUploader
+
   def self.gender
     :m
   end

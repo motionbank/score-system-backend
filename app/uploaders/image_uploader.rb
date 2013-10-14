@@ -1,0 +1,92 @@
+# encoding: utf-8
+
+class ImageUploader < CarrierWave::Uploader::Base
+
+  include CarrierWave::MiniMagick
+
+  IMAGE_EXTENSIONS = %w{jpg jpeg png}
+  ALLOWED_EXTENSIONS = IMAGE_EXTENSIONS
+
+  UPLOAD_SETTINGS = {
+    allowed_extensions: ALLOWED_EXTENSIONS,
+    wrong_extension_message: I18n.t(
+      'errors.messages.carrierwave_integrity_error',
+      extension_white_list: ALLOWED_EXTENSIONS.join(',')
+    )
+  }
+
+
+  attr_accessor :width, :height
+
+  # Override the directory where uploaded files will be stored.
+  # This is a sensible default for uploaders that are meant to be mounted:
+  def store_dir
+    "system/uploads/attachment/#{mounted_as}/#{model.id}"
+  end
+
+  # Provide a default URL as a default if there hasn't been a file uploaded:
+  # def default_url
+  #   # For Rails 3.1+ asset pipeline compatibility:
+  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  #
+  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+  # end
+
+
+  version :thumb do
+    process :resize_to_fill => [80, 80]
+    process :rgb
+
+    def filename
+      return switch_extension(super, 'jpg')
+    end
+
+    def full_filename(for_file)
+      return switch_extension(super, 'jpg')
+    end
+  end
+
+
+  version :preview do
+    process :resize_to_fit => [400, 300]
+    process :rgb
+
+    def filename
+      return switch_extension(super, 'jpg')
+    end
+
+    def full_filename(for_file)
+      return switch_extension(super, 'jpg')
+    end
+  end
+
+
+  def switch_extension(file_name, extension)
+    return file_name.chomp(File.extname(file_name)) + '.' + extension
+  end
+
+
+  def thumb_url
+    if image_or_video?
+      thumb.url
+    end
+  end
+
+
+  # white list of extensions which are allowed to be uploaded.
+  def self.extension_white_list
+    ALLOWED_EXTENSIONS
+  end
+
+
+  def extension_white_list
+    self.class.extension_white_list
+  end
+
+
+  # Override the filename of the uploaded files:
+  # Avoid using model.id or version_name here, see uploader/store.rb for details.
+  # def filename
+  #   "something.jpg" if original_filename
+  # end
+end
