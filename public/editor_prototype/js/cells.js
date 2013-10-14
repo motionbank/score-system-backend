@@ -1,8 +1,7 @@
 
 //standard gridCell
 function GridCell(id, title, description, mouseX, mouseY) {
-    id = id.split('_');
-    this.id = "gridCell_"+id[1];
+    this.id = id;
     this.class = "cell ui-widget-content";
     this.title = title;
     this.description = description;
@@ -16,8 +15,7 @@ function GridCell(id, title, description, mouseX, mouseY) {
 
 //gridCell with iframe/poster image
 function GridCell(id, title, description, mouseX, mouseY, src) {
-    id = id.split('_');
-    this.id = "gridCell_"+id[1];
+    this.id =  id;
     this.class = "cell ui-widget-content";
     this.title = title;
     this.description = description;
@@ -48,32 +46,31 @@ GridCell.prototype = {
     addEvents: function ()
     {   
         //makes cells resizable in grid
-        $("#"+this.id).resizable({
+        $("#gridCell_"+this.id).resizable({
             grid: [ this.gridSize.width, this.gridSize.height ],
             containment: "#grid",
         });
 
         //makes cells draggable in grid
-        $("#"+this.id).draggable({ 
+        $("#gridCell_"+this.id).draggable({ 
             grid: [ this.gridSize.width, this.gridSize.height ],
             containment: "#grid",
         });
 
         //update cell content with X and Y position
-        $("#"+this.id).on("dragstop resizestop", $.proxy(this.onMouseUp, this));
+        $("#gridCell_"+this.id).on("dragstop resizestop", $.proxy(this.onMouseUp, this));
 
         //register event for opening edit dialog
-        $("#"+this.id).on("dblclick", $.proxy(this.onDblClick, this));
+        $("#gridCell_"+this.id).on("dblclick", $.proxy(this.onDblClick, this));
     },
 
     //build the html of the object
     render: function(){
-        this.html = "<div id='" + this.id + "' class='" + this.class + "'><span id='" + this.id + "_content'></span></div>";
-        $("#" + this.id).html(this.html);
+        this.html = "<div id='gridCell_" + this.id + "' class='" + this.class + "'><span id='gridCell_" + this.id + "_content'><span class='cell-title'></span><br><span class='cell-content'></span></span></div>";
         $("#grid").append(this.html);
         this.setContent(this.title, this.description);
         //get the gridsize and set the size of the cell
-        this.gridSize = $("#" + this.id).css(["width", "height"]);
+        this.gridSize = $("#gridCell_" + this.id).css(["width", "height"]);
         this.gridSize.width = parseInt(this.gridSize.width);
         this.gridSize.height = parseInt(this.gridSize.height);
         
@@ -81,10 +78,10 @@ GridCell.prototype = {
 
     //update the html inside the div
     update: function(){
-        var position = $("#"+this.id).position();
+        var position = $("#gridCell_"+this.id).position();
         this.position = position;
         this.save();
-         $("#"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
+         $("#gridCell_"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
         //this.checkCollisions();
         
     },
@@ -94,8 +91,8 @@ GridCell.prototype = {
     save: function(){
         this.x = this.position.left;
         this.y = this.position.top;
-        this.width = $("#"+this.id).width()/this.gridSize.width;
-        this.height = $("#"+this.id).height()/this.gridSize.height;
+        this.width = $("#gridCell_"+this.id).width()/this.gridSize.width;
+        this.height = $("#gridCell_"+this.id).height()/this.gridSize.height;
 
         //for testing inserting data into cell, normally writing to database
         /*var titleHTML = "Position X: " + this.x/this.gridSize.width + "<br>Position Y: " + this.y/this.gridSize.height;
@@ -115,13 +112,14 @@ GridCell.prototype = {
         //calculate position in grid
         this.x = Math.floor(this.x / this.gridSize.width) * this.gridSize.width;
         this.y = Math.floor(this.y / this.gridSize.height) * this.gridSize.height;
-        $("#"+this.id).css({left: this.x, top:this.y});
+        $("#gridCell_"+this.id).css({left: this.x, top:this.y});
         this.update();
     },
 
     //later using for poster image
     setSrc: function(){
-        $("#"+this.id+"_content").html("<img src='" + this.src + "'></img>");  
+        $("#gridCell_"+this.id+"_content").html("<img src='" + this.src + "'></img>");  
+        $("#contentCell_"+this.id+" .contentCellPosterImage").html("<img src='" + this.src + "'></img>");
     },
 
     onDblClick: function(){
@@ -131,19 +129,31 @@ GridCell.prototype = {
         $("#dialog-modal #editTitle").val(this.title);
         $("#dialog-modal #editType").val("");
         $("#dialog-modal #editDescription").val(this.description);
+        $("#dialog-modal #editImageSrc").val(this.src);
         $("#dialog-modal").dialog("open");
         currentCellToEdit = this;
     },
 
     //TODO Create Templates for Cells for different types
     setContent: function(title, description, imageSrc){
-        $("#"+this.id+"_content").html("<div><p class='cell-content cell-title'>" + title + "</p><p class='cell-content'>" + description + "</p></div>");
         this.title = title;
         this.description = description;
         if(imageSrc){
             this.src = imageSrc;
             this.setSrc();
         }
+        this.updateGridCell();
+        this.updateContentCell();
+    },
+
+    updateGridCell: function(){
+        $("#gridCell_"+this.id+"_content .cell-title").html(this.title);
+        $("#gridCell_"+this.id+"_content .cell-content").html(this.description);
+    },
+
+    updateContentCell:function(){
+        $("#contentCell_"+this.id+" .contentCellTitle").html(this.title);
+        $("#contentCell_"+this.id+" .contentCellDescription").html(this.description);
     }
      
 }

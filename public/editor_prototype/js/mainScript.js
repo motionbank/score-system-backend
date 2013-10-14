@@ -1,15 +1,18 @@
 // 	TODO Check CSS (position, left, top) of Grid and BoundsForGrid, not clear written
 //	because e.g. boundaries for grid do not work at the moment
-// 	TODO: implement images for cells + deleting of images
-// 	Klasse .gridCell ohne Content
+// 	DONE ////// 	TODO: implement deleting of images
+//  TODO: Difference between poster Image in Grid and poster image in Table? Same? Wie wird Removement angezeigt?
+//  TODO: Sync gridCell mit contentCell
 // 	TODO: mark used cells and make it reversible if cell gets deleted in grid
 // 	.usedCells need to have id to mark their equivalents in the grid
 // 	--> TODO: check hover state and mark hovered cell in grid and vice versa
 // 	TODO: add "Remove" Button to graffle table "Used Cell" and implement it in table
-//	TODO: Layouts implementieren
 //	TODO: Add Edit Button In Table
-// 	TODO: Rewrite Collision Detection
 //	TODO: resize image src cell when added dynamically
+
+// 	TODO: Rewrite Collision Detection
+//	TODO: Layouts implementieren
+
 
 
 
@@ -130,6 +133,7 @@ function onDrop(event){
 	if(gridPosition.left < currentMousePos.x && currentMousePos.x < gridPosition.left + grid.width()){
 		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
 			//TODO: Prepare for reading from Database
+			id = id.split('_')[1];
 			var imageLink = "";
 			var newGridCell = new GridCell(	id, title, description, 
 											currentMousePos.x - gridPosition.left, 
