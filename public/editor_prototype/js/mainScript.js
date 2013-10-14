@@ -1,13 +1,9 @@
 // 	TODO Check CSS (position, left, top) of Grid and BoundsForGrid, not clear written
 //	because e.g. boundaries for grid do not work at the moment
-// 	DONE 	//////	implement deleting of images
+// 	TODO: check implementation of deleting of images
 //  TODO: Difference between poster Image in Grid and poster image in Table? Same? Wie wird Removement angezeigt?
-//  DONE	//////	Sync gridCell mit contentCell
-// 	TODO: mark used cells and make it reversible if cell gets deleted in grid
-// 	.usedCells need to have id to mark their equivalents in the grid
-// 	--> TODO: check hover state and mark hovered cell in grid (correctly)
-// 	TODO: add "Remove" Button to graffle table "Used Cell" and implement it in table
-//	TODO: Add Edit Button In Table
+// 	TODO: check hover in table and mark cell in grid (correctly)
+//	TODO: Implement Edit Function from Table
 //	TODO: resize image src cell when added dynamically
 // 	TODO: make gridCell background grün when hovering
 
@@ -16,7 +12,18 @@
 
 
 
-// TODO CLEAN CODE
+// TODO CLEAN && COMMENT CODE
+
+
+// 	NOTES: Add Button entfernen // "Merken" der Zelle nicht notwendig
+//	Draggen: direkt die Zelle, nicht die Zeile
+// 	TODO: Tabs implementieren --> Used Cells in Used Tab schieben
+//	TODO: zu registrierende Events einmal beim initialize, nicht für jedes Element. 
+//									Bsp: $( "#add_"+id).on("click", addOrRemoveButton); wird zu: 
+//											$(".addButton").on("click", addOrRemoveButton);
+//	nachdem alle Zeilen gerendert sind, Events !einmal! registrieren
+
+
 
 
 var currentMousePos = { x: -1, y: -1 };
@@ -31,10 +38,15 @@ $(document).ready(function() {
 	initEditBox();
 	//registrate mouse position and update it in a global variable
     getMousePosition();
+   
+    initTabs();
 
     //create dummy rows
     for(var i = 0; i < 8; i++){
     	createContentRow(i,"","MyTitle of Cell"+i,"MyDescription");
+    	if(i==7){
+    		initEvents();
+    	}
     }
 
     
@@ -75,6 +87,12 @@ $(document).ready(function() {
 		});
 	}
 
+	function initTabs(){
+		$(function() {
+			$( "#tabs" ).tabs();
+		});
+	}
+
 	function getMousePosition(){
 		$(document).mousemove(function(event) {
 	        currentMousePos.x = event.pageX;
@@ -87,19 +105,19 @@ $(document).ready(function() {
 										<td class='contentCellPosterImage'></td>\
 										<td class='contentCellTitle'></td>\
 										<td class='contentCellDescription'></td>\
-										<td id='add_" + id + "' class='contentCellAddButton'>Add</td>\
-										<td id='edit_" + id + "' class='contentCellEditButton'>Edit</td>\
+										<td class='contentCellEditButton'>Edit</td>\
 									</tr>";
 		$("#contentCellTable tbody").prepend(htmlBasicStructure);
 		$("#contentCell_"+id+" .contentCellPosterImage").append(src);
 		$("#contentCell_"+id+" .contentCellTitle").append(title);
 		$("#contentCell_"+id+" .contentCellDescription").append(description);
+	}
 
-		$( "#contentCell_" + id ).draggable({ opacity: 0.7, helper: "clone", revert: false, });
-		$( "#contentCell_" + id ).on("dragstop", onDrop);
-		$( "#add_"+id).on("click", addOrRemoveButton);
-		$( "#edit_"+id).on("click", editCellInformation);
 
+	function initEvents(){
+		$( ".contentCellEditButton").on("click", editCellInformation);
+		$( ".contentCell").draggable({ opacity: 0.7, helper: "clone", revert: false, });
+		$( ".contentCell").on("dragstop", onDrop);
 	}
 
 	
@@ -129,6 +147,7 @@ function checkCollisionsWithOthers(){
 }
 
 
+//create new GridCell when contentCell is dropped in grid
 function onDrop(event){
 	var droppedCell = $(event.target);
 	var id = droppedCell.attr("id");
@@ -153,59 +172,15 @@ function onDrop(event){
 }
 
 
-
-function onDrop(addedCell){
-	var id = addedCell.attr("id");
-	var title = addedCell.find(".contentCellTitle").html();
-	var description = addedCell.find(".contentCellDescription").html();
-	var imageLink = "";
-	id = id.split('_')[1];
-	var newGridCell = new GridCell(	id, title, description, 0, 0, imageLink);
-	addedCell.addClass("usedCell");
-	addedCell.find(".contentCellAddButton").html("Remove");
-}
-
-
+//remove GridCell when clicking in Edit Form
 function removeCellFromGrid(){
-	$("#gridCell_"+currentCellToEdit.id).slideUp();
+	$("#gridCell_"+currentCellToEdit.id).remove();
 	$("#contentCell_"+currentCellToEdit.id).removeClass("usedCell");
 	$("#contentCell_"+ currentCellToEdit.id + " .contentCellAddButton").html("Add");
 	$("#dialog-modal").dialog("close");
 }
 
-function hideCellFromGrid(clickedObject){
-	var id = clickedObject.id.split("_")[1];
-	$("#contentCell_" + id).removeClass("usedCell");
-	$("#contentCell_"+ id + " .contentCellAddButton").html("Add");
-	$("#gridCell_"+ id ).slideUp();
-	$("#dialog-modal").dialog("close");
-}
-
-function addOrRemoveButton(){
-	//console.log($(this).html());
-	if($(this).html() == "Add"){
-		addCellToGrid(this);
-	}
-	else {
-		hideCellFromGrid(this);
-	}
-
-}
-
-function addCellToGrid(clickedObject){
-	var id = clickedObject.id.split("_")[1];
-	$("#contentCell_"+id).addClass("usedCell");
-	if($("#gridCell_"+id).length == 0 ){
-		//console.log("add new one!");
-		onDrop($(clickedObject).parent());
-
-	}
-	else{
-		$("#gridCell_"+id).slideDown();
-	}
-	$("#contentCell_"+ id + " .contentCellAddButton").html("Remove");
-}
-
+//edit cell information when click in table on Edit
 function editCellInformation(){
 	console.log(this.id);
 	//currentCellToEdit = 
