@@ -87,7 +87,7 @@ $(document).ready(function() {
 										<td class='contentCellPosterImage'></td>\
 										<td class='contentCellTitle'></td>\
 										<td class='contentCellDescription'></td>\
-										<td id='add_" + id + "' class='contentCellAddButton'><a href=''>Add</a></td>\
+										<td id='add_" + id + "' class='contentCellAddButton'>Add</td>\
 										<td id='edit_" + id + "' class='contentCellEditButton'><a href=''>Edit</a></td>\
 									</tr>";
 		$("#contentCellTable tbody").prepend(htmlBasicStructure);
@@ -97,6 +97,8 @@ $(document).ready(function() {
 
 		$( "#contentCell_" + id ).draggable({ opacity: 0.7, helper: "clone", revert: false, });
 		$( "#contentCell_" + id ).on("dragstop", onDrop);
+		$( "#add_"+id).on("click", addOrRemoveButton);
+
 	}
 
 	
@@ -144,15 +146,48 @@ function onDrop(event){
 											currentMousePos.y - gridPosition.top, 
 											imageLink);
 			droppedCell.addClass("usedCell");
+			droppedCell.find(".contentCellAddButton").html("Remove");
 		}
 	}
 }
 
 
-function hideCellFromGrid(){
+function removeCellFromGrid(){
 	$("#gridCell_"+currentCellToEdit.id).slideUp();
 	$("#contentCell_"+currentCellToEdit.id).removeClass("usedCell");
+	$("#contentCell_"+ currentCellToEdit.id + " .contentCellAddButton").html("Add");
 	$("#dialog-modal").dialog("close");
+}
 
+function hideCellFromGrid(clickedObject){
+	var id = clickedObject.id.split("_")[1];
+	$("#contentCell_" + id).removeClass("usedCell");
+	$("#contentCell_"+ id + " .contentCellAddButton").html("Add");
+	$("#gridCell_"+ id ).slideUp();
+	$("#dialog-modal").dialog("close");
+}
+
+function addOrRemoveButton(){
+	console.log($(this).html());
+	if($(this).html() == "Add"){
+		addCellToGrid(this);
+	}
+	else {
+		hideCellFromGrid(this);
+	}
+
+}
+
+function addCellToGrid(clickedObject){
+	var id = clickedObject.id.split("_")[1];
+	$("#contentCell_"+id).addClass("usedCell");
+	if($("#gridCell_"+id).length == 0 ){
+		console.log("add new one!");
+	}
+	else{
+		$("#gridCell_"+id).slideDown();
+	}
+	$("#contentCell_"+ id + " .contentCellAddButton").html("Remove");
+	
 }
 
