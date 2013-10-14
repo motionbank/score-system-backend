@@ -70,6 +70,10 @@ header {
 .actions {
   text-align: right;
 
+  .btn-primary {
+    @include ctb-buttonBackground($gray, $grayLight);
+  }
+
   .btn-group,
   > .btn {
     float: right;

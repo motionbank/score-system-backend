@@ -1,0 +1,7 @@
+#flash
+  - flash.each do |name, msg|
+    - unless msg.nil?
+      - flash_class = name == :notice ? "success" : name
+      %div{:id => "flash_#{name}", :class => "msg alert alert-#{flash_class}"}
+        %a.close(data-dismiss="alert") ×
+        %p= msg

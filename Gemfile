@@ -5,7 +5,7 @@ gem 'rails', '4.0.0'
 
 
 # PERSISTENCE
-gem 'mongoid', github: 'mongoid/mongoid', ref: '484aa0721e899202cd9579617de1fc0addb1ffbf' # the next commit cc7a0e709066aff444bc21cd9826e1568603934d breaks the rails console and rake invocations
+gem 'mongoid', github: 'mongoid/mongoid', ref: '2f68fccf6b45ec1576551f38ffd1dfb5bf8bf201' # the previous commit cc7a0e709066aff444bc21cd9826e1568603934d breaks the rails console and rake invocations
 gem "mongoid-indifferent-access", require: "mongoid_indifferent_access"
 gem "mongoid_slug"
 gem "mongoid_rails_migrations"
@@ -18,6 +18,10 @@ gem 'oj' # JSON-Parser, faster than `yajl-ruby`
 gem 'carrierwave'
 gem 'mini_magick', '>= 3.4'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+
+# AUTH
+gem 'devise'
+gem 'cancan'
 
 # TESTING
 gem 'factory_girl_rails'

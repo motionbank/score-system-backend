@@ -1,7 +1,11 @@
 MotionBank::Application.routes.draw do
-  root 'cells#index'
+  devise_for :users
+  root 'admins/cells#index'
 
-  resources :cells
+  scope module: 'admins' do
+    root 'cells#index', as: :admins_root
+    resources :cells
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

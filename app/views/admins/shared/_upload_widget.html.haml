@@ -1,0 +1,7 @@
+= form.input method, as: :file, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+= form.input :"#{method}_cache", :as => :hidden
+
+- uploader = form.object.send method
+- if uploader.present?
+  %div.span6
+    = image_tag form.object.send(method).thumb.url

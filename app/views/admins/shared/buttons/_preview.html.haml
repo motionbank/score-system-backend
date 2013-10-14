@@ -1,0 +1,17 @@
+- if I18n.available_locales.count > 1
+  .btn-group
+    %a(class="btn dropdown-toggle" data-toggle="dropdown")
+      = t('record.show')
+      %span.caret
+
+    %ul.dropdown-menu
+      - I18n.available_locales.each do |loc|
+        %li
+          - if preview.is_a?(Hash) && preview[:partial]
+            - preview_url ||= render(preview[:partial])
+          - else
+            - preview_url ||= polymorphic_path(resource, locale: loc, preview: true)
+          = link_to("#{t('record.show')} #{loc.upcase}", preview_url, target: '_blank') if preview_url
+- else
+  - preview_url ||= polymorphic_path(resource, preview: true)
+  = link_to(t('record.show'), preview_url, target: '_blank', class: "btn") if preview_url

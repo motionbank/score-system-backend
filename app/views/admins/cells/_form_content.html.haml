@@ -1,0 +1,23 @@
+%section.primary-fields
+  .main-content-wrapper.bubblebox
+    .main-content.bubble
+      .page-header
+        %h2= t('form.basic_data')
+
+      .row-fluid
+        = f.input :title, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+        = f.input :kind, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+
+      .row-fluid
+        = f.input :description, as: :text, input_html: {class: 'span12', rows: 4}, wrapper_html: {class: 'span6'}
+        = render 'admins/shared/upload_widget', form: f, method: :poster_image
+
+
+%section.additional-fields
+  .bubblebox
+    .bubble
+      .page-header
+        %h2= t('form.additional_fields')
+
+      .row-fluid
+        Lorem ipsum

@@ -1,0 +1,37 @@
+- content_for :page_title, I18n.record_action(resource_class, 'index', :count => 2)
+
+%header
+  .header-inner
+    %h1.span7= yield :page_title
+
+    .actions.span5
+      = render 'shared/buttons/new', resource_class: resource_class
+
+#inner
+  .main-content-wrapper.bubblebox
+
+    - if resource_class.const_defined?(:FILTER_SCOPES)
+      = render "admins/resource/index_filter",
+        filters: resource_class.const_get(:FILTER_SCOPES),
+        resource_class: resource_class
+
+    %div.main-content.bubble.listing.tab-content{id: resource_class.to_s}
+      - unless collection.empty?
+        - collection.each do |resource|
+          .record
+            .actions
+              .btn-group
+                = render 'shared/buttons/edit', url: edit_polymorphic_url(resource)
+                = render 'shared/buttons/delete', url: polymorphic_url(resource)
+            %h4
+              = link_to(resource.title, edit_polymorphic_url(resource))
+
+            - if resource.respond_to?(:published?)
+              .state{title: resource.published? ? t('record.published') : t('record.unpublished') }
+                %i{:class => resource.published? ? "icon-eye-open" : "icon-eye-close" }
+
+        - if controller.class::PER_PAGE > 0
+          = will_paginate(collection)
+
+      - else
+        .empty= t('empty', :class_name => I18n.model_name(resource_class, count: 2))

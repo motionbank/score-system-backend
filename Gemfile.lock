@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: 484aa0721e899202cd9579617de1fc0addb1ffbf
-  ref: 484aa0721e899202cd9579617de1fc0addb1ffbf
+  revision: 2f68fccf6b45ec1576551f38ffd1dfb5bf8bf201
+  ref: 2f68fccf6b45ec1576551f38ffd1dfb5bf8bf201
   specs:
     mongoid (4.0.0)
       activemodel (~> 4.0.0)
@@ -38,10 +38,12 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.0)
     atomic (1.1.14)
+    bcrypt-ruby (3.1.2)
     bootstrap-will_paginate (0.0.10)
       will_paginate
     bson (2.0.0.rc2)
     builder (3.1.4)
+    cancan (1.6.10)
     carrierwave (0.9.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -67,6 +69,12 @@ GEM
       compass (>= 0.12.2, < 0.14)
     compass_twitter_bootstrap (2.3.1)
       compass
+    devise (3.1.1)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.2.0)
@@ -113,6 +121,7 @@ GEM
     oj (2.1.6)
     optionable (0.1.1)
     origin (1.1.0)
+    orm_adapter (0.4.0)
     polyglot (0.3.3)
     rabl (0.8.6)
       activesupport (>= 2.3.14)
@@ -175,6 +184,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    warden (1.2.3)
+      rack (>= 1.0)
     will_paginate (3.0.5)
 
 PLATFORMS
@@ -182,11 +193,13 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-will_paginate
+  cancan
   carrierwave
   carrierwave-mongoid
   compass-960-plugin
   compass-rails (>= 2.0.alpha.0)
   compass_twitter_bootstrap
+  devise
   factory_girl_rails
   haml-rails
   jquery-rails

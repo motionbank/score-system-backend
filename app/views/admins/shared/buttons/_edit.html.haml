@@ -1,0 +1,9 @@
+- url ||= '#'
+- text ||= t('record.edit')
+- css_class ||= 'btn'
+- confirm ||= nil
+- title ||= ''
+
+= link_to url, :class => css_class, :confirm => confirm, :title => title do
+  = content_tag(:i, "", :class => 'icon-edit')
+  = text

@@ -1,0 +1,6 @@
+en:
+  mongoid:
+    models:
+      cell:
+        one: "Cell"
+        other: "Cells"
