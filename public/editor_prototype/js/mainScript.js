@@ -5,14 +5,18 @@
 //  DONE	//////	Sync gridCell mit contentCell
 // 	TODO: mark used cells and make it reversible if cell gets deleted in grid
 // 	.usedCells need to have id to mark their equivalents in the grid
-// 	--> TODO: check hover state and mark hovered cell in grid and vice versa
+// 	--> TODO: check hover state and mark hovered cell in grid (correctly)
 // 	TODO: add "Remove" Button to graffle table "Used Cell" and implement it in table
 //	TODO: Add Edit Button In Table
 //	TODO: resize image src cell when added dynamically
+// 	TODO: make gridCell background grün when hovering
 
 // 	TODO: Rewrite Collision Detection
 //	TODO: Layouts implementieren
 
+
+
+// TODO CLEAN CODE
 
 
 var currentMousePos = { x: -1, y: -1 };
@@ -23,8 +27,8 @@ $(document).ready(function() {
 	
 	//TODO: Correct CSS and position grid correctly
 	makeGridResizable();
-	//create Edit Box
-	createEditBox();
+	//init Edit Box
+	initEditBox();
 	//registrate mouse position and update it in a global variable
     getMousePosition();
 
@@ -41,7 +45,7 @@ $(document).ready(function() {
         });
 	}
 
-	function createEditBox(){
+	function initEditBox(){
 		$("#dialog-modal").dialog({
 			height: 500,
 			autoOpen: false,
@@ -60,11 +64,13 @@ $(document).ready(function() {
 			var newTitle = $("input#editTitle").val();
 			var newDescription = $("input#editDescription").val();
 			var newSrc = $("input#editImageSrc").val();
+
 			//set new content for contentCell
 			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
 			$("#dialog-modal").dialog("close");
-			$("#editCell")[0].reset();
-			//prevent event from reloading the page
+			//$("#editCell")[0].reset();
+
+			//prevent form from reloading the page
 			event.preventDefault();
 		});
 	}
@@ -77,26 +83,25 @@ $(document).ready(function() {
 	}
 
 	function createContentRow(id, src, title, description){
-		var id = "contentCell_" + id;
-		var htmlBasicStructure = 	"<tr id='" + id + "'>\
-										<td class='contentCellPosterImage contentCell ui-widget-content'></td>\
+		var htmlBasicStructure = 	"<tr id='contentCell_" + id + "' class='contentCell ui-widget-content'>\
+										<td class='contentCellPosterImage'></td>\
 										<td class='contentCellTitle'></td>\
 										<td class='contentCellDescription'></td>\
-										<td class='contentCellAddButton'></td>\
-										<td class='editButton'><a class='contentCellEditButton' href='#' title='Edit'></a></td>\
+										<td id='add_" + id + "' class='contentCellAddButton'><a href=''>Add</a></td>\
+										<td id='edit_" + id + "' class='contentCellEditButton'><a href=''>Edit</a></td>\
 									</tr>";
 		$("#contentCellTable tbody").prepend(htmlBasicStructure);
-		$("#"+id+" .contentCellPosterImage").append(src);
-		$("#"+id+" .contentCellTitle").append(title);
-		$("#"+id+" .contentCellDescription").append(description);
+		$("#contentCell_"+id+" .contentCellPosterImage").append(src);
+		$("#contentCell_"+id+" .contentCellTitle").append(title);
+		$("#contentCell_"+id+" .contentCellDescription").append(description);
 
-		$( "#" + id ).draggable({ opacity: 0.7, helper: "clone", revert: false, });
-		$( "#" + id ).on("dragstop", onDrop);
-
+		$( "#contentCell_" + id ).draggable({ opacity: 0.7, helper: "clone", revert: false, });
+		$( "#contentCell_" + id ).on("dragstop", onDrop);
 	}
 
-});
+	
 
+});
 
 //TODO rewrite code, currently red cell is behind everything, because cells weren't draggable anymore
 function checkCollisionsWithOthers(){
@@ -126,6 +131,7 @@ function onDrop(event){
 	var id = droppedCell.attr("id");
 	var title = droppedCell.find(".contentCellTitle").html();
 	var description = droppedCell.find(".contentCellDescription").html();
+	var imageLink = "";
 
 	var grid = $("#grid");
 	var gridPosition = grid.offset();
@@ -133,7 +139,6 @@ function onDrop(event){
 		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
 			//TODO: Prepare for reading from Database
 			id = id.split('_')[1];
-			var imageLink = "";
 			var newGridCell = new GridCell(	id, title, description, 
 											currentMousePos.x - gridPosition.left, 
 											currentMousePos.y - gridPosition.top, 
@@ -141,5 +146,13 @@ function onDrop(event){
 			droppedCell.addClass("usedCell");
 		}
 	}
+}
+
+
+function hideCellFromGrid(){
+	$("#gridCell_"+currentCellToEdit.id).slideUp();
+	$("#contentCell_"+currentCellToEdit.id).removeClass("usedCell");
+	$("#dialog-modal").dialog("close");
+
 }
 

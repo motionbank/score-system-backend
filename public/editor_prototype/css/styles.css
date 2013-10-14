@@ -55,12 +55,6 @@ body {
 	border-style: solid;
 }
 
-/*
-#normalCell{
-	top:500px;
-	left:100px;
-}*/
-
 #iframeCell{
 	top:300px;
 }
@@ -97,4 +91,8 @@ h2 {
 	position: absolute !important;
 	opacity:0.5;
 	z-index:2;
+}
+
+#emptyCell{
+	opacity:0;
 }

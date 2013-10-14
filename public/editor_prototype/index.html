@@ -34,10 +34,10 @@
 				<p><input type="button" name="deleteImage" value="Delete Poster Image" onclick="this.form.imagesrc.value=''"></p>
 				<!--<p>Additional Fields</p>
 				<p><input type="text" name ="key"><input type="text" name="value"></p>-->
-				<p><input type="submit" value="Save"></p>
+				<p><input type="submit" value="Save"><input type="button" value="Remove Cell from Grid" onclick="hideCellFromGrid()"></p>
 			</form>
 		</div>
-		<div class="cell"></div>
+		<div id="emptyCell" class="cell"></div>
 
 
 	</body>
