@@ -2,9 +2,7 @@
   options ||= {}
   options.merge!({
     publishing_logic: f.object.respond_to?(:published_flag),
-    use_uploader: options[:uploader] || f.object.respond_to?(:attachments)
   })
-  options[:uploader] ||= :attachments if options[:use_uploader]
 
 
 .row-fluid
@@ -15,7 +13,7 @@
     = render "admins/#{view_dir_for(f.object)}/form_content", f: f
 
 
-  - if f.object.persisted? && (options[:publishing_logic] || options[:use_uploader])
+  - if f.object.persisted? && options[:publishing_logic]
     .sidebar.span4
       - if options[:publishing_logic]
         .bubblebox
@@ -23,10 +21,3 @@
             .page-header
               %h2= t('form.publish')
             = render 'admins/shared/publishing', f: f, resource: f.object #, no_publishing_end_date: true
-
-      - if options[:use_uploader]
-        .bubblebox
-          .bubble.images
-            .page-header
-              %h2= I18n.t('form.pictures')
-            = render 'admins/shared/file_upload', f: f, association: :attachments
