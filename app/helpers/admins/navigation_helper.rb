@@ -19,14 +19,6 @@ module Admins::NavigationHelper
       end
     end
 
-    if can?(:index, User)
-      result << navigation_tag(
-        I18n.model_name(User, count: 2),
-        users_url,
-        :user
-      )
-    end
-
     return result.html_safe
   end
 

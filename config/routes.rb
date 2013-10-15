@@ -1,6 +1,5 @@
 MotionBank::Application.routes.draw do
   devise_for :users
-  get 'users', to: 'users#index'
   root 'admins/cells#index'
 
   scope module: 'admins' do
