@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :cell do
-    kind "MyString"
+    kind Cell::TYPES.first
     title "MyString"
     description "MyString"
   end
