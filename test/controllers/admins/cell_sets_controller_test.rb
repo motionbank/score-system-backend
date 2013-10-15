@@ -26,11 +26,6 @@ module Admins
       assert_redirected_to edit_cell_set_path(assigns(:cell_set))
     end
 
-    test "should show cell_set" do
-      get :show, id: @cell_set
-      assert_response :success
-    end
-
     test "should get edit" do
       get :edit, id: @cell_set
       assert_response :success

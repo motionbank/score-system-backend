@@ -1,16 +1,11 @@
 module Admins
   class CellSetsController < BaseController
 
-    before_action :set_cellset, only: [:show, :edit, :update, :destroy]
+    before_action :set_cellset, only: [:edit, :update, :destroy]
 
     # GET /cell_sets
     def index
       @cell_sets = CellSet.all
-    end
-
-
-    # GET /sets/1
-    def show
     end
 
 

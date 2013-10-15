@@ -1,16 +1,12 @@
 module Admins
   class CellsController < BaseController
 
-    before_action :set_cell, only: [:show, :new , :edit, :update, :destroy]
+    before_action :set_cell, only: [:new , :edit, :update, :destroy]
     before_action :build_additional_field, only: [:new, :edit]
 
     # GET /cells
     def index
       @cells = Cell.all.paginate(page: params[:page], per_page: PER_PAGE)
-    end
-
-    # GET /cells/1
-    def show
     end
 
     # GET /cells/new
