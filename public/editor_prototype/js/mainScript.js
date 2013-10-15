@@ -1,7 +1,6 @@
 // 	TODO Check CSS (position, left, top) of Grid and BoundsForGrid, not clear written
 //	because e.g. boundaries for grid do not work at the moment
 // 	TODO: check implementation of deleting of images
-//  TODO: Difference between poster Image in Grid and poster image in Table? Same? Wie wird Removement angezeigt?
 // 	TODO: check hover in table and mark cell in grid (correctly)
 //	TODO: Implement Edit Function from Table
 //	TODO: resize image src cell when added dynamically
@@ -18,10 +17,19 @@
 // 	NOTES: Add Button entfernen // "Merken" der Zelle nicht notwendig
 //	Draggen: direkt die Zelle, nicht die Zeile
 // 	TODO: Tabs implementieren --> Used Cells in Used Tab schieben
+
+//	______________ DONE _____________________________________________________________________
 //	TODO: zu registrierende Events einmal beim initialize, nicht für jedes Element. 
 //									Bsp: $( "#add_"+id).on("click", addOrRemoveButton); wird zu: 
 //											$(".addButton").on("click", addOrRemoveButton);
 //	nachdem alle Zeilen gerendert sind, Events !einmal! registrieren
+
+
+// 	QUESTIONS:
+//  TODO: Difference between poster Image in Grid and poster image in Table? Same? Wie wird Removement angezeigt?
+//	EDIT Function auch in "Available Cells?" Edit als Button in Table in Used Cells?
+// 	Vorschlag: "Show" in Table "Available Cells", read-only
+//	"Edit" dann in Used Cells, write title, description & Poster image
 
 
 
@@ -31,68 +39,17 @@ var currentCellToEdit;
 
 
 $(document).ready(function() { 
-	
-	//TODO: Correct CSS and position grid correctly
-	makeGridResizable();
-	//init Edit Box
-	initEditBox();
+
 	//registrate mouse position and update it in a global variable
     getMousePosition();
-   
-    initTabs();
+   	//initialize table
+   	initTable();
+   	//initialize Grid
+   	initGrid();
+   	//init Edit Box
+	initEditBox();
 
-    //create dummy rows
-    for(var i = 0; i < 8; i++){
-    	createContentRow(i,"","MyTitle of Cell"+i,"MyDescription");
-    	if(i==7){
-    		initEvents();
-    	}
-    }
-
-    
-	function makeGridResizable(){
-		$("#grid").resizable({
-            grid: [ $(".cell").width() , $(".cell").height() ],
-            containment: "#boundsForGrid",
-        });
-	}
-
-	function initEditBox(){
-		$("#dialog-modal").dialog({
-			height: 500,
-			autoOpen: false,
-			show: {
-				effect:"blind",
-				duration: 800
-			},
-			hide: {
-				effect:"blind",
-				duration:400
-			},
-			modal:true
-		});
-		//register submit event of form
-	    $( "#editCell" ).submit(function( event ) {
-			var newTitle = $("input#editTitle").val();
-			var newDescription = $("input#editDescription").val();
-			var newSrc = $("input#editImageSrc").val();
-
-			//set new content for contentCell
-			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
-			$("#dialog-modal").dialog("close");
-			//$("#editCell")[0].reset();
-
-			//prevent form from reloading the page
-			event.preventDefault();
-		});
-	}
-
-	function initTabs(){
-		$(function() {
-			$( "#tabs" ).tabs();
-		});
-	}
-
+	
 	function getMousePosition(){
 		$(document).mousemove(function(event) {
 	        currentMousePos.x = event.pageX;
@@ -100,51 +57,27 @@ $(document).ready(function() {
 	    });
 	}
 
-	function createContentRow(id, src, title, description){
-		var htmlBasicStructure = 	"<tr id='contentCell_" + id + "' class='contentCell ui-widget-content'>\
-										<td class='contentCellPosterImage'></td>\
-										<td class='contentCellTitle'></td>\
-										<td class='contentCellDescription'></td>\
-										<td class='contentCellEditButton'>Edit</td>\
-									</tr>";
-		$("#contentCellTable tbody").prepend(htmlBasicStructure);
-		$("#contentCell_"+id+" .contentCellPosterImage").append(src);
-		$("#contentCell_"+id+" .contentCellTitle").append(title);
-		$("#contentCell_"+id+" .contentCellDescription").append(description);
+
+    //table.js
+	function initTable(){
+		initTabs();
+		createDummyRows();
 	}
 
-
-	function initEvents(){
-		$( ".contentCellEditButton").on("click", editCellInformation);
-		$( ".contentCell").draggable({ opacity: 0.7, helper: "clone", revert: false, });
-		$( ".contentCell").on("dragstop", onDrop);
+	//grid.js
+	function initGrid(){
+		//TODO: Correct CSS and position grid correctly
+		makeGridResizable();
 	}
 
-	
+	//edit.js
+	function initEditBox(){
+		addFormToEditBox();
+		addDialogToEditBox();
+	}
 
 });
 
-//TODO rewrite code, currently red cell is behind everything, because cells weren't draggable anymore
-function checkCollisionsWithOthers(){
-	//remove all current overlap marks
-	$(".overlap").remove();
-	//get all cells and loop through every other cell
-	var cells = $(".cell");
-    $.each(cells, function(index, item1){
-    	$.each(cells, function(index, item2){
-    		//check if it's a different item, so it's not detecting collision with itself
-    		if(item1.id != item2.id){
-    			var $item1 = $("#"+item1.id);
-	            var overlap = $item1.collision("#"+item2.id, {as: "<div/>", mode:"body"});
-	            if(overlap){
-	            	//if overlap == true, add class and add to body
-	            	overlap.addClass("overlap").appendTo("#grid");
-	            	overlap.css("z-index", $item1.css("z-index")-1);
-	            }
-	        }
-    	})
-    });
-}
 
 
 //create new GridCell when contentCell is dropped in grid
@@ -172,17 +105,12 @@ function onDrop(event){
 }
 
 
-//remove GridCell when clicking in Edit Form
-function removeCellFromGrid(){
-	$("#gridCell_"+currentCellToEdit.id).remove();
-	$("#contentCell_"+currentCellToEdit.id).removeClass("usedCell");
-	$("#contentCell_"+ currentCellToEdit.id + " .contentCellAddButton").html("Add");
-	$("#dialog-modal").dialog("close");
-}
 
 //edit cell information when click in table on Edit
-function editCellInformation(){
-	console.log(this.id);
+function editCellInformation(event){
+	console.log($(event.target).parent().attr("id"));
 	//currentCellToEdit = 
 }
+
+
 
