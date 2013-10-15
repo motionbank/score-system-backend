@@ -59,7 +59,7 @@ module Admins
 
     # Only allow a trusted parameter "white list" through.
     def cellset_params
-      params.require(:cell_set).permit(:title, :description, :poster, :image, :path, :width, :height)
+      params.require(:cell_set).permit(:title, :description, :poster_image, :path, :width, :height)
     end
   end
 end
