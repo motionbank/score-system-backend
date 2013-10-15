@@ -13,14 +13,25 @@
         = render 'admins/shared/upload_widget', form: f, method: :poster_image
 
 
-%section.additional-fields
+%section.additional_fields
   .bubblebox
     .bubble
       .page-header
         %h2= t('form.additional_fields')
 
-      - f.object.additional_fields.each_with_index do |pair, idx|
-        - key, value = pair
-        .row-fluid
-          = text_field_tag :key, key, name: "cell[additional_fields][][key]", id: nil
-          = text_field_tag :value, value, name: "cell[additional_fields][][value]", id: nil
+      .row-fluid.bar
+        %span.span3
+          Key
+        %span.span3
+          Value
+        %span.span3
+          = button_tag("Add", type: 'button', class: "add btn")
+
+      %ul.fields
+        - f.object.additional_fields.each_with_index do |pair, idx|
+          - key, value = pair
+          %li.field.row-fluid
+            %span.span3
+              = text_field_tag :key, key, name: "cell[additional_fields][][key]", id: nil
+            %span.span3
+              = text_field_tag :value, value, name: "cell[additional_fields][][value]", id: nil
