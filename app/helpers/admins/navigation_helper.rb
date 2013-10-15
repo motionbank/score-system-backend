@@ -3,7 +3,7 @@
 module Admins::NavigationHelper
 
   # DO NOT MODIFY THIS LINE EXCEPT FOR ADDING MODELS (line is used by generator)
-  NAVIGATION_MODELS = [Cell]
+  NAVIGATION_MODELS = [Cell, CellSet]
 
 
   def admin_navigation_left

@@ -7,6 +7,9 @@ en:
       cell:
         one: "Cell"
         other: "Cells"
+      cell_set:
+        one: "Set"
+        other: "Sets"
       user:
         one: "User"
         other: "Users"

@@ -1,6 +1,5 @@
 module Admins
   class CellsController < BaseController
-    include Concerns::ResourceControllerAccessors
 
     before_action :set_cell, only: [:show, :new , :edit, :update, :destroy]
     before_action :build_additional_field, only: [:new, :edit]

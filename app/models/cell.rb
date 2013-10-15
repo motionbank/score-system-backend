@@ -11,6 +11,9 @@ class Cell
   mount_uploader :poster_image, ImageUploader
 
 
+  belongs_to :cell_set
+
+
   validates_presence_of :title, :kind
   validates_inclusion_of :kind, in: TYPES
 
