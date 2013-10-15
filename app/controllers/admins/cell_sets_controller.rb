@@ -5,7 +5,7 @@ module Admins
 
     # GET /cell_sets
     def index
-      @cell_sets = CellSet.all
+      @cell_sets = CellSet.all.paginate(page: params[:page], per_page: PER_PAGE)
     end
 
 
