@@ -19,5 +19,8 @@
       .page-header
         %h2= t('form.additional_fields')
 
-      .row-fluid
-        Lorem ipsum
+      - f.object.additional_fields.each_with_index do |pair, idx|
+        - key, value = pair
+        .row-fluid
+          = text_field_tag :key, key, name: "cell[additional_fields][][key]", id: nil
+          = text_field_tag :value, value, name: "cell[additional_fields][][value]", id: nil
