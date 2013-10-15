@@ -78,7 +78,6 @@ function onDrop(event){
 											currentMousePos.x - gridPosition.left, 
 											currentMousePos.y - gridPosition.top, 
 											imageLink);
-			//droppedCell.addClass("usedCell");
 		}
 	}
 
@@ -100,6 +99,18 @@ function showCellInformation(event){
 	//currentCellToEdit = 
 }
 
+
+function onMouseIn(event){
+	var id = $(event.target).parent().attr("id");
+    $("#" + id + " tr").addClass("activeCell");
+    $("#gridCell_" + id.split("_")[1]).addClass("activeCell");
+}
+
+function onMouseOut(event){
+	var id = $(event.target).parent().attr("id");
+    $("#" + id + "tr").removeClass("activeCell");
+    $("#gridCell_"+ id.split("_")[1]).removeClass("activeCell");
+}
 
 
 

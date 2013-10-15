@@ -1,7 +1,6 @@
 //	TODO: Implement Edit Function from Table
 // 	TODO: check hover in table and mark cell in grid (correctly)
 // 	TODO: make gridCell background grün when hovering über table&grid
-// TODO Code vereinfachen, nicht mehrmals $("#beispielid .class") verwenden
 
 
 function initTabs(){
@@ -36,6 +35,9 @@ function createAvailableContentRow(id, src, title, description){
 	availableContentCell.find(".contentCellTitle").append(title);
 	availableContentCell.find(".contentCellDescription").append(description);
 
+	var cellClone = "<div class='cell'><span class='cell-title'>" + title + "</span>\
+						<br><span class='cell-content'>" + description + "</span></div>";
+        
 	availableContentCell.draggable(
 						{
 	 							opacity: 0.7, 
@@ -56,12 +58,12 @@ function createUsedContentRow(id, src, title, description){
 	usedContentCell.find(".contentCellPosterImage").append(src);
 	usedContentCell.find(".contentCellTitle").append(title);
 	usedContentCell.find(".contentCellDescription").append(description);
+	$( "#usedContentCellTable tr" ).hover(onMouseIn, onMouseOut); 
 }
 
 
 function initTableEvents(){
 	$( "#availableContentCellTable" ).on("click", ".contentCellShowButton", showCellInformation);
-	$( "#availableContentCellTable" ).on("click", ".contentCellEditButton", editCellInformation); 
+	$( "#usedContentCellTable" ).on("click", ".contentCellEditButton", editCellInformation);
 	$( "#availableContentCellTable" ).on("dragstop", ".availableCell", onDrop);
 }
-

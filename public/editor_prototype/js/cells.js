@@ -84,7 +84,9 @@ GridCell.prototype = {
         var position = $("#gridCell_"+this.id).position();
         this.position = position;
         this.save();
-         $("#gridCell_"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
+        $("#gridCell_"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
+        $("#usedContentCell_"+this.id+" .contentCellPosterImage img").addClass("thumbnail");
+       
         //this.checkCollisions();
         
     },
@@ -121,8 +123,9 @@ GridCell.prototype = {
 
     //later using for poster image
     setSrc: function(){
-        $("#gridCell_"+this.id+"_content").html("<img src='" + this.src + "'></img>");  
-        $("#contentCell_"+this.id+" .contentCellPosterImage").html("<img src='" + this.src + "'></img>");
+        $("#gridCell_"+this.id+"_content").html("<img src='" + this.src + "'></img>");
+        $("#usedContentCell_"+this.id+" .contentCellPosterImage").html("<img src='" + this.src + "'></img>");
+        this.update();
     },
 
     onDblClick: function(){
@@ -161,22 +164,7 @@ GridCell.prototype = {
     updateContentCell:function(){
         $("#contentCell_" + this.id + " .contentCellTitle").html(this.title);
         $("#contentCell_" + this.id + " .contentCellDescription").html(this.description);
-    },
-
-    onMouseIn: function(){
-        $("#usedContentCell_" + this.id).addClass("activeCell");
-        //$("#gridCell_"+this.id+"").css({"background-color":"orange !important"});
-        //$("#contentCell_"+this.id+" td").css({"text-decoration":"underline"});
-        //$("#gridCell_"+this.id+"_content").css({"text-decoration":"underline"});
-    },
-
-    onMouseOut: function(){
-        $("#usedContentCell_" + this.id).removeClass("activeCell");
-        //$("#gridCell_"+this.id+"").css({"background-color":"white"});
-        //$("#contentCell_"+this.id+" td").css({"text-decoration":"none"});
-        //$("#gridCell_"+this.id+"_content").css({"text-decoration":"none"});
-    }
-     
+    },     
 }
 
 

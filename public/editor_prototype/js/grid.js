@@ -1,8 +1,8 @@
 // 	TODO Check CSS (position, left, top) of Grid and BoundsForGrid, not clear written
 //	because e.g. boundaries for grid do not work at the moment
-//	TODO: resize image src cell when added dynamically
+//	TODO: resize image src cell when added dynamically, check in table!
 // 	TODO: Rewrite Collision Detection
-	//TODO: Correct CSS and position grid correctly
+//	TODO: Correct CSS and position grid correctly
 
 
 function makeGridResizable(){

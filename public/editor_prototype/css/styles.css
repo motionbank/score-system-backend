@@ -7,8 +7,7 @@ body {
 	position: absolute !important;
 	width: 100px; 
 	height: 100px; 
-	background-color: orange;
-	opacity:0.6;
+	opacity:0.8;
 	border-width: 0px !important;
 	z-index: 3;
 
@@ -36,7 +35,7 @@ body {
 }
 
 .usedCell{
-	opacity: 0.3;
+	opacity: 0.8;
 }
 
 .cellTable{
@@ -64,7 +63,7 @@ body {
 	margin-top: -8px;
 	margin-left: 100px;
 	width:1000px;
-	height:500px;
+	height:400px;
 	background-color: #444444;
 	opacity: 0.9;
 
@@ -98,5 +97,11 @@ h2 {
 }
 
 .activeCell{
-	background: green;
+	background: green !important;
+	text-decoration:underline;
+}
+
+.thumbnail{
+	width: auto;
+	height:100px;
 }
