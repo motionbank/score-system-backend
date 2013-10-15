@@ -64,6 +64,16 @@ Grid.prototype = {
 		this.cells.push(cell);
 	},
 
+	setCurrentCell: function(idOfCell){
+		$.each(this.cells, function(index, value){
+			if(value.id == idOfCell){
+				currentCellToEdit = value;
+				console.log("currentcell is now: " + value.id);
+				return false;
+			}
+		});
+	}
+
 }
 
 

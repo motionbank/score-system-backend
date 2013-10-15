@@ -135,12 +135,8 @@ GridCell.prototype = {
         this.openEditDialog();
     },
     openEditDialog: function(){
-        var dialog = $("#dialog-modal");
-        dialog.find("#editTitle").val(this.title);
-        dialog.find("#editType").val("");
-        dialog.find("#editDescription").val(this.description);
-        dialog.find("#editImageSrc").val(this.src);
-        dialog.dialog("open");
+        editBox.setValues(this.title, this.type, this.description, this.src);
+        editBox.openDialog();
         currentCellToEdit = this;
     },
 

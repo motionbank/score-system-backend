@@ -45,8 +45,7 @@ $(document).ready(function() {
 		theGrid = new Grid( "800px", "200px", "1000px", "600px", "100px", "100px");
 
 		//edit.js
-		addFormToEditBox();
-		addDialogToEditBox();
+		editBox = new EditDialog("Default Title", "text", "Default Description", "");
 	}
 });
 
@@ -85,14 +84,12 @@ function onDrop(event){
 
 //edit cell information when click in table on Edit
 function editCellInformation(event){
-	console.log("edit: " + $(event.target).parent().attr("id"));
-	//currentCellToEdit = 
+	theGrid.setCurrentCell($(event.target).parent().attr("id"));
 }
 
 //edit cell information when click in table on Edit
 function showCellInformation(event){
-	console.log("show: " + $(event.target).parent().attr("id"));
-	//currentCellToEdit = 
+	theGrid.setCurrentCell($(event.target).parent().attr("id"));
 }
 
 
@@ -119,10 +116,3 @@ function onMouseOut(event){
     $("#usedContentCell_" + id.split("_")[1]).removeClass("activeCell");
     $("#gridCell_"+ id.split("_")[1]).removeClass("activeCell");
 }
-
-function removeSelectedCell(){
-	grid.removeCell(currentCellToEdit);
-}
-
-
-
