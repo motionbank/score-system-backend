@@ -23,7 +23,7 @@ module Admins
         post :create, cell: {description: @cell.description, kind: @cell.kind, title: @cell.title}
       end
 
-      assert_redirected_to cell_path(assigns(:cell))
+      assert_redirected_to edit_cell_path(assigns(:cell))
     end
 
     test "should get edit" do
@@ -33,7 +33,7 @@ module Admins
 
     test "should update cell" do
       patch :update, id: @cell, cell: {description: @cell.description, kind: @cell.kind, title: @cell.title}
-      assert_redirected_to cell_path(assigns(:cell))
+      assert_redirected_to edit_cell_path(assigns(:cell))
     end
 
     test "should destroy cell" do
