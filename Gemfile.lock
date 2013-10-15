@@ -69,6 +69,7 @@ GEM
       compass (>= 0.12.2, < 0.14)
     compass_twitter_bootstrap (2.3.1)
       compass
+    database_cleaner (1.2.0)
     devise (3.1.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -123,6 +124,8 @@ GEM
     origin (1.1.0)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rabl (0.8.6)
       activesupport (>= 2.3.14)
     rack (1.5.2)
@@ -199,6 +202,7 @@ DEPENDENCIES
   compass-960-plugin
   compass-rails (>= 2.0.alpha.0)
   compass_twitter_bootstrap
+  database_cleaner
   devise
   factory_girl_rails
   haml-rails
@@ -209,6 +213,7 @@ DEPENDENCIES
   mongoid_rails_migrations
   mongoid_slug
   oj
+  quiet_assets
   rabl
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)

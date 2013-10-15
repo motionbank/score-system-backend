@@ -23,8 +23,6 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'devise'
 gem 'cancan'
 
-# TESTING
-gem 'factory_girl_rails'
 
 # FRONTEND
 gem 'jquery-rails'
@@ -63,8 +61,18 @@ end
 # Use unicorn as the app server
 gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
+
+group :development do
+  gem 'quiet_assets'
+
+  # Use Capistrano for deployment
+  # gem 'capistrano'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
