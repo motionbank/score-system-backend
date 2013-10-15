@@ -4,6 +4,7 @@ module Admins
   class CellsControllerTest < ActionController::TestCase
     setup do
       @cell = FactoryGirl.create(:cell)
+      sign_in :user, FactoryGirl.create(:user)
     end
 
     test "should get index" do

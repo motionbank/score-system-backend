@@ -9,3 +9,11 @@ end
 class ActionController::TestCase
   include Devise::TestHelpers
 end
+
+
+# clean database after each test
+class MiniTest::Unit::TestCase
+  def teardown
+    DatabaseCleaner.clean
+  end
+end
