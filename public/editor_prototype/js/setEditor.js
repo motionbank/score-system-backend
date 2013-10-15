@@ -120,5 +120,9 @@ function onMouseOut(event){
     $("#gridCell_"+ id.split("_")[1]).removeClass("activeCell");
 }
 
+function removeSelectedCell(){
+	grid.removeCell(currentCellToEdit);
+}
+
 
 

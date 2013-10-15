@@ -26,7 +26,9 @@ function addFormToEditBox(){
 		$("#dialog-modal").dialog("close");
 		//$("#editCell")[0].reset();
 
+		$("#removeCell").on("click", removeSelectedCell);
 		//prevent form from reloading the page
 		event.preventDefault();
 	});
 }
+

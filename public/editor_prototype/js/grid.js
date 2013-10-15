@@ -33,28 +33,36 @@ Grid.prototype = {
 	},
 	
 	//remove GridCell when clicking in Edit Form
-	removeCellFromGrid: function(){
-		$("#gridCell_"+currentCellToEdit.id).remove();
-		$("#usedContentCell_"+currentCellToEdit.id).remove();
-		//$("#usedContentCell_"+currentCellToEdit.id).removeClass("usedCell");
-		createAvailableContentRow(currentCellToEdit.id, currentCellToEdit.src, currentCellToEdit.title, currentCellToEdit.description);
+	removeCell: function(cellToRemove){
+		console.log(cellToRemove);
+		console.log(cellToRemove.id);
+		//remove cell from grid
+		$("#gridCell_"+cellToRemove.id).remove();
+		$("#usedContentCell_"+cellToRemove.id).remove();
+		//$("#usedContentCell_"+cellToRemove.id).removeClass("usedCell");
+		createAvailableContentRow(cellToRemove.id, cellToRemove.src, cellToRemove.title, cellToRemove.description);
 		$("#dialog-modal").dialog("close");
+
+		//remove cell from class Grid
+		$.grep(this.cells, function(index, value){
+			if(value.id == cellToRemove.id){
+				console.log("matched cell which has to be deleted. it is: " + cellToRemove.id);
+				return false;
+			}
+			else {
+				console.log(cellToRemove.id + " did not match with: " + value.id);
+				return true;
+			}
+		});
+
+		$.each(this.cells, function(index,value){
+			console.log(value.id);
+		});
 	},
 
 	addCell: function(cell){
 		this.cells.push(cell);
-		console.log(cell.id);
 	},
-
-	removeCell: function(cell){
-		$.each(this.cells, function(index, value){
-			if(this.cells.id == cell.id){
-				console.log("matched cell which has to be deleted. it is: " + cell.id);
-			}
-		})
-	}
-
-
 
 }
 

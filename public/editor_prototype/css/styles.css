@@ -103,5 +103,10 @@ h2 {
 
 .thumbnail{
 	width: auto;
-	height:100px;
+	height:70px;
+}
+
+.thumbnail img{
+	width: 100%;
+	height:100%;
 }

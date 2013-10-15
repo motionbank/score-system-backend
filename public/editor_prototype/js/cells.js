@@ -1,3 +1,6 @@
+// TODO: Check deleting of Poster Images, not working currently!
+
+
 
 //standard gridCell
 function GridCell(id, title, description, mouseX, mouseY) {
@@ -45,27 +48,27 @@ GridCell.prototype = {
     //add Handlers
     addEvents: function ()
     {   
-        //  TODO: Variable für DOM Element erstellen!!
+        var currentCell = $("#gridCell_"+this.id);
         //makes cells resizable in grid
-        $("#gridCell_"+this.id).resizable({
+        currentCell.resizable({
             grid: [ this.gridSize.width, this.gridSize.height ],
             containment: "#grid",
         });
 
         //makes cells draggable in grid
-        $("#gridCell_"+this.id).draggable({ 
+        currentCell.draggable({ 
             grid: [ this.gridSize.width, this.gridSize.height ],
             containment: "#grid",
         });
 
         //update cell content with X and Y position
-        $("#gridCell_"+this.id).on("dragstop resizestop", $.proxy(this.onMouseUp, this));
+        currentCell.on("dragstop resizestop", $.proxy(this.onMouseUp, this));
 
         //register event for opening edit dialog
-        $("#gridCell_"+this.id).on("dblclick", $.proxy(this.onDblClick, this));
+        currentCell.on("dblclick", $.proxy(this.onDblClick, this));
 
         //register hover
-        $("#gridCell_"+this.id).hover(onMouseIn, onMouseOut);
+        currentCell.hover(onMouseIn, onMouseOut);
     },
 
     //build the html of the object
@@ -86,7 +89,6 @@ GridCell.prototype = {
         this.position = position;
         this.save();
         $("#gridCell_"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
-        $("#usedContentCell_"+this.id+" .contentCellPosterImage img").addClass("thumbnail");
        
         //this.checkCollisions();
         
@@ -133,11 +135,12 @@ GridCell.prototype = {
         this.openEditDialog();
     },
     openEditDialog: function(){
-        $("#dialog-modal #editTitle").val(this.title);
-        $("#dialog-modal #editType").val("");
-        $("#dialog-modal #editDescription").val(this.description);
-        $("#dialog-modal #editImageSrc").val(this.src);
-        $("#dialog-modal").dialog("open");
+        var dialog = $("#dialog-modal");
+        dialog.find("#editTitle").val(this.title);
+        dialog.find("#editType").val("");
+        dialog.find("#editDescription").val(this.description);
+        dialog.find("#editImageSrc").val(this.src);
+        dialog.dialog("open");
         currentCellToEdit = this;
     },
 

@@ -1,6 +1,5 @@
 //	TODO: Implement Edit Function from Table
 //	TODO: "createDraggedCellElement"-Funktion schreiben, welches die gezogene Zelle darstellt
-//	TODO: alle Zellen gleiche Höhe, auch ohne Poster Image
 
 
 function initTabs(){
@@ -24,7 +23,7 @@ function createDummyRows(){
 
 function createAvailableContentRow(id, src, title, description){
 	var htmlBasicStructure = 	"<tr id='availableContentCell_" + id + "' class='contentCell availableCell cellTable ui-widget-content'>\
-									<td class='contentCellPosterImage'></td>\
+									<td class='contentCellPosterImage thumbnail'></td>\
 									<td class='contentCellTitle'></td>\
 									<td class='contentCellDescription'></td>\
 									<td class='contentCellShowButton'>Show Info</td>\
@@ -48,7 +47,7 @@ function createAvailableContentRow(id, src, title, description){
 
 function createUsedContentRow(id, src, title, description){
 	var htmlBasicStructure = 	"<tr id='usedContentCell_" + id + "' class='contentCell usedCell cellTable ui-widget-content'>\
-									<td class='contentCellPosterImage'></td>\
+									<td class='contentCellPosterImage thumbnail'></td>\
 									<td class='contentCellTitle'></td>\
 									<td class='contentCellDescription'></td>\
 									<td class='contentCellEditButton'>Edit Info</td>\
