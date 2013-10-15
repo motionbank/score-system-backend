@@ -1,5 +1,8 @@
 en:
   mongoid:
+    attributes:
+      cell:
+        kind: "Type"
     models:
       cell:
         one: "Cell"

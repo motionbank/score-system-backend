@@ -6,7 +6,7 @@
 
       .row-fluid
         = f.input :title, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
-        = f.input :kind, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+        = f.input :kind, as: :select, collection: Cell::TYPES, include_blank: false, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
 
       .row-fluid
         = f.input :description, as: :text, input_html: {class: 'span12', rows: 4}, wrapper_html: {class: 'span6'}
