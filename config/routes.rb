@@ -5,7 +5,7 @@ MotionBank::Application.routes.draw do
   scope module: 'admins' do
     root 'cells#index', as: :admins_root
     resources :cells, except: :show
-    resources :cell_sets, path: 'sets', except: :show
+    resources :cell_sets, except: :show
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
