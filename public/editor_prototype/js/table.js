@@ -1,6 +1,4 @@
 //	TODO: Implement Edit Function from Table
-// 	TODO: check hover in table and mark cell in grid (correctly)
-// 	TODO: make gridCell background grün when hovering über table&grid
 
 
 function initTabs(){

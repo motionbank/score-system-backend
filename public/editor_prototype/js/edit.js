@@ -1,6 +1,3 @@
-// 	TODO: check implementation of deleting of images
-
-
 function addDialogToEditBox(){
 	$("#dialog-modal").dialog({
 		height: 500,

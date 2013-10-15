@@ -13,15 +13,6 @@
 //	nachdem alle Zeilen gerendert sind, Events !einmal! registrieren
 
 
-
-
-// 	QUESTIONS:
-//  TODO: Difference between poster Image in Grid and poster image in Table? Same? Wie wird Removement angezeigt?
-//	EDIT Function auch in "Available Cells?" Edit als Button in Table in Used Cells?
-// 	Vorschlag: "Show" in Table "Available Cells", read-only
-//	"Edit" dann in Used Cells, write title, description & Poster image
-
-
 var currentMousePos = { x: -1, y: -1 };
 var currentCellToEdit;
 
@@ -101,14 +92,27 @@ function showCellInformation(event){
 
 
 function onMouseIn(event){
-	var id = $(event.target).parent().attr("id");
-    $("#" + id + " tr").addClass("activeCell");
+	var id;
+	console.log(id);
+	if( $(event.target).attr("id")){
+		id = $(event.target).attr("id");
+	}
+	else {
+		id = $(event.target).parent().attr("id");
+	}
+    $("#usedContentCell_" + id.split("_")[1]).addClass("activeCell");
     $("#gridCell_" + id.split("_")[1]).addClass("activeCell");
 }
 
 function onMouseOut(event){
-	var id = $(event.target).parent().attr("id");
-    $("#" + id + "tr").removeClass("activeCell");
+	var id;
+	if( $(event.target).attr("id")){
+		id = $(event.target).attr("id");
+	}
+	else {
+		id = $(event.target).parent().attr("id");
+	}
+    $("#usedContentCell_" + id.split("_")[1]).removeClass("activeCell");
     $("#gridCell_"+ id.split("_")[1]).removeClass("activeCell");
 }
 

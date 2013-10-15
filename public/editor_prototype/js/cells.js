@@ -64,7 +64,7 @@ GridCell.prototype = {
         $("#gridCell_"+this.id).on("dblclick", $.proxy(this.onDblClick, this));
 
         //register hover
-        $("#gridCell_"+this.id).hover($.proxy(this.onMouseIn, this), $.proxy(this.onMouseOut, this));
+        $("#gridCell_"+this.id).hover(onMouseIn, onMouseOut);
     },
 
     //build the html of the object
@@ -161,10 +161,10 @@ GridCell.prototype = {
         $("#gridCell_" + this.id + "_content .cell-content").html(this.description);
     },
 
-    updateContentCell:function(){
+    updateContentCell: function(){
         $("#contentCell_" + this.id + " .contentCellTitle").html(this.title);
         $("#contentCell_" + this.id + " .contentCellDescription").html(this.description);
-    },     
+    },
 }
 
 
