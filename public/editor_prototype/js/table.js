@@ -53,7 +53,6 @@ function createUsedContentRow(id, src, title, description){
 								</tr>";
 	$("#usedContentCellTable tbody").prepend(htmlBasicStructure);
 	var usedContentCell = $("#usedContentCell_"+id);
-	console.log(usedContentCell);
 	usedContentCell.find(".contentCellPosterImage").append(src);
 	usedContentCell.find(".contentCellTitle").append(title);
 	usedContentCell.find(".contentCellDescription").append(description);
