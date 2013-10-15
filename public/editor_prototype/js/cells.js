@@ -45,6 +45,7 @@ GridCell.prototype = {
     //add Handlers
     addEvents: function ()
     {   
+        //  TODO: Variable für DOM Element erstellen!!
         //makes cells resizable in grid
         $("#gridCell_"+this.id).resizable({
             grid: [ this.gridSize.width, this.gridSize.height ],

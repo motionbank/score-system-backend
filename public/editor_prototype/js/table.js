@@ -1,4 +1,6 @@
 //	TODO: Implement Edit Function from Table
+//	TODO: "createDraggedCellElement"-Funktion schreiben, welches die gezogene Zelle darstellt
+//	TODO: alle Zellen gleiche Höhe, auch ohne Poster Image
 
 
 function initTabs(){

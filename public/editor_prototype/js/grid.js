@@ -4,22 +4,58 @@
 //	TODO: Correct CSS and position grid correctly
 
 
-function makeGridResizable(){
-	$("#grid").resizable({
-        grid: [ $(".cell").width() , $(".cell").height() ],
-        containment: "#boundsForGrid",
-    });
+function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
+	this.width = width;
+	this.height = height;
+	this.boundsWidth = boundsWidth;
+	this.boundsHeight = boundsHeight;
+	this.widthStep = widthStep;
+	this.heightStep = heightStep;
+	this.cells = [ ];
+	this.init();
 }
 
 
 
-//remove GridCell when clicking in Edit Form
-function removeCellFromGrid(){
-	$("#gridCell_"+currentCellToEdit.id).remove();
-	$("#usedContentCell_"+currentCellToEdit.id).remove();
-	//$("#usedContentCell_"+currentCellToEdit.id).removeClass("usedCell");
-	createAvailableContentRow(currentCellToEdit.id, currentCellToEdit.src, currentCellToEdit.title, currentCellToEdit.description);
-	$("#dialog-modal").dialog("close");
+Grid.prototype = {
+	init: function(){
+		$("#grid").css({ "width" : this.width, "height" : this.height });
+		$("boundsForGrid").css({ "width" : this.boundsWidth, "height" : this.boundsHeight });
+		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
+		this.makeGridResizable();
+	},
+
+	makeGridResizable: function(){
+		$("#grid").resizable({
+        	grid: [ $(".cell").width() , $(".cell").height() ],
+        	containment: "#boundsForGrid",
+    	});
+	},
+	
+	//remove GridCell when clicking in Edit Form
+	removeCellFromGrid: function(){
+		$("#gridCell_"+currentCellToEdit.id).remove();
+		$("#usedContentCell_"+currentCellToEdit.id).remove();
+		//$("#usedContentCell_"+currentCellToEdit.id).removeClass("usedCell");
+		createAvailableContentRow(currentCellToEdit.id, currentCellToEdit.src, currentCellToEdit.title, currentCellToEdit.description);
+		$("#dialog-modal").dialog("close");
+	},
+
+	addCell: function(cell){
+		this.cells.push(cell);
+		console.log(cell.id);
+	},
+
+	removeCell: function(cell){
+		$.each(this.cells, function(index, value){
+			if(this.cells.id == cell.id){
+				console.log("matched cell which has to be deleted. it is: " + cell.id);
+			}
+		})
+	}
+
+
+
 }
 
 

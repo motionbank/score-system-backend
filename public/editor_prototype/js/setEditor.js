@@ -1,10 +1,7 @@
 //	TODO: Layouts implementieren
 // 	TODO CLEAN && COMMENT CODE
 
-
-// 	NOTES: Add Button entfernen // "Merken" der Zelle nicht notwendig
-//	Draggen: direkt die Zelle, nicht die Zeile
-// 	TODO: Tabs implementieren --> Used Cells in Used Tab schieben
+//	Draggen: direkt die Zelle, nicht die Zeile -> Problem: Zelle ist noch nicht angelegt
 
 //	______________ DONE _____________________________________________________________________
 //	TODO: zu registrierende Events einmal beim initialize, nicht für jedes Element. 
@@ -12,9 +9,12 @@
 //											$(".addButton").on("click", addOrRemoveButton);
 //	nachdem alle Zeilen gerendert sind, Events !einmal! registrieren
 
+// 	Referenz auf Grid, nachdem es erzeugt wurde
+
 
 var currentMousePos = { x: -1, y: -1 };
 var currentCellToEdit;
+var theGrid;
 
 
 $(document).ready(function() { 
@@ -40,8 +40,9 @@ $(document).ready(function() {
 		initTabs();
 		createDummyRows();
 
+		//	TODO Grid als Klasse neu schreiben, var grid = new Grid(), Property: this.cells = [ ]
 		//grid.js
-		makeGridResizable();
+		theGrid = new Grid( "800px", "200px", "1000px", "600px", "100px", "100px");
 
 		//edit.js
 		addFormToEditBox();
@@ -65,14 +66,18 @@ function onDrop(event){
 		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
 			//TODO: Prepare for reading from Database
 			id = id.split('_')[1];
+			//cell.js
 			var newGridCell = new GridCell(	id, title, description, 
 											currentMousePos.x - gridPosition.left, 
 											currentMousePos.y - gridPosition.top, 
 											imageLink);
+			theGrid.addCell(newGridCell);
 		}
 	}
 
+	//table.js
 	createUsedContentRow(id, imageLink, title, description);
+	
 	droppedCell.remove();
 }
 
@@ -93,7 +98,6 @@ function showCellInformation(event){
 
 function onMouseIn(event){
 	var id;
-	console.log(id);
 	if( $(event.target).attr("id")){
 		id = $(event.target).attr("id");
 	}
