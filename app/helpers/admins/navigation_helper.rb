@@ -13,7 +13,7 @@ module Admins::NavigationHelper
       if can?(:read, model)
         result << navigation_tag(
           I18n.model_name(model, count: 2),
-          polymorphic_url([:admins, model.to_s.underscore.pluralize.to_sym]),
+          polymorphic_url(model.to_s.underscore.pluralize.to_sym),
           model.to_s.underscore.to_sym
         )
       end
@@ -22,8 +22,8 @@ module Admins::NavigationHelper
     if can?(:index, User)
       result << navigation_tag(
         I18n.model_name(User, count: 2),
-        polymorphic_url([:admins, :users]),
-        :admin
+        users_url,
+        :user
       )
     end
 
@@ -36,7 +36,7 @@ module Admins::NavigationHelper
 
     result << navigation_tag(
       I18n.t('my_account'),
-      edit_user_registration_path(current_user),
+      edit_user_registration_path,
       :my_account
     )
 

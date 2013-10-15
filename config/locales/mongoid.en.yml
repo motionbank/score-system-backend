@@ -4,3 +4,6 @@ en:
       cell:
         one: "Cell"
         other: "Cells"
+      user:
+        one: "User"
+        other: "Users"
