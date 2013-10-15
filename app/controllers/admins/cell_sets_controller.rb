@@ -25,7 +25,7 @@ module Admins
       @cell_set = CellSet.new(cellset_params)
 
       if @cell_set.save
-        redirect_to edit_cell_set_url(@set), notice: 'Set was successfully created.'
+        redirect_to edit_cell_set_url(@cell_set), notice: 'Set was successfully created.'
       else
         render action: 'new'
       end
@@ -35,7 +35,7 @@ module Admins
     # PATCH/PUT /sets/1
     def update
       if @cell_set.update(cellset_params)
-        redirect_to edit_cell_set_url(@set), notice: 'Set was successfully updated.'
+        redirect_to edit_cell_set_url(@cell_set), notice: 'Set was successfully updated.'
       else
         render action: 'edit'
       end
