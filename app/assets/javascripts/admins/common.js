@@ -8,8 +8,6 @@ INIT.addInitializers({
 
 		_form: function () {
 			setupPublishingWidget();
-
-			$(document).on('nested:fieldAdded', initRedactor);
 		}
 	}
 });
