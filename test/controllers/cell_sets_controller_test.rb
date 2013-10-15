@@ -18,7 +18,7 @@ class CellSetsControllerTest < ActionController::TestCase
 
   test "should create cell_set" do
     assert_difference('CellSet.count') do
-      post :create, cell_set: { description: @cell_set.description, height: @cell_set.height, image: @cell_set.image, path: @cell_set.path, poster: @cell_set.poster, title: @cell_set.title, width: @cell_set.width }
+      post :create, cell_set: { description: @cell_set.description, height: @cell_set.height, path: @cell_set.path, poster_image: @cell_set.poster_image, title: @cell_set.title, width: @cell_set.width }
     end
 
     assert_redirected_to edit_cell_set_path(assigns(:cell_set))
@@ -35,7 +35,7 @@ class CellSetsControllerTest < ActionController::TestCase
   end
 
   test "should update cell_set" do
-    patch :update, id: @cell_set, cell_set: { description: @cell_set.description, height: @cell_set.height, image: @cell_set.image, path: @cell_set.path, poster: @cell_set.poster, title: @cell_set.title, width: @cell_set.width }
+    patch :update, id: @cell_set, cell_set: { description: @cell_set.description, height: @cell_set.height, path: @cell_set.path, poster_image: @cell_set.poster_image, title: @cell_set.title, width: @cell_set.width }
     assert_redirected_to edit_cell_set_path(assigns(:cell_set))
   end
 
