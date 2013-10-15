@@ -8,11 +8,14 @@ INIT.addInitializers({
 
 		_form: function () {
 			var additionalFields = $('.additional_fields');
-			additionalFields.find('.add.btn').click(function() {
+
+			function addEmptyKeyValueFields() {
 				var clonedEmptyFields = additionalFields.find('.field:last').clone();
 				clonedEmptyFields.find('input').val(null);
 				additionalFields.find('.fields').append(clonedEmptyFields);
-			});
+			}
+
+			additionalFields.find('.add.btn').click(addEmptyKeyValueFields);
 
 			setupPublishingWidget();
 		}
