@@ -164,14 +164,14 @@ GridCell.prototype = {
     },
 
     onMouseIn: function(){
-        $("#contentCell_" + this.id + " td").css({"background-color":"orange"});
+        $("#usedContentCell_" + this.id).addClass("activeCell");
         //$("#gridCell_"+this.id+"").css({"background-color":"orange !important"});
         //$("#contentCell_"+this.id+" td").css({"text-decoration":"underline"});
         //$("#gridCell_"+this.id+"_content").css({"text-decoration":"underline"});
     },
 
     onMouseOut: function(){
-        $("#contentCell_" + this.id + " td").css({"background-color":"white"});
+        $("#usedContentCell_" + this.id).removeClass("activeCell");
         //$("#gridCell_"+this.id+"").css({"background-color":"white"});
         //$("#contentCell_"+this.id+" td").css({"text-decoration":"none"});
         //$("#gridCell_"+this.id+"_content").css({"text-decoration":"none"});

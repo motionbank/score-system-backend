@@ -1,3 +1,10 @@
+// 	TODO Check CSS (position, left, top) of Grid and BoundsForGrid, not clear written
+//	because e.g. boundaries for grid do not work at the moment
+//	TODO: resize image src cell when added dynamically
+// 	TODO: Rewrite Collision Detection
+	//TODO: Correct CSS and position grid correctly
+
+
 function makeGridResizable(){
 	$("#grid").resizable({
         grid: [ $(".cell").width() , $(".cell").height() ],
@@ -10,8 +17,9 @@ function makeGridResizable(){
 //remove GridCell when clicking in Edit Form
 function removeCellFromGrid(){
 	$("#gridCell_"+currentCellToEdit.id).remove();
-	$("#contentCell_"+currentCellToEdit.id).removeClass("usedCell");
-	$("#contentCell_"+ currentCellToEdit.id + " .contentCellAddButton").html("Add");
+	$("#usedContentCell_"+currentCellToEdit.id).remove();
+	//$("#usedContentCell_"+currentCellToEdit.id).removeClass("usedCell");
+	createAvailableContentRow(currentCellToEdit.id, currentCellToEdit.src, currentCellToEdit.title, currentCellToEdit.description);
 	$("#dialog-modal").dialog("close");
 }
 

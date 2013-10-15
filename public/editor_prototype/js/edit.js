@@ -1,3 +1,6 @@
+// 	TODO: check implementation of deleting of images
+
+
 function addDialogToEditBox(){
 	$("#dialog-modal").dialog({
 		height: 500,
@@ -21,7 +24,7 @@ function addFormToEditBox(){
 		var newDescription = $("input#editDescription").val();
 		var newSrc = $("input#editImageSrc").val();
 
-		//set new content for contentCell
+		//cells.js, set new content for contentCell
 		currentCellToEdit.setContent(newTitle, newDescription, newSrc);
 		$("#dialog-modal").dialog("close");
 		//$("#editCell")[0].reset();

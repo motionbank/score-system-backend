@@ -11,7 +11,7 @@
 		<script src="js/cells.js"></script>
 		<script src="js/grid.js"></script>
 		<script src="js/edit.js"></script>
-		<script src="js/mainScript.js"></script>
+		<script src="js/setEditor.js"></script>
 		<link rel="stylesheet" href="css/styles.css"></link>
 		<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.3.custom.min.css"></link>
 	</head>
@@ -24,18 +24,26 @@
 
 		<div id="tabs">
 			<ul>
-				<li><a href="#usedCells">Used Cells</a></li>
-				<li><a href="#availableCells">Available Cells</a></li>
+				<li><a href="#usedContentCells">Used Cells</a></li>
+				<li><a href="#availableContentCells">Available Cells</a></li>
 			</ul>
-			<div id="usedCells">
-				Lorem ipsum
-			</div>
-			<div id="availableCells">
-				<table id="contentCellTable">
+
+
+			<div id="usedContentCells">
+				<h3>Used Cells</h3>
+				<table id="usedContentCellTable" class="cellTable">
 					<tr></tr>
 				</table>
 			</div>
+			<div id="availableContentCells">
+				<h3>Available Cells</h3>
+				<table id="availableContentCellTable" class="cellTable">
+					<tr></tr>
+				</table>
+			</div>
+
 		</div>
+
 
 
 

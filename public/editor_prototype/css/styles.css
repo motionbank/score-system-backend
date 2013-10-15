@@ -39,7 +39,7 @@ body {
 	opacity: 0.3;
 }
 
-#contentCellTable{
+.cellTable{
 	margin-left:100px;
 	margin-top:100px;
 	padding: 5px;
@@ -47,10 +47,10 @@ body {
 	border-style: solid;
 }
 
-#contentCellTable td{
+.cellTable td{
 	padding: 10px;
 }
-#contentCellTable tr{
+.cellTable tr{
 	border-width: 1px;
 	border-style: solid;
 }
@@ -95,4 +95,8 @@ h2 {
 
 #emptyCell{
 	opacity:0;
+}
+
+.activeCell{
+	background: green;
 }
