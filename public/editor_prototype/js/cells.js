@@ -73,7 +73,9 @@ GridCell.prototype = {
 
     //build the html of the object
     render: function(){
-        this.html = "<div id='gridCell_" + this.id + "' class='" + this.class + "'><span id='gridCell_" + this.id + "_content'><span class='cell-title'></span><br><span class='cell-content'></span></span></div>";
+        this.html = "<div id='gridCell_" + this.id + "' class='" + this.class + "'><span id='gridCell_" +
+                             this.id + "_content'><span class='cell-title'></span><br>\
+                                <span class='cell-content'></span></span></div>";
         $("#grid").append(this.html);
         this.setContent(this.title, this.description);
         //get the gridsize and set the size of the cell
