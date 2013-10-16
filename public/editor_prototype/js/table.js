@@ -34,15 +34,23 @@ function createAvailableContentRow(id, src, title, description){
 	availableContentCell.find(".contentCellTitle").append(title);
 	availableContentCell.find(".contentCellDescription").append(description);
 
-	var cellClone = "<div class='cell'><span class='cell-title'>" + title + "</span>\
-						<br><span class='cell-content'>" + description + "</span></div>";
-        
+	
 	availableContentCell.draggable(
 						{
 	 							opacity: 0.7, 
-	 							helper: "clone", 
+	 							helper: createDraggableCellHelper, 
 	 							revert: false, 
 	 					});
+}
+
+function createDraggableCellHelper(event){
+
+	var title = $(event.currentTarget).find(".contentCellTitle").html();
+	var description = $(event.currentTarget).find(".contentCellDescription").html();
+	var cellClone = "<div class='cell'><span id='class='cell-title'>" + title + "</span>\
+						<br><span class='cell-content'>" + description + "</span></div>";
+	//console.log(event.currentTarget);
+	return cellClone;
 }
 
 function createUsedContentRow(id, src, title, description){
