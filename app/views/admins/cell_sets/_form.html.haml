@@ -1,4 +1,10 @@
 :ruby
+  content_for(:custom_style) do
+    "gridStyle"
+  end
+  content_for(:custom_script) do
+    "gridEditor"
+  end
   options ||= {}
   options.merge!({
     publishing_logic: f.object.respond_to?(:published_flag),
