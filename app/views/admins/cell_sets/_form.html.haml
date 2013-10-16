@@ -1,0 +1,29 @@
+:ruby
+  options ||= {}
+  options.merge!({
+    publishing_logic: f.object.respond_to?(:published_flag),
+  })
+
+
+.row-fluid
+  - if f.object.persisted?
+    %section.grid-editor.span8
+      .main-content-wrapper.bubblebox
+        .main-content.bubble
+          .page-header
+            %h2= t('set.grid_editor')
+
+          .row-fluid
+            Here be dragons
+
+
+  .sidebar.span4
+    .form-inputs
+      = render "admins/#{view_dir_for(f.object)}/form_content", f: f
+
+      - if options[:publishing_logic]
+        .bubblebox
+          %section.publishing.bubble
+            .page-header
+              %h2= t('form.publish')
+            = render 'admins/shared/publishing', f: f, resource: f.object #, no_publishing_end_date: true
