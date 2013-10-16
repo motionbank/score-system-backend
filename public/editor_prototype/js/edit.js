@@ -11,6 +11,7 @@ EditDialog.prototype = {
 
 	init: function(){
 		this.initDialog();
+		this.addEvents();
 		this.initForm();
 	},
 
@@ -63,8 +64,6 @@ EditDialog.prototype = {
 		$(dialog).find("#type").html(this.type);
 		$(dialog).find("#editDescription").val(this.description);
 		$(dialog).find("#editImageSrc").val(this.posterImage);
-		
-
 	},
 
 	addEvents: function(){

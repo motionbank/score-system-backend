@@ -106,8 +106,14 @@ h2 {
 	text-decoration:underline;
 }
 
+.activeCell span img{
+	filter: gray;
+	-webkit-filter: grayscale(100%);
+}
+
 .thumbnail{
-	width: auto;
+	/*width: auto;*/
+	width:auto;
 	height:70px;
 }
 

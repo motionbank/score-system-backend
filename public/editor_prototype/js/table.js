@@ -1,6 +1,6 @@
 //	TODO: Implement Edit Function from Table
 //	TODO: "createDraggedCellElement"-Funktion schreiben, welches die gezogene Zelle darstellt
-
+// 	TODO: Templates erstellen für createContentCellHelper!
 
 function initTabs(){
 		$(function() {
@@ -11,8 +11,10 @@ function initTabs(){
 
 function createDummyRows(){
 	//create dummy rows
+	var imageSrc = "http://msmunited.com/wp-content/uploads/2013/02/dance1.jpg";
     for(var i = 0; i < 8; i++){
-    	createAvailableContentRow(i,"","MyTitle of Cell"+i,"MyDescription");
+    	if(i%2) createAvailableContentRow(i,imageSrc,"MyTitle of Cell"+i,"MyDescription");
+    	else createAvailableContentRow(i,"","MyTitle of Cell"+i,"MyDescription");
     	if(i==7){
     		initTableEvents();
     	}
@@ -30,7 +32,7 @@ function createAvailableContentRow(id, src, title, description){
 								</tr>";
 	$("#availableContentCellTable tbody").prepend(htmlBasicStructure);
 	var availableContentCell = $("#availableContentCell_"+id);
-	availableContentCell.find(".contentCellPosterImage").append(src);
+	availableContentCell.find(".contentCellPosterImage").append("<img src='" + src + "' />");
 	availableContentCell.find(".contentCellTitle").append(title);
 	availableContentCell.find(".contentCellDescription").append(description);
 
@@ -44,12 +46,24 @@ function createAvailableContentRow(id, src, title, description){
 }
 
 function createDraggableCellHelper(event){
+	var cell = $(event.currentTarget);
+	var title = cell.find(".contentCellTitle").html();
+	var description = cell.find(".contentCellDescription").html();
+	var cellClone = "<div class='cell thumbnail'>";
 
-	var title = $(event.currentTarget).find(".contentCellTitle").html();
-	var description = $(event.currentTarget).find(".contentCellDescription").html();
-	var cellClone = "<div class='cell'><span id='class='cell-title'>" + title + "</span>\
+
+	if(cell.find(".contentCellPosterImage img").attr("src").length > 0){
+		cellClone += cell.find(".contentCellPosterImage").html();
+	}
+	else {
+		cellClone += "<span id='class='cell-title'>" + title + "</span>\
 						<br><span class='cell-content'>" + description + "</span></div>";
+	}
+	cellClone += "</div>";
 	//console.log(event.currentTarget);
+	console.log(cell.find(".contentCellPosterImage img").attr("src").length);
+	console.log(cell.find(".contentCellPosterImage").html());
+	console.log(cellClone);
 	return cellClone;
 }
 
@@ -62,7 +76,7 @@ function createUsedContentRow(id, src, title, description){
 								</tr>";
 	$("#usedContentCellTable tbody").prepend(htmlBasicStructure);
 	var usedContentCell = $("#usedContentCell_"+id);
-	usedContentCell.find(".contentCellPosterImage").append(src);
+	usedContentCell.find(".contentCellPosterImage").append("<img src='" + src + "' />");
 	usedContentCell.find(".contentCellTitle").append(title);
 	usedContentCell.find(".contentCellDescription").append(description);
 	$( "#usedContentCellTable tr" ).hover(onMouseIn, onMouseOut); 

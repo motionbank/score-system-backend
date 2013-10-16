@@ -43,7 +43,6 @@ GridCell.prototype = {
         //use this later for poster images
         if(this.src){
             this.setSrc();
-            alert("settting src as init because: "+ this.src);
         } 
     },
 

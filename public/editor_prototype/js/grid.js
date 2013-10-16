@@ -34,8 +34,7 @@ Grid.prototype = {
 	
 	//remove GridCell when clicking in Edit Form
 	removeCell: function(cellToRemove){
-		console.log(cellToRemove);
-		console.log(cellToRemove.id);
+		
 		//remove cell from grid
 		$("#gridCell_"+cellToRemove.id).remove();
 		$("#usedContentCell_"+cellToRemove.id).remove();
@@ -43,20 +42,14 @@ Grid.prototype = {
 		createAvailableContentRow(cellToRemove.id, cellToRemove.src, cellToRemove.title, cellToRemove.description);
 		$("#dialog-modal").dialog("close");
 
-		//remove cell from class Grid
-		$.grep(this.cells, function(index, value){
+		//remove cell from class Grid, if it maches return false and delete it by this
+		this.cells = $.grep(this.cells, function(value, index){
 			if(value.id == cellToRemove.id){
-				console.log("matched cell which has to be deleted. it is: " + cellToRemove.id);
 				return false;
 			}
 			else {
-				console.log(cellToRemove.id + " did not match with: " + value.id);
 				return true;
 			}
-		});
-
-		$.each(this.cells, function(index,value){
-			console.log(value.id);
 		});
 	},
 

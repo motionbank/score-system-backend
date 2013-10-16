@@ -57,13 +57,14 @@ function onDrop(event){
 	var id = droppedCell.attr("id");
 	var title = droppedCell.find(".contentCellTitle").html();
 	var description = droppedCell.find(".contentCellDescription").html();
-	var imageLink = "";
+	var imageLink = droppedCell.find(".contentCellPosterImage img").attr("src");
 	var type = "text";
 
 	var grid = $("#grid");
 	var gridPosition = grid.offset();
 	if(gridPosition.left < currentMousePos.x && currentMousePos.x < gridPosition.left + grid.width()){
 		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
+
 			//TODO: Prepare for reading from Database
 			id = id.split('_')[1];
 			//cell.js
@@ -72,13 +73,13 @@ function onDrop(event){
 											currentMousePos.y - gridPosition.top, 
 											imageLink);
 			theGrid.addCell(newGridCell);
+			//table.js
+			createUsedContentRow(id, imageLink, title, description);
+			droppedCell.remove();
 		}
 	}
 
-	//table.js
-	createUsedContentRow(id, imageLink, title, description);
 	
-	droppedCell.remove();
 }
 
 
@@ -86,11 +87,14 @@ function onDrop(event){
 //edit cell information when click in table on Edit
 function editCellInformation(event){
 	theGrid.setCurrentCell($(event.target).parent().attr("id"));
+	editBox.setValues(currentCellToEdit.title, currentCellToEdit.type, currentCellToEdit.description, currentCellToEdit.src);
+	editBox.openDialog();
 }
 
 //edit cell information when click in table on Edit
 function showCellInformation(event){
 	theGrid.setCurrentCell($(event.target).parent().attr("id"));
+	editBox.openDialog();
 }
 
 
@@ -116,4 +120,9 @@ function onMouseOut(event){
 	}
     $("#usedContentCell_" + id.split("_")[1]).removeClass("activeCell");
     $("#gridCell_"+ id.split("_")[1]).removeClass("activeCell");
+}
+
+function removeSelectedCell(){
+	theGrid.removeCell(currentCellToEdit);
+
 }
