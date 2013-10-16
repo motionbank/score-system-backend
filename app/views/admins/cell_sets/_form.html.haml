@@ -20,7 +20,45 @@
             %h2= t('set.grid_editor')
 
           .row-fluid
-            Here be dragons
+            #boundsForGrid
+              #grid
+            
+            #tabs
+              %ul
+                %li
+                  %a(href="#usedContentCells") Used Cells
+                %li
+                  %a(href="#availableContentCells") Available Cells
+
+              #usedContentCells
+                %h3 Used Cells
+                %table#usedContentCellTable.cellTable
+                  %tr
+              #availableContentCells
+                %h3 Available Cells
+                %table#availableContentCellTable.cellTable
+                  %tr
+
+            #dialog-modal.Basic.modal.dialog(title="Edit Cell")
+              %form#editCell
+                %p Title
+                %p
+                  %input#editTitle(type="text" name="title")
+                %p Type
+                %p
+                  %input#type.textInEdit
+                %p Description
+                %p
+                  %input#editDescription(type="text" name="description")
+                %p Upload Poster Image
+                %p
+                  %input#editImageSrc(type="text" name="imagesrc")
+                %p
+                  %input(type="button" name="deleteImage" value="Delete Poster Image" onclick="this.form.imagesrc.value=''")
+                %p
+                  %input(type="submit" value="Save")
+                  %input#removeCell(type="button" value="Remove Cell from Grid")
+            #emptyCell.cell
 
 
   .sidebar.span4
