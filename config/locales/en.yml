@@ -24,6 +24,8 @@ en:
     title: "Motion Bank"
   my_account: "My account"
   logout: "Logout"
+  set:
+    grid_editor: "Grid-Editor"
   record:
     index: "List"
     show: "Show"
@@ -44,3 +46,7 @@ en:
       deleted: "%{class_name} was deleted."
       not_deleted: "%{class_name} could not be deleted"
 
+  form:
+    basic_data: "Basic Data"
+    additional_fields: "Additional Fields"
+    publish: "Publication"

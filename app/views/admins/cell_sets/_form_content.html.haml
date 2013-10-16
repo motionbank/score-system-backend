@@ -1,0 +1,23 @@
+.bubblebox
+  %section.primary-fields.bubble
+    .page-header
+      %h2= t('form.basic_data')
+
+    = f.error_notification
+    - base_errors(f)
+
+    .row-fluid
+      = f.input :title, input_html: {class: 'span12'}
+
+    .row-fluid
+      = f.input :path, input_html: {class: 'span12'}
+
+    .row-fluid
+      = f.input :description, as: :text, input_html: {class: 'span12', rows: 4}
+
+    .row-fluid
+      = f.input :width, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+      = f.input :height, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+
+    .row-fluid
+      = render 'admins/shared/upload_widget', form: f, method: :poster_image, span_size: 12

@@ -1,21 +1,16 @@
 module Admins
   class CellsController < BaseController
-    include Concerns::ResourceControllerAccessors
 
-    before_action :set_cell, only: [:show, :edit, :update, :destroy]
+    before_action :set_cell, only: [:new , :edit, :update, :destroy]
+    before_action :build_additional_field, only: [:new, :edit]
 
     # GET /cells
     def index
       @cells = Cell.all.paginate(page: params[:page], per_page: PER_PAGE)
     end
 
-    # GET /cells/1
-    def show
-    end
-
     # GET /cells/new
     def new
-      @cell = Cell.new
     end
 
     # GET /cells/1/edit
@@ -49,14 +44,34 @@ module Admins
     end
 
     private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cell
-      @cell = Cell.find(params[:id])
+
+    # This is done to assert that at least one additional field (key-value pair) is in the form
+    def build_additional_field
+      @cell.additional_fields[""] = ""
     end
+
+
+    def set_cell
+      @cell = action_name == "new" ? Cell.new : Cell.find(params[:id])
+    end
+
 
     # Only allow a trusted parameter "white list" through.
     def cell_params
-      params.require(:cell).permit(:kind, :title, :description, :poster_image)
+      attrs = params.dup
+
+      attrs[:cell][:additional_fields] ||= {}
+
+      # pre-process additional_fields to be a standard hash, instead of an array containing {key: KEY, value: VALUE} hashes
+      attrs[:cell][:additional_fields] = attrs[:cell][:additional_fields].inject({}) do |result, element|
+        result[element[:key]] = element[:value] if element[:key].present? && element[:value].present?
+        result
+      end
+
+      # ActionController::StrongParameters#permit requires to specify all keys when permitting a hash field
+      all_additional_keys = attrs[:cell][:additional_fields].keys
+
+      attrs.require(:cell).permit(:kind, :title, :description, :poster_image, additional_fields: all_additional_keys)
     end
   end
 end

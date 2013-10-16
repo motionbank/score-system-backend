@@ -1,4 +1,4 @@
-/*global initUploader,initRedactor,setupPublishingWidget,initKalendae,flashTimeout:true */
+/*global setupPublishingWidget,flashTimeout:true */
 
 INIT.addInitializers({
 	common: {
@@ -7,12 +7,17 @@ INIT.addInitializers({
 		},
 
 		_form: function () {
-			initUploader();
-			initRedactor();
-			setupPublishingWidget();
-			initKalendae();
+			var additionalFields = $('.additional_fields');
 
-			$(document).on('nested:fieldAdded', initRedactor);
+			function addEmptyKeyValueFields() {
+				var clonedEmptyFields = additionalFields.find('.field:last').clone();
+				clonedEmptyFields.find('input').val(null);
+				additionalFields.find('.fields').append(clonedEmptyFields);
+			}
+
+			additionalFields.find('.add.btn').click(addEmptyKeyValueFields);
+
+			setupPublishingWidget();
 		}
 	}
 });
@@ -22,16 +27,4 @@ function flashTimeout() {
 	setTimeout(function () {
 		$('#flash .alert').alert('close');
 	}, 4000);
-}
-
-
-function initKalendae() {
-	if (document.querySelectorAll) {
-		I18n.initKalendae();
-
-		$('input.kalendae_field').kalendae({
-			weekStart: 1,
-			format: I18n.t('kalendae.dateFormat')
-		});
-	}
 }

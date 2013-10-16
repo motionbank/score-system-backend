@@ -1,9 +1,12 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :cell do
-    kind Cell::TYPES.first
+  factory :cell_set do
     title "MyString"
     description "MyString"
+    poster_image "MyString"
+    path "MyString"
+    width "MyString"
+    height "MyString"
   end
 end

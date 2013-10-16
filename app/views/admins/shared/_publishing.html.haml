@@ -1,0 +1,24 @@
+- no_publishing_end_date ||= false
+
+= f.input :published_flag, :as => :hidden
+
+.btn-group(data-toggle="buttons-radio")
+  .btn(data-toggle="button" data-published="1")
+    = t('record.published')
+
+  .btn(data-toggle="button" data-published="0")
+    = t('record.unpublished')
+
+.publishing_dates
+  %span= t('record.published_on')
+  = f.text_field(:publishing_date, :value => l(resource.publishing_date || Time.now.to_date),
+    :"data-date" => l(resource.publishing_date || Time.now.to_date),
+    :class => "kalendae_field" )
+
+  - if resource.respond_to?(:publishing_end_date) && !no_publishing_end_date
+    %br
+    %span= t('record.published_until')
+    = f.text_field(:publishing_end_date,
+      :value => (l(resource.publishing_end_date) if resource.publishing_end_date),
+      :"data-date" => l(resource.publishing_end_date || Time.now.to_date),
+      :class => "kalendae_field" )

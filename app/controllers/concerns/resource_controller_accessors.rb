@@ -11,12 +11,12 @@ module Concerns
 
 
       def resource_sym
-        resource_class.to_s.downcase.to_sym
+        resource_class.to_s.underscore.to_sym
       end
 
 
       def resources_sym
-        resource_class.to_s.downcase.pluralize.to_sym
+        resource_class.to_s.underscore.pluralize.to_sym
       end
 
 

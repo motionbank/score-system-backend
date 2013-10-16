@@ -1,5 +1,8 @@
 class User
   include Mongoid::Document
+
+  field :admin, :type => Boolean
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
