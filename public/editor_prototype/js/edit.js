@@ -33,22 +33,23 @@ EditDialog.prototype = {
 	initForm: function(){
 		//register submit event of form
 	    $( "#editCell" ).submit(function( event ) {
-			var newTitle = $("input#editTitle").val();
-			var newDescription = $("input#editDescription").val();
-			var newSrc = $("input#editImageSrc").val();
+			//prevent form from reloading the page
+			event.preventDefault();
+
+			var dialog = $("#dialog-modal #editCell");
+			var newTitle = $(dialog).find("#editTitle").val();
+			var newDescription = $(dialog).find("#editDescription").val();
+			var newSrc = $(dialog).find("#editImageSrc").val();
 
 			//cells.js, set new content for contentCell
 			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
-			this.closeDialog();
-			//$("#editCell")[0].reset();
-			return false;
-			//prevent form from reloading the page
-			event.preventDefault();
+
+			editBox.closeDialog();
+			
 		});
 	},
 
 	setValues: function(title, type, description, posterImage){
-		console.log("set the values!" + title + type + description);
 		this.title = title;
 		this.type = type;
 		this.description = description;
@@ -58,12 +59,11 @@ EditDialog.prototype = {
 
 	updateHTMLContent: function(){
 		var dialog = $("#dialog-modal #editCell");
-		console.log(dialog);
-		console.log(this.title);
 		$(dialog).find("#editTitle").val(this.title);
-		$(dialog).find("#editType").val(this.type);
+		$(dialog).find("#type").html(this.type);
 		$(dialog).find("#editDescription").val(this.description);
 		$(dialog).find("#editImageSrc").val(this.posterImage);
+		
 
 	},
 

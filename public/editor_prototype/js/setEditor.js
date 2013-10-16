@@ -58,6 +58,7 @@ function onDrop(event){
 	var title = droppedCell.find(".contentCellTitle").html();
 	var description = droppedCell.find(".contentCellDescription").html();
 	var imageLink = "";
+	var type = "text";
 
 	var grid = $("#grid");
 	var gridPosition = grid.offset();
@@ -66,7 +67,7 @@ function onDrop(event){
 			//TODO: Prepare for reading from Database
 			id = id.split('_')[1];
 			//cell.js
-			var newGridCell = new GridCell(	id, title, description, 
+			var newGridCell = new GridCell(	id, type, title, description, 
 											currentMousePos.x - gridPosition.left, 
 											currentMousePos.y - gridPosition.top, 
 											imageLink);

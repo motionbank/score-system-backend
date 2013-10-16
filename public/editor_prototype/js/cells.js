@@ -3,8 +3,9 @@
 
 
 //standard gridCell
-function GridCell(id, title, description, mouseX, mouseY) {
+function GridCell(id, type, title, description, mouseX, mouseY) {
     this.id = id;
+    this.type;
     this.class = "cell ui-widget-content";
     this.title = title;
     this.description = description;
@@ -17,9 +18,10 @@ function GridCell(id, title, description, mouseX, mouseY) {
 }
 
 //gridCell with iframe/poster image
-function GridCell(id, title, description, mouseX, mouseY, src) {
+function GridCell(id, type, title, description, mouseX, mouseY, src) {
     this.id =  id;
     this.class = "cell ui-widget-content";
+    this.type = type;
     this.title = title;
     this.description = description;
     this.html; 
@@ -164,8 +166,8 @@ GridCell.prototype = {
     },
 
     updateContentCell: function(){
-        $("#contentCell_" + this.id + " .contentCellTitle").html(this.title);
-        $("#contentCell_" + this.id + " .contentCellDescription").html(this.description);
+        $("#usedContentCell_" + this.id + " .contentCellTitle").html(this.title);
+        $("#usedContentCell_" + this.id + " .contentCellDescription").html(this.description);
     },
 }
 
