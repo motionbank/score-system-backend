@@ -5,8 +5,7 @@ class Cell
 
   TYPES = [:html, :iframe, :image, :set_link, :text, :title]
 
-  field :kind, type: Symbol # should actually be called type but wasn't due to _type being a magic
-                            # field name (used for inheritance)
+  field :type, type: Symbol
   field :title, type: String
   field :description, type: String
   field :additional_fields, type: Hash, default: {}
@@ -14,8 +13,8 @@ class Cell
   mount_uploader :poster_image, ImageUploader
 
 
-  validates_presence_of :title, :kind
-  validates_inclusion_of :kind, in: TYPES
+  validates_presence_of :title, :type
+  validates_inclusion_of :type, in: TYPES
 
   def self.gender
     :m

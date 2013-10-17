@@ -20,7 +20,7 @@ module Admins
 
     test "should create cell" do
       assert_difference('Cell.count') do
-        post :create, cell: {description: @cell.description, kind: @cell.kind, title: @cell.title}
+        post :create, cell: {description: @cell.description, type: @cell.type, title: @cell.title}
       end
 
       assert_redirected_to edit_cell_path(assigns(:cell))
@@ -32,7 +32,7 @@ module Admins
     end
 
     test "should update cell" do
-      patch :update, id: @cell, cell: {description: @cell.description, kind: @cell.kind, title: @cell.title}
+      patch :update, id: @cell, cell: {description: @cell.description, type: @cell.type, title: @cell.title}
       assert_redirected_to edit_cell_path(assigns(:cell))
     end
 
