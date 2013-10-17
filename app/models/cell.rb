@@ -3,7 +3,7 @@
 class Cell
   include Mongoid::Document
 
-  TYPES = [:html, :iframe, :image, :set_link, :text, :title]
+  TYPES = [:html, :iframe, :image, :vimeo, :visualization, :set_link, :text, :title]
 
   field :legacy_id, type: Integer # the ID in the legacy MySQL database
 
