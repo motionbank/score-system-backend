@@ -10,9 +10,6 @@ gem "mongoid-indifferent-access", require: "mongoid_indifferent_access"
 gem "mongoid_slug"
 gem "mongoid_rails_migrations"
 
-# LEGACY IMPORT
-gem "mysql2"
-
 # SERIALIZATION
 gem 'rabl' # API building
 gem 'oj' # JSON-Parser, faster than `yajl-ruby`
@@ -66,6 +63,9 @@ gem 'unicorn'
 
 
 group :development do
+  # LEGACY IMPORT
+  gem "mysql2"
+
   gem 'quiet_assets'
 
   # Use Capistrano for deployment
