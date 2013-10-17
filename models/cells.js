@@ -1,7 +1,7 @@
 module.exports = function (db, models) {
 
 	var cellTypes = [ 'text', 'title', 'html', 'image',
- 					  'iframe', 'set-link' ];
+ 					  'iframe', 'set-link', 'vimeo' ];
  	cellTypes.sort();
 
 	var model = db.define('cells',{
