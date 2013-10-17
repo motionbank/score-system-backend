@@ -12,6 +12,10 @@ class LegacyImport
     sets_cells: GridCell
   }
 
+  ADDITIONAL_STEPS = {
+      sets: [:get_associated_cells]
+  }
+
   # Only columns of the legacy database that are called differently than the fields in the MongoDB
   # will be listed here
   FIELD_MAPPINGS = {
@@ -48,13 +52,9 @@ class LegacyImport
 
 
   def run
-    # trivial imports
     [:users, :cells, :sets].each do |table|
-      straightly_import(table)
+      import(table)
     end
-
-    import_grid_cells
-    import_additional_fields
   end
 
 
@@ -73,47 +73,54 @@ EOL
   private
 
 
-    def import_grid_cells
-      table = TABLE_MODEL_MAPPING.key(GridCell)
+    def import(table)
       results = @client.query "SELECT * FROM #{table}"
+      model = TABLE_MODEL_MAPPING[table]
       results.each do |row|
-        # get set
-        id = row.delete 'sets_id'
-        set = CellSet.find_by(legacy_id: id)
+        map_fields(table, row)
+        doc = model.create!(row)
 
-        # get cell
-        id = row.delete 'cells_id'
-        cell = Cell.find_by(legacy_id: id)
-
-        # ignore this row if the set or cell couldn't be retrieved.
-        if set.nil? || cell.nil?
-          puts "#{row} was not imported. Broken foreign key(s): #{"sets_id" if set.nil} #{"cells_id" if cell.nil?}"
-          next
-        end
-
-        map_primary_key(row, 'connection_id')
-
-        row['cell_id'] = cell.id # cell_id is the foreign_key to the canonical cell in the new db. This is not an import.
-
-        grid_cell = GridCell.new(row)
-        set.grid_cells << grid_cell
-        unless set.valid?
-          puts "GridCell with connection_id #{grid_cell.legacy_id} was not imported because it had errors: #{grid_cell.errors.full_messages}"
+        # do any additional steps
+        (ADDITIONAL_STEPS[table] || []).each do |step|
+          send(step, doc)
         end
       end
     end
 
 
-    def import_additional_fields
-    end
+    def get_associated_cells(doc)
+      table = TABLE_MODEL_MAPPING.key(GridCell)
 
+      set_id = doc.legacy_id
 
-    def straightly_import(table)
-      results = @client.query "SELECT * FROM #{table}"
-      model = TABLE_MODEL_MAPPING[table]
-      results.each do |row|
-        map_fields(table, row)
-        model.create!(row)
+      # get all foreign_keys from the legacy table and use these to query the MongoDB cells
+      cell_ids = @client.query("SELECT cells_id FROM #{table} WHERE sets_id = #{set_id}").map(&:values).flatten
+
+      # get those canonical cells from the new db by means of the legacy_id
+      canonical_cells = Cell.where(:legacy_id.in => cell_ids).only(:_id, :legacy_id).to_a
+
+      # now get the actual rows to be used for the grid cells/associated cells
+      cell_rows = @client.query "SELECT * FROM #{table} WHERE sets_id = #{set_id}"
+      cell_rows.each do |row|
+        # we already have the set -> the passed doc
+        row.delete 'sets_id'
+
+        map_primary_key(row, 'connection_id')
+
+        # delete the cells_id as we'll use MongoDB IDs for this, but we'll use this field to get the proper cell from
+        # our pre-fetched canonical cells without querying again
+        legacy_id = row.delete 'cells_id'
+
+        # this is not an import, it's the equivalent of the old foreign_key relationship. The new foreign key is named cell_id
+        canonical_cell = canonical_cells.detect {|cell| cell.legacy_id == legacy_id }
+        row['cell_id'] = canonical_cell._id if canonical_cell
+
+        # actually create the GridCell
+        grid_cell = GridCell.new(row)
+        doc.grid_cells << grid_cell
+        unless doc.valid?
+          puts "GridCell with connection_id #{grid_cell.legacy_id} was not imported because it had errors: #{grid_cell.errors.full_messages}"
+        end
       end
     end
 
