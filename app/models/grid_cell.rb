@@ -17,4 +17,7 @@ class GridCell
 
   belongs_to :cell # the canonical cell that this GridCell is an instance of
   embedded_in :cell_set
+
+
+  validates_presence_of :cell, :x, :y, :width, :height
 end
