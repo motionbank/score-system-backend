@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+email = "admin@meso.net"
+password = 'asasas'
+User.create!(email: email, password: password, password_confirmation: password, admin: true)
+puts "Create default user #{email} with password #{password}"
