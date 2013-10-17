@@ -4,10 +4,14 @@
     %title= t('page.title') + (yield(:page_title).present? ? " - #{yield(:page_title)}" : '')
     %meta(charset="utf-8")
     = stylesheet_link_tag "admins", media: "all", "data-turbolinks-track" => true
+    - if content_for?(:custom_style)
+      = stylesheet_link_tag yield(:custom_style), media: "all", "data-turbolinks-track" => true 
 
     = js_framework_settings
     = javascript_include_tag "admins", "data-turbolinks-track" => true
+    = javascript_include_tag yield(:custom_script), "data-turbolinks-track" => true if content_for?(:custom_script)
     = javascript_tag yield(:custom_javascript) if content_for?(:custom_javascript)
+
 
     :plain
       <!--[if lt IE 9]>
