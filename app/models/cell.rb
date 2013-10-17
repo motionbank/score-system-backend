@@ -5,6 +5,8 @@ class Cell
 
   TYPES = [:html, :iframe, :image, :set_link, :text, :title]
 
+  field :legacy_id, type: Integer # the ID in the legacy MySQL database
+
   field :type, type: Symbol
   field :title, type: String
   field :description, type: String

@@ -1,6 +1,8 @@
 class CellSet
   include Mongoid::Document
 
+  field :legacy_id, type: Integer # the ID in the legacy MySQL database
+
   field :title, type: String
   field :description, type: String
 

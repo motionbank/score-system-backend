@@ -1,6 +1,9 @@
 class User
   include Mongoid::Document
 
+  field :legacy_id, type: Integer # the ID in the legacy MySQL database
+
+  field :name, :type => String
   field :admin, :type => Boolean
 
   has_many :cell_sets
