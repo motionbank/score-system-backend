@@ -1,3 +1,5 @@
+# This is the canonical representation of a Cell and contains all the information that constitute
+# this very cell.
 class Cell
   include Mongoid::Document
 
@@ -9,9 +11,6 @@ class Cell
   field :additional_fields, type: Hash, default: {}
 
   mount_uploader :poster_image, ImageUploader
-
-
-  belongs_to :cell_set
 
 
   validates_presence_of :title, :kind

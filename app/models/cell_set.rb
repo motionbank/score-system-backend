@@ -15,7 +15,7 @@ class CellSet
   field :cell_height, type: Integer, default: 240
 
 
-  has_many :cells
+  embeds_many :grid_cells
 
 
   validates_presence_of :title
