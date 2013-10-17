@@ -1,4 +1,11 @@
-// TODO: Check deleting of Poster Images, not working currently!
+//  BUG: When hovering gridCell hover event fires one time on outer div, second time on image
+//          this causes an error, because the code accesses the parent event of the hovered element (in setEditor.js -> onMouseIn, onMouseOut)
+//          and tries to get the id of the parent element. works fine for outer div, error on image.
+
+//  TODO: implemented updating of this.x, .y, .width and .height as an event directly bound to resize
+//          by this the functions "this.update" and "this.getAndSaveNewPositionAndSize" could be removed
+//          and the binding of event "resizestop dragstop" could also be removed
+//          but when doing is, the resizing of the image does not work anymore properly
 
 
 
@@ -54,12 +61,21 @@ GridCell.prototype = {
         currentCell.resizable({
             grid: [ this.gridSize.width, this.gridSize.height ],
             containment: "#grid",
+            stop: function(event, ui){
+                this.width = ui.size.width;
+                this.height = ui.size.height;
+            }
         });
 
         //makes cells draggable in grid
         currentCell.draggable({ 
             grid: [ this.gridSize.width, this.gridSize.height ],
             containment: "#grid",
+            stop: function(event, ui){
+                this.x = ui.position.left;
+                this.y = ui.position.top;
+                console.log(this.id + " is now " + this.x + " and " +this.y);
+            }
         });
 
         //update cell content with X and Y position
@@ -70,6 +86,7 @@ GridCell.prototype = {
 
         //register hover
         currentCell.hover(onMouseIn, onMouseOut);
+        currentCell.children().hover( function(){},function(){});
     },
 
     //build the html of the object
@@ -86,20 +103,16 @@ GridCell.prototype = {
         this.gridSize.height = parseInt(this.gridSize.height);
     },
 
-    //update the html inside the div
     update: function(){
         this.getAndSaveNewPositionAndSize();
-        
         //adjust image size
-        $("#gridCell_"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
-       
         //this.checkCollisions();
-        
     },
     onMouseUp: function(){
         console.log("mouse up" + this.gridSize.width);
         this.update();
     },
+
     getAndSaveNewPositionAndSize: function(){
         var position = $("#gridCell_"+this.id).position();
         this.position = position;
@@ -107,6 +120,9 @@ GridCell.prototype = {
         this.y = this.position.top;
         this.width = $("#gridCell_"+this.id).width()/this.gridSize.width;
         this.height = $("#gridCell_"+this.id).height()/this.gridSize.height;
+
+        $("#gridCell_"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
+        
     },
 
     checkCollisions: function(){

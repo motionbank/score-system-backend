@@ -1,7 +1,8 @@
 //	TODO: Layouts implementieren
-// 	TODO CLEAN && COMMENT CODE
+//	TODO: Templates für alle größeren Div-Inhalte schreiben und einbinden
+//			welche wären: table.js -> createAvailableContentRow, createUsedContentRow, evtl. createDraggableCellHelper
+//							cells.js -> render
 
-//	Draggen: direkt die Zelle, nicht die Zeile -> Problem: Zelle ist noch nicht angelegt
 
 //	______________ DONE _____________________________________________________________________
 //	TODO: zu registrierende Events einmal beim initialize, nicht für jedes Element. 
@@ -10,10 +11,12 @@
 //	nachdem alle Zeilen gerendert sind, Events !einmal! registrieren
 
 // 	Referenz auf Grid, nachdem es erzeugt wurde
+//__________________________________________________________________________________________
 
-//	TODO: Responsive, Skalierung & Neuberechnung wenn sich window-Größe verändert
+
+//	TODO: Responsive, Skalierung & Neuberechnung wenn sich window-Größe verändert für Grid, Cells and EditBox
 //	Anmerkung: Cells & Grid = responsive. wenn Cell jedoch größer gezogen wurde, nicht mehr responsive.
-//  wenn Grid skaliert wird, wird dies auch als "window.resize"-Event behandelt. Fixen!!!
+//  TO FIX: wenn Grid skaliert wird, wird dies auch als "window.resize"-Event behandelt. 
 
 
 var currentMousePos = { x: -1, y: -1 };
@@ -80,7 +83,7 @@ function onDrop(event){
 				if(id == value.id)
 					id = id + "-2";
 			});
-			
+
 			//cell.js
 			var newGridCell = new GridCell(	id, type, title, description, 
 											currentMousePos.x - gridPosition.left, 
@@ -114,6 +117,7 @@ function showCellInformation(event){
 
 function onMouseIn(event){
 	var id;
+	
 	if( $(event.currentTarget).attr("id")){
 		id = $(event.currentTarget).attr("id");
 	}
