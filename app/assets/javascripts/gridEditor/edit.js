@@ -46,6 +46,7 @@ EditDialog.prototype = {
 			var newDescription = $(dialog).find("#editDescription").val();
 			var newSrc = $(dialog).find("#editImageSrc").val();
 
+			console.log($(dialog).find("#editImageSrc").val());
 			//cells.js, set new content for contentCell
 			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
 
@@ -55,7 +56,7 @@ EditDialog.prototype = {
 
 		$("#deleteImage").click(function(){
 			$("#editImageSrc").val("");
-			
+
 		})
 	},
 

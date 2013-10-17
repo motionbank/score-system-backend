@@ -80,6 +80,7 @@ function onDrop(event){
 				if(id == value.id)
 					id = id + "-2";
 			});
+			
 			//cell.js
 			var newGridCell = new GridCell(	id, type, title, description, 
 											currentMousePos.x - gridPosition.left, 

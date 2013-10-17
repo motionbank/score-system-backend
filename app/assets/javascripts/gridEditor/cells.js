@@ -29,29 +29,27 @@ function GridCell(id, type, title, description, mouseX, mouseY, src) {
     this.y = mouseY;
     this.width;
     this.height;
-    if(src) this.src = src;
-    else this.src = "";
+    if(src){
+        this.src = src; 
+    } 
+    else {
+        this.src = "";
+    }
     this.init();
 }
 
 GridCell.prototype = {
     init: function ()
     {
-        //$.when(this.render()).then(this.setPositions());
         this.render();
         this.addEvents();
         this.setPositions();
-        //use this later for poster images
-        if(this.src){
-            this.setSrc();
-        } 
     },
 
     //add Handlers
     addEvents: function ()
     {   
         var currentCell = $("#gridCell_"+this.id);
-        console.log(this.id);
         //makes cells resizable in grid
         currentCell.resizable({
             grid: [ this.gridSize.width, this.gridSize.height ],
@@ -77,44 +75,38 @@ GridCell.prototype = {
     //build the html of the object
     render: function(){
         this.html = "<div id='gridCell_" + this.id + "' class='" + this.class + "'><span id='gridCell_" +
-                             this.id + "_content'><span class='cell-title'></span><br>\
+                             this.id + "_content'><span class='cell-image'></span><span class='cell-title'></span><br>\
                                 <span class='cell-content'></span></span></div>";
         $("#grid").append(this.html);
-        this.setContent(this.title, this.description);
+        this.setContent(this.title, this.description, this.src);
+
         //get the gridsize and set the size of the cell
-        console.log("grid size gets set");
         this.gridSize = $("#gridCell_" + this.id).css(["width", "height"]);
         this.gridSize.width = parseInt(this.gridSize.width);
         this.gridSize.height = parseInt(this.gridSize.height);
-        console.log("grid size is now:" + this.gridSize)
-        
     },
 
     //update the html inside the div
     update: function(){
-        var position = $("#gridCell_"+this.id).position();
-        this.position = position;
-        this.save();
+        this.getAndSaveNewPositionAndSize();
+        
+        //adjust image size
         $("#gridCell_"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
        
         //this.checkCollisions();
         
     },
     onMouseUp: function(){
-        console.log("mouse up" + this.gridSize);
+        console.log("mouse up" + this.gridSize.width);
         this.update();
     },
-    save: function(){
-        console.log(this.gridSize);
+    getAndSaveNewPositionAndSize: function(){
+        var position = $("#gridCell_"+this.id).position();
+        this.position = position;
         this.x = this.position.left;
         this.y = this.position.top;
         this.width = $("#gridCell_"+this.id).width()/this.gridSize.width;
         this.height = $("#gridCell_"+this.id).height()/this.gridSize.height;
-
-        //for testing inserting data into cell, normally writing to database
-        /*var titleHTML = "Position X: " + this.x/this.gridSize.width + "<br>Position Y: " + this.y/this.gridSize.height;
-        var descriptionHTML = "Width: " + this.width + "<br>Height: " + this.height;
-        $("#" + this.id + "_content").html(titleHTML + "<br>" + descriptionHTML + "</div>");*/
     },
 
     checkCollisions: function(){
@@ -134,9 +126,8 @@ GridCell.prototype = {
     },
 
     //later using for poster image
-    setSrc: function(){
-        $("#gridCell_"+this.id+"_content .cell-image").html("<img src='" + this.src + "'></img>");
-        $("#usedContentCell_"+this.id+" .contentCellPosterImage").html("<img src='" + this.src + "'></img>");
+    setSrc: function(src){
+        this.src = src;
         //this.update();
     },
 
@@ -153,28 +144,33 @@ GridCell.prototype = {
     setContent: function(title, description, imageSrc){
         this.title = title;
         this.description = description;
-        if(imageSrc){
-            this.src = imageSrc;
-            this.setSrc();
-        }
+        this.src = imageSrc;
         
-        else {
-            this.src = "";
-            //this.setSrc();
-        }
-
-        this.updateGridCell();
+        this.updateGridCell(); 
         this.updateContentCell();
     },
 
     updateGridCell: function(){
-        $("#gridCell_" + this.id + "_content .cell-title").html(this.title);
-        $("#gridCell_" + this.id + "_content .cell-content").html(this.description);
+        var gridCell = $("#gridCell_" + this.id + "_content");
+        
+        if(this.src){
+            $(gridCell).find(".cell-image").html("<img src='" + this.src + "'></img>");
+            $(gridCell).find(".cell-title").html("");
+            $(gridCell).find(".cell-content").html("");
+        }
+        else{
+            $(gridCell).find(".cell-image").html("");
+            $(gridCell).find(".cell-title").html(this.title);
+            $(gridCell).find(".cell-content").html(this.description);
+        }
+    
     },
 
     updateContentCell: function(){
-        $("#usedContentCell_" + this.id + " .contentCellTitle").html(this.title);
-        $("#usedContentCell_" + this.id + " .contentCellDescription").html(this.description);
+        var contentCell = $("#usedContentCell_" + this.id);
+        $(contentCell).find(".contentCellPosterImage").html("<img src='" + this.src + "'></img>");
+        $(contentCell).find(".contentCellTitle").html(this.title);
+        $(contentCell).find(".contentCellDescription").html(this.description);
     },
 }
 
