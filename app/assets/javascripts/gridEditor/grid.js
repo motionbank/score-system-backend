@@ -39,7 +39,7 @@ Grid.prototype = {
 		$("#gridCell_"+cellToRemove.id).remove();
 		$("#usedContentCell_"+cellToRemove.id).remove();
 		//$("#usedContentCell_"+cellToRemove.id).removeClass("usedCell");
-		createAvailableContentRow(cellToRemove.id, cellToRemove.src, cellToRemove.title, cellToRemove.description);
+		//createAvailableContentRow(cellToRemove.id, cellToRemove.src, cellToRemove.title, cellToRemove.description);
 		$("#dialog-modal").dialog("close");
 
 		//remove cell from class Grid, if it maches return false and delete it by this

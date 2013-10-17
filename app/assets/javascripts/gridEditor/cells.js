@@ -37,6 +37,7 @@ function GridCell(id, type, title, description, mouseX, mouseY, src) {
 GridCell.prototype = {
     init: function ()
     {
+        //$.when(this.render()).then(this.setPositions());
         this.render();
         this.addEvents();
         this.setPositions();
@@ -50,6 +51,7 @@ GridCell.prototype = {
     addEvents: function ()
     {   
         var currentCell = $("#gridCell_"+this.id);
+        console.log(this.id);
         //makes cells resizable in grid
         currentCell.resizable({
             grid: [ this.gridSize.width, this.gridSize.height ],
@@ -80,9 +82,11 @@ GridCell.prototype = {
         $("#grid").append(this.html);
         this.setContent(this.title, this.description);
         //get the gridsize and set the size of the cell
+        console.log("grid size gets set");
         this.gridSize = $("#gridCell_" + this.id).css(["width", "height"]);
         this.gridSize.width = parseInt(this.gridSize.width);
         this.gridSize.height = parseInt(this.gridSize.height);
+        console.log("grid size is now:" + this.gridSize)
         
     },
 
@@ -97,9 +101,11 @@ GridCell.prototype = {
         
     },
     onMouseUp: function(){
+        console.log("mouse up" + this.gridSize);
         this.update();
     },
     save: function(){
+        console.log(this.gridSize);
         this.x = this.position.left;
         this.y = this.position.top;
         this.width = $("#gridCell_"+this.id).width()/this.gridSize.width;
@@ -124,14 +130,14 @@ GridCell.prototype = {
         this.x = Math.floor(this.x / this.gridSize.width) * this.gridSize.width;
         this.y = Math.floor(this.y / this.gridSize.height) * this.gridSize.height;
         $("#gridCell_"+this.id).css({left: this.x, top:this.y});
-        this.update();
+        //this.update();
     },
 
     //later using for poster image
     setSrc: function(){
-        $("#gridCell_"+this.id+"_content").html("<img src='" + this.src + "'></img>");
+        $("#gridCell_"+this.id+"_content .cell-image").html("<img src='" + this.src + "'></img>");
         $("#usedContentCell_"+this.id+" .contentCellPosterImage").html("<img src='" + this.src + "'></img>");
-        this.update();
+        //this.update();
     },
 
     onDblClick: function(){
@@ -151,10 +157,12 @@ GridCell.prototype = {
             this.src = imageSrc;
             this.setSrc();
         }
-        /*else {
+        
+        else {
             this.src = "";
-            this.setSrc();
-        }*/
+            //this.setSrc();
+        }
+
         this.updateGridCell();
         this.updateContentCell();
     },

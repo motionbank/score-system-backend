@@ -78,7 +78,7 @@ function onDrop(event){
 			$.each(theGrid.cells, function(index, value){
 				//console.log(value);
 				if(id == value.id)
-					id = id + "_2";
+					id = id + "-2";
 			});
 			//cell.js
 			var newGridCell = new GridCell(	id, type, title, description, 
@@ -93,8 +93,6 @@ function onDrop(event){
 			//droppedCell.remove();
 		}
 	}
-
-	
 }
 
 

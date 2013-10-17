@@ -51,8 +51,12 @@ EditDialog.prototype = {
 
 			//edit.js
 			editBox.closeDialog();
-			
 		});
+
+		$("#deleteImage").click(function(){
+			$("#editImageSrc").val("");
+			
+		})
 	},
 
 	setValues: function(title, type, description, posterImage){

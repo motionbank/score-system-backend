@@ -54,7 +54,7 @@
                     %label{:for => "imagesrc"} Upload Poster Image:
                     %input{:id => "editImageSrc", :type => "text", :name => "imagesrc"}
                   %p
-                    %input{:type => "button", :name => "deleteImage", :value => "Delete Poster Image", :onclick => "this.form.imagesrc.value=''"}
+                    %input{:id => "deleteImage", :type => "button", :name => "deleteImage", :value => "Delete Poster Image"}
                   %p
                     /%input{:type => "submit", :value => "Save"}
                     %input{:type => "button", :value => "Save", :class => "form_submit"}
