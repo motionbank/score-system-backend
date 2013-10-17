@@ -32,8 +32,12 @@ EditDialog.prototype = {
 	},
 
 	initForm: function(){
+
 		//register submit event of form
-	    $( "#editCell" ).submit(function( event ) {
+		$( ".form_submit" ).click(function( event ) {
+
+			
+			$("#editCell").submit();
 			//prevent form from reloading the page
 			event.preventDefault();
 
@@ -42,12 +46,18 @@ EditDialog.prototype = {
 			var newDescription = $(dialog).find("#editDescription").val();
 			var newSrc = $(dialog).find("#editImageSrc").val();
 
+			console.log($(dialog).find("#editImageSrc").val());
 			//cells.js, set new content for contentCell
 			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
 
+			//edit.js
 			editBox.closeDialog();
-			
 		});
+
+		$("#deleteImage").click(function(){
+			$("#editImageSrc").val("");
+
+		})
 	},
 
 	setValues: function(title, type, description, posterImage){

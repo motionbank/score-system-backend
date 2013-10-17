@@ -40,24 +40,27 @@
                   %tr
 
             #dialog-modal.Basic.modal.dialog(title="Edit Cell")
-              %form#editCell
-                %p Title
-                %p
-                  %input#editTitle(type="text" name="title")
-                %p Type
-                %p
-                  %input#type.textInEdit
-                %p Description
-                %p
-                  %input#editDescription(type="text" name="description")
-                %p Upload Poster Image
-                %p
-                  %input#editImageSrc(type="text" name="imagesrc")
-                %p
-                  %input(type="button" name="deleteImage" value="Delete Poster Image" onclick="this.form.imagesrc.value=''")
-                %p
-                  %input(type="submit" value="Save")
-                  %input#removeCell(type="button" value="Remove Cell from Grid")
+              %form{ :action => "", :method => "post"}
+                %fieldset#editCell
+                  %p
+                    %label{:for => "editTitle"} Title:
+                    %input{:id => "editTitle", :type => "text", :name => "editTitle"}
+                  %p Type
+                  %p#type.textInEdit
+                  %p
+                    %label{:for => "editDescription"} Description:
+                    %input{:id => "editDescription", :type => "text", :name => "editDescription"}
+                  %p
+                    %label{:for => "imagesrc"} Upload Poster Image:
+                    %input{:id => "editImageSrc", :type => "text", :name => "imagesrc"}
+                  %p
+                    %input{:id => "deleteImage", :type => "button", :name => "deleteImage", :value => "Delete Poster Image"}
+                  %p
+                    /%input{:type => "submit", :value => "Save"}
+                    %input{:type => "button", :value => "Save", :class => "form_submit"}
+                    %input{:id => "removeCell", :type => "button", :value => "Remove Cell from Grid"}
+
+
             #emptyCell.cell
 
 
