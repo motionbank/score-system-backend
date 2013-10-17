@@ -11,6 +11,8 @@
 
 // 	Referenz auf Grid, nachdem es erzeugt wurde
 
+//	TODO: Responsive, Skalierung & Neuberechnung wenn sich window-Größe verändert
+
 
 var currentMousePos = { x: -1, y: -1 };
 var currentCellToEdit;
@@ -33,7 +35,6 @@ $(document).ready(function() {
 	    });
 	}
 
-
     
 	function initialize(){
 		//table.js
@@ -42,10 +43,15 @@ $(document).ready(function() {
 
 		//	TODO Grid als Klasse neu schreiben, var grid = new Grid(), Property: this.cells = [ ]
 		//grid.js
-		theGrid = new Grid( "800px", "200px", "1000px", "600px", "100px", "100px");
+		theGrid = new Grid( "70%", "70%", "100%", "100%", "10%", "10%");
 
 		//edit.js
 		editBox = new EditDialog("Default Title", "text", "Default Description", "");
+
+
+		/*$( window ).resize(function() {
+  			theGrid.onWindowResize();
+		});*/
 	}
 });
 
@@ -67,6 +73,11 @@ function onDrop(event){
 
 			//TODO: Prepare for reading from Database
 			id = id.split('_')[1];
+			$.each(theGrid.cells, function(index, value){
+				console.log(value);
+				if(id == value.id)
+					id = id + "_2";
+			});
 			//cell.js
 			var newGridCell = new GridCell(	id, type, title, description, 
 											currentMousePos.x - gridPosition.left, 
@@ -75,7 +86,9 @@ function onDrop(event){
 			theGrid.addCell(newGridCell);
 			//table.js
 			createUsedContentRow(id, imageLink, title, description);
-			droppedCell.remove();
+
+			//entfernt Zelle aus "available cells"; nicht erwünscht!
+			//droppedCell.remove();
 		}
 	}
 

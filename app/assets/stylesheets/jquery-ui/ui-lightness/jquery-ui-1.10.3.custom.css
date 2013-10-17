@@ -807,9 +807,11 @@ body .ui-tooltip {
 .ui-widget-content a {
 	color: #333333;
 }
+
+/*OWN CHANGES*/
 .ui-widget-header {
 	border: 1px solid #e78f08;
-	background: #f6a828 url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x;
+	background: linear-gradient(#BAD3C7, #99ADA3 70%, #99ADA3) repeat scroll 0 0 #9BB0A5;
 	color: #ffffff;
 	font-weight: bold;
 }

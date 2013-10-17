@@ -60,10 +60,6 @@ function createDraggableCellHelper(event){
 						<br><span class='cell-content'>" + description + "</span></div>";
 	}
 	cellClone += "</div>";
-	//console.log(event.currentTarget);
-	console.log(cell.find(".contentCellPosterImage img").attr("src").length);
-	console.log(cell.find(".contentCellPosterImage").html());
-	console.log(cellClone);
 	return cellClone;
 }
 

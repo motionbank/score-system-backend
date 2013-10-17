@@ -20,7 +20,7 @@ function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
 Grid.prototype = {
 	init: function(){
 		$("#grid").css({ "width" : this.width, "height" : this.height });
-		$("boundsForGrid").css({ "width" : this.boundsWidth, "height" : this.boundsHeight });
+		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 		this.makeGridResizable();
 	},
@@ -61,10 +61,16 @@ Grid.prototype = {
 		$.each(this.cells, function(index, value){
 			if(value.id == idOfCell){
 				currentCellToEdit = value;
-				console.log("currentcell is now: " + value.id);
 				return false;
 			}
 		});
+	},
+
+	onWindowResize: function(){
+		console.log($(window).width());
+		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
+		$("#grid").css({ "width" : this.width, "height" : this.height });
+		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 	}
 
 }
