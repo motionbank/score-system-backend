@@ -1,5 +1,7 @@
 /*TODO
 height boundsForGrid?
+
+
 */
 
 
@@ -51,7 +53,7 @@ h2 {
 }
 
 .cell-content{
-	padding: 1px 0px 1px 20px;
+	padding: 0px 0px 0px 20px;
 	font-size: 12px;
 }
 
@@ -82,23 +84,12 @@ h2 {
 	border-style: solid;
 }
 
-#iframeCell{
-	top:300px;
-}
-
-.overlap{
-	background-color: red;
-	position: absolute !important;
-	opacity:0.5;
-	z-index:2;
-}
-
 #emptyCell{
 	opacity:0;
 }
 
 .activeCell{
-	background: green !important;
+	background: #BAD3C7 !important;
 	text-decoration:underline;
 }
 
@@ -121,4 +112,11 @@ h2 {
 .textInEdit{
 	font-size:14px;
 	font-style: italic;
+}
+
+.overlap{
+	background-color: red;
+	position: absolute !important;
+	opacity:0.5;
+	z-index:2;
 }

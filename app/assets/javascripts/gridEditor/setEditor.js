@@ -12,6 +12,8 @@
 // 	Referenz auf Grid, nachdem es erzeugt wurde
 
 //	TODO: Responsive, Skalierung & Neuberechnung wenn sich window-Größe verändert
+//	Anmerkung: Cells & Grid = responsive. wenn Cell jedoch größer gezogen wurde, nicht mehr responsive.
+//  wenn Grid skaliert wird, wird dies auch als "window.resize"-Event behandelt. Fixen!!!
 
 
 var currentMousePos = { x: -1, y: -1 };
