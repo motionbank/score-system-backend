@@ -16,6 +16,7 @@ class CellSet
 
 
   embeds_many :grid_cells
+  belongs_to :creator, class_name: 'User'
 
 
   validates_presence_of :title

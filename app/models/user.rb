@@ -3,6 +3,8 @@ class User
 
   field :admin, :type => Boolean
 
+  has_many :cell_sets
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
