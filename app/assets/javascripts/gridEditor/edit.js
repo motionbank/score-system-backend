@@ -32,8 +32,12 @@ EditDialog.prototype = {
 	},
 
 	initForm: function(){
+
 		//register submit event of form
-	    $( "#editCell" ).submit(function( event ) {
+		$( ".form_submit" ).click(function( event ) {
+
+			
+			$("#editCell").submit();
 			//prevent form from reloading the page
 			event.preventDefault();
 
@@ -45,6 +49,7 @@ EditDialog.prototype = {
 			//cells.js, set new content for contentCell
 			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
 
+			//edit.js
 			editBox.closeDialog();
 			
 		});

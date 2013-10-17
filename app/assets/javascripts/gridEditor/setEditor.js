@@ -76,7 +76,7 @@ function onDrop(event){
 			//TODO: Prepare for reading from Database
 			id = id.split('_')[1];
 			$.each(theGrid.cells, function(index, value){
-				console.log(value);
+				//console.log(value);
 				if(id == value.id)
 					id = id + "_2";
 			});
