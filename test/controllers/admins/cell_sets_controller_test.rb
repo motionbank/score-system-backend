@@ -20,7 +20,7 @@ module Admins
 
     test "should create cell_set" do
       assert_difference('CellSet.count') do
-        post :create, cell_set: {description: @cell_set.description, height: @cell_set.height, path: @cell_set.path, poster_image: @cell_set.poster_image, title: @cell_set.title, width: @cell_set.width}
+        post :create, cell_set: {title: @cell_set.title, description: @cell_set.description, path: @cell_set.path, poster_image: @cell_set.poster_image, cell_width: @cell_set.cell_width, cell_height: @cell_set.cell_height}
       end
 
       assert_redirected_to edit_cell_set_path(assigns(:cell_set))
@@ -32,7 +32,7 @@ module Admins
     end
 
     test "should update cell_set" do
-      patch :update, id: @cell_set, cell_set: {description: @cell_set.description, height: @cell_set.height, path: @cell_set.path, poster_image: @cell_set.poster_image, title: @cell_set.title, width: @cell_set.width}
+      patch :update, id: @cell_set, cell_set: {title: @cell_set.title, description: @cell_set.description, path: @cell_set.path, poster_image: @cell_set.poster_image, cell_width: @cell_set.cell_width, cell_height: @cell_set.cell_height}
       assert_redirected_to edit_cell_set_path(assigns(:cell_set))
     end
 

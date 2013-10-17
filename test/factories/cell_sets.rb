@@ -6,7 +6,9 @@ FactoryGirl.define do
     description "MyString"
     poster_image "MyString"
     path "MyString"
-    width "MyString"
-    height "MyString"
+    rows 3
+    columns 3
+    cell_width 300
+    cell_height 200
   end
 end
