@@ -7,6 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 email = "admin@meso.net"
-password = 'asasas'
+password = SecureRandom.hex(8)
 User.create!(email: email, password: password, password_confirmation: password, admin: true)
-puts "Create default user #{email} with password #{password}"
+puts "Created default user #{email} with password #{password}"
