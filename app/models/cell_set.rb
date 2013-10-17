@@ -8,8 +8,11 @@ class CellSet
 
   field :path, type: String
 
-  field :width, type: String
-  field :height, type: String
+  field :rows, type: Integer
+  field :columns, type: Integer
+
+  field :cell_width, type: Integer, default: 320
+  field :cell_height, type: Integer, default: 240
 
 
   has_many :cells
