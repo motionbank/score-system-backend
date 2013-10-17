@@ -114,11 +114,11 @@ function showCellInformation(event){
 
 function onMouseIn(event){
 	var id;
-	if( $(event.target).attr("id")){
-		id = $(event.target).attr("id");
+	if( $(event.currentTarget).attr("id")){
+		id = $(event.currentTarget).attr("id");
 	}
 	else {
-		id = $(event.target).parent().attr("id");
+		id = $(event.currentTarget).parent().attr("id");
 	}
     $("#usedContentCell_" + id.split("_")[1]).addClass("activeCell");
     $("#gridCell_" + id.split("_")[1]).addClass("activeCell");
@@ -126,11 +126,11 @@ function onMouseIn(event){
 
 function onMouseOut(event){
 	var id;
-	if( $(event.target).attr("id")){
-		id = $(event.target).attr("id");
+	if( $(event.currentTarget).attr("id")){
+		id = $(event.currentTarget).attr("id");
 	}
 	else {
-		id = $(event.target).parent().attr("id");
+		id = $(event.currentTarget).parent().attr("id");
 	}
     $("#usedContentCell_" + id.split("_")[1]).removeClass("activeCell");
     $("#gridCell_"+ id.split("_")[1]).removeClass("activeCell");
