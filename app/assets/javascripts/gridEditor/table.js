@@ -1,6 +1,4 @@
-//	TODO: Implement Edit Function from Table
-//	TODO: "createDraggedCellElement"-Funktion schreiben, welches die gezogene Zelle darstellt
-// 	TODO: Templates erstellen für createContentCellHelper!
+//	TODO: Implement Edit Function from Table, has worked in prototype, not now anymore
 
 function initTabs(){
 		$(function() {
