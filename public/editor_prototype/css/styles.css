@@ -1,0 +1,128 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+p {
+	margin: 0;
+	padding: 8px;
+}
+
+.cell {
+	position: absolute !important;
+	width: 100px; 
+	height: 100px; 
+	opacity:0.8;
+	border-width: 0px !important;
+	z-index: 3;
+
+}
+
+
+.cell h3{ 
+	/*text-align: center;*/ 
+	padding: 5px 0px 5px 5px; 
+	position: absolute;
+}
+
+.cell-content{
+	padding: 1px 0px 1px 20px;
+	font-size: 12px;
+}
+
+.cell-title{
+	font-weight: 700;
+}
+
+.contentCell{
+	position: relative;
+	border-width: 0;
+}
+
+.usedCell{
+	opacity: 0.8;
+}
+
+.cellTable{
+	margin-left:100px;
+	margin-top:100px;
+	padding: 5px;
+	border-width: 3px;
+	border-style: solid;
+}
+
+.cellTable td{
+	padding: 10px;
+}
+.cellTable tr{
+	border-width: 1px;
+	border-style: solid;
+}
+
+#iframeCell{
+	top:300px;
+}
+
+#boundsForGrid{
+	position: :absolute;
+	margin-top: -8px;
+	margin-left: 100px;
+	width:1000px;
+	height:400px;
+	background-color: #444444;
+	opacity: 0.9;
+
+}
+
+#grid{
+	position: absolute;
+	left: 100px;
+    top: 100px;
+    width: 600px;
+    height: 300px;
+    background-color: #cccccc;
+    opacity: 1;
+    z-index:1;
+}
+
+
+h2 {
+	padding: 20px 5px 20px 20px;
+}
+
+.overlap{
+	background-color: red;
+	position: absolute !important;
+	opacity:0.5;
+	z-index:2;
+}
+
+#emptyCell{
+	opacity:0;
+}
+
+.activeCell{
+	background: green !important;
+	text-decoration:underline;
+}
+
+.activeCell span img{
+	filter: gray;
+	-webkit-filter: grayscale(100%);
+}
+
+.thumbnail{
+	/*width: auto;*/
+	width:auto;
+	height:70px;
+}
+
+.thumbnail img{
+	width: 100%;
+	height:100%;
+}
+
+.textInEdit{
+	font-size:14px;
+	font-style: italic;
+}
