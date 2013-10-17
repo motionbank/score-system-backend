@@ -5,7 +5,8 @@ class Cell
 
   TYPES = [:html, :iframe, :image, :set_link, :text, :title]
 
-  field :kind, type: Symbol
+  field :kind, type: Symbol # should actually be called type but wasn't due to _type being a magic
+                            # field name (used for inheritance)
   field :title, type: String
   field :description, type: String
   field :additional_fields, type: Hash, default: {}
