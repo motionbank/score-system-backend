@@ -8,7 +8,8 @@ class LegacyImport
   TABLE_MODEL_MAPPING = {
     users: User,
     cells: Cell,
-    sets: CellSet
+    sets: CellSet,
+    sets_cells: GridCell
   }
 
   # Only columns of the legacy database that are called differently than the fields in the MongoDB
@@ -51,6 +52,9 @@ class LegacyImport
     [:users, :cells, :sets].each do |table|
       straightly_import(table)
     end
+
+    import_grid_cells
+    import_additional_fields
   end
 
 
@@ -69,6 +73,41 @@ EOL
   private
 
 
+    def import_grid_cells
+      table = TABLE_MODEL_MAPPING.key(GridCell)
+      results = @client.query "SELECT * FROM #{table}"
+      results.each do |row|
+        # get set
+        id = row.delete 'sets_id'
+        set = CellSet.find_by(legacy_id: id)
+
+        # get cell
+        id = row.delete 'cells_id'
+        cell = Cell.find_by(legacy_id: id)
+
+        # ignore this row if the set or cell couldn't be retrieved.
+        if set.nil? || cell.nil?
+          puts "#{row} was not imported. Broken foreign key(s): #{"sets_id" if set.nil} #{"cells_id" if cell.nil?}"
+          next
+        end
+
+        map_primary_key(row, 'connection_id')
+
+        row['cell_id'] = cell.id # cell_id is the foreign_key to the canonical cell in the new db. This is not an import.
+
+        grid_cell = GridCell.new(row)
+        set.grid_cells << grid_cell
+        unless set.valid?
+          puts "GridCell with connection_id #{grid_cell.legacy_id} was not imported because it had errors: #{grid_cell.errors.full_messages}"
+        end
+      end
+    end
+
+
+    def import_additional_fields
+    end
+
+
     def straightly_import(table)
       results = @client.query "SELECT * FROM #{table}"
       model = TABLE_MODEL_MAPPING[table]
@@ -80,9 +119,7 @@ EOL
 
 
     def map_fields(table, row)
-      # MongoDB uses a different paradigm for IDs, so we don't want to use MySQL's IDs as "primary key"
-      # instead we save it as legacy_id to always have a mapping
-      row['legacy_id'] = row.delete 'id'
+      map_primary_key(row, 'id')
 
       # extra handling for devise's requirement to have a password_confirmation when creating users
       if table == :users
@@ -101,5 +138,12 @@ EOL
           row[key.to_s] = mapping[current]
         end
       end
+    end
+
+
+    # MongoDB uses a different paradigm for IDs, so we don't want to use MySQL's IDs as "primary key"
+    # instead we save it as legacy_id to always have a mapping
+    def map_primary_key(row, primary_key_name)
+      row['legacy_id'] = row.delete primary_key_name
     end
 end
