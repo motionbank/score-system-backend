@@ -9,6 +9,12 @@ class GridCell
   field :description, type: String
   mount_uploader :poster_image, ImageUploader
 
+  # grid placement
+  field :x, type: Integer
+  field :y, type: Integer
+  field :width, type: Integer, default: 1
+  field :height, type: Integer, default: 1
+
   belongs_to :cell # the canonical cell that this GridCell is an instance of
   embedded_in :cell_set
 end
