@@ -4,6 +4,8 @@
 class GridCell
   include Mongoid::Document
 
+  field :legacy_id, type: Integer # connection_id in the legacy MySQL database (table sets_cells)
+
   # overriding fields (used to override the value from the canonical Cell)
   field :title, type: String
   field :description, type: String
