@@ -119,6 +119,7 @@ GEM
       bson (~> 2.0.0.rc2)
       optionable (~> 0.1.1)
     multi_json (1.8.1)
+    mysql2 (0.3.13)
     oj (2.1.6)
     optionable (0.1.1)
     origin (1.1.0)
@@ -212,6 +213,7 @@ DEPENDENCIES
   mongoid-indifferent-access
   mongoid_rails_migrations
   mongoid_slug
+  mysql2
   oj
   quiet_assets
   rabl
