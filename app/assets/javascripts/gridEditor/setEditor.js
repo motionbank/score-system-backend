@@ -1,6 +1,6 @@
 //	TODO: Layouts implementieren
 //	TODO: Templates für alle größeren Div-Inhalte schreiben und einbinden
-//			welche wären: table.js -> createAvailableContentRow, createUsedContentRow, evtl. createDraggableCellHelper
+//			welche wären: table.js -> createUsedContentRow, evtl. createDraggableCellHelper
 //							cells.js -> render
 
 
@@ -44,9 +44,8 @@ $(document).ready(function() {
 	function initialize(){
 		//table.js
 		initTabs();
-		createDummyRows();
+		initTableEvents();
 
-		//	TODO Grid als Klasse neu schreiben, var grid = new Grid(), Property: this.cells = [ ]
 		//grid.js
 		theGrid = new Grid( "70%", "70%", "100%", "100%", "10%", "10%");
 

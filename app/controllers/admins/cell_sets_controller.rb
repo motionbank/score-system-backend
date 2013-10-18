@@ -17,6 +17,7 @@ module Admins
 
     # GET /sets/1/edit
     def edit
+      @available_cells = Cell.order_by(title: 1) # cells available to be dragged to the set
     end
 
 

@@ -18,6 +18,11 @@ class Cell
   validates_presence_of :title, :type
   validates_inclusion_of :type, in: TYPES
 
+  def self.dummy_poster_image
+    "http://msmunited.com/wp-content/uploads/2013/02/dance1.jpg"
+  end
+
+
   def self.gender
     :m
   end

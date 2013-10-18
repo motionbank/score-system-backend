@@ -7,42 +7,6 @@ function initTabs(){
 }
 
 
-function createDummyRows(){
-	//create dummy rows
-	var imageSrc = "http://msmunited.com/wp-content/uploads/2013/02/dance1.jpg";
-    for(var i = 0; i < 8; i++){
-    	if(i%2) createAvailableContentRow(i,imageSrc,"MyTitle of Cell"+i,"MyDescription");
-    	else createAvailableContentRow(i,"","MyTitle of Cell"+i,"MyDescription");
-    	if(i==7){
-    		initTableEvents();
-    	}
-    }
-    createUsedContentRow("-1","","Empty Title","Empty Description");
-}
-
-
-function createAvailableContentRow(id, src, title, description){
-	var htmlBasicStructure = 	"<tr id='availableContentCell_" + id + "' class='contentCell availableCell cellTable ui-widget-content'>\
-									<td class='contentCellPosterImage thumbnail'></td>\
-									<td class='contentCellTitle'></td>\
-									<td class='contentCellDescription'></td>\
-									<td class='contentCellShowButton'>Show Info</td>\
-								</tr>";
-	$("#availableContentCellTable tbody").prepend(htmlBasicStructure);
-	var availableContentCell = $("#availableContentCell_"+id);
-	availableContentCell.find(".contentCellPosterImage").append("<img src='" + src + "' />");
-	availableContentCell.find(".contentCellTitle").append(title);
-	availableContentCell.find(".contentCellDescription").append(description);
-
-	
-	availableContentCell.draggable(
-						{
-	 							opacity: 0.7, 
-	 							helper: createDraggableCellHelper, 
-	 							revert: false, 
-	 					});
-}
-
 function createDraggableCellHelper(event){
 	var cell = $(event.currentTarget);
 	var title = cell.find(".contentCellTitle").html();
@@ -78,7 +42,14 @@ function createUsedContentRow(id, src, title, description){
 
 
 function initTableEvents(){
-	$( "#availableContentCellTable" ).on("click", ".contentCellShowButton", showCellInformation);
+	var availableCellsContainer = $('#availableContentCellTable');
+
+	availableCellsContainer.on("click", ".contentCellShowButton", showCellInformation);
 	$( "#usedContentCellTable" ).on("click", ".contentCellEditButton", editCellInformation);
-	$( "#availableContentCellTable" ).on("dragstop", ".availableCell", onDrop);
+	availableCellsContainer.on("dragstop", ".availableCell", onDrop);
+	availableCellsContainer.find(".availableCell").draggable({
+		opacity: 0.7,
+		helper: createDraggableCellHelper,
+		revert: false
+	});
 }

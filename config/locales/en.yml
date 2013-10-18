@@ -26,6 +26,10 @@ en:
   logout: "Logout"
   set:
     grid_editor: "Grid-Editor"
+    tabs:
+      available_cells: "Available Cells"
+      used_cells: "Used Cells"
+      show_info: "Show Info"
   record:
     index: "List"
     show: "Show"
