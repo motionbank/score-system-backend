@@ -28,7 +28,7 @@ Grid.prototype = {
 	makeGridResizable: function(){
 		$("#grid").resizable({
         	grid: [ $(".cell").width() , $(".cell").height() ],
-        	containment: "#boundsForGrid",
+        	containment: "#boundsForGrid"
     	});
 	},
 	

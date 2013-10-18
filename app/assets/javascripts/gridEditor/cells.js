@@ -187,7 +187,7 @@ GridCell.prototype = {
         $(contentCell).find(".contentCellPosterImage").html("<img src='" + this.src + "'></img>");
         $(contentCell).find(".contentCellTitle").html(this.title);
         $(contentCell).find(".contentCellDescription").html(this.description);
-    },
+    }
 }
 
 
