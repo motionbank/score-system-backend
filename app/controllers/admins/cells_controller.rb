@@ -6,7 +6,7 @@ module Admins
 
     # GET /cells
     def index
-      @cells = Cell.all.paginate(page: params[:page], per_page: PER_PAGE)
+      @cells = Cell.order_by(title: 1).paginate(page: params[:page], per_page: PER_PAGE)
     end
 
     # GET /cells/new
