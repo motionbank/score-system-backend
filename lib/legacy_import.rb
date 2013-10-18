@@ -75,15 +75,23 @@ EOL
 
     def import(table)
       results = @client.query "SELECT * FROM #{table}"
+      imported = 0
       model = TABLE_MODEL_MAPPING[table]
-      results.each do |row|
-        map_fields(table, row)
-        doc = model.create!(row)
+      begin
+        results.each do |row|
+          map_fields(table, row)
+          doc = model.create!(row)
+          imported += 1
 
-        # do any additional steps
-        (ADDITIONAL_STEPS[table] || []).each do |step|
-          send(step, doc)
+          # do any additional steps
+          (ADDITIONAL_STEPS[table] || []).each do |step|
+            send(step, doc)
+          end
         end
+      rescue => e
+        raise e
+      ensure
+        puts "Imported #{imported}/#{results.count} rows from #{table}."
       end
     end
 
@@ -101,6 +109,7 @@ EOL
 
       # now get the actual rows to be used for the grid cells/associated cells
       cell_rows = @client.query "SELECT * FROM #{table} WHERE sets_id = #{set_id}"
+      imported = 0
       cell_rows.each do |row|
         # we already have the set -> the passed doc
         row.delete 'sets_id'
@@ -118,10 +127,14 @@ EOL
         # actually create the GridCell
         grid_cell = GridCell.new(row)
         doc.grid_cells << grid_cell
-        unless doc.valid?
-          puts "GridCell with connection_id #{grid_cell.legacy_id} was not imported because it had errors: #{grid_cell.errors.full_messages}"
+        if doc.valid?
+          imported += 1
+        else
+          puts "!!! GridCell with connection_id #{grid_cell.legacy_id} was not imported because it had errors: #{grid_cell.errors.full_messages}"
         end
       end
+
+      puts "Imported #{imported}/#{cell_rows.count} cells associated to the set #{doc.title} which has the ID: #{doc.id}."
     end
 
 
