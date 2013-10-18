@@ -13,6 +13,7 @@ class LegacyImport
   }
 
   ADDITIONAL_STEPS = {
+      cells: [:get_additional_cell_fields],
       sets: [:get_associated_cells]
   }
 
@@ -48,6 +49,9 @@ class LegacyImport
     rescue Mysql2::Error => e
       puts "Error while connecting: #{e}"
     end
+
+    # this is for statistics
+    @imported_cell_fields = 0
   end
 
 
@@ -55,6 +59,8 @@ class LegacyImport
     [:users, :cells, :sets].each do |table|
       import(table)
     end
+
+    display_statistics
   end
 
 
@@ -92,6 +98,35 @@ EOL
         raise e
       ensure
         puts "Imported #{imported}/#{results.count} rows from #{table}."
+      end
+    end
+
+
+    def get_additional_cell_fields(doc)
+      table = :cells_fields
+
+      cell_id = doc.legacy_id
+
+      # get all foreign_keys from the legacy table and use these to query the fields table
+      # where no connection is setup. This means that these fields are on the canonical cell itself.
+      field_ids = @client.query("SELECT fields_id FROM #{table} WHERE cells_id = #{cell_id} AND connection_id = 0").map(&:values).flatten
+
+      return if field_ids.empty?
+
+      # get those fields from the fields table
+      fields = @client.query("SELECT * FROM fields WHERE id IN (#{field_ids.join(',')})")
+
+      # make 'name' be a hash key and 'value' its value
+      fields_as_hash = {}
+      fields.each do |row|
+        fields_as_hash[row['name']] = row['value']
+      end
+
+      # now add those fields to the cell
+      if doc.update(additional_fields: fields_as_hash)
+        @imported_cell_fields += fields.count
+      else
+        puts "#{fields} were not imported to the cell #{cell_id} because of errors in the cell: #{doc.errors.full_messages}"
       end
     end
 
@@ -165,5 +200,23 @@ EOL
     # instead we save it as legacy_id to always have a mapping
     def map_primary_key(row, primary_key_name)
       row['legacy_id'] = row.delete primary_key_name
+    end
+
+
+    def display_statistics
+      possible_cell_fields = @client.query("SELECT COUNT(*) FROM cells_fields WHERE connection_id = 0", as: :array)
+      possible_cell_fields = possible_cell_fields.to_a.flatten.first # get the single value from the array of arrays
+      puts "#{@imported_cell_fields}/#{possible_cell_fields} fields were imported directly to cells."
+
+      if @imported_cell_fields != possible_cell_fields
+        puts "The #{possible_cell_fields-@imported_cell_fields} remaining fields were not imported because their" +
+             " cells_id is not pointing to an existing cell. Their rows are:"
+
+        fields_missing_cell = @client.query("SELECT f.fields_id, f.cells_id FROM cells_fields AS f LEFT JOIN cells AS c" +
+                                            " ON f.cells_id = c.id WHERE f.connection_id = 0 AND c.id IS NULL")
+        fields_missing_cell.each do |field|
+          puts field
+        end
+      end
     end
 end
