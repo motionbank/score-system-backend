@@ -218,5 +218,7 @@ EOL
           puts field
         end
       end
+
+      puts "Import finished!"
     end
 end
