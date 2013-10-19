@@ -4,16 +4,6 @@
 //							cells.js -> render
 
 
-//	______________ DONE _____________________________________________________________________
-//	TODO: zu registrierende Events einmal beim initialize, nicht für jedes Element. 
-//									Bsp: $( "#add_"+id).on("click", addOrRemoveButton); wird zu: 
-//											$(".addButton").on("click", addOrRemoveButton);
-//	nachdem alle Zeilen gerendert sind, Events !einmal! registrieren
-
-// 	Referenz auf Grid, nachdem es erzeugt wurde
-//__________________________________________________________________________________________
-
-
 //	TODO: Responsive, Skalierung & Neuberechnung wenn sich window-Größe verändert für Grid, Cells and EditBox
 //	Anmerkung: Cells & Grid = responsive. wenn Cell jedoch größer gezogen wurde, nicht mehr responsive.
 //  TO FIX: wenn Grid skaliert wird, wird dies auch als "window.resize"-Event behandelt. 
@@ -75,12 +65,11 @@ function onDrop(event){
 	if(gridPosition.left < currentMousePos.x && currentMousePos.x < gridPosition.left + grid.width()){
 		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
 
-			//TODO: Prepare for reading from Database
 			id = id.split('_')[1];
-			$.each(theGrid.cells, function(index, value){
-				//console.log(value);
-				if(id == value.id)
+			$.each(theGrid.cells, function(index, value) {
+				if(id == value.id) {
 					id = id + "-2";
+				}
 			});
 
 			//cell.js
@@ -89,11 +78,9 @@ function onDrop(event){
 											currentMousePos.y - gridPosition.top, 
 											imageLink);
 			theGrid.addCell(newGridCell);
+
 			//table.js
 			createUsedContentRow(id, imageLink, title, description);
-
-			//entfernt Zelle aus "available cells"; nicht erwünscht!
-			//droppedCell.remove();
 		}
 	}
 }
