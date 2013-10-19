@@ -156,7 +156,7 @@ noError = function (req,res,err) {
 
 s3FileUpload = function ( req, res, file, basePath, next ) {
 	var s3 			= new aws.S3(),
-		s3Req 		= {Bucket: config.aws.bucket},
+		s3Req 		= {Bucket: config.aws.bucket, ACL: 'public-read'},
 		s3Client 	= s3.client;
 
 	var err = null;
@@ -167,9 +167,14 @@ s3FileUpload = function ( req, res, file, basePath, next ) {
 								replace(/^-+|-+$/,'');
 
 	if ( fileName.length < 10 ) {
-		err = new Error('That filename is too short, needs at least 10 chars');
-		next(err,null);
-		return;
+		// err = new Error('That filename is too short, needs at least 10 chars');
+		// next(err,null);
+		// return;
+		while ( fileName.length < 10 ) {
+			var crypto = require('crypto'), shasum = crypto.createHash('sha1');
+			shasum.update( fileName + '-' + (new Date()).getTime() );
+			fileName = shasum.digest('hex') + '_' + fileName;
+		}
 	}
 
 	var fileNameUnique = fileName;
