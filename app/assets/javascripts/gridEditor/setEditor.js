@@ -72,10 +72,15 @@ function onDrop(event){
 				}
 			});
 
+			var setId = APPLICATION.resource_id;
+			$.post(
+				Routes.cell_set_grid_cells_path(setId, {canonical_cell_id: id})
+			);
+
 			//cell.js
-			var newGridCell = new GridCell(	id, type, title, description, 
-											currentMousePos.x - gridPosition.left, 
-											currentMousePos.y - gridPosition.top, 
+			var newGridCell = new GridCell(	id, type, title, description,
+											currentMousePos.x - gridPosition.left,
+											currentMousePos.y - gridPosition.top,
 											imageLink);
 			theGrid.addCell(newGridCell);
 
@@ -84,7 +89,6 @@ function onDrop(event){
 		}
 	}
 }
-
 
 
 //edit cell information when click in table on Edit
