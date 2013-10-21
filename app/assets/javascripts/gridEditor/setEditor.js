@@ -86,10 +86,12 @@ function onDrop(event){
 			});
 
 			var setId = APPLICATION.resource_id;
+			var gridCoordinates = theGrid.mapPixelsToGrid(	currentMousePos.x - gridPosition.left,
+															currentMousePos.y - gridPosition.top);
 			var cellAttributes = {
 				cell_id: id,//this will make sure a reference to the canonical cell is kept
-				x: currentMousePos.x - gridPosition.left,
-				y: currentMousePos.y - gridPosition.top
+				x: gridCoordinates.x,
+				y: gridCoordinates.y
 			};
 			$.post(
 				Routes.cell_set_grid_cells_path(setId),
@@ -103,7 +105,11 @@ function onDrop(event){
 function createGridCell(data) {
 	// first get the information from the grid cell itself
 	var id = data.grid_cell.id;
-	var x = data.grid_cell.x, y = data.grid_cell.y;
+
+	// multiply the abstract grid coordinates with the actual cell size in pixels
+	var absCellSize = theGrid.getCellSizeAsPixels();
+	var x = data.grid_cell.x * absCellSize.width;
+	var y = data.grid_cell.y * absCellSize.height;
 
 	// for all other fields we want to get the information of the canonical cell
 	var cellData = data.grid_cell.canonical_cell;

@@ -120,8 +120,9 @@ GridCell.prototype = {
         var gridPosition = grid.offset();
 
         //calculate position in grid
-        this.x = Math.floor(this.x / this.gridSize.width) * this.gridSize.width;
-        this.y = Math.floor(this.y / this.gridSize.height) * this.gridSize.height;
+		var gridPosition = theGrid.mapPixelsToGrid(this.x, this.y);
+        this.x = gridPosition.x * this.gridSize.width;
+		this.y = gridPosition.y * this.gridSize.height;
         $("#gridCell_"+this.id).css({left: this.x, top:this.y});
         //this.update();
     },
