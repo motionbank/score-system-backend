@@ -43,7 +43,7 @@ Grid.prototype = {
 
 
 	makeGridResizable: function(){
-		$("#grid").resizable({
+		this.container.resizable({
         	grid: [ $(".cell").width() , $(".cell").height() ],
         	containment: "#boundsForGrid"
     	});
@@ -84,7 +84,7 @@ Grid.prototype = {
 	onWindowResize: function(){
 		console.log($(window).width());
 		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
-		$("#grid").css({ "width" : this.width, "height" : this.height });
+		this.container.css({ "width" : this.width, "height" : this.height });
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 	}
 
