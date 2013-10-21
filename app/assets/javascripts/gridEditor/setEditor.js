@@ -73,30 +73,23 @@ function onDrop(event){
 			});
 
 			var setId = APPLICATION.resource_id;
-			var cellAttributes = {
-				cell_id: id,//this will make sure a reference to the canonical cell is kept
-				x: currentMousePos.x - gridPosition.left,
-				y: currentMousePos.y - gridPosition.top
-			};
 			$.post(
-				Routes.cell_set_grid_cells_path(setId),
-				{grid_cell: cellAttributes},
-				createGridCell
+				Routes.cell_set_grid_cells_path(setId, {canonical_cell_id: id})
 			);
+
+			//cell.js
+			var newGridCell = new GridCell(	id, type, title, description,
+											currentMousePos.x - gridPosition.left,
+											currentMousePos.y - gridPosition.top,
+											imageLink);
+			theGrid.addCell(newGridCell);
+
+			//table.js
+			createUsedContentRow(id, imageLink, title, description);
 		}
 	}
 }
 
-function createGridCell(data) {
-	var id = data.id, title = data.title, description = data.description, imageSrc = data.poster_image;
-	//cell.js
-	var newGridCell = new GridCell(	id, data.type, title, description,
-									data.x, data.y, imageSrc);
-	theGrid.addCell(newGridCell);
-
-	//table.js
-	createUsedContentRow(id, imageSrc, title, description);
-}
 
 //edit cell information when click in table on Edit
 function editCellInformation(event){

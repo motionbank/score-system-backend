@@ -1,12 +1,11 @@
 module Admins
   class GridCellsController < BaseController
 
-    before_action :set_cell_set
     before_action :set_grid_cell, only: [:edit, :update, :destroy]
 
     # GET /admins/cell_sets/1/grid_cells
     def index
-      @grid_cells = @cell_set.grid_cells
+      @grid_cells = GridCell.all
     end
 
     # GET /admins/cell_sets/1/grid_cells/1/edit
@@ -15,11 +14,12 @@ module Admins
 
     # POST /admins/cell_sets/1/grid_cells
     def create
-      @grid_cell = @cell_set.grid_cells.build(grid_cell_params)
+      @grid_cell = GridCell.new(grid_cell_params)
+
       if @grid_cell.save
-        render @grid_cell, notice: 'Grid cell was successfully created.'
+        redirect_to @grid_cell, notice: 'Grid cell was successfully created.'
       else
-        render json: {errors: @grid_cell.errors.full_messages}, status: :unprocessable_entity
+        render action: 'new'
       end
     end
 
@@ -39,20 +39,14 @@ module Admins
     end
 
     private
-
-      def set_cell_set
-        @cell_set = CellSet.find(params[:cell_set_id])
-      end
-
-
+      # Use callbacks to share common setup or constraints between actions.
       def set_grid_cell
-        @grid_cell = @cell_set.grid_cells.find(params[:id])
+        @grid_cell = GridCell.find(params[:id])
       end
-
 
       # Only allow a trusted parameter "white list" through.
       def grid_cell_params
-        params.require(:grid_cell).permit(:title, :description, :poster_image, :cell_id, :x, :y)
+        params.require(:grid_cell).permit(:title, :description, :poster_image)
       end
   end
 end
