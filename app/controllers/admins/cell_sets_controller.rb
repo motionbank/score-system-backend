@@ -18,9 +18,6 @@ module Admins
     # GET /sets/1/edit
     def edit
       @available_cells = Cell.order_by(title: 1) # cells available to be dragged to the set
-
-      # will be needed by the grid editor to pass it to named routes
-      @js_framework_settings[:resource_id] = @cell_set.id.to_s
     end
 
 
