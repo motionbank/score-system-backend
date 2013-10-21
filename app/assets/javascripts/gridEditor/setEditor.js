@@ -43,12 +43,25 @@ $(document).ready(function() {
 		editBox = new EditDialog("Default Title", "text", "Default Description", "");
 
 
+		// now fill the grid with existing cells
+		$.get(
+			Routes.cell_set_grid_cells_path(APPLICATION.resource_id),
+			populateTheGrid
+		);
+
 		/*$( window ).resize(function() {
   			theGrid.onWindowResize();
 		});*/
 	}
 });
 
+
+// populate the grid with cells already added to this set
+function populateTheGrid(data) {
+	$.each(data, function(idx, gridCell) {
+		createGridCell(gridCell);
+	});
+}
 
 
 //create new GridCell when contentCell is dropped in grid
