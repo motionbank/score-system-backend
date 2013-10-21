@@ -1,11 +1,13 @@
 %tr(id="availableContentCell_#{cell.id}" class="contentCell availableCell cellTable ui-widget-content")
   %td(class='contentCellPosterImage thumbnail')
-    = image_tag Cell.dummy_poster_image
-    -#TODO should be the actual poster_image, but this would lead to too many requests
-    -#     instead we should filter the available sets by type or something like that.
-    -#     @see Case 26630
-    -#- if cell.poster_image
-    -#  = image_tag cell.poster_image.url
+    - if cell.poster_image
+      -#TODO should be the actual poster_image in any case, but this would lead to too many 404 requests
+      -#     slowing things down. Furthermore we should filter the available sets by type or something like that.
+      -#     @see Case 26630
+      - if File.exists?(cell.poster_image.path)
+        = image_tag cell.poster_image.url
+      - else
+        = image_tag Cell.dummy_poster_image
   %td(class='contentCellTitle')= cell.title
   %td(class='contentCellDescription')= cell.description
   %td(class='contentCellShowButton')= t('set.tabs.show_info')
