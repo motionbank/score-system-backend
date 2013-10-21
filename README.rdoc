@@ -1,4 +1,26 @@
-== README
+== Ruby version
+ruby 2.0.0p247
+
+== 
+
+
+
+
+
+== base Import
+If you want to import an SQL file of yours into the MongoDB of this project
+* Import your SQL file to your MySQL database
+* create a config/config.yml file providing your MySQL credentials, please match this format:
+<tt>
+ legacy_db:
+   database: YOUR_MySQL_DATABASE_NAME
+   username: YOUR_MySQL_USER
+   password: YOUR_MySQL_PASSWORD
+   host: localhost # optional
+</tt>
+* Run <tt>rake motion_bank:import_legacy</tt>
+
+== RAILS GENERATED README
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
