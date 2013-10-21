@@ -9,22 +9,7 @@
 
 
 
-//standard gridCell
-function GridCell(id, type, title, description, mouseX, mouseY) {
-    this.id = id;
-    this.type;
-    this.class = "cell ui-widget-content";
-    this.title = title;
-    this.description = description;
-    this.html; 
-    this.x = mouseX;
-    this.y = mouseY;
-    this.width;
-    this.height;
-    this.init();
-}
-
-//gridCell with iframe/poster image
+//GridCell constructor
 function GridCell(id, type, title, description, mouseX, mouseY, src) {
     this.id =  id;
     this.class = "cell ui-widget-content";
