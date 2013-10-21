@@ -88,10 +88,19 @@ function onDrop(event){
 }
 
 function createGridCell(data) {
-	var id = data.id, title = data.title, description = data.description, imageSrc = data.poster_image;
+	// first get the information from the grid cell itself
+	var id = data.grid_cell.id;
+	var x = data.grid_cell.x, y = data.grid_cell.y;
+
+	// for all other fields we want to get the information of the canonical cell
+	var cellData = data.grid_cell.canonical_cell;
+	var title = cellData.title, description = cellData.description;
+	var type = cellData.type;
+	var imageSrc = cellData.poster_image.thumb.url;
+
 	//cell.js
-	var newGridCell = new GridCell(	id, data.type, title, description,
-									data.x, data.y, imageSrc);
+	var newGridCell = new GridCell(	id, type, title, description,
+									x, y, imageSrc);
 	theGrid.addCell(newGridCell);
 
 	//table.js
