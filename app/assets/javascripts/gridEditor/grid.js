@@ -12,6 +12,7 @@ function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
 	this.widthStep = widthStep;
 	this.heightStep = heightStep;
 	this.cells = [ ];
+	this.container = $('#grid');
 	this.init();
 }
 
@@ -19,11 +20,27 @@ function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
 
 Grid.prototype = {
 	init: function(){
-		$("#grid").css({ "width" : this.width, "height" : this.height });
+		this.container.css({ "width" : this.width, "height" : this.height });
 		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 		this.makeGridResizable();
 	},
+
+
+	getCellSizeAsPixels: function() {
+		var width = this.container.width() / 100 * parseInt(this.widthStep);
+		var height = this.container.height() / 100 * parseInt(this.heightStep);
+		return {width: Math.round(width), height: Math.round(height)};
+	},
+
+
+	mapPixelsToGrid: function(x, y) {
+		var absCellSize = theGrid.getCellSizeAsPixels();
+		var column = Math.floor(x / absCellSize.width);
+		var row = Math.floor(y / absCellSize.height);
+		return {x: column, y: row};
+	},
+
 
 	makeGridResizable: function(){
 		$("#grid").resizable({
