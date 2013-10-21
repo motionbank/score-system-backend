@@ -23,19 +23,25 @@ Grid.prototype = {
 		this.container.css({ "width" : this.width, "height" : this.height });
 		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
+		this.saveCellSizeAsPixels();
 		this.makeGridResizable();
 	},
 
 
-	getCellSizeAsPixels: function() {
+	saveCellSizeAsPixels: function() {
 		var width = this.container.width() / 100 * parseInt(this.widthStep);
 		var height = this.container.height() / 100 * parseInt(this.heightStep);
-		return {width: Math.round(width), height: Math.round(height)};
+		this.cellSize = {width: Math.round(width), height: Math.round(height)};
+	},
+
+
+	getCellSizeAsPixels: function() {
+		return this.cellSize;
 	},
 
 
 	mapPixelsToGrid: function(x, y) {
-		var absCellSize = theGrid.getCellSizeAsPixels();
+		var absCellSize = this.getCellSizeAsPixels();
 		var column = Math.floor(x / absCellSize.width);
 		var row = Math.floor(y / absCellSize.height);
 		return {x: column, y: row};
@@ -43,8 +49,9 @@ Grid.prototype = {
 
 
 	makeGridResizable: function(){
+		var absCellSize = this.getCellSizeAsPixels();
 		this.container.resizable({
-        	grid: [ $(".cell").width() , $(".cell").height() ],
+        	grid: [ absCellSize.width , absCellSize.height ],
         	containment: "#boundsForGrid"
     	});
 	},
@@ -86,6 +93,7 @@ Grid.prototype = {
 		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
 		this.container.css({ "width" : this.width, "height" : this.height });
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
+		this.saveCellSizeAsPixels();
 	}
 
 }
