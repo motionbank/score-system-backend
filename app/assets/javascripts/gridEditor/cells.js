@@ -10,15 +10,15 @@
 
 
 //GridCell constructor
-function GridCell(id, type, title, description, mouseX, mouseY, src) {
+function GridCell(id, type, title, description, x, y, src) {
     this.id =  id;
     this.class = "cell ui-widget-content";
     this.type = type;
     this.title = title;
     this.description = description;
     this.html; 
-    this.x = mouseX;
-    this.y = mouseY;
+    this.x = x;
+    this.y = y;
     this.width;
     this.height;
     if(src){
