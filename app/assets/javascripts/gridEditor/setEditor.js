@@ -37,7 +37,7 @@ $(document).ready(function() {
 		initTableEvents();
 
 		//grid.js
-		theGrid = new Grid( "70%", "70%", "100%", "100%", "5%", "5%");
+		theGrid = new Grid( "70%", "70%", "100%", "100%", "50px", "25px");
 
 		//edit.js
 		editBox = new EditDialog("Default Title", "text", "Default Description", "");

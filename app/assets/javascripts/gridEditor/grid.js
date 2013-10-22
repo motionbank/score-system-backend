@@ -24,8 +24,12 @@ Grid.prototype = {
 		var grid = $("#grid").css({ "width" : this.width, "height" : this.height });
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 
-		this.canonicalCellWidth = grid.width() * parseInt(this.widthStep, 10)/100;
-		this.canonicalCellHeight = grid.height() * parseInt(this.heightStep, 10)/100;
+		/*this.canonicalCellWidth = grid.width() * parseInt(this.widthStep, 10)/100;
+		this.canonicalCellHeight = grid.height() * parseInt(this.heightStep, 10)/100;*/
+		
+		this.canonicalCellWidth = parseInt(this.widthStep);
+		this.canonicalCellHeight = parseInt(this.heightStep);
+
 		grid.prepend(this.drawGridMesh());
 
 		this.width = grid.width();
@@ -36,10 +40,10 @@ Grid.prototype = {
 		var addRowButton = '<div id="addRow"></div>';
 		var addColumnButton = '<div id="addColumn"></div>';
 
-		grid.append(addRowButton);
+		$("#boundsForGrid").append(addRowButton);
 		$("#addRow").click($.proxy(this.addRow, this));
 
-		grid.append(addColumnButton);
+		$("#boundsForGrid").append(addColumnButton);
 		$("#addColumn").click($.proxy(this.addColumn, this));
 
 		this.updateButtonPositionAndSize();
