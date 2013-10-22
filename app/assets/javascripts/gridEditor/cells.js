@@ -100,6 +100,8 @@ GridCell.prototype = {
 
         //get the gridsize and set the size of the cell
         this.gridSize = { width: theGrid.canonicalCellWidth, height: theGrid.canonicalCellHeight };
+        this.width = theGrid.canonicalCellWidth;
+        this.height = theGrid.canonicalCellHeight;
     },
 
     update: function(){
@@ -138,6 +140,7 @@ GridCell.prototype = {
         this.y = Math.floor(this.y / this.gridSize.height) * this.gridSize.height;
         $("#gridCell_"+this.id).css({left: this.x, top:this.y});
         //this.update();
+        this.getAndSaveNewPositionAndSize();
     },
 
     //later using for poster image
