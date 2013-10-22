@@ -5,10 +5,11 @@
 
 
 function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
-	this.width = width;
-	this.height = height;
-	this.boundsWidth = boundsWidth;
-	this.boundsHeight = boundsHeight;
+	
+	this.width = width*parseInt(widthStep);
+	this.height = height*parseInt(heightStep);
+	this.boundsWidth = boundsWidth*parseInt(widthStep);
+	this.boundsHeight = boundsHeight*parseInt(heightStep);
 	this.widthStep = widthStep;
 	this.heightStep = heightStep;
 	this.canonicalCellWidth = 0;
@@ -32,10 +33,10 @@ Grid.prototype = {
 
 		grid.prepend(this.drawGridMesh());
 
-		this.width = grid.width();
-		this.height = grid.height();
-		this.boundsWidth = grid.parent().width();
-		this.boundsHeight = grid.parent().height();
+		//this.width = grid.width();
+		//this.height = grid.height();
+		//this.boundsWidth = grid.parent().width();
+		//this.boundsHeight = grid.parent().height();
 
 		var addRowButton = '<div id="addRow"></div>';
 		var addColumnButton = '<div id="addColumn"></div>';
@@ -51,25 +52,23 @@ Grid.prototype = {
 	},
 
 	addRow: function(){
-		console.log(this.width + "and boundwidth: " + (this.boundsWidth - this.canonicalCellWidth));
-		if(this.width < this.boundsWidth - this.canonicalCellWidth*2){
+		if(this.width < this.boundsWidth){
 			this.width += this.canonicalCellWidth;
 			this.updateButtonPositionAndSize();
 		}
 		else {
-			alert("Maximum Width reached!");
+			alert("Maximum Rows reached! Maximum is: " + this.boundsWidth/parseInt(this.widthStep));
 		}
 		
 	},
 
 	addColumn: function(){
-		console.log(this.height + "and boundwidth: " + (this.boundsHeight - this.canonicalCellHeight));
-		if(this.height < this.boundsHeight - this.canonicalCellHeight*2){
+		if(this.height < this.boundsHeight){
 			this.height += this.canonicalCellHeight;
 			this.updateButtonPositionAndSize();
 		}
 		else {
-			alert("Maximum Height reached!");
+			alert("Maximum Columns reached! Maximum is: " + this.boundsHeight/parseInt(this.heightStep));
 		}
 
 	},
