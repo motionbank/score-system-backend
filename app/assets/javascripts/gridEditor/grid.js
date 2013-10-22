@@ -73,10 +73,22 @@ Grid.prototype = {
 		
 	},
 
-	//TODO: Check for minimum rows!!
 	removeColumn: function(){
-		this.width -= this.cellSize.width;
-		this.updateButtonPositionAndSize();
+		var cellsInColumnToRemove = 0;
+		var currentWidth = this.width;
+		$.each(this.cells, function(index, value){
+			if(value.x + value.width >= currentWidth){
+				cellsInColumnToRemove++;
+			}
+		});
+
+		if(cellsInColumnToRemove == 0){
+			this.width -= this.cellSize.width;
+			this.updateButtonPositionAndSize();
+		}
+		else {
+			alert("There is a cell in the column you want to remove!\nPlease delete or move this cell.");
+		}
 	},
 
 	
@@ -91,8 +103,22 @@ Grid.prototype = {
 	},
 
 	removeRow: function(){
-		this.height -= this.cellSize.height;
-		this.updateButtonPositionAndSize();
+		var cellsInRowToRemove = 0;
+		var currentHeight = this.height;
+
+		$.each(this.cells, function(index, value){
+			if(value.y + value.height >= currentHeight){
+				cellsInRowToRemove++;
+			}
+		});
+
+		if(cellsInRowToRemove == 0){
+			this.height -= this.cellSize.height;
+			this.updateButtonPositionAndSize();
+		}
+		else {
+			alert("There is a cell in the row you want to remove!\nPlease delete or move this cell.");
+		}	
 	},
 	
 	
