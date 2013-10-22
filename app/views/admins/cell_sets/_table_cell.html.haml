@@ -1,5 +1,5 @@
-%tr(id="availableContentCell_#{cell.id}" class="contentCell availableCell cellTable ui-widget-content")
-  %td(class='contentCellPosterImage thumbnail')
+.row-fluid(id="availableContentCell_#{cell.id}" class="contentCell availableCell")
+  .contentCellPosterImage.thumbnail.span2
     - if cell.poster_image
       -#TODO should be the actual poster_image in any case, but this would lead to too many 404 requests
       -#     slowing things down. Furthermore we should filter the available sets by type or something like that.
@@ -8,6 +8,7 @@
         = image_tag cell.poster_image.url
       - else
         = image_tag Cell.dummy_poster_image
-  %td(class='contentCellTitle')= cell.title
-  %td(class='contentCellDescription')= cell.description
-  %td(class='contentCellShowButton')= t('set.tabs.show_info')
+  .span8
+    %h5.contentCellTitle= cell.title
+    %p.contentCellDescription= cell.description
+  .span2.contentCellShowButton= t('set.tabs.show_info')
