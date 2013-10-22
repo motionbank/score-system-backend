@@ -8,10 +8,11 @@ function initTabs(){
 
 
 function createDraggableCellHelper(event){
+
 	var cell = $(event.currentTarget);
 	var title = cell.find(".contentCellTitle").html();
 	var description = cell.find(".contentCellDescription").html();
-	var cellClone = "<div class='cell thumbnail'>";
+	var cellClone = "<div class='thumbnail dragHelper'>";
 
 
 	if(cell.find(".contentCellPosterImage img").attr("src").length > 0){

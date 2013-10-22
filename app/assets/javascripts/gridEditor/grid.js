@@ -5,10 +5,11 @@
 
 
 function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
-	this.width = width;
-	this.height = height;
-	this.boundsWidth = boundsWidth;
-	this.boundsHeight = boundsHeight;
+	
+	this.width = width*parseInt(widthStep);
+	this.height = height*parseInt(heightStep);
+	this.boundsWidth = boundsWidth*parseInt(widthStep);
+	this.boundsHeight = boundsHeight*parseInt(heightStep);
 	this.widthStep = widthStep;
 	this.heightStep = heightStep;
 	this.cells = [ ];
@@ -22,32 +23,27 @@ Grid.prototype = {
 	init: function(){
 		this.container.css({ "width" : this.width, "height" : this.height });
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
-		
+
 		this.saveCellSizeAsPixels();
-		this.container.prepend(this.drawGridMesh());
-		
-        this.width = this.container.width();
-		this.height = this.container.height();
-		this.boundsWidth = this.container.parent().width();
-		this.boundsHeight = this.container.parent().height();
-		
+        this.container.prepend(this.drawGridMesh());
+
 		var addRowButton = '<div id="addRow"></div>';
-        var addColumnButton = '<div id="addColumn"></div>';
-    
-		this.container.append(addRowButton);
-        $("#addRow").click($.proxy(this.addRow, this));
-    
-		this.container.append(addColumnButton);
-        $("#addColumn").click($.proxy(this.addColumn, this));
-    
-        this.updateButtonPositionAndSize();
+		var addColumnButton = '<div id="addColumn"></div>';
+
+		$("#boundsForGrid").append(addRowButton);
+		$("#addRow").click($.proxy(this.addRow, this));
+
+		$("#boundsForGrid").append(addColumnButton);
+		$("#addColumn").click($.proxy(this.addColumn, this));
+
+		this.updateButtonPositionAndSize();
 	},
-
-
-	saveCellSizeAsPixels: function() {
-		var width = this.container.width() / 100 * parseInt(this.widthStep, 10);
-		var height = this.container.height() / 100 * parseInt(this.heightStep, 10);
-		this.cellSize = {width: Math.round(width), height: Math.round(height)};
+	
+	
+    saveCellSizeAsPixels: function() {
+		var width = parseInt(this.widthStep, 10);
+		var height = parseInt(this.heightStep, 10);
+		this.cellSize = {width: width, height: height};
 	},
 
 
@@ -62,29 +58,27 @@ Grid.prototype = {
 		var row = Math.floor(y / absCellSize.height);
 		return {x: column, y: row};
 	},
-	
-	
+
+
 	addRow: function(){
-		console.log(this.width + "and boundwidth: " + (this.boundsWidth - this.cellSize.width));
-		if(this.width < this.boundsWidth - this.cellSize.width*2){
+		if(this.width < this.boundsWidth){
 			this.width += this.cellSize.width;
 			this.updateButtonPositionAndSize();
 		}
 		else {
-			alert("Maximum Width reached!");
+			alert("Maximum Rows reached! Maximum is: " + this.boundsWidth/parseInt(this.widthStep));
 		}
 		
 	},
 
-
+	
 	addColumn: function(){
-		console.log(this.height + "and boundwidth: " + (this.boundsHeight - this.cellSize.height));
-		if(this.height < this.boundsHeight - this.cellSize.height*2){
+		if(this.height < this.boundsHeight){
 			this.height += this.cellSize.height;
 			this.updateButtonPositionAndSize();
 		}
 		else {
-			alert("Maximum Height reached!");
+			alert("Maximum Columns reached! Maximum is: " + this.boundsHeight/parseInt(this.heightStep));
 		}
 
 	},

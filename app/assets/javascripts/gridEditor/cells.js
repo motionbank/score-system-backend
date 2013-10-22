@@ -63,6 +63,8 @@ GridCell.prototype = {
             }
         });
 
+        $("#gridCell_"+this.id).css({"width":this.width, "height":this.height});
+
         //update cell content with X and Y position
         currentCell.on("dragstop resizestop", $.proxy(this.onMouseUp, this));
 
@@ -89,14 +91,8 @@ GridCell.prototype = {
         this.height = this.gridSize.height;
     },
 
-    update: function(){
-        this.getAndSaveNewPositionAndSize();
-        //adjust image size
-        //this.checkCollisions();
-    },
     onMouseUp: function(){
-        console.log("mouse up" + this.gridSize.width);
-        this.update();
+        this.getAndSaveNewPositionAndSize();
     },
 
     getAndSaveNewPositionAndSize: function(){
@@ -104,10 +100,10 @@ GridCell.prototype = {
         this.position = position;
         this.x = this.position.left;
         this.y = this.position.top;
-        this.width = $("#gridCell_"+this.id).width()/this.gridSize.width;
-        this.height = $("#gridCell_"+this.id).height()/this.gridSize.height;
+        this.width = $("#gridCell_"+this.id).width();
+        this.height = $("#gridCell_"+this.id).height();
 
-        $("#gridCell_"+this.id+"_content img").css({"width": this.width*this.gridSize.width, "height":this.height*this.gridSize.height });
+        $("#gridCell_"+this.id+"_content img").css({"width": this.width, "height":this.height});
         
     },
 
@@ -125,14 +121,14 @@ GridCell.prototype = {
         this.x = gridPosition.x * this.gridSize.width;
 		this.y = gridPosition.y * this.gridSize.height;
         $("#gridCell_"+this.id).css({left: this.x, top:this.y});
-        //this.update();
+     
         this.getAndSaveNewPositionAndSize();
     },
 
     //later using for poster image
     setSrc: function(src){
         this.src = src;
-        //this.update();
+       
     },
 
     onDblClick: function(){
