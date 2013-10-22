@@ -33,6 +33,7 @@ en:
   record:
     index: "List"
     show: "Show"
+    delete: "Delete"
     with_class_name:
       all: "All %{class_name}"
       show: "Show %{class_name}"

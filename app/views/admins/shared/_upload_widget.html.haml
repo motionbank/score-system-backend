@@ -7,3 +7,4 @@
 - if uploader.present?
   .span3
     = image_tag form.object.send(method).thumb.url
+    %button.delete(type="button")= t('record.delete')
