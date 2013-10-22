@@ -129,18 +129,36 @@ h2 {
   cursor: pointer;
 }
 
-#addRow{
+#addRow, #removeRow{
 	position: absolute;
+	text-align: center;
+	font-size: 20px;
+	width:100px;
+	height:50px;
+}
+
+#addRow{
 	background-color: white;
+}
+
+#removeRow{
+	background-color: #BAD3C7;
+}
+
+#addColumn, #removeColumn{
+	position: absolute;
+	text-align: center;
+	font-size: 20px;
 	width:50px;
 	height:200px;
 }
 
-#addColumn{
-	position: absolute;
+#addColumn {
 	background-color: white;
-	width:200px;
-	height:50px;
+}
+
+#removeColumn{
+	background-color: #BAD3C7;
 }
 
 .dragHelper {
