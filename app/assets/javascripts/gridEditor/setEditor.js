@@ -37,9 +37,9 @@ $(document).ready(function() {
 		initTableEvents();
 
 		//initiating works now with number of rows & columns
-		//new Grid ( numberOfRows, numberOfColumns, numberOfMaxRows, numberOfMaxColumns)
+		//new Grid ( numberOfColumns, numberOfRows, numberOfMaxColumns, numberOfMaxRows, cellWidth, cellHeight)
 		//grid.js
-		theGrid = new Grid( 20, 10, 25, 15, "50px", "25px");
+		theGrid = new Grid( APPLICATION.columns, APPLICATION.rows, 25, 15, "50px", "25px");
 
 		//edit.js
 		editBox = new EditDialog("Default Title", "text", "Default Description", "");
