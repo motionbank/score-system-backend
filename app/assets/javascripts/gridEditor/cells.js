@@ -84,9 +84,9 @@ GridCell.prototype = {
 
 
         //get the gridsize and set the size of the cell
-        this.gridSize = { width: theGrid.canonicalCellWidth, height: theGrid.canonicalCellHeight };
-        this.width = theGrid.canonicalCellWidth;
-        this.height = theGrid.canonicalCellHeight;
+        this.gridSize = theGrid.getCellSizeAsPixels();
+        this.width = this.gridSize.width;
+        this.height = this.gridSize.height;
     },
 
     update: function(){

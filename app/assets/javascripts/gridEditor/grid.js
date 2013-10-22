@@ -65,9 +65,9 @@ Grid.prototype = {
 	
 	
 	addRow: function(){
-		console.log(this.width + "and boundwidth: " + (this.boundsWidth - this.canonicalCellWidth));
-		if(this.width < this.boundsWidth - this.canonicalCellWidth*2){
-			this.width += this.canonicalCellWidth;
+		console.log(this.width + "and boundwidth: " + (this.boundsWidth - this.cellSize.width));
+		if(this.width < this.boundsWidth - this.cellSize.width*2){
+			this.width += this.cellSize.width;
 			this.updateButtonPositionAndSize();
 		}
 		else {
@@ -78,9 +78,9 @@ Grid.prototype = {
 
 
 	addColumn: function(){
-		console.log(this.height + "and boundwidth: " + (this.boundsHeight - this.canonicalCellHeight));
-		if(this.height < this.boundsHeight - this.canonicalCellHeight*2){
-			this.height += this.canonicalCellHeight;
+		console.log(this.height + "and boundwidth: " + (this.boundsHeight - this.cellSize.height));
+		if(this.height < this.boundsHeight - this.cellSize.height*2){
+			this.height += this.cellSize.height;
 			this.updateButtonPositionAndSize();
 		}
 		else {
