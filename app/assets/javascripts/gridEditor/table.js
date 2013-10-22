@@ -26,13 +26,15 @@ function createDraggableCellHelper(event){
 }
 
 function createUsedContentRow(id, src, title, description){
-	var htmlBasicStructure = 	"<tr id='usedContentCell_" + id + "' class='contentCell usedCell cellTable ui-widget-content'>\
-									<td class='contentCellPosterImage thumbnail'></td>\
-									<td class='contentCellTitle'></td>\
-									<td class='contentCellDescription'></td>\
-									<td class='contentCellEditButton'>Edit Info</td>\
-								</tr>";
-	$("#usedContentCellTable tbody").prepend(htmlBasicStructure);
+	var htmlBasicStructure = 	"<div id='usedContentCell_" + id + "' class='row-fluid contentCell usedCell'>\
+									<div class='span2 contentCellPosterImage thumbnail'></div>\
+									<div class='span8'>\
+										<h5 class='contentCellTitle'></h5>\
+										<p class='contentCellDescription'></p>\
+									</div>\
+									<div class='span2 contentCellEditButton'>Edit Info</div>\
+								</div>";
+	$("#usedContentCellTable").prepend(htmlBasicStructure);
 	var usedContentCell = $("#usedContentCell_"+id);
 	usedContentCell.find(".contentCellPosterImage").append("<img src='" + src + "' />");
 	usedContentCell.find(".contentCellTitle").append(title);

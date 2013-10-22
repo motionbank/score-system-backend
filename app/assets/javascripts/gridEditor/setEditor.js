@@ -90,6 +90,7 @@ function onDrop(event){
 //edit cell information when click in table on Edit
 function editCellInformation(event){
 	theGrid.setCurrentCell($(event.target).parent().attr("id"));
+	console.log($(event.target).parent().attr("id"));
 	editBox.setValues(currentCellToEdit.title, currentCellToEdit.type, currentCellToEdit.description, currentCellToEdit.src);
 	editBox.openDialog();
 }

@@ -20,6 +20,10 @@ h2 {
 	padding: 20px 5px 20px 20px;
 }
 
+.edit_cell_set img {
+  margin: 0;
+}
+
 #boundsForGrid{
 	position: relative;
 	background-color: #444444;
@@ -63,25 +67,36 @@ h2 {
 
 .contentCell{
 	position: relative;
-	border-width: 0;
 }
 
 .usedCell{
 	opacity: 0.8;
 }
 
-.cellTable{
-	padding: 5px;
-	border-width: 3px;
-	border-style: solid;
-}
+.cellTable .row-fluid{
+  border: none;
+	border-bottom: 1px solid #ddd;
+  padding: 5px;
 
-.cellTable td{
-	padding: 0px 10px 0px 10px;
-}
-.cellTable tr{
-	border-width: 1px;
-	border-style: solid;
+  h5 {
+    margin-bottom: 0;
+  }
+
+  p {
+    padding: 0;
+  }
+
+  &:nth-child(odd) {
+    background: #f9f9f9;
+  }
+
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+  }
 }
 
 #emptyCell{
@@ -101,12 +116,10 @@ h2 {
 .thumbnail{
 	/*width: auto;*/
 	width:auto;
-	height:70px;
 }
 
 .thumbnail img{
 	width: 100%;
-	height:100%;
 }
 
 .textInEdit{
@@ -119,4 +132,12 @@ h2 {
 	position: absolute !important;
 	opacity:0.5;
 	z-index:2;
+}
+
+.contentCellShowButton {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
 }
