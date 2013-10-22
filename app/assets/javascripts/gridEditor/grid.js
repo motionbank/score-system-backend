@@ -36,10 +36,7 @@ Grid.prototype = {
 		var context = this;
 		$("#grid").resizable({
 			grid: [ this.canonicalCellWidth , this.canonicalCellHeight ],
-			containment: "#boundsForGrid",
-			stop: function(event, ui) {
-				ui.element.prepend(context.drawGridMesh());
-			}
+			containment: "#boundsForGrid"
     	});
 	},
 	
