@@ -109,15 +109,6 @@ h2 {
 	-webkit-filter: grayscale(100%);
 }
 
-.thumbnail{
-	/*width: auto;*/
-	width:auto;
-}
-
-.thumbnail img{
-	width: 100%;
-}
-
 .textInEdit{
 	font-size:14px;
 	font-style: italic;
@@ -152,9 +143,9 @@ h2 {
 	height:50px;
 }
 
-.dragHelper{
-	width:50px;
-	height:20px;
+.dragHelper {
+  width: 75px;
+  display: inline;
 }
 
 svg {

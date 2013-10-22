@@ -12,8 +12,7 @@ function createDraggableCellHelper(event){
 	var cell = $(event.currentTarget);
 	var title = cell.find(".contentCellTitle").html();
 	var description = cell.find(".contentCellDescription").html();
-	var cellClone = "<div class='thumbnail dragHelper'>";
-
+	var cellClone = "<div class='dragHelper'>";
 
 	if(cell.find(".contentCellPosterImage img").attr("src").length > 0){
 		cellClone += cell.find(".contentCellPosterImage").html();
@@ -53,6 +52,7 @@ function initTableEvents(){
 	availableCellsContainer.find(".availableCell").draggable({
 		opacity: 0.7,
 		helper: createDraggableCellHelper,
+		cursorAt: { left: 5, top: 5 },
 		revert: false
 	});
 }
