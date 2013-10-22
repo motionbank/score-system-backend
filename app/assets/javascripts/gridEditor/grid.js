@@ -11,6 +11,8 @@ function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
 	this.boundsHeight = boundsHeight;
 	this.widthStep = widthStep;
 	this.heightStep = heightStep;
+	this.canonicalCellWidth = 0;
+	this.canonicalCellHeight = 0;
 	this.cells = [ ];
 	this.init();
 }
@@ -19,16 +21,25 @@ function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
 
 Grid.prototype = {
 	init: function(){
-		$("#grid").css({ "width" : this.width, "height" : this.height });
+		var grid = $("#grid").css({ "width" : this.width, "height" : this.height });
 		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
+
+		this.canonicalCellWidth = grid.width() * parseInt(this.widthStep, 10)/100;
+		this.canonicalCellHeight = grid.height() * parseInt(this.heightStep, 10)/100;
+		grid.prepend(this.drawGridMesh());
+
 		this.makeGridResizable();
 	},
 
 	makeGridResizable: function(){
+		var context = this;
 		$("#grid").resizable({
-        	grid: [ $(".cell").width() , $(".cell").height() ],
-        	containment: "#boundsForGrid"
+			grid: [ this.canonicalCellWidth , this.canonicalCellHeight ],
+			containment: "#boundsForGrid",
+			stop: function(event, ui) {
+				ui.element.prepend(context.drawGridMesh());
+			}
     	});
 	},
 	
@@ -67,10 +78,28 @@ Grid.prototype = {
 	onWindowResize: function(){
 		console.log($(window).width());
 		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
-		$("#grid").css({ "width" : this.width, "height" : this.height });
+		$("#grid")
+			.css({ "width" : this.width, "height" : this.height })
+			.prepend(this.drawGridMesh());
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
-	}
+	},
 
+	drawGridMesh: function() {
+		var grid = $('#grid');
+
+		grid.find('svg').remove();
+
+		var w = this.canonicalCellWidth;
+		var h = this.canonicalCellHeight;
+
+		var pathDescription = "M " + w + " 0 L 0 0 0 " + h;
+		var path = '<path d="'+ pathDescription + '" fill="none" stroke="#fff" stroke-width="1"/>';
+		var pattern = '<pattern id="gridPattern" width="'+ w +'" height="'+ h +'" patternUnits="userSpaceOnUse">' + path + '</pattern>';
+		var rect = '<rect width="100%" height="100%" fill="url(#gridPattern)" />';
+		var svg = '<svg width="100%" height="100%"><defs>' + pattern + '</defs>' + rect + '</svg>';
+
+		return svg;
+	}
 }
 
 
