@@ -82,10 +82,11 @@ GridCell.prototype = {
         $("#grid").append(this.html);
         this.setContent(this.title, this.description, this.src);
 
+
         //get the gridsize and set the size of the cell
-        this.gridSize = $("#gridCell_" + this.id).css(["width", "height"]);
-        this.gridSize.width = parseInt(this.gridSize.width);
-        this.gridSize.height = parseInt(this.gridSize.height);
+        this.gridSize = { width: theGrid.canonicalCellWidth, height: theGrid.canonicalCellHeight };
+        this.width = theGrid.canonicalCellWidth;
+        this.height = theGrid.canonicalCellHeight;
     },
 
     update: function(){
@@ -125,6 +126,7 @@ GridCell.prototype = {
 		this.y = gridPosition.y * this.gridSize.height;
         $("#gridCell_"+this.id).css({left: this.x, top:this.y});
         //this.update();
+        this.getAndSaveNewPositionAndSize();
     },
 
     //later using for poster image

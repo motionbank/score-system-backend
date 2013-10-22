@@ -20,6 +20,9 @@ class Cell
 
   def self.dummy_poster_image
     "http://msmunited.com/wp-content/uploads/2013/02/dance1.jpg"
+    # another placeholder image, in case the one above becomes unavailable
+    # (as happened this morning)
+    # "http://cezoe.com/wp-content/uploads/2012/05/Tanz.jpg"
   end
 
 

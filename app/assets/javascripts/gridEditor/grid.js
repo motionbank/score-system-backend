@@ -24,13 +24,14 @@ Grid.prototype = {
 		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 		this.saveCellSizeAsPixels();
+		this.container.prepend(this.drawGridMesh());
 		this.makeGridResizable();
 	},
 
 
 	saveCellSizeAsPixels: function() {
-		var width = this.container.width() / 100 * parseInt(this.widthStep);
-		var height = this.container.height() / 100 * parseInt(this.heightStep);
+		var width = this.container.width() / 100 * parseInt(this.widthStep, 10);
+		var height = this.container.height() / 100 * parseInt(this.heightStep, 10);
 		this.cellSize = {width: Math.round(width), height: Math.round(height)};
 	},
 
@@ -92,10 +93,26 @@ Grid.prototype = {
 		console.log($(window).width());
 		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
 		this.container.css({ "width" : this.width, "height" : this.height });
-		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 		this.saveCellSizeAsPixels();
-	}
+		this.container.prepend(this.drawGridMesh());
+		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
+	},
 
+	drawGridMesh: function() {
+		this.container.find('svg').remove();
+
+		var absCellSize = this.getCellSizeAsPixels();
+		var w = absCellSize.width;
+		var h = absCellSize.height;
+		
+		var pathDescription = "M " + w + " 0 L 0 0 0 " + h;
+		var path = '<path d="'+ pathDescription + '" fill="none" stroke="#fff" stroke-width="1"/>';
+		var pattern = '<pattern id="gridPattern" width="'+ w +'" height="'+ h +'" patternUnits="userSpaceOnUse">' + path + '</pattern>';
+		var rect = '<rect width="100%" height="100%" fill="url(#gridPattern)" />';
+		var svg = '<svg width="100%" height="100%"><defs>' + pattern + '</defs>' + rect + '</svg>';
+
+		return svg;
+	}
 }
 
 
