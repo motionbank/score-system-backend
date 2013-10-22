@@ -37,7 +37,7 @@ $(document).ready(function() {
 		initTableEvents();
 
 		//grid.js
-		theGrid = new Grid( "70%", "70%", "100%", "100%", "10%", "10%");
+		theGrid = new Grid( "70%", "70%", "100%", "100%", "5%", "5%");
 
 		//edit.js
 		editBox = new EditDialog("Default Title", "text", "Default Description", "");
@@ -97,6 +97,7 @@ function editCellInformation(event){
 //edit cell information when click in table on Edit
 function showCellInformation(event){
 	theGrid.setCurrentCell($(event.target).parent().attr("id"));
+	editBox.setValues(currentCellToEdit.title, currentCellToEdit.type, currentCellToEdit.description, currentCellToEdit.src);
 	editBox.openDialog();
 }
 
