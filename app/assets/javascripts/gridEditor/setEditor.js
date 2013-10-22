@@ -89,45 +89,46 @@ function onDrop(event){
 
 //edit cell information when click in table on Edit
 function editCellInformation(event){
-	theGrid.setCurrentCell($(event.target).parent().attr("id"));
+	var id = getIdOfHoveredCell(event);
+	theGrid.setCurrentCell(id);
 	editBox.setValues(currentCellToEdit.title, currentCellToEdit.type, currentCellToEdit.description, currentCellToEdit.src);
 	editBox.openDialog();
 }
 
 //edit cell information when click in table on Edit
 function showCellInformation(event){
-	theGrid.setCurrentCell($(event.target).parent().attr("id"));
+	var id = getIdOfHoveredCell(event);
+	theGrid.setCurrentCell(id);
 	editBox.setValues(currentCellToEdit.title, currentCellToEdit.type, currentCellToEdit.description, currentCellToEdit.src);
 	editBox.openDialog();
 }
 
 
 function onMouseIn(event){
-	var id;
-	
-	if( $(event.currentTarget).attr("id")){
-		id = $(event.currentTarget).attr("id");
-	}
-	else {
-		id = $(event.currentTarget).parent().attr("id");
-	}
+	var id = getIdOfHoveredCell(event);
     $("#usedContentCell_" + id.split("_")[1]).addClass("activeCell");
     $("#gridCell_" + id.split("_")[1]).addClass("activeCell");
 }
 
 function onMouseOut(event){
-	var id;
-	if( $(event.currentTarget).attr("id")){
-		id = $(event.currentTarget).attr("id");
-	}
-	else {
-		id = $(event.currentTarget).parent().attr("id");
-	}
+	var id = getIdOfHoveredCell(event);
     $("#usedContentCell_" + id.split("_")[1]).removeClass("activeCell");
     $("#gridCell_"+ id.split("_")[1]).removeClass("activeCell");
 }
 
 function removeSelectedCell(){
 	theGrid.removeCell(currentCellToEdit);
+}
 
+
+function getIdOfHoveredCell(event){
+	var id;
+	if( $(event.currentTarget).attr("id")){
+		id = $(event.currentTarget).attr("id");
+	}
+	else {
+		id = $(event.currentTarget).parent().attr("id");
+	}
+	id = id.split("_")[1];
+	return id;
 }
