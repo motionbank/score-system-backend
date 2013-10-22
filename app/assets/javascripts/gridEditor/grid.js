@@ -22,24 +22,65 @@ function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
 Grid.prototype = {
 	init: function(){
 		var grid = $("#grid").css({ "width" : this.width, "height" : this.height });
-		$("boundsForGrid").css({ "width" : $("boundsForGrid").parent().width(), "height" : this.boundsHeight });
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 
 		this.canonicalCellWidth = grid.width() * parseInt(this.widthStep, 10)/100;
 		this.canonicalCellHeight = grid.height() * parseInt(this.heightStep, 10)/100;
 		grid.prepend(this.drawGridMesh());
 
-		this.makeGridResizable();
+		this.width = grid.width();
+		this.height = grid.height();
+		this.boundsWidth = grid.parent().width();
+		this.boundsHeight = grid.parent().height();
+
+		var addRowButton = '<div id="addRow"></div>';
+		var addColumnButton = '<div id="addColumn"></div>';
+
+		grid.append(addRowButton);
+		$("#addRow").click($.proxy(this.addRow, this));
+
+		grid.append(addColumnButton);
+		$("#addColumn").click($.proxy(this.addColumn, this));
+
+		this.updateButtonPositionAndSize();
+
 	},
 
-	makeGridResizable: function(){
-		var context = this;
-		$("#grid").resizable({
-			grid: [ this.canonicalCellWidth , this.canonicalCellHeight ],
-			containment: "#boundsForGrid"
-    	});
+	addRow: function(){
+		console.log(this.width + "and boundwidth: " + (this.boundsWidth - this.canonicalCellWidth));
+		if(this.width < this.boundsWidth - this.canonicalCellWidth*2){
+			this.width += this.canonicalCellWidth;
+			this.updateButtonPositionAndSize();
+		}
+		else {
+			alert("Maximum Width reached!");
+		}
+		
+	},
+
+	addColumn: function(){
+		console.log(this.height + "and boundwidth: " + (this.boundsHeight - this.canonicalCellHeight));
+		if(this.height < this.boundsHeight - this.canonicalCellHeight*2){
+			this.height += this.canonicalCellHeight;
+			this.updateButtonPositionAndSize();
+		}
+		else {
+			alert("Maximum Height reached!");
+		}
+
 	},
 	
+	updateButtonPositionAndSize: function(){
+		var addRowButton = $("#addRow");
+		var addColumnButton = $("#addColumn");
+
+		addRowButton.css({"left":this.width, "height": this.height});
+		addColumnButton.css({"top":this.height, "width":this.width});
+
+		$("#grid").css({"width":this.width,"height":this.height});
+	},
+
+
 	//remove GridCell when clicking in Edit Form
 	removeCell: function(cellToRemove){
 		
