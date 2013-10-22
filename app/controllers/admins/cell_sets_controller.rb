@@ -2,6 +2,7 @@ module Admins
   class CellSetsController < BaseController
 
     before_action :set_cellset, only: [:edit, :update, :destroy]
+    before_action :extend_js_framework_settings, only: [:edit, :update]
 
     # GET /cell_sets
     def index
@@ -18,9 +19,6 @@ module Admins
     # GET /sets/1/edit
     def edit
       @available_cells = Cell.order_by(title: 1) # cells available to be dragged to the set
-
-      # will be needed by the grid editor to pass it to named routes
-      @js_framework_settings[:resource_id] = @cell_set.id.to_s
     end
 
 
@@ -50,6 +48,15 @@ module Admins
     def destroy
       @cell_set.destroy
       redirect_to cell_sets_url, notice: 'Set was successfully destroyed.'
+    end
+
+
+    def extend_js_framework_settings
+      @js_framework_settings.merge!({
+        resource_id: @cell_set.id.to_s, # will be needed by the grid editor to pass it to named routes
+        rows: @cell_set.rows,
+        columns: @cell_set.columns
+      })
     end
 
 

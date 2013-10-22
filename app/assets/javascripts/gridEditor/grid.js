@@ -27,14 +27,16 @@ Grid.prototype = {
 		this.saveCellSizeAsPixels();
         this.container.prepend(this.drawGridMesh());
 
-		var addRowButton = '<div id="addRow"></div>';
-		var addColumnButton = '<div id="addColumn"></div>';
+		var addRowButtons = '<div><span id="removeRow">-</span><span id="addRow">+</span></div>';
+		var addColumnButtons = '<div><span id="removeColumn">-</span><span id="addColumn">+</span></div>';
 
-		$("#boundsForGrid").append(addRowButton);
+		$("#boundsForGrid").append(addRowButtons);
 		$("#addRow").click($.proxy(this.addRow, this));
+		$("#removeRow").click($.proxy(this.removeRow, this));
 
-		$("#boundsForGrid").append(addColumnButton);
+		$("#boundsForGrid").append(addColumnButtons);
 		$("#addColumn").click($.proxy(this.addColumn, this));
+		$("#removeColumn").click($.proxy(this.removeColumn, this));
 
 		this.updateButtonPositionAndSize();
 	},
@@ -60,36 +62,51 @@ Grid.prototype = {
 	},
 
 
-	addRow: function(){
+	addColumn: function(){
 		if(this.width < this.boundsWidth){
 			this.width += this.cellSize.width;
 			this.updateButtonPositionAndSize();
 		}
 		else {
-			alert("Maximum Rows reached! Maximum is: " + this.boundsWidth/parseInt(this.widthStep));
+			alert("Maximum Columns reached! Maximum is: " + this.boundsWidth/parseInt(this.widthStep));
 		}
 		
 	},
 
+	//TODO: Check for minimum rows!!
+	removeColumn: function(){
+		this.width -= this.cellSize.width;
+		this.updateButtonPositionAndSize();
+	},
+
 	
-	addColumn: function(){
+	addRow: function(){
 		if(this.height < this.boundsHeight){
 			this.height += this.cellSize.height;
 			this.updateButtonPositionAndSize();
 		}
 		else {
-			alert("Maximum Columns reached! Maximum is: " + this.boundsHeight/parseInt(this.heightStep));
+			alert("Maximum Rows reached! Maximum is: " + this.boundsHeight/parseInt(this.heightStep));
 		}
+	},
 
+	removeRow: function(){
+		this.height -= this.cellSize.height;
+		this.updateButtonPositionAndSize();
 	},
 	
 	
 	updateButtonPositionAndSize: function(){
 		var addRowButton = $("#addRow");
+		var removeRowButton = $("#removeRow");
 		var addColumnButton = $("#addColumn");
+		var removeColumnButton = $("#removeColumn");
 
-		addRowButton.css({"left":this.width, "height": this.height});
-		addColumnButton.css({"top":this.height, "width":this.width});
+		
+		addColumnButton.css({"left":this.width, "height": this.height/2, "top":this.height/2});
+		removeColumnButton.css({"left":this.width, "height":this.height/2});
+		addRowButton.css({"top":this.height, "width":this.width/2, "left":this.width/2});
+		removeRowButton.css({"top":this.height, "width":this.width/2});
 
 		$("#grid").css({"width":this.width,"height":this.height});
 	},
