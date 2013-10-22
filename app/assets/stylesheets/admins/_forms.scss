@@ -108,3 +108,10 @@ section.publishing .publishing_dates {
 .edit_cell_set .bubble {
   padding-top: 20px;
 }
+
+
+input[type="file"] {
+  line-height: normal;
+  min-height: 0;
+  height: auto;
+}

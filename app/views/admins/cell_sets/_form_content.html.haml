@@ -11,6 +11,8 @@
       .span4
         = f.input :description, as: :text, input_html: {class: 'span12', rows: 4}
       .span4
-        = f.input :cell_width, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
-        = f.input :cell_height, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
-        = render 'admins/shared/upload_widget', form: f, method: :poster_image, span_size: 12
+        .row-fluid
+          = f.input :cell_width, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+          = f.input :cell_height, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+        .row-fluid
+          = render 'admins/shared/upload_widget', form: f, method: :poster_image
