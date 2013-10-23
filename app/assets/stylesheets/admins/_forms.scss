@@ -88,7 +88,10 @@ section.publishing .publishing_dates {
   }
 
   .inputs,
-  .page-header {
+  .page-header,
+  .form-inputs,
+  .links,
+  .cancel-account {
     margin-left: $baseLineHeight;
     margin-right: $baseLineHeight;
   }
@@ -101,6 +104,17 @@ section.publishing .publishing_dates {
     width: 100%;
     position: static;
     margin: $baseLineHeight auto;
+  }
+
+  .hint {
+    display: block;
+    margin-bottom: 20px;
+    font-size: .9em;
+    color: $grayLight;
+  }
+
+  .cancel-account {
+    margin-bottom: $baseLineHeight;
   }
 }
 
