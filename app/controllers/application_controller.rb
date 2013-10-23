@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :init_js_framework_settings
 
+  layout :layout_by_resource
 
   def init_js_framework_settings
     @js_framework_settings ||= {}
@@ -17,6 +18,16 @@ class ApplicationController < ActionController::Base
       partial: partial_name,
       request_url: request.try(:url)
     }
+  end
+
+  protected
+
+  def layout_by_resource
+    if devise_controller?
+      "devise/sessions"
+    else
+      "admins"
+    end
   end
 
 end

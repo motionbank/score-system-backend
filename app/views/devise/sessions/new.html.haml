@@ -1,0 +1,21 @@
+.main-content-wrapper.bubblebox
+  %section#login.main-content.bubble
+    .page-header
+      %h1 Sign in
+    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      .inputs
+        .row-fluid
+          = f.input :email, :required => false, :autofocus => true, :input_html => { :class => "span12" },
+            :wrapper_html => { :class => "span6" }
+          = f.input :password, :required => false, :input_html => { :class => "span12" },
+            :wrapper_html => { :class => "span6" }
+        .row-fluid
+          .span6
+            - if devise_mapping.rememberable?
+              .controls
+                =f.label(:remember_me, resource, :class => 'checkbox') do
+                  = f.check_box :remember_me
+                  Remember me
+          .span6
+            .options= render :partial => "devise/shared/links"
+      .form-actions= f.button :submit, "Sign in"
