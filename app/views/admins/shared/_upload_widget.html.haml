@@ -7,3 +7,6 @@
 - if uploader.present?
   .span3
     = image_tag form.object.send(method).thumb.url
+    %label
+      = form.check_box :"remove_#{method}"
+      = t('record.with_class_name.delete', class_name: method.to_s.humanize)
