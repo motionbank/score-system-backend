@@ -12,10 +12,9 @@
     = javascript_include_tag yield(:custom_script), "data-turbolinks-track" => true if content_for?(:custom_script)
     = javascript_tag yield(:custom_javascript) if content_for?(:custom_javascript)
 
-
     :plain
       <!--[if lt IE 9]>
-        #{ javascript_include_tag "/vendor/html5shiv.js" }
+        #{ javascript_include_tag "/vendor/custom-html5shiv.js" }
       <![endif]-->
 
       <!--[if (gte IE 6)&(lte IE 8)]>
