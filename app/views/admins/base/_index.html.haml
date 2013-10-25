@@ -25,6 +25,10 @@
                 = render 'shared/buttons/delete', url: polymorphic_url(resource)
             %h4
               = link_to(resource.title, edit_polymorphic_url(resource))
+              -if resource.description.present?
+                %span
+                  ,
+                  = truncate(resource.description, length: 100)
 
             - if resource.respond_to?(:published?)
               .state{title: resource.published? ? t('record.published') : t('record.unpublished') }

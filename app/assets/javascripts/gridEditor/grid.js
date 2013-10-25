@@ -14,6 +14,7 @@ function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
 	this.heightStep = heightStep;
 	this.cells = [ ];
 	this.container = $('#grid');
+  this.parentContainer = $('#boundsForGrid');
 	this.init();
 }
 
@@ -118,7 +119,7 @@ Grid.prototype = {
 		}
 		else {
 			alert("There is a cell in the row you want to remove!\nPlease delete or move this cell.");
-		}	
+		}
 	},
 	
 	
@@ -135,6 +136,7 @@ Grid.prototype = {
 		removeRowButton.css({"top":this.height, "width":this.width/2});
 
 		$("#grid").css({"width":this.width,"height":this.height});
+    $('#boundsForGrid').css({ "height" : (this.height + this.cellSize.height*2) });
 	},
 
 

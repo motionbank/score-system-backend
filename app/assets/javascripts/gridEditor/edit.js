@@ -19,14 +19,14 @@ EditDialog.prototype = {
 		$("#dialog-modal").dialog({
 			height: 500,
 			autoOpen: false,
-			show: {
+			/*show: {
 				effect:"blind",
-				duration: 800
+				duration: 200
 			},
 			hide: {
 				effect:"blind",
-				duration:400
-			},
+				duration:200
+			},*/
 			modal:true
 		});
 	},

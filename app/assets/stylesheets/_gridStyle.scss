@@ -33,9 +33,11 @@ h2 {
 #boundsForGrid{
 	position: relative;
 	background-color: #444444;
-	height:250px;
+	min-height:100px;
 	width: 100%;
 	opacity: 0.9;
+  overflow-x:auto;
+  overflow-y:hidden;
 }
 
 #grid{
