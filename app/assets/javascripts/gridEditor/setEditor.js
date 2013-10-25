@@ -77,10 +77,10 @@ function onDrop(event){
 	var imageLink = droppedCell.find(".contentCellPosterImage img").attr("src");
 	var type = "text";
 
-	var grid = $("#grid");
-	var gridPosition = grid.offset();
-	if(gridPosition.left < currentMousePos.x && currentMousePos.x < gridPosition.left + grid.width()){
-		if(gridPosition.top < currentMousePos.y && currentMousePos.y < gridPosition.top + grid.height()){
+	var grid = theGrid.container;
+	var gridOffset = grid.offset();
+	if(gridOffset.left < currentMousePos.x && currentMousePos.x < gridOffset.left + grid.width()){
+		if(gridOffset.top < currentMousePos.y && currentMousePos.y < gridOffset.top + grid.height()){
 
 			id = id.split('_')[1];
 			$.each(theGrid.cells, function(index, value) {
@@ -90,12 +90,12 @@ function onDrop(event){
 			});
 
 			var setId = APPLICATION.resource_id;
-			var gridCoordinates = theGrid.mapPixelsToGrid(	currentMousePos.x - gridPosition.left,
-															currentMousePos.y - gridPosition.top);
+			var gridPosition = theGrid.mapPixelsToGrid(	currentMousePos.x - gridOffset.left,
+														currentMousePos.y - gridOffset.top);
 			var cellAttributes = {
 				cell_id: id,//this will make sure a reference to the canonical cell is kept
-				x: gridCoordinates.x,
-				y: gridCoordinates.y
+				x: gridPosition.x,
+				y: gridPosition.y
 			};
 			$.post(
 				Routes.cell_set_grid_cells_path(setId),
