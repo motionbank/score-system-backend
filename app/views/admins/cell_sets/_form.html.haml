@@ -3,7 +3,7 @@
     "gridStyle"
   end
   content_for(:custom_script) do
-    "gridEditor"
+    "gridEditor" if @cell_set.persisted?
   end
   options ||= {}
   options.merge!({
