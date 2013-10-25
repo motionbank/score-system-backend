@@ -1,7 +1,12 @@
 == Ruby version
 ruby 2.0.0p247
 
+== Initial setup
+* run rails g mongoid:config
+
 == 
+
+
 
 
 
