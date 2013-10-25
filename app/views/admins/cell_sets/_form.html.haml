@@ -43,6 +43,11 @@
 
               #availableContentCells
                 %h3= t('set.tabs.available_cells')
+                %form#filter{ :action => "", :method => "get"}
+                  %strong Filter
+                  %select
+                  containing
+                  %input(type="text")
                 #availableContentCellTable.cellTable
                   - @available_cells.each do |cell|
                     = render partial: 'table_cell', locals: {cell: cell}
