@@ -27,8 +27,8 @@ function createDraggableCellHelper(event){
 
 function createUsedContentRow(id, src, title, description){
 	var htmlBasicStructure = 	"<div id='usedContentCell_" + id + "' class='row-fluid contentCell usedCell'>\
-									<div class='span2 contentCellPosterImage thumbnail'></div>\
-									<div class='span8'>\
+									<div class='span1 contentCellPosterImage'></div>\
+									<div class='span9'>\
 										<h5 class='contentCellTitle'></h5>\
 										<p class='contentCellDescription'></p>\
 									</div>\

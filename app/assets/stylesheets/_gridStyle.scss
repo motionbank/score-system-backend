@@ -69,6 +69,10 @@ h2 {
 
 .contentCell{
 	position: relative;
+
+  img {
+    margin-left: 5px;
+  }
 }
 
 .usedCell{
@@ -78,7 +82,7 @@ h2 {
 .cellTable .row-fluid{
   border: none;
 	border-bottom: 1px solid #ddd;
-  padding: 5px;
+  padding: 5px 0;
 
   h5 {
     margin-bottom: 0;
@@ -127,10 +131,11 @@ h2 {
 	z-index:2;
 }
 
-.contentCellShowButton {
-  display: inline-block;
-  vertical-align: middle;
-  padding: 10px 0;
+.contentCellTitle {
+  margin-top: 0;
+}
+
+.contentCellEditButton {
   text-align: center;
   cursor: pointer;
 }
