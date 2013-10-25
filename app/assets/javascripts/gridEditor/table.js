@@ -32,9 +32,7 @@ function createUsedContentRow(id, src, title, description){
 										<h5 class='contentCellTitle'></h5>\
 										<p class='contentCellDescription'></p>\
 									</div>\
-									<div class='span2'>\
-										<span class='contentCellEditButton'>Edit Info</span>\
-									</div>\
+									<div class='span2 contentCellEditButton'>Edit Info</div>\
 								</div>";
 	$("#usedContentCellTable").prepend(htmlBasicStructure);
 	var usedContentCell = $("#usedContentCell_"+id);
