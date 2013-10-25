@@ -46,6 +46,10 @@
                 %form#filter{ :action => "", :method => "get"}
                   %strong Filter
                   %select
+                    %option(value="all") All types
+                    - Cell::TYPES.each do |type|
+                      %option{value: type}= type.to_s.humanize
+
                   containing
                   %input(type="text")
                 #availableContentCellTable.cellTable
