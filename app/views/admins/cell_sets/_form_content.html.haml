@@ -1,18 +1,22 @@
-.bubblebox
-  %section.primary-fields.bubble
+.collapsable-box
+  .box-title
+    %h3 title here
+    %i.fa.fa-resize-full
+    %i.fa.fa-resize-small
+  .bubblebox
+    %section.primary-fields.bubble
 
-    = f.error_notification
-    - base_errors(f)
-
-    .row-fluid
-      .span4
-        = f.input :title, input_html: {class: 'span12'}
-        = f.input :path, input_html: {class: 'span12'}
-      .span4
-        = f.input :description, as: :text, input_html: {class: 'span12', rows: 4}
-      .span4
-        .row-fluid
-          = f.input :cell_width, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
-          = f.input :cell_height, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
-        .row-fluid
-          = render 'admins/shared/upload_widget', form: f, method: :poster_image
+      = f.error_notification
+      - base_errors(f)
+      .row-fluid
+        .span4
+          = f.input :title, input_html: {class: 'span12'}
+          = f.input :path, input_html: {class: 'span12'}
+        .span4
+          = f.input :description, as: :text, input_html: {class: 'span12', rows: 4}
+        .span4
+          .row-fluid
+            = f.input :cell_width, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+            = f.input :cell_height, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+          .row-fluid
+            = render 'admins/shared/upload_widget', form: f, method: :poster_image

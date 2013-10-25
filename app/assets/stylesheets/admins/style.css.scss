@@ -1,15 +1,20 @@
 @import "compass/css3";
 @import "compass_twitter_bootstrap/variables";
+@import "compass_twitter_bootstrap_awesome";
 @import "admin_base";
 @import "helpers";
 @import "elements";
 @import "admins/forms";
 @import "colorbox-skin";
 
+
 /* MAIN STYLESHEET */
+body{
+  padding:0;
+}
 #inner {
   margin: auto;
-  padding-top: 3.25 * $navbarHeight;
+  padding-top:2 * $navbarHeight;
   margin-bottom: $baseLineHeight;
   max-width: $maxContentWidth;
 }
@@ -32,8 +37,12 @@
   font-style: italic;
 }
 
-
 /* Header Styling */
+.navbar.navbar-fixed-top{
+  .navbar-inner{
+    padding:0;
+  }
+}
 header {
   @extend .row-fluid;
   background: $mintyGreen;
@@ -41,23 +50,40 @@ header {
   @include box-shadow(darken($green, 30%) 0 -10px 10px -8px inset);
   position: fixed;
   margin: 0 ($gridGutterWidth * -1);
-  padding: 1.5 * $navbarHeight 0 0 0;
+  padding: $navbarHeight 0 0 0;
   z-index:  $zindexFixedNavbar - 1;
   border-bottom: 1px dotted $grayDark;
 
   .header-inner {
-    @include clearfix;
+    @include pie-clearfix;
     overflow: visible;
-    margin: auto $gridGutterWidth;
+    margin: 0 0 0 $gridGutterWidth;
+    height:$navbarheight;
+    line-height:$navbarheight;
+    a.btn, input.btn{
+      @include border-radius(0);
+      @include box-sizing(border-box);
+      @include box-shadow(none);
+      border:none;
+      border-left: 1px solid $green;
+      height:$navbarheight;
+      line-height:$navbarheight;
+      margin:0;
+      padding-top:0;
+      padding-bottom:0;
+    }
   }
 
   h1 {
     @extend .span8;
     @include single-text-shadow(darken($green, 40%), 0, 0, 2px);
-    margin-bottom: $halfBaseLine;
+    //margin-bottom: $halfBaseLine;
     color: lighten($green, 35%);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size:1.3em;
+    font-weight:normal;
+    height:$navbarheight;
+    line-height:$navbarheight;
+    margin:0;
   }
 }
 
@@ -178,3 +204,79 @@ header {
     margin-bottom: 0px;
     padding-left: 0px;
 }
+
+
+// extend form css
+.collapsable-box{
+  padding:20px 0 0 0;
+  .box-title{
+    height:35px;
+    line-height:35px;
+    background: lighten($green, 20%);
+    padding: 0 10px 0 35px;
+    @include border-top-radius(5px);
+    position:relative;
+    h3{
+      font-size:1.2em;
+      margin:0;
+      height:35px;
+      line-height:35px;
+    }
+    .fa{
+      display: inline-block;
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      position:absolute;
+      top:0px;
+      left:0px;
+      font-size:1.3em;
+      background:lighten($green, 5%);
+      padding:0 8px;
+      height:35px;
+      line-height:38px;
+      color:#fff;
+      @include border-top-left-radius(5px);
+      &.fa-resize-full{
+        &:before{
+          content: '\f065';
+        }
+      }
+      &.fa-resize-small{
+        display:none;
+        &:before{
+          content: '\f066';
+        }
+      }
+    }
+  }
+  .bubblebox{
+    display:none;
+    margin:0;
+    @include border-bottom-radius(5px);
+    .bubble{
+      padding-top:20px;
+    }
+  }
+  &.open{
+    .box-title{
+      .fa{
+        &.fa-resize-full{display:none;}
+        &.fa-resize-small{display:block;}
+      }
+    }
+  }
+  &.always-open{
+    .box-title{
+      padding: 0 10px 0 15px;
+      .fa{
+        &.fa-resize-full{display:none;}
+        &.fa-resize-small{display:none;}
+      }
+    }
+    .bubblebox{
+      display: block;
+    }
+  }
+}
+
