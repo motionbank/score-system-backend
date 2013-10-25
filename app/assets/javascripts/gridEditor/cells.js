@@ -10,7 +10,7 @@
 
 
 //GridCell constructor
-function GridCell(id, type, title, description, x, y, src) {
+function GridCell(id, type, title, description, x, y, width, height, src) {
     this.id =  id;
     this.class = "cell ui-widget-content";
     this.type = type;
@@ -19,8 +19,8 @@ function GridCell(id, type, title, description, x, y, src) {
     this.html;
     this.x = x;
     this.y = y;
-    this.width;
-    this.height;
+    this.width = width;
+    this.height = height;
     if(src){
         this.src = src;
     }
@@ -82,8 +82,8 @@ GridCell.prototype = {
 
         //get the gridsize and set the size of the cell
         this.gridSize = theGrid.getCellSizeAsPixels();
-        this.width = this.gridSize.width;
-        this.height = this.gridSize.height;
+        this.width = this.width * this.gridSize.width;
+        this.height = this.height * this.gridSize.height;
     },
 
     onChangedRectangle: function(){

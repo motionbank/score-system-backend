@@ -114,6 +114,8 @@ function createGridCell(data) {
 	var absCellSize = theGrid.getCellSizeAsPixels();
 	var x = data.grid_cell.x * absCellSize.width;
 	var y = data.grid_cell.y * absCellSize.height;
+	var width = data.grid_cell.width;
+	var height = data.grid_cell.height;
 
 	// for all other fields we want to get the information of the canonical cell
 	var cellData = data.grid_cell.canonical_cell;
@@ -123,7 +125,7 @@ function createGridCell(data) {
 
 	//cell.js
 	var newGridCell = new GridCell(	id, type, title, description,
-									x, y, imageSrc);
+									x, y, width, height, imageSrc);
 	theGrid.addCell(newGridCell);
 
 	//table.js
