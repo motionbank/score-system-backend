@@ -26,16 +26,16 @@ module Admins
     # PATCH/PUT /admins/cell_sets/1/grid_cells/1
     def update
       if @grid_cell.update(grid_cell_params)
-        redirect_to @grid_cell, notice: 'Grid cell was successfully updated.'
+        render nothing: true
       else
-        render action: 'edit'
+        render json: {errors: @grid_cell.errors.full_messages}, status: :unprocessable_entity
       end
     end
 
     # DELETE /admins/cell_sets/1/grid_cells/1
     def destroy
       @grid_cell.destroy
-      redirect_to grid_cells_url, notice: 'Grid cell was successfully destroyed.'
+      render nothing: true, notice: 'Grid cell was successfully destroyed.'
     end
 
     private
@@ -52,7 +52,7 @@ module Admins
 
       # Only allow a trusted parameter "white list" through.
       def grid_cell_params
-        params.require(:grid_cell).permit(:title, :description, :poster_image, :cell_id, :x, :y)
+        params.require(:grid_cell).permit(:title, :description, :poster_image, :cell_id, :x, :y, :width, :height)
       end
   end
 end
