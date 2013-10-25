@@ -5,6 +5,9 @@
   content_for(:custom_script) do
     "gridEditor" if @cell_set.persisted?
   end
+  content_for(:custom_javascript) do
+    "APPLICATION.cells = #{render('cells.json')};".html_safe
+  end
   options ||= {}
   options.merge!({
     publishing_logic: f.object.respond_to?(:published_flag),
@@ -46,6 +49,10 @@
                 %form#filter{ :action => "", :method => "get"}
                   %strong Filter
                   %select
+                    %option(value="all") All types
+                    - Cell::TYPES.each do |type|
+                      %option{value: type}= type.to_s.humanize
+
                   containing
                   %input(type="text")
                 #availableContentCellTable.cellTable
