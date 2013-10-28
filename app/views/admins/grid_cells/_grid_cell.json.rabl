@@ -12,3 +12,5 @@ child locals[:object].cell => :canonical_cell do |canonical_cell|
   extends 'shared/cell', object: canonical_cell
   attribute :type
 end
+
+attribute :additional_fields
