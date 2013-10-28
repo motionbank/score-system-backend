@@ -53,10 +53,10 @@ function initFilter() {
 
 	/* Event Listeners */
 
-	inputField.on('change', function (event) {
-		searchTerm = inputField.val();
+	inputField.on('keyup change', _.debounce(function (event) {
+		searchTerm = event.target.value;
 		updateView();
-	});
+	}, 150));
 
 	selectBox.on('change', function (event) {
 		filterType = selectBox.find('option:selected').val();
