@@ -280,3 +280,25 @@ header {
   }
 }
 
+.record{
+  h4{
+    font-size:1em;
+    line-height:1.9em;
+    padding-right:100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    span{
+      color:#666;
+      font-weight:normal;
+    }
+  }
+  .actions{
+    .btn-group{
+      .btn{
+        font-size:12px;
+        padding:2px 12px;
+      }
+    }
+  }
+}
