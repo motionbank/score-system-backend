@@ -303,3 +303,6 @@ $bubbleBorderColor: darken($grayLighter, 10%);
     font-size:0.8em;
   }
 }
+.ui-tabs .ui-tabs-nav li.ui-tabs-active{
+  outline:none;
+}

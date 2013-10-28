@@ -130,6 +130,7 @@ h2 {
 
 .selectedCell{
   z-index:9999;
+  margin:-1px 0 0 -1px;
   > span{
     -moz-box-shadow: 0 0 25px #000;
     -webkit-box-shadow:0 0 25px #000;
