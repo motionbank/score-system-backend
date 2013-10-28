@@ -120,17 +120,14 @@ function createGridCell(data) {
 function editCellInformation(event){
 	var id = getIdOfHoveredCell(event);
 	theGrid.setCurrentCell(id);
-	editBox.setValues(currentCellToEdit.title, currentCellToEdit.type, currentCellToEdit.description, currentCellToEdit.src);
-	editBox.openDialog();
-  console.log('edit Cell Info')
+	editBox.openDialog(currentCellToEdit);
 }
 
 //edit cell information when click in table on Edit
 function showCellInformation(event){
 	var id = getIdOfHoveredCell(event);
 	theGrid.setCurrentCell(id);
-	editBox.setValues(currentCellToEdit.title, currentCellToEdit.type, currentCellToEdit.description, currentCellToEdit.src);
-	editBox.openDialog();
+	editBox.openDialog(currentCellToEdit);
 }
 
 

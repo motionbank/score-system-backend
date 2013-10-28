@@ -151,7 +151,6 @@ GridCell.prototype = {
 
     onDblClick: function(){
       this.openEditDialog();
-      console.log(APPLICATION, this.id)
     },
 
 
@@ -186,8 +185,7 @@ GridCell.prototype = {
 
 
     openEditDialog: function(){
-      editBox.setValues(this.title, this.type, this.description, this.src);
-      editBox.openDialog();
+      editBox.openDialog(this);
       currentCellToEdit = this;
     },
 

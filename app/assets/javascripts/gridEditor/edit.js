@@ -66,13 +66,6 @@ EditDialog.prototype = {
 		});
 	},
 
-	setValues: function(title, type, description, posterImage){
-		this.title = title;
-		this.type = type;
-		this.description = description;
-		this.posterImage = posterImage;
-		this.updateHTMLContent();
-	},
 
 	updateHTMLContent: function(){
 		var dialog = $("#dialog-modal #editCell");
@@ -91,8 +84,10 @@ EditDialog.prototype = {
 		$("#dialog-modal").dialog("close");
 	},
 
-	openDialog: function(){
+	openDialog: function(model){
 		theGrid.cellSelected = false;
+		this.model = model;
+		this.updateHTMLContent();
 		$("#dialog-modal").dialog("open");
 	},
 
