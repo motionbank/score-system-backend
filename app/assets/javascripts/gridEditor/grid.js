@@ -143,7 +143,6 @@ Grid.prototype = {
 
 	//remove GridCell when clicking in Edit Form
 	removeCell: function(cellToRemove){
-		
 		//remove cell from grid
 		$("#gridCell_"+cellToRemove.id).remove();
 		$("#usedContentCell_"+cellToRemove.id).remove();

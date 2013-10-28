@@ -12,7 +12,6 @@ EditDialog.prototype = {
 	init: function(){
 		this.initDialog();
 		this.initModal();
-		this.addEvents();
 		this.initForm();
 	},
 
@@ -40,48 +39,37 @@ EditDialog.prototype = {
 
 
 	initForm: function(){
-
-		//register submit event of form
-		$( ".form_submit" ).click(function( event ) {
-
-			$("#editCell").submit();
-			//prevent form from reloading the page
-			event.preventDefault();
-
-			var dialog = $("#dialog-modal #editCell");
-			var newTitle = $(dialog).find("#editTitle").val();
-			var newDescription = $(dialog).find("#editDescription").val();
-			var newSrc = $(dialog).find("#editImageSrc").val();
-
-			console.log($(dialog).find("#editImageSrc").val());
-			//cells.js, set new content for contentCell
-			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
-
-			//edit.js
-			editBox.closeDialog();
-		});
-
-		$("#deleteImage").click(function(){
-			$("#editImageSrc").val("");
-		});
+		this.editForm = $("#dialog-modal").find('form');
 	},
 
+	submitForm: function(event) {
+		$("#editCell").submit();
+		//prevent form from reloading the page
+		event.preventDefault();
 
-	updateHTMLContent: function(){
 		var dialog = $("#dialog-modal #editCell");
-		var canonicalCell = this.model.canonicalCell;
+		var newTitle = $(dialog).find("#editTitle").val();
+		var newDescription = $(dialog).find("#editDescription").val();
+		var newSrc = $(dialog).find("#editImageSrc").val();
 
-		$(dialog).find("#editTitle").val(this.model.title);
-		$(dialog).find("#type").html(this.model.type);
-		$(dialog).find("#editDescription").val(this.model.description);
-		$(dialog).find("#editImageSrc").val(this.model.src);
+		console.log($(dialog).find("#editImageSrc").val());
+		//cells.js, set new content for contentCell
+		currentCellToEdit.setContent(newTitle, newDescription, newSrc);
 
-		$(dialog).find("#canonicalTitle").html(canonicalCell.title);
-		$(dialog).find("#canonicalDescription").html(canonicalCell.description);
+		//edit.js
+		editBox.closeDialog();
 	},
+
+
+	deleteImage: function() {
+		$("#editImageSrc").val("");
+	},
+
 
 	addEvents: function(){
 		$("#removeCell").on("click", removeSelectedCell);
+		$("#deleteImage").on("click", this.deleteImage);
+		$( ".form_submit" ).on("click", this.submitForm);
 	},
 
 	closeDialog: function(){
@@ -92,7 +80,10 @@ EditDialog.prototype = {
 	openDialog: function(model){
 		theGrid.cellSelected = false;
 		this.model = model;
-		this.updateHTMLContent();
+		this.editForm.empty();
+		this.formTemplate = JST['templates/edit_cell']({data: this.model});
+		this.editForm.append(this.formTemplate);
+		this.addEvents();
 		$("#dialog-modal").dialog("open");
 	},
 

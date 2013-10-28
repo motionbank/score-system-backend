@@ -27,6 +27,7 @@ gem 'cancan'
 # FRONTEND
 gem 'jquery-rails'
 gem 'haml-rails'
+gem 'ruby-haml-js'
 gem "js-routes"
 
 # Use SCSS for stylesheets
