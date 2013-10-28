@@ -66,20 +66,13 @@ EditDialog.prototype = {
 		});
 	},
 
-	setValues: function(title, type, description, posterImage){
-		this.title = title;
-		this.type = type;
-		this.description = description;
-		this.posterImage = posterImage;
-		this.updateHTMLContent();
-	},
 
 	updateHTMLContent: function(){
 		var dialog = $("#dialog-modal #editCell");
-		$(dialog).find("#editTitle").val(this.title);
-		$(dialog).find("#type").html(this.type);
-		$(dialog).find("#editDescription").val(this.description);
-		$(dialog).find("#editImageSrc").val(this.posterImage);
+		$(dialog).find("#editTitle").val(this.model.title);
+		$(dialog).find("#type").html(this.model.type);
+		$(dialog).find("#editDescription").val(this.model.description);
+		$(dialog).find("#editImageSrc").val(this.model.src);
 	},
 
 	addEvents: function(){
@@ -91,8 +84,10 @@ EditDialog.prototype = {
 		$("#dialog-modal").dialog("close");
 	},
 
-	openDialog: function(){
+	openDialog: function(model){
 		theGrid.cellSelected = false;
+		this.model = model;
+		this.updateHTMLContent();
 		$("#dialog-modal").dialog("open");
 	},
 
