@@ -6,7 +6,7 @@ object locals[:object]
 extends 'shared/cell', object: locals[:object]
 attributes :x, :y # the position in the grid
 attributes :width, :height # the position in the grid
-attribute :additional_fields
+attributes :additional_fields
 
 # now render the canonical cell
 child locals[:object].cell => :canonical_cell do |canonical_cell|

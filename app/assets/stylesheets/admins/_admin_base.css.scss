@@ -309,37 +309,70 @@ $bubbleBorderColor: darken($grayLighter, 10%);
 
 .ui-dialog{
   h3{
-    font-size:1.2em;
+    font-size:1.1em;
+  }
+  h4{
+    margin:0;
+    font-size:0.8em;
   }
   .row-fluid{
     border-bottom:1px solid #d7d7d7;
-    margin:10px 0 0 0;
-  }
-  dl{
-    margin:0;
-    padding:0;
-    span{
-      font-weight:normal;
+    margin:10px 0 10px 0;
+    textarea,
+    input,
+    input[type="button"]{
+      margin: 0 10px 10px 0;
+      font-size:0.8em;
     }
-    dd{
+    &.noborder{
+      border:none;
+    }
+    label{
+      font-size:0.8em;
+    }
+    dl{
       margin:0;
       padding:0;
+      font-size:0.8em;
+      span{
+        font-weight:normal;
+      }
+      dd{
+        margin:0;
+        padding:0;
+      }
     }
-  }
-  .original *{
-    color:#999;
-  }
-  table{
-    font-size:0.8em;
-    border-bottom:1px solid #d7d7d7;
-    border-right:1px solid #d7d7d7;
-    margin:5px 0 15px 0;
-    td, th{
-      border-top:1px solid #d7d7d7;
-      border-left:1px solid #d7d7d7;
-      padding:0 3px;
-      text-align: left;
-      white-space:nowrap;
+    .original *{
+      color:#999;
+    }
+    table{
+      border-bottom:1px solid #d7d7d7;
+      border-right:1px solid #d7d7d7;
+      margin:5px 0 15px 0;
+      width:100%;
+      td, th{
+        border-top:1px solid #d7d7d7;
+        border-left:1px solid #d7d7d7;
+        padding:0 3px;
+        text-align: left;
+        white-space:nowrap;
+        &.key{
+          width:30%;
+          padding:0;
+        }
+        &.value{
+          width:70%;
+          padding:0;
+        }
+        input{
+          margin:0;
+          width:100%;
+          @include box-sizing(border-box);
+          @include border-radius(none);
+          @include box-shadow(none);
+          border:none;
+        }
+      }
     }
   }
 }

@@ -1,60 +1,71 @@
 %fieldset#editCell
-= console.log(data)
   .row-fluid
     .span6
       %h3 Used Cell
     .span6.original
       %h3 Original Cell
-    .row-fluid
-      .span6
-        %label(for="editTitle") Title:
-        %textarea(id="editTitle" name="editTitle")
-          = data.title || data.canonicalCell.title
-      .span6.original
-        %dl
-          %dt Title:
-          %dd(id="canonicalTitle")
-            = data.canonicalCell.title
-    .row-fluid
-      .span6
-        %label(for="editDescription") Description:
-        %textarea(id="editDescription" type="text" name="editDescription")
-          = data.description || data.canonicalCell.description
-      .span6.original
-        %dl
-          %dt Description:
-          %dd(id="canonicalDescription")
-            = data.canonicalCell.description
-    .row-fluid
-      .span6
-        %label(for="imagesrc") Upload Poster Image:
-        %input(id="editImageSrc" type="text" name="imagesrc" value=(data.src || data.canonicalCell.poster_image.url))
+  .row-fluid
+    .span6
+      %label(for="editTitle") Title:
+      %textarea(id="editTitle" name="editTitle")
+        = data.title || data.canonicalCell.title
+    .span6.original
+      %dl
+        %dt Title:
+        %dd(id="canonicalTitle")
+          = data.canonicalCell.title
+  .row-fluid
+    .span6
+      %label(for="editDescription") Description:
+      %textarea(id="editDescription" type="text" name="editDescription")
+        = data.description || data.canonicalCell.description
+    .span6.original
+      %dl
+        %dt Description:
+        %dd(id="canonicalDescription")
+          = data.canonicalCell.description
+  .row-fluid
+    .span6
+      %label(for="imagesrc") Upload Poster Image:
+      %input(id="editImageSrc" type="text" name="imagesrc" value=(data.src || data.canonicalCell.poster_image.url))
 
-        %input(id="deleteImage" type="button" name="deleteImage" value="Delete Poster Image")
-      .span6.original
-        %label(for="imagesrc") Upload Poster Image:
-        %img(src=data.canonicalCell.poster_image.thumb.url)
+      %input(id="deleteImage" type="button" name="deleteImage" value="Delete Poster Image")
+    .span6.original
+      %label(for="imagesrc") Upload Poster Image:
+      %img(src=data.canonicalCell.poster_image.thumb.url)
 
-    .row-fluid
-      .span6
-      .span6.original
-        %dl
-          %dt Type:
-            %span= data.canonicalCell.type
-    .row-fluid
-      .span6
-      .span6.original
-        %dl
-          %dt Sepcial Attributes:
-          %table.specialAttributes
-            :each key, value in data.canonicalCell.additional_fields
-              %tr
-                %th
-                  = key
-                %td
-                  = value
-    .row-fluid
-      .span12
-        %p
-          %input(type="button" value="Save" class="form_submit")
-          %input(id="removeCell" type="button" value="Remove Cell from Grid")
+  .row-fluid.original
+    %dl
+      %dt Type: 
+        %span= data.canonicalCell.type
+  .row-fluid.noborder
+    %dl
+      %dt Additional fields:
+  .row-fluid.noborder
+    %h4 Original:
+    %table#specialAttributesCanonical.original
+      :each key, value in data.canonicalCell.additional_fields
+        %tr
+          %th.key
+            %input(name="cell[additional_fields][][key]" type="text" disabled="disabled" value=key)
+          %td.value
+            %input(name="cell[additional_fields][][value]" type="text" disabled="disabled" value=value)
+
+  .row-fluid
+      %h4 Used cell:
+      %table#specialAttributes
+        :each key, value in usedCellAdditionalFields
+          %tr
+            %th.key
+              %input(name="cell[additional_fields][][key]" type="text" value=key)
+            %td.value
+              %input(name="cell[additional_fields][][value]" type="text" value=value)
+
+
+      %input(id="addSpecialAttribute" type="button" name="addSpecialAttribute" value="Add additional fields ")
+
+  .row-fluid.noborder
+    .span12
+      %p
+        %input(type="button" value="Save" class="form_submit")
+        %input(id="removeCell" type="button" value="Remove Cell from Grid")

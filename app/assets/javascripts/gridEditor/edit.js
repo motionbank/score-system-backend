@@ -40,6 +40,7 @@ EditDialog.prototype = {
 
 	initForm: function(){
 		this.editForm = $("#dialog-modal").find('form');
+		this.addAdditionalAttributesTemplate = JST['templates/additional_field'];
 	},
 
 	submitForm: function(event) {
@@ -47,7 +48,7 @@ EditDialog.prototype = {
 		//prevent form from reloading the page
 		event.preventDefault();
 
-		var dialog = $("#dialog-modal #editCell");
+		var dialog = $("#dialog-modal");
 		var newTitle = $(dialog).find("#editTitle").val();
 		var newDescription = $(dialog).find("#editDescription").val();
 		var newSrc = $(dialog).find("#editImageSrc").val();
@@ -66,10 +67,16 @@ EditDialog.prototype = {
 	},
 
 
+	addAdditionalAttributes: function() {
+		$("#specialAttributes").append(this.addAdditionalAttributesTemplate);
+	},
+
+
 	addEvents: function(){
 		$("#removeCell").on("click", removeSelectedCell);
 		$("#deleteImage").on("click", this.deleteImage);
-		$( ".form_submit" ).on("click", this.submitForm);
+		$(".form_submit").on("click", this.submitForm);
+		$("#addSpecialAttribute").on("click", $.proxy(this.addAdditionalAttributes, this));
 	},
 
 	closeDialog: function(){
@@ -81,7 +88,8 @@ EditDialog.prototype = {
 		theGrid.cellSelected = false;
 		this.model = model;
 		this.editForm.empty();
-		this.formTemplate = JST['templates/edit_cell']({data: this.model});
+		var usedCellAdditionalFields = this.model.additional_fields || this.model.canonicalCell.additional_fields;
+		this.formTemplate = JST['templates/edit_cell']({data: this.model, usedCellAdditionalFields: usedCellAdditionalFields});
 		this.editForm.append(this.formTemplate);
 		this.addEvents();
 		$("#dialog-modal").dialog("open");
