@@ -306,3 +306,40 @@ $bubbleBorderColor: darken($grayLighter, 10%);
 .ui-tabs .ui-tabs-nav li.ui-tabs-active{
   outline:none;
 }
+
+.ui-dialog{
+  h3{
+    font-size:1.2em;
+  }
+  .row-fluid{
+    border-bottom:1px solid #d7d7d7;
+    margin:10px 0 0 0;
+  }
+  dl{
+    margin:0;
+    padding:0;
+    span{
+      font-weight:normal;
+    }
+    dd{
+      margin:0;
+      padding:0;
+    }
+  }
+  .original *{
+    color:#999;
+  }
+  table{
+    font-size:0.8em;
+    border-bottom:1px solid #d7d7d7;
+    border-right:1px solid #d7d7d7;
+    margin:5px 0 15px 0;
+    td, th{
+      border-top:1px solid #d7d7d7;
+      border-left:1px solid #d7d7d7;
+      padding:0 3px;
+      text-align: left;
+      white-space:nowrap;
+    }
+  }
+}

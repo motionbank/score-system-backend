@@ -87,6 +87,7 @@ EditDialog.prototype = {
 		$("#dialog-modal").dialog("open");
 	},
 
+
 	openConfirmDialog: function(celltitle) {
 		if(celltitle){
 			$("#dialog-confirm").find('#cell-title-todelete').html('<li>' + celltitle + '</li>');
