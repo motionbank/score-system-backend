@@ -1,17 +1,18 @@
 %fieldset#editCell
+= console.log(data)
   .row-fluid
     .span6
       %h3 Used Cell
-    .span6
+    .span6.original
       %h3 Original Cell
     .row-fluid
       .span6
         %label(for="editTitle") Title:
         %textarea(id="editTitle" name="editTitle")
           = data.title || data.canonicalCell.title
-      .span6
+      .span6.original
         %dl
-          %dt Title
+          %dt Title:
           %dd(id="canonicalTitle")
             = data.canonicalCell.title
     .row-fluid
@@ -19,25 +20,39 @@
         %label(for="editDescription") Description:
         %textarea(id="editDescription" type="text" name="editDescription")
           = data.description || data.canonicalCell.description
-      .span6
+      .span6.original
         %dl
-          %dt Description
+          %dt Description:
           %dd(id="canonicalDescription")
             = data.canonicalCell.description
     .row-fluid
       .span6
         %label(for="imagesrc") Upload Poster Image:
-        %input(id="editImageSrc" type="text" name="imagesrc" value=(data.src || data.canonicalCell.src))
+        %input(id="editImageSrc" type="text" name="imagesrc" value=(data.src || data.canonicalCell.poster_image.url))
 
         %input(id="deleteImage" type="button" name="deleteImage" value="Delete Poster Image")
-      .span6
+      .span6.original
+        %label(for="imagesrc") Upload Poster Image:
+        %img(src=data.canonicalCell.poster_image.thumb.url)
+
     .row-fluid
       .span6
-      .span6
+      .span6.original
         %dl
-          %dt Type
-          %dd#type.textInEdit
-            = data.canonicalCell.type
+          %dt Type:
+            %span= data.canonicalCell.type
+    .row-fluid
+      .span6
+      .span6.original
+        %dl
+          %dt Sepcial Attributes:
+          %table.specialAttributes
+            :each key, value in data.canonicalCell.additional_fields
+              %tr
+                %th
+                  = key
+                %td
+                  = value
     .row-fluid
       .span12
         %p
