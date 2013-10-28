@@ -26,6 +26,9 @@ textarea[class*="span"],
 label {
   font-weight: bold;
 }
+#filter label {
+  display: inline-block;
+}
 
 textarea {
   resize: vertical;
