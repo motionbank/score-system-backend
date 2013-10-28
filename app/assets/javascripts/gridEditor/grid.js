@@ -15,6 +15,7 @@ function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
 	this.cells = [ ];
 	this.container = $('#grid');
   this.parentContainer = $('#boundsForGrid');
+  this.cellSelected = false;
 	this.init();
 }
 
@@ -157,6 +158,7 @@ Grid.prototype = {
 				return true;
 			}
 		});
+    this.cellSelected = false;
 	},
 
 	addCell: function(cell){

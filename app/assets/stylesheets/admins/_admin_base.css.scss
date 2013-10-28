@@ -279,3 +279,27 @@ $bubbleBorderColor: darken($grayLighter, 10%);
   font-size: $baseFontSize * 3/4;
   vertical-align: middle;
 }
+
+
+/* Modal Dialog */
+
+#cell-title-todelete{
+  margin:0 0 0 25px;
+  li{
+    font-weight: bold;
+  }
+}
+
+.ui-tabs-panel{
+  h3{
+    font-size:1.2em;
+  }
+  .contentCellDescription{
+    font-size:0.8em;
+  }
+  .contentCellEditButton{
+    min-height:15px;
+    font-weight:bold;
+    font-size:0.8em;
+  }
+}

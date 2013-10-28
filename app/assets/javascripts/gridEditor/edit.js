@@ -11,6 +11,7 @@ EditDialog.prototype = {
 
 	init: function(){
 		this.initDialog();
+		this.initModal();
 		this.addEvents();
 		this.initForm();
 	},
@@ -30,6 +31,21 @@ EditDialog.prototype = {
 			modal:true
 		});
 	},
+
+
+	initModal: function (){
+		$("#dialog-confirm").dialog({
+			modal: true,
+			autoOpen: false,
+			buttons: {
+			Ok: function() {
+				removeSelectedCell();
+				$( this ).dialog( "close" );
+			}
+		}
+		});
+	},
+
 
 	initForm: function(){
 
@@ -86,5 +102,18 @@ EditDialog.prototype = {
 
 	openDialog: function(){
 		$("#dialog-modal").dialog("open");
+	},
+
+	openConfirmDialog: function(celltitle) {
+		if(celltitle){
+			$("#dialog-confirm").find('#cell-title-todelete').html('<li>' + celltitle + '</li>');
+		}
+		$("#dialog-confirm").dialog("open");
+		console.log(GridCell)
+	},
+
+
+	closeConfirmDialog: function() {
+		$("#dialog-confirm").dialog("close");
 	}
 }

@@ -7,17 +7,17 @@ height boundsForGrid?
 
 
 body {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 p {
-	margin: 0;
-	padding: 3px;
+  margin: 0;
+  padding: 3px;
 }
 
 h2 {
-	padding: 20px 5px 20px 20px;
+  padding: 20px 5px 20px 20px;
 }
 
 .edit_cell_set img {
@@ -31,46 +31,53 @@ h2 {
 }
 
 #boundsForGrid{
-	position: relative;
-	background-color: #444444;
-	min-height:100px;
-	width: 100%;
-	opacity: 0.9;
+  position: relative;
+  background-color: #444444;
+  min-height:100px;
+  width: 100%;
+  opacity: 0.9;
   overflow-x:auto;
   overflow-y:hidden;
 }
 
 #grid{
-	position: absolute;
-    background-color: #cccccc;
-    opacity: 1;
-    z-index:1;
+  position: absolute;
+  background-color: #cccccc;
+  opacity: 1;
+  z-index:1;
 }
 
 .cell {
-	position: absolute !important;
-	opacity:0.8;
-	border-width: 0px !important;
-	z-index: 3;
+  position: absolute !important;
+  opacity:0.8;
+  border-width: 0px !important;
+  z-index: 3;
+  span.cell-image, > span{
+    display: block;
+    img{
+      display: block;
+    }
+  }
+  span.cell-title, .cell-content{display: none;}
 }
 
 .cell h3{ 
-	/*text-align: center;*/ 
-	padding: 5px 0px 5px 5px; 
-	position: absolute;
+  /*text-align: center;*/ 
+  padding: 5px 0px 5px 5px; 
+  position: absolute;
 }
 
 .cell-content{
-	padding: 0px 0px 0px 20px;
-	font-size: 12px;
+  padding: 0px 0px 0px 20px;
+  font-size: 12px;
 }
 
 .cell-title{
-	font-weight: 700;
+  font-weight: 700;
 }
 
 .contentCell{
-	position: relative;
+  position: relative;
 
   img {
     margin-left: 5px;
@@ -78,12 +85,12 @@ h2 {
 }
 
 .usedCell{
-	opacity: 0.8;
+  opacity: 0.8;
 }
 
 .cellTable .row-fluid{
   border: none;
-	border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   padding: 5px 0;
 
   h5 {
@@ -108,29 +115,41 @@ h2 {
 }
 
 #emptyCell{
-	opacity:0;
+  opacity:0;
 }
 
 .activeCell{
-	background: #BAD3C7 !important;
-	text-decoration:underline;
+  background: #BAD3C7 !important;
+  text-decoration:underline;
 }
 
 .activeCell span img{
-	filter: gray;
-	-webkit-filter: grayscale(100%);
+  filter: gray;
+  -webkit-filter: grayscale(100%);
+}
+
+.selectedCell{
+  z-index:9999;
+  > span{
+    -moz-box-shadow: 0 0 25px #000;
+    -webkit-box-shadow:0 0 25px #000;
+    box-shadow: 0 0 25px #000;
+    img{
+      border:1px solid #c77405;
+    }
+  }
 }
 
 .textInEdit{
-	font-size:14px;
-	font-style: italic;
+  font-size:14px;
+  font-style: italic;
 }
 
 .overlap{
-	background-color: red;
-	position: absolute !important;
-	opacity:0.5;
-	z-index:2;
+  background-color: red;
+  position: absolute !important;
+  opacity:0.5;
+  z-index:2;
 }
 
 .contentCellTitle {
@@ -143,35 +162,35 @@ h2 {
 }
 
 #addRow, #removeRow{
-	position: absolute;
-	text-align: center;
-	font-size: 20px;
-	width:100px;
-	height:50px;
+  position: absolute;
+  text-align: center;
+  font-size: 20px;
+  width:100px;
+  height:50px;
 }
 
 #addRow{
-	background-color: white;
+  background-color: white;
 }
 
 #removeRow{
-	background-color: #BAD3C7;
+  background-color: #BAD3C7;
 }
 
 #addColumn, #removeColumn{
-	position: absolute;
-	text-align: center;
-	font-size: 20px;
-	width:50px;
-	height:200px;
+  position: absolute;
+  text-align: center;
+  font-size: 20px;
+  width:50px;
+  height:200px;
 }
 
 #addColumn {
-	background-color: white;
+  background-color: white;
 }
 
 #removeColumn{
-	background-color: #BAD3C7;
+  background-color: #BAD3C7;
 }
 
 .dragHelper {
@@ -180,5 +199,5 @@ h2 {
 }
 
 svg {
-	position: absolute;
+  position: absolute;
 }

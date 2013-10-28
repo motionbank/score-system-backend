@@ -65,6 +65,9 @@ GridCell.prototype = {
 
         //register event for opening edit dialog
         currentCell.on("dblclick", $.proxy(this.onDblClick, this));
+        currentCell.on("click", $.proxy(this.onClickCell, this));
+
+        $(document).on("keydown", $.proxy(this.onKeyPress, this));
 
         //register hover
         currentCell.hover(onMouseIn, onMouseOut);
@@ -74,8 +77,8 @@ GridCell.prototype = {
     //build the html of the object
     render: function(){
         this.html = "<div id='gridCell_" + this.id + "' class='" + this.class + "'><span id='gridCell_" +
-                             this.id + "_content'><span class='cell-image'></span><span class='cell-title'></span><br>\
-                                <span class='cell-content'></span></span></div>";
+                    this.id + "_content'><span class='cell-image'></span><span class='cell-title'></span>" +
+                    "<span class='cell-content'></span></span></div>";
         $("#grid").append(this.html);
         this.setContent(this.title, this.description, this.src);
 
@@ -143,6 +146,37 @@ GridCell.prototype = {
     onDblClick: function(){
         this.openEditDialog();
     },
+
+
+    onClickCell: function() {
+      var currentId = this.id;
+      if($('div#gridCell_' + currentId).hasClass('selectedCell')){
+        theGrid.cellSelected = false;
+        $('.cell').removeClass('selectedCell');
+      } else {
+        $('.cell').removeClass('selectedCell');
+        $('div#gridCell_' + currentId).addClass('selectedCell');
+        theGrid.cellSelected = true;
+        currentCellToEdit = this;
+      }
+    },
+
+
+    onKeyPress: function (e) {
+      var keyPressed = e.keyCode || e.which;
+      if(theGrid.cellSelected) {
+        if(keyPressed === 8) {
+          editBox.openConfirmDialog(currentCellToEdit.title);
+          return false;
+        }
+        if(keyPressed === 27) {
+          editBox.closeConfirmDialog();
+          return false;
+        }
+      }
+    },
+
+
     openEditDialog: function(){
         editBox.setValues(this.title, this.type, this.description, this.src);
         editBox.openDialog();
@@ -181,16 +215,5 @@ GridCell.prototype = {
         $(contentCell).find(".contentCellTitle").html(this.title);
         $(contentCell).find(".contentCellDescription").html(this.description);
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
