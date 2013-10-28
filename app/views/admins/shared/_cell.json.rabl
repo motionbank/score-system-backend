@@ -1,7 +1,7 @@
 node :id do
   locals[:object].id.to_s
 end
-attributes :title, :description
+attributes :title, :description, :type
 node :poster_image do
   image = locals[:object].poster_image
   #TODO remove when the legacy assets are synced to this project
