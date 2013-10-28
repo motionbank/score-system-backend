@@ -148,6 +148,7 @@ GridCell.prototype = {
     },
 
 
+	// toggle the selectedCell class of the cell
     onClickCell: function() {
       var currentId = this.id;
       if($('div#gridCell_' + currentId).hasClass('selectedCell')){
@@ -165,11 +166,11 @@ GridCell.prototype = {
     onKeyPress: function (e) {
       var keyPressed = e.keyCode || e.which;
       if(theGrid.cellSelected) {
-        if(keyPressed === 8) {
+        if(keyPressed === 8) {//backspace -> remove cell from set
           editBox.openConfirmDialog(currentCellToEdit.title);
           return false;
         }
-        if(keyPressed === 27) {
+        if(keyPressed === 27) {//escape -> close modal dialog
           editBox.closeConfirmDialog();
           return false;
         }
@@ -216,4 +217,4 @@ GridCell.prototype = {
         $(contentCell).find(".contentCellDescription").html(this.description);
     }
 
-}
+};
