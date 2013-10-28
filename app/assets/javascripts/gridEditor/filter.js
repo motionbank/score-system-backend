@@ -47,16 +47,24 @@ function initFilter() {
 	}
 
 	function updateView() {
-		$('#availableContentCellTable').html(generateHtml());
+		$('#availableContentCellTable')
+			.html(generateHtml())
+			.on("dragstop", ".availableCell", onDrop)
+			.find(".availableCell").draggable({
+				opacity: 0.7,
+				helper: createDraggableCellHelper,
+				cursorAt: { left: 5, top: 5 },
+				revert: false
+			});
 	}
 
 
 	/* Event Listeners */
 
-	inputField.on('change', function (event) {
-		searchTerm = inputField.val();
+	inputField.on('keyup change', _.debounce(function (event) {
+		searchTerm = event.target.value;
 		updateView();
-	});
+	}, 150));
 
 	selectBox.on('change', function (event) {
 		filterType = selectBox.find('option:selected').val();
