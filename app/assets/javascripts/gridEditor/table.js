@@ -44,15 +44,5 @@ function createUsedContentRow(id, src, title, description){
 
 
 function initTableEvents(){
-	var availableCellsContainer = $('#availableContentCellTable');
-
-	availableCellsContainer.on("click", ".contentCellShowButton", showCellInformation);
 	$( "#usedContentCellTable" ).on("click", ".contentCellEditButton", editCellInformation);
-	availableCellsContainer.on("dragstop", ".availableCell", onDrop);
-	availableCellsContainer.find(".availableCell").draggable({
-		opacity: 0.7,
-		helper: createDraggableCellHelper,
-		cursorAt: { left: 5, top: 5 },
-		revert: false
-	});
 }

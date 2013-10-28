@@ -125,13 +125,6 @@ function editCellInformation(event){
 	editBox.openDialog(currentCellToEdit);
 }
 
-//edit cell information when click in table on Edit
-function showCellInformation(event){
-	var id = getIdOfHoveredCell(event);
-	theGrid.setCurrentCell(id);
-	editBox.openDialog(currentCellToEdit);
-}
-
 
 function onMouseIn(event){
 	var id = getIdOfHoveredCell(event);
