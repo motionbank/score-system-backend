@@ -10,20 +10,20 @@
 
 
 //GridCell constructor
-function GridCell(id, type, title, description, x, y, src) {
+function GridCell(id, type, title, description, x, y, width, height, src) {
     this.id =  id;
     this.class = "cell ui-widget-content";
     this.type = type;
     this.title = title;
     this.description = description;
-    this.html; 
+    this.html;
     this.x = x;
     this.y = y;
-    this.width;
-    this.height;
+    this.width = width;
+    this.height = height;
     if(src){
-        this.src = src; 
-    } 
+        this.src = src;
+    }
     else {
         this.src = "";
     }
@@ -40,7 +40,7 @@ GridCell.prototype = {
 
     //add Handlers
     addEvents: function ()
-    {   
+    {
         var currentCell = $("#gridCell_"+this.id);
         //makes cells resizable in grid
         currentCell.resizable({
@@ -53,20 +53,15 @@ GridCell.prototype = {
         });
 
         //makes cells draggable in grid
-        currentCell.draggable({ 
+        currentCell.draggable({
             grid: [ this.gridSize.width, this.gridSize.height ],
-            containment: "#grid",
-            stop: function(event, ui){
-                this.x = ui.position.left;
-                this.y = ui.position.top;
-                console.log(this.id + " is now " + this.x + " and " +this.y);
-            }
+            containment: "#grid"
         });
 
         $("#gridCell_"+this.id).css({"width":this.width, "height":this.height});
 
         //update cell content with X and Y position
-        currentCell.on("dragstop resizestop", $.proxy(this.onMouseUp, this));
+        currentCell.on("dragstop resizestop", $.proxy(this.onChangedRectangle, this));
 
         //register event for opening edit dialog
         currentCell.on("dblclick", $.proxy(this.onDblClick, this));
@@ -87,12 +82,29 @@ GridCell.prototype = {
 
         //get the gridsize and set the size of the cell
         this.gridSize = theGrid.getCellSizeAsPixels();
-        this.width = this.gridSize.width;
-        this.height = this.gridSize.height;
+        this.width = this.width * this.gridSize.width;
+        this.height = this.height * this.gridSize.height;
     },
 
-    onMouseUp: function(){
+    onChangedRectangle: function(){
         this.getAndSaveNewPositionAndSize();
+
+		// send update request
+		var setId = APPLICATION.resource_id;
+		var gridPosition = theGrid.mapPixelsToGrid(this.x, this.y);
+		var cellAttributes = {
+			x: gridPosition.x,
+			y: gridPosition.y,
+			width: Math.round(this.width / this.gridSize.width),
+			height: Math.round(this.height / this.gridSize.height)
+		};
+		$.post(
+			Routes.cell_set_grid_cell_path(setId, this.id),
+			{
+				grid_cell: cellAttributes,
+				_method: "patch" // to get rails to handle this a update request
+			}
+		);
     },
 
     getAndSaveNewPositionAndSize: function(){
@@ -104,7 +116,6 @@ GridCell.prototype = {
         this.height = $("#gridCell_"+this.id).height();
 
         $("#gridCell_"+this.id+"_content img").css({"width": this.width, "height":this.height});
-        
     },
 
     checkCollisions: function(){
@@ -114,21 +125,19 @@ GridCell.prototype = {
     //set position of cell when inserting into grid
     setPositions: function(){
         var grid = $("#grid");
-        var gridPosition = grid.offset();
 
         //calculate position in grid
 		var gridPosition = theGrid.mapPixelsToGrid(this.x, this.y);
         this.x = gridPosition.x * this.gridSize.width;
 		this.y = gridPosition.y * this.gridSize.height;
         $("#gridCell_"+this.id).css({left: this.x, top:this.y});
-     
+
         this.getAndSaveNewPositionAndSize();
     },
 
     //later using for poster image
     setSrc: function(src){
         this.src = src;
-       
     },
 
     onDblClick: function(){
@@ -145,14 +154,14 @@ GridCell.prototype = {
         this.title = title;
         this.description = description;
         this.src = imageSrc;
-        
-        this.updateGridCell(); 
+
+        this.updateGridCell();
         this.updateContentCell();
     },
 
     updateGridCell: function(){
         var gridCell = $("#gridCell_" + this.id + "_content");
-        
+
         if(this.src){
             $(gridCell).find(".cell-image").html("<img src='" + this.src + "'></img>");
             $(gridCell).find(".cell-title").html("");
@@ -163,7 +172,7 @@ GridCell.prototype = {
             $(gridCell).find(".cell-title").html(this.title);
             $(gridCell).find(".cell-content").html(this.description);
         }
-    
+
     },
 
     updateContentCell: function(){
