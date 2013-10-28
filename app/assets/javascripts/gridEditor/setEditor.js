@@ -107,29 +107,12 @@ function onDrop(event){
 }
 
 function createGridCell(data) {
-	// first get the information from the grid cell itself
-	var id = data.grid_cell.id;
-
-	// multiply the abstract grid coordinates with the actual cell size in pixels
-	var absCellSize = theGrid.getCellSizeAsPixels();
-	var x = data.grid_cell.x * absCellSize.width;
-	var y = data.grid_cell.y * absCellSize.height;
-	var width = data.grid_cell.width;
-	var height = data.grid_cell.height;
-
-	// for all other fields we want to get the information of the canonical cell
-	var cellData = data.grid_cell.canonical_cell;
-	var title = cellData.title, description = cellData.description;
-	var type = cellData.type;
-	var imageSrc = cellData.poster_image.thumb.url;
-
 	//cell.js
-	var newGridCell = new GridCell(	id, type, title, description,
-									x, y, width, height, imageSrc);
+	var newGridCell = new GridCell(data);
 	theGrid.addCell(newGridCell);
 
 	//table.js
-	createUsedContentRow(id, imageSrc, title, description);
+	createUsedContentRow(newGridCell.id, newGridCell.src, newGridCell.title, newGridCell.description);
 }
 
 //edit cell information when click in table on Edit
@@ -138,6 +121,7 @@ function editCellInformation(event){
 	theGrid.setCurrentCell(id);
 	editBox.setValues(currentCellToEdit.title, currentCellToEdit.type, currentCellToEdit.description, currentCellToEdit.src);
 	editBox.openDialog();
+  console.log('edit Cell Info')
 }
 
 //edit cell information when click in table on Edit

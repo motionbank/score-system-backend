@@ -20,3 +20,4 @@ node :poster_image do
   end
 end
 
+attribute :additional_fields

@@ -15,6 +15,7 @@ function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
 	this.cells = [ ];
 	this.container = $('#grid');
   this.parentContainer = $('#boundsForGrid');
+  this.cellSelected = false;
 	this.init();
 }
 
@@ -26,7 +27,7 @@ Grid.prototype = {
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 
 		this.saveCellSizeAsPixels();
-        this.container.prepend(this.drawGridMesh());
+    this.container.prepend(this.drawGridMesh());
 
 		var addRowButtons = '<div><span id="removeRow">-</span><span id="addRow">+</span></div>';
 		var addColumnButtons = '<div><span id="removeColumn">-</span><span id="addColumn">+</span></div>';
@@ -157,6 +158,7 @@ Grid.prototype = {
 				return true;
 			}
 		});
+    this.cellSelected = false;
 	},
 
 	addCell: function(cell){
