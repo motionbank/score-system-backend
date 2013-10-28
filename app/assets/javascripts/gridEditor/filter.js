@@ -47,7 +47,15 @@ function initFilter() {
 	}
 
 	function updateView() {
-		$('#availableContentCellTable').html(generateHtml());
+		$('#availableContentCellTable')
+			.html(generateHtml())
+			.on("dragstop", ".availableCell", onDrop)
+			.find(".availableCell").draggable({
+				opacity: 0.7,
+				helper: createDraggableCellHelper,
+				cursorAt: { left: 5, top: 5 },
+				revert: false
+			});
 	}
 
 
