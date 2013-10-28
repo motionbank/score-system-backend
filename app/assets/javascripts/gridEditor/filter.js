@@ -5,11 +5,10 @@ function initFilter() {
 	var searchIndex = {};
 	var filterType = "all";
 	var searchTerm = "";
+	var tableRowTemplate = _.template('<div id="availableContentCell_<%= id %>" class="row-fluid contentCell availableCell"><div class="contentCellPosterImage span1"><img src="<%= poster_image.url %>"></div><div class="span10"><h5 class="contentCellTitle"><span class="badge"><%= type %></span> <%= title %></h5><p class="contentCellDescription"><%= description %></p></div></div>');
 
-	$.each(APPLICATION.cells, function (index, cell) {
-		dictionary[cell.id] = cell;
-		searchIndex[cell.id] = JSON.stringify(cell);
-	});
+
+	/* Private Functions */
 
 	function search(term) {
 		var regex = new RegExp(term, 'i');
@@ -38,13 +37,39 @@ function initFilter() {
 		return updatedCells;
 	}
 
+	function generateHtml() {
+		var html = "";
+		$.each(filter(), function (index, element) {
+			html += tableRowTemplate(element);
+		});
+
+		return html;
+	}
+
+	function updateView() {
+		$('#availableContentCellTable').html(generateHtml());
+	}
+
+
+	/* Event Listeners */
+
 	inputField.on('change', function (event) {
 		searchTerm = inputField.val();
-		var cells = filter();
+		updateView();
 	});
 
 	selectBox.on('change', function (event) {
 		filterType = selectBox.find('option:selected').val();
-		var cells = filter();
+		updateView();
 	});
+
+
+	/* Initialization */
+
+	$.each(APPLICATION.cells, function (index, cell) {
+		dictionary[cell.id] = cell;
+		searchIndex[cell.id] = JSON.stringify(cell);
+	});
+
+	updateView();
 }

@@ -56,9 +56,8 @@
 
                   containing
                   %input(type="text" id="searchTerm" name="searchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
+
                 #availableContentCellTable.cellTable
-                  - @available_cells.each do |cell|
-                    = render partial: 'table_cell', locals: {cell: cell}
 
             = render "edit_cell"
 
