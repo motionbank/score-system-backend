@@ -77,25 +77,22 @@ GridCell.prototype = {
     
     
 	updateData: function(data) {
-		// first get the information from the grid cell itself
 		this.id = data.grid_cell.id;
+		this.canonicalCell = data.grid_cell.canonical_cell;
+		this.type = this.canonicalCell.type;
 
 		// multiply the abstract grid coordinates with the actual cell size in pixels
 		var absCellSize = theGrid.getCellSizeAsPixels();
-		this.canonicalCell = data.grid_cell.canonical_cell;
-
 		this.x = data.grid_cell.x * absCellSize.width;
 		this.y = data.grid_cell.y * absCellSize.height;
+
 		this.width = data.grid_cell.width;
 		this.height = data.grid_cell.height;
-		this.title = this.canonicalCell.title || data.grid_cell.title ;
-		this.description = this.canonicalCell.description || data.grid_cell.description;
-		this.src = this.canonicalCell.poster_image.thumb.url ||data.grid_cell.poster_image.thumb.url;
-
-		// for all other fields we want to get the information of the canonical cell
 		
-
-		this.type = this.canonicalCell.type;
+		// If the grid cell does not have a value of its own it is taken from the canonical cell
+		this.title = data.grid_cell.title || this.canonicalCell.title;
+		this.description = data.grid_cell.description || this.canonicalCell.description;
+		this.src = data.grid_cell.poster_image.thumb.url || this.canonicalCell.poster_image.thumb.url;
 	},
 
     onChangedRectangle: function(){

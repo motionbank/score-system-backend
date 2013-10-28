@@ -113,6 +113,7 @@ function createGridCell(data) {
 
 	//table.js
 	createUsedContentRow(newGridCell.id, newGridCell.src, newGridCell.title, newGridCell.description);
+  
 }
 
 //edit cell information when click in table on Edit
