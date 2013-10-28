@@ -179,9 +179,10 @@ GridCell.prototype = {
 
 
     openEditDialog: function(){
-        editBox.setValues(this.title, this.type, this.description, this.src);
-        editBox.openDialog();
-        currentCellToEdit = this;
+      console.log(this)
+      editBox.setValues(this.title, this.type, this.description, this.src);
+      editBox.openDialog();
+      currentCellToEdit = this;
     },
 
     //TODO Create Templates for Cells for different types

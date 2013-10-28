@@ -20,14 +20,6 @@ EditDialog.prototype = {
 		$("#dialog-modal").dialog({
 			height: 500,
 			autoOpen: false,
-			/*show: {
-				effect:"blind",
-				duration: 200
-			},
-			hide: {
-				effect:"blind",
-				duration:200
-			},*/
 			modal:true
 		});
 	},
@@ -52,7 +44,6 @@ EditDialog.prototype = {
 		//register submit event of form
 		$( ".form_submit" ).click(function( event ) {
 
-			
 			$("#editCell").submit();
 			//prevent form from reloading the page
 			event.preventDefault();
@@ -72,8 +63,7 @@ EditDialog.prototype = {
 
 		$("#deleteImage").click(function(){
 			$("#editImageSrc").val("");
-
-		})
+		});
 	},
 
 	setValues: function(title, type, description, posterImage){
@@ -97,10 +87,12 @@ EditDialog.prototype = {
 	},
 
 	closeDialog: function(){
+		theGrid.cellSelected = true;
 		$("#dialog-modal").dialog("close");
 	},
 
 	openDialog: function(){
+		theGrid.cellSelected = false;
 		$("#dialog-modal").dialog("open");
 	},
 
