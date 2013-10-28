@@ -27,7 +27,7 @@ Grid.prototype = {
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 
 		this.saveCellSizeAsPixels();
-        this.container.prepend(this.drawGridMesh());
+    this.container.prepend(this.drawGridMesh());
 
 		var addRowButtons = '<div><span id="removeRow">-</span><span id="addRow">+</span></div>';
 		var addColumnButtons = '<div><span id="removeColumn">-</span><span id="addColumn">+</span></div>';
