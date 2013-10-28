@@ -69,10 +69,15 @@ EditDialog.prototype = {
 
 	updateHTMLContent: function(){
 		var dialog = $("#dialog-modal #editCell");
+		var canonicalCell = this.model.canonicalCell;
+
 		$(dialog).find("#editTitle").val(this.model.title);
 		$(dialog).find("#type").html(this.model.type);
 		$(dialog).find("#editDescription").val(this.model.description);
 		$(dialog).find("#editImageSrc").val(this.model.src);
+
+		$(dialog).find("#canonicalTitle").html(canonicalCell.title);
+		$(dialog).find("#canonicalDescription").html(canonicalCell.description);
 	},
 
 	addEvents: function(){

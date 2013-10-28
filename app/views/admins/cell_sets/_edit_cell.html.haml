@@ -9,19 +9,19 @@
       .row-fluid
         .span6
           %label{:for => "editTitle"} Title:
-          %input{:id => "editTitle", :type => "text", :name => "editTitle"}
+          %textarea{:id => "editTitle", :type => "text", :name => "editTitle"}
         .span6
           %dl
             %dt Title
-            %dd
+            %dd{:id => "canonicalTitle"}
       .row-fluid
         .span6
           %label{:for => "editDescription"} Description:
-          %input{:id => "editDescription", :type => "text", :name => "editDescription"}
+          %textarea{:id => "editDescription", :type => "text", :name => "editDescription"}
         .span6
           %dl
             %dt Description
-            %dd
+            %dd{:id => "canonicalDescription"}
       .row-fluid
         .span6
           %label{:for => "imagesrc"} Upload Poster Image:
