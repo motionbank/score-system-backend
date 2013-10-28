@@ -109,7 +109,6 @@ EditDialog.prototype = {
 			$("#dialog-confirm").find('#cell-title-todelete').html('<li>' + celltitle + '</li>');
 		}
 		$("#dialog-confirm").dialog("open");
-		console.log(GridCell)
 	},
 
 
