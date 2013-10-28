@@ -26,3 +26,5 @@
 //
 //  *** view/controller centric code
 //= require_tree ./admins
+
+//= require_tree ./templates
