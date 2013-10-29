@@ -4,6 +4,15 @@
       = link_to I18n.t('page.title'), admins_root_url, :class => "brand"
 
       %ul.nav
+        %li.dropdown.score-switch
+          %a.dropdown-toggle(href="#" data-toggle="dropdown")
+            [current score]
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              %a link to switch to score 1
+            %li
+              %a link to switch to score 2
         = admin_navigation_left
 
       %ul.nav.pull-right
