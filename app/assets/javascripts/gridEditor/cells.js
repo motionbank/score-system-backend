@@ -195,6 +195,8 @@ GridCell.prototype = {
         this.description = description;
         this.src = imageSrc;
 
+        console.log(title, description, imageSrc);
+
         this.updateGridCell();
         this.updateContentCell();
     },
