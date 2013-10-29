@@ -113,9 +113,10 @@ function createGridCell(data) {
 	var newGridCell = new GridCell(data);
 	theGrid.addCell(newGridCell);
 
+  var title = newGridCell.title || newGridCell.canonicalCell.title;
+  var description = newGridCell.description || newGridCell.canonicalCell.description;
 	//table.js
-	createUsedContentRow(newGridCell.id, newGridCell.src, newGridCell.title, newGridCell.description);
-  
+	createUsedContentRow(newGridCell.id, newGridCell.src, title, description, newGridCell.canonicalCell.type);
 }
 
 //edit cell information when click in table on Edit

@@ -292,8 +292,7 @@ $bubbleBorderColor: darken($grayLighter, 10%);
 
 .ui-tabs-panel{
   h3{
-    font-size:1.2em;
-    margin:0;
+    display:none;
   }
   .contentCellDescription{
     font-size:0.8em;
@@ -302,6 +301,9 @@ $bubbleBorderColor: darken($grayLighter, 10%);
     min-height:15px;
     font-weight:bold;
     font-size:0.8em;
+  }
+  h5{
+    display:inline-block;
   }
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active{
