@@ -293,6 +293,7 @@ $bubbleBorderColor: darken($grayLighter, 10%);
 .ui-tabs-panel{
   h3{
     font-size:1.2em;
+    margin:0;
   }
   .contentCellDescription{
     font-size:0.8em;
@@ -327,6 +328,11 @@ $bubbleBorderColor: darken($grayLighter, 10%);
       margin: 0 10px 5px 0;
       font-size:0.8em;
     }
+    textarea,
+    input[type="text"]{
+      width:100%;
+      @include box-sizing(border-box);
+    }
     &.noborder{
       border:none;
       padding:5px 0 0px 0;
@@ -345,6 +351,16 @@ $bubbleBorderColor: darken($grayLighter, 10%);
         margin:0;
         padding:0;
       }
+    }
+    #type{
+      text-transform:uppercase;
+      > span{
+        text-transform:none;
+        margin: 0 0 0 5px;
+      }
+    }
+    #additionalinfo{
+      text-transform:uppercase;
     }
     .original *{
       color:#999;
