@@ -321,10 +321,10 @@ $bubbleBorderColor: darken($grayLighter, 10%);
         border:none;
         font-size:1.1em;
         font-weight:bold;
-        &:focus, &:activeui,&.ui-tabs-active, &.ui-state-active{
-          outline:none;
+        &:focus, &:active,&.ui-tabs-active, &.ui-state-active{
+          outline:none!important;
           a{
-            outline:none;
+            outline:none!important;
           }
         }
       }

@@ -59,8 +59,15 @@ $(document).ready(function() {
 		});*/
 
 		initFilter();
+    setScrollbarHeight();
+    $(window).on('resize', setScrollbarHeight);
 	}
 });
+
+
+function setScrollbarHeight(){
+  $('.cellTable').height($(window).height() - $('.cellTable').offset().top - 100);
+}
 
 
 // populate the grid with cells already added to this set
