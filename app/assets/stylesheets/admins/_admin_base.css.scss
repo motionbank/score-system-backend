@@ -399,3 +399,30 @@ $bubbleBorderColor: darken($grayLighter, 10%);
     }
   }
 }
+.row-fluid{
+  .cell_poster_image{
+    margin:0;
+  }
+}
+.additional_fields{
+  .buttonfield{
+    text-align:right;
+  }
+  .bar{
+    padding:0 0 10px 0;
+    > span{
+      line-height:28px;
+      font-weight:bold;
+    }
+  }
+  ul.fields{
+    li{
+      input{
+        width:100%;
+        @include box-sizing(border-box);
+        height:28px;
+        line-height:28px;
+      }
+    }
+  }
+}

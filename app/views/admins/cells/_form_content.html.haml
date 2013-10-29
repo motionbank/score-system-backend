@@ -22,9 +22,9 @@
       .row-fluid.bar
         %span.span3
           Key
-        %span.span3
+        %span.span6
           Value
-        %span.span3
+        %span.span3.buttonfield
           = button_tag("Add", type: 'button', class: "add btn")
 
       %ul.fields
@@ -33,5 +33,5 @@
           %li.field.row-fluid
             %span.span3
               = text_field_tag :key, key, name: "cell[additional_fields][][key]", id: nil
-            %span.span3
+            %span.span9
               = text_field_tag :value, value, name: "cell[additional_fields][][value]", id: nil
