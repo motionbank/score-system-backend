@@ -310,6 +310,8 @@ $bubbleBorderColor: darken($grayLighter, 10%);
 .ui-dialog{
   h3{
     font-size:1.1em;
+    line-height:1.2em;
+    margin:0;
   }
   h4{
     margin:0;
@@ -317,15 +319,17 @@ $bubbleBorderColor: darken($grayLighter, 10%);
   }
   .row-fluid{
     border-bottom:1px solid #d7d7d7;
-    margin:10px 0 10px 0;
+    margin:0;
+    padding:5px 0 5px 0;
     textarea,
     input,
     input[type="button"]{
-      margin: 0 10px 10px 0;
+      margin: 0 10px 5px 0;
       font-size:0.8em;
     }
     &.noborder{
       border:none;
+      padding:5px 0 0px 0;
     }
     label{
       font-size:0.8em;
@@ -348,8 +352,11 @@ $bubbleBorderColor: darken($grayLighter, 10%);
     table{
       border-bottom:1px solid #d7d7d7;
       border-right:1px solid #d7d7d7;
-      margin:5px 0 15px 0;
+      margin:5px 0 10px 0;
       width:100%;
+      &#specialAttributesCanonical{
+        margin:5px 0 0 0;
+      }
       td, th{
         border-top:1px solid #d7d7d7;
         border-left:1px solid #d7d7d7;
