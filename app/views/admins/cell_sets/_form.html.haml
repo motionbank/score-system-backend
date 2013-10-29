@@ -14,7 +14,7 @@
   })
 
 .form-inputs
-  = render "admins/#{view_dir_for(f.object)}/form_content", f: f
+  = render "admins/#{view_dir_for(f.object)}/form_content", f: f, model_name: model_name
 
   - if options[:publishing_logic]
     .bubblebox
