@@ -48,7 +48,14 @@ module MultiTenancy
     def dynamic_collection_name
       raise_if_uninitialized
 
-      original_collection_name = default_collection_name.to_s
+      if respond_to?(:storage_options_defaults)
+        # from Mongoid 4.x on
+        original_collection_name = storage_options_defaults[:collection].to_s
+      else
+        # before Mongoid 4.x
+        original_collection_name = default_collection_name.to_s
+      end
+
       relevant_segments = MultiTenancy.collection_setup.slice(*collection_hierarchy)
       dynamic_part = relevant_segments.values.map(&:slug).join(".")
 
