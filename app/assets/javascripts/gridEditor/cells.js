@@ -100,6 +100,7 @@ GridCell.prototype = {
         this.getAndSaveNewPositionAndSize();
 
 		// send update request
+		var scoreId = APPLICATION.score_id;
 		var setId = APPLICATION.resource_id;
 		var gridPosition = theGrid.mapPixelsToGrid(this.x, this.y);
 		var cellAttributes = {
@@ -109,7 +110,7 @@ GridCell.prototype = {
 			height: Math.round(this.height / this.gridSize.height)
 		};
 		$.post(
-			Routes.cell_set_grid_cell_path(setId, this.id),
+			Routes.cell_set_grid_cell_path(scoreId, setId, this.id),
 			{
 				grid_cell: cellAttributes,
 				_method: "patch" // to get rails to handle this a update request

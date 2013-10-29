@@ -48,8 +48,9 @@ $(document).ready(function() {
 
 
 		// now fill the grid with existing cells
+		var scoreId = APPLICATION.score_id;
 		$.get(
-			Routes.cell_set_grid_cells_path(APPLICATION.resource_id),
+			Routes.cell_set_grid_cells_path(scoreId, APPLICATION.resource_id),
 			populateTheGrid
 		);
 
@@ -91,6 +92,7 @@ function onDrop(event){
 				}
 			});
 
+			var scoreId = APPLICATION.score_id;
 			var setId = APPLICATION.resource_id;
 			var gridPosition = theGrid.mapPixelsToGrid(	currentMousePos.x - gridOffset.left,
 														currentMousePos.y - gridOffset.top);
@@ -100,7 +102,7 @@ function onDrop(event){
 				y: gridPosition.y
 			};
 			$.post(
-				Routes.cell_set_grid_cells_path(setId),
+				Routes.cell_set_grid_cells_path(scoreId, setId),
 				{grid_cell: cellAttributes},
 				createGridCell
 			);
