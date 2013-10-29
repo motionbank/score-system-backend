@@ -40,7 +40,13 @@ EditDialog.prototype = {
 
 	initForm: function(){
 		this.editForm = $("#dialog-modal").find('form');
-		this.addAdditionalAttributesTemplate = JST['templates/additional_field'];
+		this.addAdditionalAttributesTemplate = _.template(
+			'<tr>' +
+			'<th class="key"><input name="cell[additional_fields][][key]" type="text" placeholder="Key"/></th>' +
+			'<td class="value"><input name="cell[additional_fields][][value]" type="text" placeholder="Value"/></td>' +
+			'</tr>'
+		);
+
 	},
 
 	submitForm: function(event) {

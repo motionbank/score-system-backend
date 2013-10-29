@@ -1,5 +1,0 @@
-%tr
-  %th.key
-    %input(name="cell[additional_fields][][key]" type="text" placeholder="Key")
-  %td.value
-    %input(name="cell[additional_fields][][value]" type="text" placeholder="Value")
