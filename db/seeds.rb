@@ -8,5 +8,13 @@
 
 email = "admin@meso.net"
 password = SecureRandom.hex(8)
-User.create!(email: email, password: password, password_confirmation: password, admin: true)
-puts "Created default user #{email} with password #{password}"
+unless User.where(email: email).exists?
+  User.create!(email: email, password: password, password_confirmation: password, admin: true)
+  puts "Created default user #{email} with password #{password}"
+end
+
+score_name = "Deborah Hay"
+unless Score.where(name: score_name).exists?
+  score = Score.create!(name: score_name)
+  puts "Created default score #{score_name} with URL slug #{score.slug}"
+end
