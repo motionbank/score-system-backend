@@ -9,7 +9,7 @@ module Controllers
 
 
     def default_url_options
-      super.merge(score_id: ::MultiTenancy.current_score.id)
+      super.merge(score_id: ::MultiTenancy.current_score)
     end
 
 
