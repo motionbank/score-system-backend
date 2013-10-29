@@ -20,3 +20,6 @@
             = f.input :cell_height, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
           .row-fluid
             = render 'admins/shared/upload_widget', form: f, method: :poster_image
+    .form-actions.actions
+      = f.submit I18n.t('helpers.submit.update', model: model_name),
+                  class: "btn btn-primary"

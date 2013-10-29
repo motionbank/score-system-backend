@@ -39,7 +39,7 @@ EditDialog.prototype = {
 
 
 	initForm: function(){
-		this.editForm = $("#dialog-modal").find('form');
+		this.editForm = $("#dialog-modal");
 		this.addAdditionalAttributesTemplate = JST['templates/additional_field'];
 	},
 
@@ -64,13 +64,15 @@ EditDialog.prototype = {
 	deleteImage: function(e) {
 		$("#editImageSrc").val("");
 		$("#usedPosterImage").hide().attr('src', '');
+		this.showDisplayDeleteBtn();
 		e.preventDefault();
 	},
 
 
 	uploadNewImage: function(){
-		$("#editImageSrc").val($(this).val());
-		$("#usedPosterImage").attr('src', $(this).val()).show();
+		$("#editImageSrc").val($("#cell_poster_image").val());
+		$("#usedPosterImage").attr('src', $("#cell_poster_image").val()).show();
+		this.showDisplayDeleteBtn();
 	},
 
 
@@ -81,10 +83,20 @@ EditDialog.prototype = {
 
 	addEvents: function(){
 		$("#removeCell").on("click", removeSelectedCell);
-		$("#deleteImage").on("click", this.deleteImage);
+		$("#deleteImage").on("click", $.proxy(this.deleteImage, this));
 		$(".form_submit").on("click", this.submitForm);
 		$("#addSpecialAttribute").on("click", $.proxy(this.addAdditionalAttributes, this));
-		$("#cell_poster_image").on("change", this.uploadNewImage);
+		$("#cell_poster_image").on("change", $.proxy(this.uploadNewImage, this));
+		this.showDisplayDeleteBtn();
+	},
+
+
+	showDisplayDeleteBtn: function() {
+		if($("#usedPosterImage").attr('src') == ''){
+			$("#deleteImage").hide();
+		} else {
+			$("#deleteImage").show();
+		}
 	},
 
 	closeDialog: function(){
@@ -96,7 +108,8 @@ EditDialog.prototype = {
 		theGrid.cellSelected = false;
 		this.model = model;
 		this.editForm.empty();
-		var usedCellAdditionalFields = this.model.additional_fields || this.model.canonicalCell.additional_fields;
+		//var usedCellAdditionalFields = this.model.additional_fields || this.model.canonicalCell.additional_fields;
+		var usedCellAdditionalFields = this.model.additional_fields;
 		this.formTemplate = JST['templates/edit_cell']({data: this.model, usedCellAdditionalFields: usedCellAdditionalFields});
 		this.editForm.append(this.formTemplate);
 		this.addEvents();

@@ -1,77 +1,79 @@
-%fieldset#editCell
-  .row-fluid
-    .span6
-      %h3 Used Cell
-    .span6.original
-      %h3 Original Cell
-  .row-fluid
-    .span6
-      %label(for="editTitle") Title:
-      %textarea(id="editTitle" name="editTitle")
-        = data.title || data.canonicalCell.title
-    .span6.original
+%form(action="" method="post")
+  %fieldset#editCell
+    .row-fluid
+      .span6
+        %h3 Used Cell
+      .span6.original
+        %h3 Original Cell
+    .row-fluid
+      .span6
+        %label(for="editTitle") New title:
+        %textarea(id="editTitle" name="editTitle")
+          = data.title
+      .span6.original
+        %dl
+          %dt Original title:
+          %dd(id="canonicalTitle")
+            = data.canonicalCell.title
+    .row-fluid
+      .span6
+        %label(for="editDescription") New description:
+        %textarea(id="editDescription" type="text" name="editDescription")
+          = data.description
+      .span6.original
+        %dl
+          %dt Original description:
+          %dd(id="canonicalDescription")
+            = data.canonicalCell.description
+    .row-fluid
+      .span6
+        %label(for="imagesrc") New poster image:
+        #imagecontainer
+          %img(src=data.src id="usedPosterImage")
+          %a(id="deleteImage" href="/")
+        %input(id="editImageSrc" type="text" name="imagesrc" value=data.src)
+        %input(id="cell_poster_image" name="cell[poster_image]" type="file")
+
+
+      .span6.original
+        %label(for="imagesrc") Original poster image:
+        %img(src=data.canonicalCell.poster_image.thumb.url id="originalPosterImage")
+
+    .row-fluid
       %dl
-        %dt Title:
-        %dd(id="canonicalTitle")
-          = data.canonicalCell.title
-  .row-fluid
-    .span6
-      %label(for="editDescription") Description:
-      %textarea(id="editDescription" type="text" name="editDescription")
-        = data.description || data.canonicalCell.description
-    .span6.original
-      %dl
-        %dt Description:
-        %dd(id="canonicalDescription")
-          = data.canonicalCell.description
-  .row-fluid
-    .span6
-      %label(for="imagesrc") Upload Poster Image:
-      #imagecontainer
-        %img(src=(data.src || data.canonicalCell.poster_image.url) id="usedPosterImage")
-        %a(id="deleteImage" href="/")
-      %input(id="editImageSrc" type="text" name="imagesrc" value=(data.src || data.canonicalCell.poster_image.url))
-      %input(id="cell_poster_image" name="cell[poster_image]" type="file")
+        %dt#type Type:
+          %span= data.canonicalCell.type
 
-      
-
-
-    .span6.original
-      %label(for="imagesrc") Upload Poster Image:
-      %img(src=data.canonicalCell.poster_image.thumb.url)
-
-  .row-fluid.original
-    %dl
-      %dt#type Type:
-        %span= data.canonicalCell.type
-  .row-fluid.noborder
-    %dl
-      %dt#additionalinfo Additional fields:
-  .row-fluid.noborder.original
-    %h4 Original:
-    %table#specialAttributesCanonical
-      :each key, value in data.canonicalCell.additional_fields
-        %tr
-          %th.key
-            %input(name="cell[additional_fields][][key]" type="text" disabled="disabled" value=key)
-          %td.value
-            %input(name="cell[additional_fields][][value]" type="text" disabled="disabled" value=value)
-
-  .row-fluid
-      %h4 Used cell:
-      %table#specialAttributes
-        :each key, value in usedCellAdditionalFields
+    .row-fluid.noborder.original
+      %h4 Original cell additional fields:
+      %table#specialAttributesCanonical.original
+        :each key, value in data.canonicalCell.additional_fields
           %tr
             %th.key
-              %input(name="cell[additional_fields][][key]" type="text" value=key)
+              %input(name="cell[additional_fields][][key]" type="text" disabled="disabled" value=key)
             %td.value
-              %input(name="cell[additional_fields][][value]" type="text" value=value)
+              %input(name="cell[additional_fields][][value]" type="text" disabled="disabled" value=value)
+
+    .row-fluid
+        %h4 Used cell additional fields:
+        %table#specialAttributes
+          %tr
+            %th.key
+              %input(name="cell[additional_fields][][key]" type="text" placeholder="Key")
+            %td.value
+              %input(name="cell[additional_fields][][value]" type="text" placeholder="Value")
+          :each key, value in usedCellAdditionalFields
+            %tr
+              %th.key
+                %input(name="cell[additional_fields][][key]" type="text" value=key)
+              %td.value
+                %input(name="cell[additional_fields][][value]" type="text" value=value)
 
 
-      %input(id="addSpecialAttribute" type="button" name="addSpecialAttribute" value="Add additional fields ")
+        %input(id="addSpecialAttribute" type="button" name="addSpecialAttribute" value="Edit/Add additional fields ")
 
-  .row-fluid.noborder
-    .span12
-      %p
-        %input(type="button" value="Save" class="form_submit")
-        %input(id="removeCell" type="button" value="Remove Cell from Grid")
+    .row-fluid.noborder
+      .span12
+        %p
+          %input(type="button" value="Save" class="form_submit")
+          %input(id="removeCell" type="button" value="Remove Cell from Grid")

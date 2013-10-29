@@ -319,6 +319,9 @@ $bubbleBorderColor: darken($grayLighter, 10%);
     font-size:0.8em;
   }
   .row-fluid{
+    .original *, &.original *{
+      color:#999;
+    }
     border-bottom:1px solid #d7d7d7;
     margin:0;
     padding:5px 0 5px 0;
@@ -361,9 +364,6 @@ $bubbleBorderColor: darken($grayLighter, 10%);
     }
     #additionalinfo{
       text-transform:uppercase;
-    }
-    .original *{
-      color:#999;
     }
     table{
       border-bottom:1px solid #d7d7d7;
