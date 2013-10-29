@@ -1,5 +1,8 @@
 class CellSet
   include Mongoid::Document
+  include MultiTenancy
+
+  set_collection_hierarchy [:score]
 
   field :legacy_id, type: Integer # the ID in the legacy MySQL database
 

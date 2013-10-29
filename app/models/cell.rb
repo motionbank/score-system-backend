@@ -2,6 +2,9 @@
 # this very cell.
 class Cell
   include Mongoid::Document
+  include MultiTenancy
+
+  set_collection_hierarchy [:score]
 
   TYPES = [:html, :iframe, :image, :vimeo, :visualization, :set_link, :text, :title]
 
