@@ -8,7 +8,7 @@
     .span6
       %label(for="editTitle") Title:
       %textarea(id="editTitle" name="editTitle")
-        = data.title || data.canonicalCell.title
+        = data.title
     .span6.original
       %dl
         %dt Title:
@@ -18,7 +18,7 @@
     .span6
       %label(for="editDescription") Description:
       %textarea(id="editDescription" type="text" name="editDescription")
-        = data.description || data.canonicalCell.description
+        = data.description
     .span6.original
       %dl
         %dt Description:
@@ -28,17 +28,15 @@
     .span6
       %label(for="imagesrc") Upload Poster Image:
       #imagecontainer
-        %img(src=(data.src || data.canonicalCell.poster_image.url) id="usedPosterImage")
+        %img(src=data.src id="usedPosterImage")
         %a(id="deleteImage" href="/")
-      %input(id="editImageSrc" type="text" name="imagesrc" value=(data.src || data.canonicalCell.poster_image.url))
+      %input(id="editImageSrc" type="text" name="imagesrc" value=data.src)
       %input(id="cell_poster_image" name="cell[poster_image]" type="file")
-
-      
 
 
     .span6.original
       %label(for="imagesrc") Upload Poster Image:
-      %img(src=data.canonicalCell.poster_image.thumb.url)
+      %img(src=data.canonicalCell.poster_image.thumb.url id="originalPosterImage")
 
   .row-fluid.original
     %dl
@@ -60,6 +58,11 @@
   .row-fluid
       %h4 Used cell:
       %table#specialAttributes
+        %tr
+          %th.key
+            %input(name="cell[additional_fields][][key]" type="text" placeholder="Key")
+          %td.value
+            %input(name="cell[additional_fields][][value]" type="text" placeholder="Value")
         :each key, value in usedCellAdditionalFields
           %tr
             %th.key
@@ -68,7 +71,7 @@
               %input(name="cell[additional_fields][][value]" type="text" value=value)
 
 
-      %input(id="addSpecialAttribute" type="button" name="addSpecialAttribute" value="Add additional fields ")
+      %input(id="addSpecialAttribute" type="button" name="addSpecialAttribute" value="Edit/Add additional fields ")
 
   .row-fluid.noborder
     .span12
