@@ -54,7 +54,6 @@ EditDialog.prototype = {
 		var newSrc = $(dialog).find("#editImageSrc").val();
 
 		//cells.js, set new content for contentCell
-		console.log('newSrc', newSrc)
 		currentCellToEdit.setContent(newTitle, newDescription, newSrc);
 
 		//edit.js
@@ -62,9 +61,10 @@ EditDialog.prototype = {
 	},
 
 
-	deleteImage: function() {
+	deleteImage: function(e) {
 		$("#editImageSrc").val("");
 		$("#usedPosterImage").hide().attr('src', '');
+		e.preventDefault();
 	},
 
 
@@ -97,7 +97,6 @@ EditDialog.prototype = {
 		this.model = model;
 		this.editForm.empty();
 		var usedCellAdditionalFields = this.model.additional_fields || this.model.canonicalCell.additional_fields;
-		console.log(this.model)
 		this.formTemplate = JST['templates/edit_cell']({data: this.model, usedCellAdditionalFields: usedCellAdditionalFields});
 		this.editForm.append(this.formTemplate);
 		this.addEvents();

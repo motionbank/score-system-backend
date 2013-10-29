@@ -27,10 +27,13 @@
   .row-fluid
     .span6
       %label(for="imagesrc") Upload Poster Image:
-      %img(src=(data.src || data.canonicalCell.poster_image.url) id="usedPosterImage")
+      #imagecontainer
+        %img(src=(data.src || data.canonicalCell.poster_image.url) id="usedPosterImage")
+        %a(id="deleteImage" href="/")
       %input(id="editImageSrc" type="text" name="imagesrc" value=(data.src || data.canonicalCell.poster_image.url))
       %input(id="cell_poster_image" name="cell[poster_image]" type="file")
-      %input(id="deleteImage" type="button" name="deleteImage" value="Delete Poster Image")
+
+      
 
 
     .span6.original

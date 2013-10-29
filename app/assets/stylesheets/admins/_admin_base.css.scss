@@ -398,6 +398,35 @@ $bubbleBorderColor: darken($grayLighter, 10%);
       }
     }
   }
+  #imagecontainer{
+    position:relative;
+    background:$grayLight;
+    min-height:170px;
+    margin:0 0 20px 0;
+    img{
+      display:block;
+      margin:0;
+    }
+    #deleteImage{
+      display: inline-block;
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      position:absolute;
+      top:2px;
+      right:2px;
+      font-size:1.3em;
+      @include border-radius(5px);
+      background:rgba(255, 255, 255, 0.5);
+      &:before{
+        padding:3px;
+        content: '\f00d';
+      }
+      &:hover{
+        text-decoration:none;
+      }
+    }
+  }
 }
 .row-fluid{
   .cell_poster_image{

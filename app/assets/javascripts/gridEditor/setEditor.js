@@ -128,7 +128,7 @@ function editCellInformation(event){
 
 function onMouseIn(event){
 	var id = getIdOfHoveredCell(event);
-	console.log("hovered " + id);
+	//console.log("hovered " + id);
     $("#usedContentCell_" + id).addClass("activeCell");
     $("#gridCell_" + id).addClass("activeCell");
 }
