@@ -96,7 +96,8 @@ EditDialog.prototype = {
 		theGrid.cellSelected = false;
 		this.model = model;
 		this.editForm.empty();
-		var usedCellAdditionalFields = this.model.additional_fields || this.model.canonicalCell.additional_fields;
+		//var usedCellAdditionalFields = this.model.additional_fields || this.model.canonicalCell.additional_fields;
+		var usedCellAdditionalFields = this.model.additional_fields;
 		this.formTemplate = JST['templates/edit_cell']({data: this.model, usedCellAdditionalFields: usedCellAdditionalFields});
 		this.editForm.append(this.formTemplate);
 		this.addEvents();

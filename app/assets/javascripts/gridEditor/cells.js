@@ -204,7 +204,11 @@ GridCell.prototype = {
         var gridCell = $("#gridCell_" + this.id + "_content");
 
         if(this.src){
-            $(gridCell).find(".cell-image").html("<img src='" + this.src + "'></img>");
+            if(this.src == '' ){
+                $(gridCell).find(".cell-image").html("<img src='" + this.canonicalCell.poster_image.url + "'></img>");
+            } else {
+                $(gridCell).find(".cell-image").html("<img src='" + this.src + "'></img>");
+            }
             $(gridCell).find(".cell-title").html("");
             $(gridCell).find(".cell-content").html("");
         }
@@ -218,7 +222,12 @@ GridCell.prototype = {
 
     updateContentCell: function(){
         var contentCell = $("#usedContentCell_" + this.id);
-        $(contentCell).find(".contentCellPosterImage").html("<img src='" + this.src + "'></img>");
+        if(this.src == '' ){
+            $(contentCell).find(".contentCellPosterImage").html("<img src='" + this.canonicalCell.poster_image.url + "'></img>");
+        } else {
+            $(contentCell).find(".contentCellPosterImage").html("<img src='" + this.src + "'></img>");
+        }
+        
         $(contentCell).find(".contentCellTitle").html(this.title);
         $(contentCell).find(".contentCellDescription").html(this.description);
     }
