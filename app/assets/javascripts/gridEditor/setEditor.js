@@ -128,14 +128,15 @@ function editCellInformation(event){
 
 function onMouseIn(event){
 	var id = getIdOfHoveredCell(event);
-    $("#usedContentCell_" + id.split("_")[1]).addClass("activeCell");
-    $("#gridCell_" + id.split("_")[1]).addClass("activeCell");
+	console.log("hovered " + id);
+    $("#usedContentCell_" + id).addClass("activeCell");
+    $("#gridCell_" + id).addClass("activeCell");
 }
 
 function onMouseOut(event){
 	var id = getIdOfHoveredCell(event);
-    $("#usedContentCell_" + id.split("_")[1]).removeClass("activeCell");
-    $("#gridCell_"+ id.split("_")[1]).removeClass("activeCell");
+    $("#usedContentCell_" + id).removeClass("activeCell");
+    $("#gridCell_"+ id).removeClass("activeCell");
 }
 
 function removeSelectedCell(){

@@ -1,5 +1,3 @@
-//	TODO: Implement Edit Function from Table, has worked in prototype, not now anymore
-
 function initTabs(){
 		$(function() {
 			$( "#tabs" ).tabs();
@@ -39,7 +37,7 @@ function createUsedContentRow(id, src, title, description){
 	usedContentCell.find(".contentCellPosterImage").append("<img src='" + src + "' />");
 	usedContentCell.find(".contentCellTitle").append(title);
 	usedContentCell.find(".contentCellDescription").append(description);
-	$( "#usedContentCellTable tr" ).hover(onMouseIn, onMouseOut); 
+	$( "#usedContentCellTable div" ).hover(onMouseIn, onMouseOut); 
 }
 
 
