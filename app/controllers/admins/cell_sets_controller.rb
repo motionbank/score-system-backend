@@ -53,7 +53,7 @@ module Admins
 
     def extend_js_framework_settings
       @js_framework_settings.merge!({
-        score_id: MultiTenancy.current_score, # will be needed by the grid editor to pass it to named routes
+        score_id: MultiTenancy.current_score.to_param, # will be needed by the grid editor to pass it to named routes
         resource_id: @cell_set.id.to_s, # will be needed by the grid editor to pass it to named routes
         rows: @cell_set.rows,
         columns: @cell_set.columns
