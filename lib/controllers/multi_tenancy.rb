@@ -8,11 +8,8 @@ module Controllers
     end
 
 
-    module ClassMethods
-      def default_url_options(options = {})
-        options[:score_id] = ::MultiTenancy.current_score
-        options
-      end
+    def default_url_options
+      super.merge(score_id: ::MultiTenancy.current_score.id)
     end
 
 
