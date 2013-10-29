@@ -5,9 +5,11 @@ gem 'rails', '4.0.0'
 
 
 # PERSISTENCE
-gem 'mongoid', github: 'mongoid/mongoid', ref: '2f68fccf6b45ec1576551f38ffd1dfb5bf8bf201' # the previous commit cc7a0e709066aff444bc21cd9826e1568603934d breaks the rails console and rake invocations
+gem 'mongoid', github: 'mongoid/mongoid', ref: '2f68fccf6b45ec1576551f38ffd1dfb5bf8bf201' # prev. commit cc7a0e709066aff444bc21cd9826e1568603934d breaks the rails console and rake invocations
+#gem 'mongoid', '~> 4.0.0' #TODO once a mongoid 4.0.0 gem release is out, remove comment and the other line referencing mongoid from github
 gem "mongoid-indifferent-access", require: "mongoid_indifferent_access"
-gem "mongoid_slug"
+gem "mongoid_slug", github: 'digitalplaywright/mongoid-slug', ref: 'a1f9012e97825a84d8193790d1403f35a1053b6b' # prev. commit had problems with mongoid 4
+#gem "mongoid_slug", '>= 3.2.0' #TODO once 3.2.0 is out, remove comment and the other line referencing mongoid_slug from github
 gem "mongoid_rails_migrations"
 
 # SERIALIZATION
