@@ -49,6 +49,7 @@ function initFilter() {
 	function updateView() {
 		$('#availableContentCellTable')
 			.html(generateHtml())
+			.off("dragstop", ".availableCell", onDrop)
 			.on("dragstop", ".availableCell", onDrop)
 			.find(".availableCell").draggable({
 				opacity: 0.7,
