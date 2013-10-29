@@ -16,7 +16,9 @@ module Controllers
     def setup_score
       ::MultiTenancy.collection_segments = ::MultiTenancy::COLLECTION_SEGMENTS
 
-      score = params[:score_id] ? Score.find(params[:score_id].to_s) : Score.first
+      @scores = Score.all
+
+      score = params[:score_id] ? @scores.find(params[:score_id].to_s) : @scores.first
       ::MultiTenancy.current_score = score
     end
   end
