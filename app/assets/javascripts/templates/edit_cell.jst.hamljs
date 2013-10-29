@@ -4,7 +4,7 @@
       .span6
         %h3 Used Cell
       .span6.original
-        %h3 Original Cell
+        %h3 Heritage Cell
     .row-fluid
       .span6
         %label(for="editTitle") New title:

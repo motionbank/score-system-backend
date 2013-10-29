@@ -66,6 +66,7 @@ GridCell.prototype = {
                     this.id + "_content'><span class='cell-image'></span><span class='cell-title'></span>" +
                     "<span class='cell-content'></span></span></div>";
         $("#grid").append(this.html);
+        
         this.setContent(this.title, this.description, this.src);
 
 
@@ -90,9 +91,9 @@ GridCell.prototype = {
 		this.height = data.grid_cell.height;
 		
 		// If the grid cell does not have a value of its own it is taken from the canonical cell
-		this.title = data.grid_cell.title || this.canonicalCell.title;
-		this.description = data.grid_cell.description || this.canonicalCell.description;
-		this.src = data.grid_cell.poster_image.thumb.url || this.canonicalCell.poster_image.thumb.url;
+		this.title = data.grid_cell.title || '';
+		this.description = data.grid_cell.description || '';
+		this.src = data.grid_cell.poster_image.thumb.url || '';
 	},
 
     onChangedRectangle: function(){
@@ -199,37 +200,49 @@ GridCell.prototype = {
         this.updateContentCell();
     },
 
+    whichDataToUse: function(modelData, canonicalField) {
+        var data = '';
+        if(modelData.length <= 0){
+            data = canonicalField;
+        } else{
+            data = modelData;
+        }
+
+        return data
+    },
 
     updateGridCell: function(){
         var gridCell = $("#gridCell_" + this.id + "_content");
+        var title = this.whichDataToUse(this.title, this.canonicalCell.title);
+        var description = this.whichDataToUse(this.description, this.canonicalCell.description);
 
         if(this.src){
-            if(this.src == '' ){
-                $(gridCell).find(".cell-image").html("<img src='" + this.canonicalCell.poster_image.url + "'></img>");
-            } else {
-                $(gridCell).find(".cell-image").html("<img src='" + this.src + "'></img>");
-            }
+            var image = this.whichDataToUse(this.src, this.canonicalCell.poster_image.url);
+            $(gridCell).find(".cell-image").html("<img src='" + image + "'></img>");
             $(gridCell).find(".cell-title").html("");
             $(gridCell).find(".cell-content").html("");
         }
         else{
             $(gridCell).find(".cell-image").html("");
-            $(gridCell).find(".cell-title").html(this.title);
-            $(gridCell).find(".cell-content").html(this.description);
+            $(gridCell).find(".cell-title").html(title);
+            $(gridCell).find(".cell-content").html(description);
         }
 
     },
 
     updateContentCell: function(){
         var contentCell = $("#usedContentCell_" + this.id);
+        var title = this.whichDataToUse(this.title, this.canonicalCell.title);
+        var description = this.whichDataToUse(this.description, this.canonicalCell.description);
+
         if(this.src == '' ){
-            $(contentCell).find(".contentCellPosterImage").html("<img src='" + this.canonicalCell.poster_image.url + "'></img>");
-        } else {
-            $(contentCell).find(".contentCellPosterImage").html("<img src='" + this.src + "'></img>");
+            var image = this.whichDataToUse(this.src, this.canonicalCell.poster_image.url);
+            $(contentCell).find(".contentCellPosterImage").html("<img src='" + image + "'></img>");
         }
-        
-        $(contentCell).find(".contentCellTitle").html(this.title);
-        $(contentCell).find(".contentCellDescription").html(this.description);
+
+        $(contentCell).find(".contentCellTitle").html(title);
+        $(contentCell).find(".contentCellDescription").html(description);
+        $(contentCell).find(".badge").html(this.type);
     }
 
 };

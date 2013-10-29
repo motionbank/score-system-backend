@@ -23,10 +23,11 @@ function createDraggableCellHelper(event){
 	return cellClone;
 }
 
-function createUsedContentRow(id, src, title, description){
+function createUsedContentRow(id, src, title, description, type){
 	var htmlBasicStructure = 	"<div id='usedContentCell_" + id + "' class='row-fluid contentCell usedCell'>\
 									<div class='span1 contentCellPosterImage'></div>\
 									<div class='span9'>\
+										<span class='badge'></span>\
 										<h5 class='contentCellTitle'></h5>\
 										<p class='contentCellDescription'></p>\
 									</div>\
@@ -37,6 +38,7 @@ function createUsedContentRow(id, src, title, description){
 	usedContentCell.find(".contentCellPosterImage").append("<img src='" + src + "' />");
 	usedContentCell.find(".contentCellTitle").append(title);
 	usedContentCell.find(".contentCellDescription").append(description);
+	usedContentCell.find(".badge").html(type);
 	$( "#usedContentCellTable div" ).hover(onMouseIn, onMouseOut); 
 }
 
