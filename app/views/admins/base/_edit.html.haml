@@ -17,7 +17,8 @@
     .header-inner
       %h1.span7= yield :page_title
       .actions.span5
-        = f.submit I18n.t('helpers.submit.update', model: model_name),
+        - unless controller.controller_name == 'cell_sets'
+          = f.submit I18n.t('helpers.submit.update', model: model_name),
                     class: "btn btn-primary"
 
         - if preview
@@ -28,4 +29,4 @@
 
   #inner
     %div
-      = render 'form', :f => f
+      = render 'form', :f => f, :model_name => model_name
