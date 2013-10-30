@@ -27,7 +27,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
 
   def base_dir
-    "system/uploads/#{model.class}/#{mounted_as}"
+    "system/uploads/#{MultiTenancy.current_score.to_param}/#{model.class}/#{mounted_as}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
