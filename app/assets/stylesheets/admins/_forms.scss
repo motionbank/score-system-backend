@@ -90,7 +90,6 @@ section.publishing .publishing_dates {
   max-width: 50%;
   margin: 36px auto;
 
-  .form-actions,
   .control-group {
     margin-bottom: 0;
   }
@@ -127,6 +126,43 @@ section.publishing .publishing_dates {
 
   .cancel-account {
     margin-bottom: $baseLineHeight;
+  }
+
+  img {
+    display: block;
+    margin: 80px auto 40px;
+  }
+}
+
+.session #login {
+  border-color: #777;
+
+  .inputs,
+  .page-header,
+  .form-inputs,
+  .links,
+  .form-submission {
+    margin-left: 2 * $baseLineHeight;
+    margin-right: 2 * $baseLineHeight;
+  }
+
+  .page-header {
+    border-bottom: none;
+    margin-top: 50px;
+    margin-bottom: 10px;
+  }
+
+  .form-submission {
+    text-align: right;
+    margin-top: 2 * $baseLineHeight;
+    padding-top: $baseLineHeight;
+    border-top: 1px solid #ddd;
+    padding-bottom: 2 * $baseLineHeight;
+  }
+
+  h1 {
+    font-weight: 200;
+    text-transform: uppercase;
   }
 }
 
