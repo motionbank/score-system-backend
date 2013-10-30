@@ -47,13 +47,15 @@
               #availableContentCells
                 %h3= t('set.tabs.available_cells')
                 #filter
-                  %label(for="searchTerm") Filter
+                  %label(for="searchTerm")
+                    = t('grid_editor.filter.title')
                   %select#cellType
-                    %option(value="all") All types
+                    %option(value="all")
+                      = t('grid_editor.filter.all_types')
                     - Cell::TYPES.each do |type|
                       %option{value: type}= type.to_s.humanize
 
-                  %label containing
+                  %label= t('grid_editor.filter.containing')
                   %input(type="text" id="searchTerm" name="searchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
 
                 #availableContentCellTable.cellTable
