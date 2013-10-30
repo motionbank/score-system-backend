@@ -47,12 +47,11 @@
               #availableContentCells
                 %h3= t('set.tabs.available_cells')
                 #filter
-                  %form#filter{ :action => "", :method => "get"}
-                    %label(for="searchTerm") Filter
-                    %select#cellType
-                      %option(value="all") All types
-                      - Cell::TYPES.each do |type|
-                        %option{value: type}= type.to_s.humanize
+                  %label(for="searchTerm") Filter
+                  %select#cellType
+                    %option(value="all") All types
+                    - Cell::TYPES.each do |type|
+                      %option{value: type}= type.to_s.humanize
 
                   %label containing
                   %input(type="text" id="searchTerm" name="searchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")

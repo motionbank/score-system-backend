@@ -1,22 +1,19 @@
-/* CONTAINS IMPORTS, OUR OWN VARIABLES AND MIXINS */
-/* shouldn't contain any actual styling definitions */
-
-@import "compass";
-@import "admins/custom_bootstrap_variables";
-@import "compass_twitter_bootstrap_responsive";
-@import "compass_twitter_bootstrap_awesome";
-
-
-
+/* CONTAINS OUR OWN VARIABLES AND MIXINS */
+/* shouldn't contain specific styling definitions */
 
 
 // VARIABLES
 //------------------------------------------
 
+// typography
+$base-font-size: 32px;
+$base-font: 'ReplicaBold', 'Arial', sans-serif;
+$halo-font-path: 'lineto-replica-bold';
+
+// measurments
 $maxContentWidth: 100%;
 $halfBaseLine: $baseLineHeight / 2;
 $doubleBaseLine: $baseLineHeight * 2;
-
 
 // colors
 $mintyGreen: #9bb0a5;
@@ -31,6 +28,14 @@ html{
 
 // MIXINS
 //------------------------------------------
+
+@mixin repeating-linear-gradient($params...) {
+  background-image: -webkit-repeating-linear-gradient($params);
+  background-image: -moz-repeating-linear-gradient($params);
+  background-image: -ms-repeating-linear-gradient($params);
+  background-image: -o-repeating-linear-gradient($params);
+  background-image: repeating-linear-gradient($params);
+}
 
 @mixin navtabs {
   // tabbed sub menu
@@ -205,8 +210,6 @@ html{
     }
 
     li {
-      // :((((((((((((((((((((((
-      //border-left: 1px dotted $gray;
       list-style-type: none;
     }
 
@@ -283,210 +286,16 @@ html{
 }
 
 
-/* Modal Dialog */
 
-#cell-title-todelete{
-  margin:0 0 0 25px;
-  li{
-    font-weight: bold;
-  }
-}
-#wrap{
-  .ui-tabs-panel{
-    h3{
-      display:none;
-    }
-    .contentCellDescription{
-    }
-    .contentCellEditButton{
-      min-height:15px;
-      font-weight:bold;
-    }
-    h5{
-      display:inline-block;
-    }
-  }
-  .ui-tabs{
-    margin:15px 0 0 0;
-    font-size:13px;
-    color:#333;
-    .ui-tabs-panel{
-      padding:0;
-      margin:0;
-    }
-    .ui-tabs-nav{
-      background:#eee;
-      border:none;
-      ul, li{
-        margin:0;
-        padding:0;
-        border:none;
-        font-size:1.1em;
-        font-weight:bold;
-        &:focus, &:active,&.ui-tabs-active, &.ui-state-active{
-          outline:none!important;
-          a{
-            outline:none!important;
-          }
-        }
-      }
-    }
-  }
-  .ui-widget-content{
-    color:#333;
-  }
-}
-.ui-tabs .ui-tabs-nav li.ui-tabs-active{
-  outline:none;
-}
+/* FONT FACE */
 
-.ui-dialog{
-  .ui-dialog-titlebar{
-    background:#eee;
-  }
-  h3{
-    font-size:1.1em;
-    line-height:1.2em;
-    margin:0;
-  }
-  h4{
-    margin:0;
-    font-size:0.8em;
-  }
-  .row-fluid{
-    .original *, &.original *{
-      color:#999;
-    }
-    border-bottom:1px solid #d7d7d7;
-    margin:0;
-    padding:5px 0 5px 0;
-    textarea,
-    input,
-    input[type="button"]{
-      margin: 0 10px 5px 0;
-      font-size:0.8em;
-    }
-    textarea,
-    input[type="text"]{
-      width:100%;
-      @include box-sizing(border-box);
-    }
-    &.noborder{
-      border:none;
-      padding:5px 0 0px 0;
-    }
-    label{
-      font-size:0.8em;
-    }
-    dl{
-      margin:0;
-      padding:0;
-      font-size:0.8em;
-      span{
-        font-weight:normal;
-      }
-      dd{
-        margin:0;
-        padding:0;
-      }
-    }
-    #type{
-      text-transform:uppercase;
-      > span{
-        text-transform:none;
-        margin: 0 0 0 5px;
-      }
-    }
-    #additionalinfo{
-      text-transform:uppercase;
-    }
-    table{
-      border-bottom:1px solid #d7d7d7;
-      border-right:1px solid #d7d7d7;
-      margin:5px 0 10px 0;
-      width:100%;
-      &#specialAttributesCanonical{
-        margin:5px 0 0 0;
-      }
-      td, th{
-        border-top:1px solid #d7d7d7;
-        border-left:1px solid #d7d7d7;
-        padding:0 3px;
-        text-align: left;
-        white-space:nowrap;
-        &.key{
-          width:30%;
-          padding:0;
-        }
-        &.value{
-          width:70%;
-          padding:0;
-        }
-        input{
-          margin:0;
-          width:100%;
-          @include box-sizing(border-box);
-          @include border-radius(none);
-          @include box-shadow(none);
-          border:none;
-        }
-      }
-    }
-  }
-  #imagecontainer{
-    position:relative;
-    background:$grayLight;
-    min-height:170px;
-    margin:0 0 20px 0;
-    img{
-      display:block;
-      margin:0;
-    }
-    #deleteImage{
-      display: inline-block;
-      font-family: FontAwesome;
-      font-style: normal;
-      font-weight: normal;
-      position:absolute;
-      top:2px;
-      right:2px;
-      font-size:1.3em;
-      @include border-radius(5px);
-      background:rgba(255, 255, 255, 0.5);
-      &:before{
-        padding:3px;
-        content: '\f00d';
-      }
-      &:hover{
-        text-decoration:none;
-      }
-    }
-  }
-}
-.row-fluid{
-  .cell_poster_image{
-    margin:0;
-  }
-}
-.additional_fields{
-  .buttonfield{
-    text-align:right;
-  }
-  .bar{
-    padding:0 0 10px 0;
-    > span{
-      line-height:28px;
-      font-weight:bold;
-    }
-  }
-  ul.fields{
-    li{
-      input{
-        width:100%;
-        @include box-sizing(border-box);
-        height:28px;
-        line-height:28px;
-      }
-    }
-  }
+@font-face {
+    font-family: 'ReplicaBold';
+    src: asset-url('#{$halo-font-path}.eot','font');
+    src: asset-url('#{$halo-font-path}.eot?#iefix','font') format('embedded-opentype'),
+         asset-url('#{$halo-font-path}.woff','font') format('woff'),
+         asset-url('#{$halo-font-path}.ttf','font') format('truetype'),
+         asset-url('#{$halo-font-path}.svg#ReplicaBold','font') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
