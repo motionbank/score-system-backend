@@ -20,8 +20,14 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
+  #@override
   def store_dir
-    "system/uploads/attachment/#{mounted_as}/#{model.id}"
+    "#{base_dir}/full"
+  end
+
+
+  def base_dir
+    "system/uploads/#{model.class}/#{mounted_as}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -33,30 +39,38 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
 
-  version :thumb do
+  version :small do
     process :resize_to_fill => [80, 80]
     process :rgb
+
+    def store_dir
+      "#{base_dir}/small"
+    end
 
     def filename
       return switch_extension(super, 'jpg')
     end
 
     def full_filename(for_file)
-      return switch_extension(super, 'jpg')
+      return switch_extension(for_file, 'jpg')
     end
   end
 
 
-  version :preview do
+  version :medium do
     process :resize_to_fit => [400, 300]
     process :rgb
+
+    def store_dir
+      "#{base_dir}/medium"
+    end
 
     def filename
       return switch_extension(super, 'jpg')
     end
 
     def full_filename(for_file)
-      return switch_extension(super, 'jpg')
+      return switch_extension(for_file, 'jpg')
     end
   end
 
@@ -68,7 +82,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def thumb_url
     if image_or_video?
-      thumb.url
+      small.url
     end
   end
 
