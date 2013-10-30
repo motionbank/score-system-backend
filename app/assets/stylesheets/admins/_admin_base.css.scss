@@ -24,7 +24,9 @@ $lightGray: #999999;
 $bubbleBorderColor: darken($grayLighter, 10%);
 
 
-
+html{
+  overflow:auto!important;
+}
 
 
 // MIXINS

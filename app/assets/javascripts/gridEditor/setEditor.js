@@ -66,7 +66,7 @@ $(document).ready(function() {
 
 
 function setScrollbarHeight(){
-  $('.cellTable').height($(window).height() - $('.cellTable').offset().top - 100);
+  $('.cellTable').height($(window).height() - $('#boundsForGrid').height() - 360);
 }
 
 
