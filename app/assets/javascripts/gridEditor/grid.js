@@ -102,6 +102,7 @@ Grid.prototype = {
 		else {
 			alert("Maximum Rows reached! Maximum is: " + this.boundsHeight/parseInt(this.heightStep));
 		}
+    $('.cellTable').height($('.cellTable').height() - this.cellSize.height);
 	},
 
 	removeRow: function(){
@@ -121,6 +122,7 @@ Grid.prototype = {
 		else {
 			alert("There is a cell in the row you want to remove!\nPlease delete or move this cell.");
 		}
+    $('.cellTable').height($('.cellTable').height() + this.cellSize.height);
 	},
 	
 	

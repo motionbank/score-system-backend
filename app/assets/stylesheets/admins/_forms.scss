@@ -26,8 +26,17 @@ textarea[class*="span"],
 label {
   font-weight: bold;
 }
-#filter label {
-  display: inline-block;
+#filter{
+  background:#d2dad6;
+  padding:10px 15px;
+  label {
+    display: inline-block;
+    line-height:30px;
+    font-weight:bold;
+  }
+  select, input, label{
+    margin-bottom:0;
+  }
 }
 
 textarea {

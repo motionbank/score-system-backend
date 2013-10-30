@@ -24,7 +24,9 @@ $lightGray: #999999;
 $bubbleBorderColor: darken($grayLighter, 10%);
 
 
-
+html{
+  overflow:auto!important;
+}
 
 
 // MIXINS
@@ -289,21 +291,49 @@ $bubbleBorderColor: darken($grayLighter, 10%);
     font-weight: bold;
   }
 }
-
-.ui-tabs-panel{
-  h3{
-    display:none;
+#wrap{
+  .ui-tabs-panel{
+    h3{
+      display:none;
+    }
+    .contentCellDescription{
+    }
+    .contentCellEditButton{
+      min-height:15px;
+      font-weight:bold;
+    }
+    h5{
+      display:inline-block;
+    }
   }
-  .contentCellDescription{
-    font-size:0.8em;
+  .ui-tabs{
+    margin:15px 0 0 0;
+    font-size:13px;
+    color:#333;
+    .ui-tabs-panel{
+      padding:0;
+      margin:0;
+    }
+    .ui-tabs-nav{
+      background:#eee;
+      border:none;
+      ul, li{
+        margin:0;
+        padding:0;
+        border:none;
+        font-size:1.1em;
+        font-weight:bold;
+        &:focus, &:active,&.ui-tabs-active, &.ui-state-active{
+          outline:none!important;
+          a{
+            outline:none!important;
+          }
+        }
+      }
+    }
   }
-  .contentCellEditButton{
-    min-height:15px;
-    font-weight:bold;
-    font-size:0.8em;
-  }
-  h5{
-    display:inline-block;
+  .ui-widget-content{
+    color:#333;
   }
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active{
@@ -311,6 +341,9 @@ $bubbleBorderColor: darken($grayLighter, 10%);
 }
 
 .ui-dialog{
+  .ui-dialog-titlebar{
+    background:#eee;
+  }
   h3{
     font-size:1.1em;
     line-height:1.2em;

@@ -75,8 +75,8 @@ GridCell.prototype = {
         this.width = this.width * this.gridSize.width;
         this.height = this.height * this.gridSize.height;
     },
-    
-    
+
+
 	updateData: function(data) {
 		this.id = data.grid_cell.id;
 		this.canonicalCell = data.grid_cell.canonical_cell;

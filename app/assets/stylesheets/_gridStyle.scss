@@ -47,8 +47,8 @@ h2 {
   z-index:1;
 }
 
-#tabs > .ui-tabs-panel {
-  max-height: 320px;
+#tabs .cellTable{
+  min-height: 100px;
   overflow-y: scroll;
 }
 
