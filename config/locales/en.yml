@@ -24,6 +24,7 @@ en:
     title: "Motion Bank Scores"
   my_account: "My account"
   logout: "Logout"
+  are_you_sure: "Are you sure? This action is not reversible."
   set:
     grid_editor: "Grid-Editor"
     tabs:
