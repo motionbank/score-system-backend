@@ -93,7 +93,7 @@ GridCell.prototype = {
 		// If the grid cell does not have a value of its own it is taken from the canonical cell
 		this.title = data.grid_cell.title || '';
 		this.description = data.grid_cell.description || '';
-		this.src = data.grid_cell.poster_image.thumb.url || '';
+		this.src = data.grid_cell.poster_image.small.url || this.canonicalCell.poster_image.small.url || '';
 	},
 
     onChangedRectangle: function(){

@@ -6,6 +6,6 @@
 
 - if uploader.present?
   .span5.poster-image-preview
-    = image_tag form.object.send(method).thumb.url
+    = image_tag form.object.send(method).small.url
     = link_to(cell_set_path(@cell_set, cell_set: {remove_poster_image: true}), :method => :put, :class => "btn btn-mini") do
       = t('record.with_class_name.delete', class_name: method.to_s.humanize)

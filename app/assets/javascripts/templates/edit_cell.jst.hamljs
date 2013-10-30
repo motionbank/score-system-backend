@@ -37,7 +37,7 @@
 
       .span6.original
         %label(for="imagesrc") Original poster image:
-        %img(src=data.canonicalCell.poster_image.thumb.url id="originalPosterImage")
+        %img(src=data.canonicalCell.poster_image.small.url id="originalPosterImage")
 
     .row-fluid
       %dl
