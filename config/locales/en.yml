@@ -24,6 +24,7 @@ en:
     title: "Motion Bank Scores"
   my_account: "My account"
   logout: "Logout"
+  are_you_sure: "Are you sure? This action is not reversible."
   set:
     grid_editor: "Grid-Editor"
     tabs:
@@ -55,3 +56,14 @@ en:
     basic_data: "Basic Data"
     additional_fields: "Additional Fields"
     publish: "Publication"
+
+  grid_editor:
+    add: "Add"
+    delete_text: "Do you really want to delete this Cell?"
+    filter:
+      title: "Filter"
+      containing: "containing"
+      all_types: "All types"
+    aditional_fields:
+      key: "Key"
+      value: "Value"

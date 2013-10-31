@@ -1,5 +1,3 @@
-@import "compass/css3";
-@import "compass_twitter_bootstrap/variables";
 /* ALL FORM-RELATED STYLNGS SHOULD GO HERE */
 
 form {
@@ -17,26 +15,20 @@ textarea[class*="span"],
   /* Makes inputs behave like true block-level elements */
   @include box-sizing(boder-box);
 }
-// But don't let it screw up prepend/append inputs
+// But don't let it mess up prepend/append inputs
 .input-prepend input[class*="span"],
 .input-append input[class*="span"] {
   width: auto;
 }
 
+input[type="file"] {
+  line-height: normal;
+  min-height: 0;
+  height: auto;
+}
+
 label {
   font-weight: bold;
-}
-#filter{
-  background:#d2dad6;
-  padding:10px 15px;
-  label {
-    display: inline-block;
-    line-height:30px;
-    font-weight:bold;
-  }
-  select, input, label{
-    margin-bottom:0;
-  }
 }
 
 textarea {
@@ -173,11 +165,4 @@ section.publishing .publishing_dates {
 
 .poster-image-preview a {
   margin-top: 5px;
-}
-
-
-input[type="file"] {
-  line-height: normal;
-  min-height: 0;
-  height: auto;
 }

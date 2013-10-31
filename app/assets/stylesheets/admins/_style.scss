@@ -1,11 +1,16 @@
-@import "compass/css3";
-@import "compass_twitter_bootstrap/variables";
-@import "compass_twitter_bootstrap_awesome";
-@import "admin_base";
-@import "helpers";
-@import "elements";
-@import "admins/forms";
-@import "colorbox-skin";
+
+/* STYLING OF HTML ELEMENTS */
+
+::-moz-selection { background: $gray; color: #fff; text-shadow: none; }
+::selection { background: $gray; color: #fff; text-shadow: none; }
+
+time {
+  font-family: $altFontFamily;
+}
+
+html {
+  overflow-y: scroll;
+}
 
 
 /* MAIN STYLESHEET */
@@ -188,6 +193,7 @@ header {
 
 
 /* ALERT STYLING */
+
 #flash {
   width: 50%;
   position: fixed;
@@ -203,6 +209,10 @@ header {
 .alert.alert-error .help-inline {
     margin-bottom: 0px;
     padding-left: 0px;
+}
+
+.error_notification, .error {
+	color: maroon;
 }
 
 

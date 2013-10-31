@@ -21,11 +21,11 @@
 
       .row-fluid.bar
         %span.span3
-          Key
+          = t('grid_editor.additional_fields.key')
         %span.span6
-          Value
+          = t('grid_editor.additional_fields.value')
         %span.span3.buttonfield
-          = button_tag("Add", type: 'button', class: "add btn")
+          = button_tag(t('grid_editor.add'), type: 'button', class: "add btn")
 
       %ul.fields
         - f.object.additional_fields.each_with_index do |pair, idx|
