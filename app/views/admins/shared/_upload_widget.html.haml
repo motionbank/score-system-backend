@@ -7,5 +7,7 @@
 - if uploader.present?
   .span5.poster-image-preview
     = image_tag form.object.send(method).small.url
-    = link_to(cell_set_path(@cell_set, cell_set: {remove_poster_image: true}), :method => :put, :class => "btn btn-mini") do
+    - resource_sym = form.object.class.to_s.underscore.to_sym
+    - delete_params = {resource_sym => {remove_poster_image: true}}
+    = link_to(polymorphic_path(form.object, delete_params), :method => :put, :class => "btn btn-mini") do
       = t('record.with_class_name.delete', class_name: method.to_s.humanize)
