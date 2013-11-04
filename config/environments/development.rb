@@ -27,4 +27,7 @@ MotionBank::Application.configure do
 
   # had to add the add following due to problems with js-routes, see https://github.com/railsware/js-routes/issues/79
   config.assets.initialize_on_precompile = true
+
+  # avoid inteferences with precompiled assets within the repository, see http://edgeguides.rubyonrails.org/asset_pipeline.html#local-precompilation
+  config.assets.prefix = "/dev-assets"
 end
