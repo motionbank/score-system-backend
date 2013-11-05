@@ -28,10 +28,14 @@
     .row-fluid
       .span6
         %label(for="imagesrc") New poster image:
+        - if (data.src) {
         #imagecontainer
           %img(src=data.src id="usedPosterImage")
           %a(id="deleteImage" href="/")
         %input(id="editImageSrc" type="text" name="imagesrc" value=data.src)
+        - } else {
+        %input(id="editImageSrc" type="text" name="imagesrc")
+        - }
         %input(id="cell_poster_image" name="cell[poster_image]" type="file")
 
 
