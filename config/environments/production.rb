@@ -78,4 +78,7 @@ MotionBank::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # had to add the add following due to problems with js-routes, see https://github.com/railsware/js-routes/issues/79
+  config.assets.initialize_on_precompile = true
 end
