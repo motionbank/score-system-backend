@@ -1,7 +1,7 @@
 locals ||= {}
 locals[:object] ||= @set
 
-object locals[:object]
+object locals[:object] => nil # the nil value means, don't wrap the object with its name
 
 node :id do
   locals[:object].id.to_s
