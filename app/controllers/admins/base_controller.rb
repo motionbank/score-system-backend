@@ -13,6 +13,7 @@ module Admins
     layout 'admins'
 
     before_filter :add_admin_view_path
+    before_action :authenticate_user!
 
     helper 'admins/form'
 

@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
 
   include ResourceHelper
 
-  before_action :authenticate_user!
   before_action :init_js_framework_settings
 
   layout :layout_by_resource
