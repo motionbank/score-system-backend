@@ -12,6 +12,13 @@ MotionBank::Application.routes.draw do
         resources :grid_cells, except: [:show, :new]
       end
     end
+
+    scope :api do
+      ["sets", "cells"].each do |model|
+        get "#{model}" => "api##{model}", as: "#{model}_api"
+        get "#{model}/:id" => "api##{model.singularize}", as: "#{model.singularize}_api"
+      end
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -54,7 +61,7 @@ MotionBank::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
