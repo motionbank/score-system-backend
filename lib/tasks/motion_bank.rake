@@ -3,13 +3,14 @@
 
 namespace :motion_bank do
 
-  desc "Imports the legacy MySQL database"
-  task :import_legacy => :environment do
+  desc 'Imports from the legacy MySQL database that is defined in config.yml for the SCORE_SLUG="my_score" key'
+  task :import_legacy, [:score_slug] => :environment do |t, args|
+    score_slug = args[:score_slug] || ENV['SCORE_SLUG']
+    raise ArgumentError.new('SCORE_SLUG has to be specified like this SCORE_SLUG="my_score"') unless score_slug
     require 'legacy_import'
     begin
-      score_key = "deborah_hay"
-      MultiTenancy.current_score = Score.find(score_key)
-      source_config = YAML::load_file("config/config.yml").fetch(score_key)
+      MultiTenancy.current_score = Score.find(score_slug)
+      source_config = YAML::load_file("config/config.yml").fetch(score_slug)
       importer = LegacyImport.new(source_config)
       importer.run
     rescue Errno::ENOENT => e
