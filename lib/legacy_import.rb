@@ -57,6 +57,11 @@ class LegacyImport
 
   def run
     [:users, :cells, :sets].each do |table|
+      model = TABLE_MODEL_MAPPING[table]
+      if model.count > 0
+        puts "Skipping table #{table} as the Mongoid model #{model} already contains documents"
+        next
+      end
       import(table)
     end
 
@@ -67,7 +72,7 @@ class LegacyImport
   def self.config_format_message
 <<-EOL
 Please make sure that your config file does have at least the following yaml tree.
-legacy_db:
+my_score_slug:
   database: YOUR_MySQL_DATABASE_NAME
   username: YOUR_MySQL_USER
   password: YOUR_MySQL_PASSWORD
