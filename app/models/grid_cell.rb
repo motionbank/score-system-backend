@@ -9,6 +9,7 @@ class GridCell
   # overriding fields (used to override the value from the canonical Cell)
   field :title, type: String
   field :description, type: String
+  field :additional_fields, type: Hash, default: {}
   mount_uploader :poster_image, ImageUploader
 
   # grid placement
@@ -22,4 +23,9 @@ class GridCell
 
 
   validates_presence_of :cell, :x, :y, :width, :height
+
+
+  def type
+    cell.type
+  end
 end
