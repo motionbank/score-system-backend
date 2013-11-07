@@ -18,6 +18,7 @@ child locals[:object].creator do
   attributes :id, :name, :email
 end
 
-child locals[:object].grid_cells => :cells do
+child locals[:object].grid_cells => :cells do |cells|
+  collection cells, object_root: false
   extends 'shared/cell'
 end
