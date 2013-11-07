@@ -1,0 +1,14 @@
+connection: &connection
+  username: USER_NAME
+  password: PASSWORD
+  host: localhost # optional
+
+deborah_hay:
+  database: motion_bank_score_deborah_hay
+  <<: *connection
+jbmf:
+  database: motion_bank_score_jbmf
+  <<: *connection
+two:
+  database: motion_bank_score_two
+  <<: *connection
