@@ -14,11 +14,17 @@ module Admins
 
     before_filter :add_admin_view_path
     before_action :authenticate_user!
+    before_action :set_current_navigation
 
     helper 'admins/form'
 
 
     protected
+
+
+    def set_current_navigation
+      @current_navigation = resource_sym
+    end
 
 
     def after_sign_out_path_for(resource_or_scope)
