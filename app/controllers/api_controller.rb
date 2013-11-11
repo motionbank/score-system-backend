@@ -1,4 +1,6 @@
 class ApiController < ApplicationController
+  before_filter :allow_cors
+
   # GET /api/sets
   def sets
     @sets = CellSet.all
