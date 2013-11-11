@@ -109,7 +109,7 @@ EditDialog.prototype = {
 		this.model = model;
 		this.editForm.empty();
 
-		if (this.model.canonicalCell.poster_image.small.url === this.model.src) {
+		if (this.model.canonicalCell.poster_image.medium.url === this.model.src) {
 			this.model.src = null;
 		}
 

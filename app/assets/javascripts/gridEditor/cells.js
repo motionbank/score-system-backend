@@ -66,7 +66,7 @@ GridCell.prototype = {
                     this.id + "_content'><span class='cell-image'></span><span class='cell-title'></span>" +
                     "<span class='cell-content'></span></span></div>";
         $("#grid").append(this.html);
-        
+
         this.setContent(this.title, this.description, this.src);
 
 
@@ -89,11 +89,15 @@ GridCell.prototype = {
 
 		this.width = data.grid_cell.width;
 		this.height = data.grid_cell.height;
-		
+
 		// If the grid cell does not have a value of its own it is taken from the canonical cell
 		this.title = data.grid_cell.title || '';
 		this.description = data.grid_cell.description || '';
-		this.src = data.grid_cell.poster_image.small.url || this.canonicalCell.poster_image.small.url || '';
+		if (!(/default.png$/i.test(data.grid_cell.poster_image.small.url))) {
+			this.src = data.grid_cell.poster_image.small.url;
+		}else{
+			this.src = this.canonicalCell.poster_image.small.url;
+		}
 	},
 
     onChangedRectangle: function(){
