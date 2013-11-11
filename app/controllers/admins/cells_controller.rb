@@ -71,7 +71,7 @@ module Admins
       # ActionController::StrongParameters#permit requires to specify all keys when permitting a hash field
       all_additional_keys = attrs[:cell][:additional_fields].keys
 
-      attrs.require(:cell).permit(:type, :title, :description, :poster_image, additional_fields: all_additional_keys)
+      attrs.require(:cell).permit(:type, :title, :description, :poster_image, :remove_poster_image, additional_fields: all_additional_keys)
     end
   end
 end
