@@ -93,7 +93,7 @@ GridCell.prototype = {
 		// If the grid cell does not have a value of its own it is taken from the canonical cell
 		this.title = data.grid_cell.title || '';
 		this.description = data.grid_cell.description || '';
-		if (!(/default.png$/i.test(data.grid_cell.poster_image.small.url))) {
+		if (!(/default[-a-z0-9A-z]*.png$/i.test(data.grid_cell.poster_image.small.url))) {
 			this.src = data.grid_cell.poster_image.small.url;
 		}else{
 			this.src = this.canonicalCell.poster_image.small.url;

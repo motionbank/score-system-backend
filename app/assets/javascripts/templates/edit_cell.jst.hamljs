@@ -28,7 +28,7 @@
     .row-fluid
       .span6
         %label(for="imagesrc") New poster image:
-        - if (data.src && !(/default.png$/i.test(data.src)) && data.src != data.canonicalCell.poster_image.small.url) {
+        - if (data.src && !(/default[-a-z0-9A-z]*.png$/i.test(data.src)) && data.src != data.canonicalCell.poster_image.small.url) {
         #imagecontainer
           %img(src=data.src id="usedPosterImage")
           %a(id="deleteImage" href="/")
