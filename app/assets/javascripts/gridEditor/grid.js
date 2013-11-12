@@ -27,7 +27,7 @@ Grid.prototype = {
 		$(".cell").css({ "width" : this.widthStep, "height" : this.heightStep });
 
 		this.saveCellSizeAsPixels();
-    this.container.prepend(this.drawGridMesh());
+    	this.container.prepend(this.drawGridMesh());
 
 		var addRowButtons = '<div><span id="removeRow">-</span><span id="addRow">+</span></div>';
 		var addColumnButtons = '<div><span id="removeColumn">-</span><span id="addColumn">+</span></div>';
@@ -40,7 +40,7 @@ Grid.prototype = {
 		$("#addColumn").click($.proxy(this.addColumn, this));
 		$("#removeColumn").click($.proxy(this.removeColumn, this));
 
-		this.updateButtonPositionAndSize();
+		this.setPositionsOfButtons();
 	},
 	
 	
@@ -63,15 +63,37 @@ Grid.prototype = {
 		return {x: column, y: row};
 	},
 
+	setPositionsOfButtons: function(){
+		$("#grid").css({"width":this.width,"height":this.height});
+    	$('#boundsForGrid').css({ "height" : (this.height + this.cellSize.height*2) });
+
+		var addRowButton = $("#addRow");
+		var removeRowButton = $("#removeRow");
+		var addColumnButton = $("#addColumn");
+		var removeColumnButton = $("#removeColumn");
+
+		var parentContainer = addColumnButton.parent().parent();
+		
+		addColumnButton.css({"left":parentContainer.width()-addColumnButton.width(), "height": parentContainer.height()/2, "top":parentContainer.height()/2, "padding-top":parentContainer.height()*0.16});
+		removeColumnButton.css({"left":parentContainer.width()-addColumnButton.width(), "height":parentContainer.height()/2, "padding-top":parentContainer.height()*0.16});
+		addRowButton.css({"top":parentContainer.height()-addRowButton.height(), "width":parentContainer.width()/2, "left":parentContainer.width()/2});
+		removeRowButton.css({"top":parentContainer.height()-addRowButton.height(), "width":parentContainer.width()/2});
+		
+		
+
+	},
+
 
 	addColumn: function(){
 		if(this.width < this.boundsWidth){
 			this.width += this.cellSize.width;
-			this.updateButtonPositionAndSize();
+			this.setPositionsOfButtons();
 		}
 		else {
 			alert("Maximum Columns reached! Maximum is: " + this.boundsWidth/parseInt(this.widthStep));
 		}
+		console.log("added column");
+		$('.cellTable').width($('.cellTable').width() - this.cellSize.width);
 		
 	},
 
@@ -86,7 +108,7 @@ Grid.prototype = {
 
 		if(cellsInColumnToRemove == 0){
 			this.width -= this.cellSize.width;
-			this.updateButtonPositionAndSize();
+			this.setPositionsOfButtons();
 		}
 		else {
 			alert("There is a cell in the column you want to remove!\nPlease delete or move this cell.");
@@ -97,12 +119,13 @@ Grid.prototype = {
 	addRow: function(){
 		if(this.height < this.boundsHeight){
 			this.height += this.cellSize.height;
-			this.updateButtonPositionAndSize();
+			this.setPositionsOfButtons();
 		}
 		else {
 			alert("Maximum Rows reached! Maximum is: " + this.boundsHeight/parseInt(this.heightStep));
 		}
-    $('.cellTable').height($('.cellTable').height() - this.cellSize.height);
+    	$('.cellTable').height($('.cellTable').height() - this.cellSize.height);
+    	console.log("added row");
 	},
 
 	removeRow: function(){
@@ -117,7 +140,7 @@ Grid.prototype = {
 
 		if(cellsInRowToRemove == 0){
 			this.height -= this.cellSize.height;
-			this.updateButtonPositionAndSize();
+			this.setPositionsOfButtons();
 		}
 		else {
 			alert("There is a cell in the row you want to remove!\nPlease delete or move this cell.");
@@ -125,24 +148,6 @@ Grid.prototype = {
     $('.cellTable').height($('.cellTable').height() + this.cellSize.height);
 	},
 	
-	
-	updateButtonPositionAndSize: function(){
-		var addRowButton = $("#addRow");
-		var removeRowButton = $("#removeRow");
-		var addColumnButton = $("#addColumn");
-		var removeColumnButton = $("#removeColumn");
-
-		
-		addColumnButton.css({"left":this.width, "height": this.height/2, "top":this.height/2});
-		removeColumnButton.css({"left":this.width, "height":this.height/2});
-		addRowButton.css({"top":this.height, "width":this.width/2, "left":this.width/2});
-		removeRowButton.css({"top":this.height, "width":this.width/2});
-
-		$("#grid").css({"width":this.width,"height":this.height});
-    $('#boundsForGrid').css({ "height" : (this.height + this.cellSize.height*2) });
-	},
-
-
 	//remove GridCell when clicking in Edit Form
 	removeCell: function(cellToRemove){
 		//remove cell from grid
