@@ -45,19 +45,35 @@ EditDialog.prototype = {
 
 	submitForm: function(event) {
 		var form = $("#dialog-modal").find('form');
-		form.submit();
+
+		// do a HTML 5 file upload, this will prevent it working in non-HTML 5 browsers
+		var formData = new FormData(form[0]);
+		var successHandler = function(data) {
+			var newTitle = form.find("#editTitle").val();
+			var newDescription = form.find("#editDescription").val();
+			var newSrc = data.grid_cell.poster_image.small.url;
+
+			//cells.js, set new content for contentCell
+			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
+
+			//edit.js
+			editBox.closeDialog();
+		};
+		$.ajax({
+			url: form.attr('action'),
+			type: 'POST',
+			// Form data
+			data: formData,
+			//event handlers
+			success: successHandler,
+			//Options to tell jQuery not to process data or worry about content-type.
+			cache: false,
+			contentType: false,
+			processData: false
+		});
+
 		//prevent form from reloading the page
 		event.preventDefault();
-
-		var newTitle = form.find("#editTitle").val();
-		var newDescription = form.find("#editDescription").val();
-		var newSrc = form.find("#editImageSrc").val();
-
-		//cells.js, set new content for contentCell
-		currentCellToEdit.setContent(newTitle, newDescription, newSrc);
-
-		//edit.js
-		editBox.closeDialog();
 	},
 
 

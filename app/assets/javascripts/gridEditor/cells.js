@@ -222,8 +222,13 @@ GridCell.prototype = {
         var description = this.whichDataToUse(this.description, this.canonicalCell.description);
 
         if(this.src){
-            var image = this.whichDataToUse(this.src, this.canonicalCell.poster_image.url);
-            $(gridCell).find(".cell-image").html("<img src='" + image + "'></img>");
+            var imageURL = this.whichDataToUse(this.src, this.canonicalCell.poster_image.url);
+            var imageContainer = $(gridCell).find(".cell-image");
+			if(imageContainer.find('img').length > 0) {
+				imageContainer.find("img").attr("src", imageURL);
+			} else {
+				imageContainer.html("<img src='" + imageURL + "'></img>");
+			}
             $(gridCell).find(".cell-title").html("");
             $(gridCell).find(".cell-content").html("");
         }
@@ -240,7 +245,7 @@ GridCell.prototype = {
         var title = this.whichDataToUse(this.title, this.canonicalCell.title);
         var description = this.whichDataToUse(this.description, this.canonicalCell.description);
 
-        if(this.src == '' ){
+        if(this.src){
             var image = this.whichDataToUse(this.src, this.canonicalCell.poster_image.url);
             $(contentCell).find(".contentCellPosterImage").html("<img src='" + image + "'></img>");
         }

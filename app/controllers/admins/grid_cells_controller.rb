@@ -26,7 +26,7 @@ module Admins
     # PATCH/PUT /admins/cell_sets/1/grid_cells/1
     def update
       if @grid_cell.update(grid_cell_params)
-        render nothing: true
+        render @grid_cell, notice: 'Grid cell was successfully updated.'
       else
         render json: {errors: @grid_cell.errors.full_messages}, status: :unprocessable_entity
       end

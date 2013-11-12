@@ -1,4 +1,4 @@
-%form(action=formTargetUrl method="put" data-remote="true" accept-charset="UTF-8")
+%form(action=formTargetUrl method="put" enctype="multipart/form-data" data-remote="true" accept-charset="UTF-8")
   %div(style="margin:0;padding:0;display:inline")
     %input(type="hidden" value="✓" name="utf8")
     %input(type="hidden" value="put" name="_method")
