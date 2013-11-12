@@ -31,10 +31,11 @@
     .row-fluid
       .span6
         %label(for="imagesrc") New poster image:
-        - if (data.src && !(/default[-a-z0-9A-z]*.png$/i.test(data.src)) && data.src != data.canonicalCell.poster_image.small.url) {
+        - if (data.src && !data.defaultImageRegex.test(data.src) && data.src != data.canonicalCell.poster_image.small.url) {
         #imagecontainer
           %img(src=data.src id="usedPosterImage")
           %a(id="deleteImage" href="/")
+          %input(id="removeImageSrc" type="hidden" value="" name="grid_cell[remove_poster_image]")
         %input(id="editImageSrc" type="text" name="grid_cell[poster_image]" value=data.src)
         - } else {
         %input(id="editImageSrc" type="text" name="grid_cell[poster_image]")

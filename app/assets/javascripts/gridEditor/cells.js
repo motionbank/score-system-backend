@@ -17,6 +17,9 @@ function GridCell(data) {
 }
 
 GridCell.prototype = {
+
+	defaultImageRegex: /default[-a-z0-9A-z]*.png$/i,
+
     init: function ()
     {
         this.render();
@@ -93,12 +96,18 @@ GridCell.prototype = {
 		// If the grid cell does not have a value of its own it is taken from the canonical cell
 		this.title = data.grid_cell.title || '';
 		this.description = data.grid_cell.description || '';
-		if (!(/default[-a-z0-9A-z]*.png$/i.test(data.grid_cell.poster_image.small.url))) {
+		this.updatePosterImageFromData(data);
+	},
+
+
+	updatePosterImageFromData: function(data) {
+		if (!this.defaultImageRegex.test(data.grid_cell.poster_image.small.url)) {
 			this.src = data.grid_cell.poster_image.small.url;
 		}else{
 			this.src = this.canonicalCell.poster_image.small.url;
 		}
 	},
+
 
     onChangedRectangle: function(){
         this.getAndSaveNewPositionAndSize();
@@ -221,7 +230,7 @@ GridCell.prototype = {
         var title = this.whichDataToUse(this.title, this.canonicalCell.title);
         var description = this.whichDataToUse(this.description, this.canonicalCell.description);
 
-        if(this.src){
+        if(this.src) {
             var imageURL = this.whichDataToUse(this.src, this.canonicalCell.poster_image.url);
             var imageContainer = $(gridCell).find(".cell-image");
 			if(imageContainer.find('img').length > 0) {
@@ -231,8 +240,7 @@ GridCell.prototype = {
 			}
             $(gridCell).find(".cell-title").html("");
             $(gridCell).find(".cell-content").html("");
-        }
-        else{
+        } else {
             $(gridCell).find(".cell-image").html("");
             $(gridCell).find(".cell-title").html(title);
             $(gridCell).find(".cell-content").html(description);
@@ -245,7 +253,7 @@ GridCell.prototype = {
         var title = this.whichDataToUse(this.title, this.canonicalCell.title);
         var description = this.whichDataToUse(this.description, this.canonicalCell.description);
 
-        if(this.src){
+        if(this.src) {
             var image = this.whichDataToUse(this.src, this.canonicalCell.poster_image.url);
             $(contentCell).find(".contentCellPosterImage").html("<img src='" + image + "'></img>");
         }

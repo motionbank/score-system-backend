@@ -51,7 +51,8 @@ EditDialog.prototype = {
 		var successHandler = function(data) {
 			var newTitle = form.find("#editTitle").val();
 			var newDescription = form.find("#editDescription").val();
-			var newSrc = data.grid_cell.poster_image.small.url;
+			currentCellToEdit.updatePosterImageFromData(data);
+			var newSrc = currentCellToEdit.src;
 
 			//cells.js, set new content for contentCell
 			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
@@ -80,6 +81,7 @@ EditDialog.prototype = {
 	deleteImage: function(e) {
 		$("#editImageSrc").val("");
 		$("#usedPosterImage").hide().attr('src', '');
+		$("#removeImageSrc").val("1"); // the ruby gem carrierwave uses a checkbox field to delete the current file.
 		this.showDisplayDeleteBtn();
 		e.preventDefault();
 	},
