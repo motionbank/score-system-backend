@@ -96,6 +96,17 @@ GridCell.prototype = {
 		}else{
 			this.src = this.canonicalCell.poster_image.small.url;
 		}
+
+        //check if css-z-index is there as an additional field and set it as this.z, if not set it to 3
+        if("css-z-index" in data.grid_cell.canonical_cell.additional_fields){
+            //console.log("z-index exists in database");
+            var zIndex = data.grid_cell.canonical_cell.additional_fields.css-z-index;
+            this.z = zIndex;
+        }
+        else{
+            //console.log("z-index exists not in database");
+            this.z = 3;
+        }
 	},
 
 
@@ -130,6 +141,7 @@ GridCell.prototype = {
         this.height = $("#gridCell_"+this.id).height();
 
         $("#gridCell_"+this.id+"_content img").css({"width": this.width, "height":this.height});
+
     },
 
     checkCollisions: function(){
@@ -144,7 +156,7 @@ GridCell.prototype = {
 		var gridPosition = theGrid.mapPixelsToGrid(this.x, this.y);
         this.x = gridPosition.x * this.gridSize.width;
 		this.y = gridPosition.y * this.gridSize.height;
-        $("#gridCell_"+this.id).css({left: this.x, top:this.y});
+        $("#gridCell_"+this.id).css({left: this.x, top:this.y, 'z-index':this.z});
 
         this.getAndSaveNewPositionAndSize();
     },
