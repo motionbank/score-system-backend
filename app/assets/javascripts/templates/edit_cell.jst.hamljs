@@ -1,4 +1,7 @@
-%form(action="" method="post")
+%form(action=formTargetUrl method="put" data-remote="true" accept-charset="UTF-8")
+  %div(style="margin:0;padding:0;display:inline")
+    %input(type="hidden" value="✓" name="utf8")
+    %input(type="hidden" value="put" name="_method")
   %fieldset#editCell
     .row-fluid
       .span6
@@ -8,7 +11,7 @@
     .row-fluid
       .span6
         %label(for="editTitle") New title:
-        %textarea(id="editTitle" name="editTitle")
+        %textarea(id="editTitle" name="grid_cell[title]")
           = data.title
       .span6.original
         %dl
@@ -18,7 +21,7 @@
     .row-fluid
       .span6
         %label(for="editDescription") New description:
-        %textarea(id="editDescription" type="text" name="editDescription")
+        %textarea(id="editDescription" type="text" name="grid_cell[description]")
           = data.description
       .span6.original
         %dl
@@ -32,11 +35,11 @@
         #imagecontainer
           %img(src=data.src id="usedPosterImage")
           %a(id="deleteImage" href="/")
-        %input(id="editImageSrc" type="text" name="imagesrc" value=data.src)
+        %input(id="editImageSrc" type="text" name="grid_cell[poster_image]" value=data.src)
         - } else {
-        %input(id="editImageSrc" type="text" name="imagesrc")
+        %input(id="editImageSrc" type="text" name="grid_cell[poster_image]")
         - }
-        %input(id="cell_poster_image" name="cell[poster_image]" type="file")
+        %input(id="cell_poster_image" name="grid_cell[poster_image]" type="file")
 
 
       .span6.original
@@ -63,15 +66,15 @@
         %table#specialAttributes
           %tr
             %th.key
-              %input(name="cell[additional_fields][][key]" type="text" placeholder="Key")
+              %input(name="grid_cell[additional_fields][][key]" type="text" placeholder="Key")
             %td.value
-              %input(name="cell[additional_fields][][value]" type="text" placeholder="Value")
+              %input(name="grid_cell[additional_fields][][value]" type="text" placeholder="Value")
           :each key, value in usedCellAdditionalFields
             %tr
               %th.key
-                %input(name="cell[additional_fields][][key]" type="text" value=key)
+                %input(name="grid_cell[additional_fields][][key]" type="text" value=key)
               %td.value
-                %input(name="cell[additional_fields][][value]" type="text" value=value)
+                %input(name="grid_cell[additional_fields][][value]" type="text" value=value)
 
 
         %input(id="addSpecialAttribute" type="button" name="addSpecialAttribute" value="Edit/Add additional fields ")

@@ -44,14 +44,14 @@ EditDialog.prototype = {
 	},
 
 	submitForm: function(event) {
-		$("#editCell").submit();
+		var form = $("#dialog-modal").find('form');
+		form.submit();
 		//prevent form from reloading the page
 		event.preventDefault();
 
-		var dialog = $("#dialog-modal");
-		var newTitle = $(dialog).find("#editTitle").val();
-		var newDescription = $(dialog).find("#editDescription").val();
-		var newSrc = $(dialog).find("#editImageSrc").val();
+		var newTitle = form.find("#editTitle").val();
+		var newDescription = form.find("#editDescription").val();
+		var newSrc = form.find("#editImageSrc").val();
 
 		//cells.js, set new content for contentCell
 		currentCellToEdit.setContent(newTitle, newDescription, newSrc);
@@ -115,7 +115,13 @@ EditDialog.prototype = {
 
 		//var usedCellAdditionalFields = this.model.additional_fields || this.model.canonicalCell.additional_fields;
 		var usedCellAdditionalFields = this.model.additional_fields;
-		this.formTemplate = JST['templates/edit_cell']({data: this.model, usedCellAdditionalFields: usedCellAdditionalFields});
+		var scoreId = APPLICATION.score_id;
+		var setId = APPLICATION.resource_id;
+		this.formTemplate = JST['templates/edit_cell']({
+			data: this.model,
+			formTargetUrl: Routes.cell_set_grid_cell_path(scoreId, setId, this.model.id),
+			usedCellAdditionalFields: usedCellAdditionalFields
+		});
 		this.editForm.append(this.formTemplate);
 		this.addEvents();
 		$("#dialog-modal").dialog("open");
@@ -133,4 +139,4 @@ EditDialog.prototype = {
 	closeConfirmDialog: function() {
 		$("#dialog-confirm").dialog("close");
 	}
-}
+};
