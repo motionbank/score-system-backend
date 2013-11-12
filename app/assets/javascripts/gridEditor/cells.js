@@ -1,13 +1,3 @@
-//  BUG: When hovering gridCell hover event fires one time on outer div, second time on image
-//          this causes an error, because the code accesses the parent event of the hovered element (in setEditor.js -> onMouseIn, onMouseOut)
-//          and tries to get the id of the parent element. works fine for outer div, error on image.
-
-//  TODO: implemented updating of this.x, .y, .width and .height as an event directly bound to resize
-//          by this the functions "this.update" and "this.getAndSaveNewPositionAndSize" could be removed
-//          and the binding of event "resizestop dragstop" could also be removed
-//          but when doing is, the resizing of the image does not work anymore properly
-
-
 
 //GridCell constructor
 function GridCell(data) {

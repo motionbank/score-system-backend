@@ -1,13 +1,3 @@
-//	TODO: Layouts implementieren
-//	TODO: Templates für alle größeren Div-Inhalte schreiben und einbinden
-//			welche wären: table.js -> createUsedContentRow, evtl. createDraggableCellHelper
-//							cells.js -> render
-
-
-//	TODO: Responsive, Skalierung & Neuberechnung wenn sich window-Größe verändert für Grid, Cells and EditBox
-//	Anmerkung: Cells & Grid = responsive. wenn Cell jedoch größer gezogen wurde, nicht mehr responsive.
-//  TO FIX: wenn Grid skaliert wird, wird dies auch als "window.resize"-Event behandelt. 
-
 
 var currentMousePos = { x: -1, y: -1 };
 var currentCellToEdit;
