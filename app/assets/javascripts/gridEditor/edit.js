@@ -53,9 +53,10 @@ EditDialog.prototype = {
 			var newDescription = form.find("#editDescription").val();
 			currentCellToEdit.updatePosterImageFromData(data);
 			var newSrc = currentCellToEdit.src;
+			var additional_fields = data.grid_cell.additional_fields;
 
 			//cells.js, set new content for contentCell
-			currentCellToEdit.setContent(newTitle, newDescription, newSrc);
+			currentCellToEdit.setContent(newTitle, newDescription, newSrc, additional_fields);
 
 			//edit.js
 			editBox.closeDialog();

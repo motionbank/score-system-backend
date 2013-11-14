@@ -60,7 +60,7 @@ GridCell.prototype = {
                     "<span class='cell-content'></span></span></div>";
         $("#grid").append(this.html);
 
-        this.setContent(this.title, this.description, this.src);
+        this.setContent(this.title, this.description, this.src, this.additional_fields);
 
 
         //get the gridsize and set the size of the cell
@@ -74,6 +74,7 @@ GridCell.prototype = {
 		this.id = data.grid_cell.id;
 		this.canonicalCell = data.grid_cell.canonical_cell;
 		this.type = this.canonicalCell.type;
+		this.additional_fields = data.grid_cell.additional_fields;
 
 		// multiply the abstract grid coordinates with the actual cell size in pixels
 		var absCellSize = theGrid.getCellSizeAsPixels();
@@ -207,10 +208,11 @@ GridCell.prototype = {
     },
 
     //TODO Create Templates for Cells for different types
-    setContent: function(title, description, imageSrc){
+    setContent: function(title, description, imageSrc, additional_fields){
         this.title = title;
         this.description = description;
         this.src = imageSrc;
+		this.additional_fields = additional_fields;
 
         this.updateGridCell();
         this.updateContentCell();

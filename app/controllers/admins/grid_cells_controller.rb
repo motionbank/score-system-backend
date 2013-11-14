@@ -52,7 +52,20 @@ module Admins
 
       # Only allow a trusted parameter "white list" through.
       def grid_cell_params
-        params.require(:grid_cell).permit(:title, :description, :poster_image, :remove_poster_image, :cell_id, :x, :y, :width, :height, :additional_fields)
+        attrs = params.dup
+
+        attrs[:grid_cell][:additional_fields] ||= {}
+
+        # pre-process additional_fields to be a standard hash, instead of an array containing {key: KEY, value: VALUE} hashes
+        attrs[:grid_cell][:additional_fields] = attrs[:grid_cell][:additional_fields].inject({}) do |result, element|
+          result[element[:key]] = element[:value] if element[:key].present? && element[:value].present?
+          result
+        end
+
+        # ActionController::StrongParameters#permit requires to specify all keys when permitting a hash field
+        all_additional_keys = attrs[:grid_cell][:additional_fields].keys
+
+        attrs.require(:grid_cell).permit(:title, :description, :poster_image, :remove_poster_image, :cell_id, :x, :y, :width, :height, additional_fields: all_additional_keys)
       end
   end
 end
