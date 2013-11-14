@@ -5,7 +5,7 @@
 
 
 function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep ){
-	
+
 	this.width = width*parseInt(widthStep);
 	this.height = height*parseInt(heightStep);
 	this.boundsWidth = boundsWidth*parseInt(widthStep);
@@ -29,21 +29,21 @@ Grid.prototype = {
 		this.saveCellSizeAsPixels();
     	this.container.prepend(this.drawGridMesh());
 
-		var addRowButtons = '<div><span id="removeRow">-</span><span id="addRow">+</span></div>';
-		var addColumnButtons = '<div><span id="removeColumn">-</span><span id="addColumn">+</span></div>';
+		var addRowButtons = '<div id="addRow">+</div><div id="removeRow">-</div>';
+		var addColumnButtons = '<div id="removeColumn"><span>-</span></div><div id="addColumn"><span>+</span></div>';
 
-		$("#boundsForGrid").append(addRowButtons);
+		$("#rowButtons").append(addRowButtons);
 		$("#addRow").click($.proxy(this.addRow, this));
 		$("#removeRow").click($.proxy(this.removeRow, this));
 
-		$("#boundsForGrid").append(addColumnButtons);
+		$("#columnButtons").append(addColumnButtons);
 		$("#addColumn").click($.proxy(this.addColumn, this));
 		$("#removeColumn").click($.proxy(this.removeColumn, this));
 
-		this.setPositionsOfButtons();
+		this.setGridHeight();
 	},
-	
-	
+
+
     saveCellSizeAsPixels: function() {
 		var width = parseInt(this.widthStep, 10);
 		var height = parseInt(this.heightStep, 10);
@@ -63,21 +63,9 @@ Grid.prototype = {
 		return {x: column, y: row};
 	},
 
-	setPositionsOfButtons: function(){
+	setGridHeight: function(){
 		$("#grid").css({"width":this.width,"height":this.height});
-    	$('#boundsForGrid').css({ "height" : (this.height + this.cellSize.height*2) });
-
-		var addRowButton = $("#addRow");
-		var removeRowButton = $("#removeRow");
-		var addColumnButton = $("#addColumn");
-		var removeColumnButton = $("#removeColumn");
-
-		var parentContainer = addColumnButton.parent().parent();
-		
-		addColumnButton.css({"left":parentContainer.width()-addColumnButton.width(), "height": parentContainer.height()/2, "top":parentContainer.height()/2, "padding-top":parentContainer.height()*0.16});
-		removeColumnButton.css({"left":parentContainer.width()-addColumnButton.width(), "height":parentContainer.height()/2, "padding-top":parentContainer.height()*0.16});
-		addRowButton.css({"top":parentContainer.height()-addRowButton.height(), "width":parentContainer.width()/2, "left":parentContainer.width()/2});
-		removeRowButton.css({"top":parentContainer.height()-addRowButton.height(), "width":parentContainer.width()/2});
+   	$('#boundsForGrid, #columnButtons').css({ "height" : (this.height + this.cellSize.height*2) });
 	},
 
 
@@ -100,14 +88,14 @@ Grid.prototype = {
 	addColumn: function() {
 		if(this.width < this.boundsWidth){
 			this.width += this.cellSize.width;
-			this.setPositionsOfButtons();
+			this.setGridHeight();
 			this.persistSetSize();
 		}
 		else {
 			alert("Maximum Columns reached! Maximum is: " + this.boundsWidth/parseInt(this.widthStep));
 		}
 		console.log("added column");
-		$('.cellTable').width($('.cellTable').width() - this.cellSize.width);
+//		$('.cellTable').width($('.cellTable').width() - this.cellSize.width);
 	},
 
 
@@ -122,7 +110,7 @@ Grid.prototype = {
 
 		if(cellsInColumnToRemove == 0){
 			this.width -= this.cellSize.width;
-			this.setPositionsOfButtons();
+			this.setGridHeight();
 			this.persistSetSize();
 		}
 		else {
@@ -130,11 +118,11 @@ Grid.prototype = {
 		}
 	},
 
-	
+
 	addRow: function(){
 		if(this.height < this.boundsHeight){
 			this.height += this.cellSize.height;
-			this.setPositionsOfButtons();
+			this.setGridHeight();
 			this.persistSetSize();
 		}
 		else {
@@ -156,7 +144,7 @@ Grid.prototype = {
 
 		if(cellsInRowToRemove == 0){
 			this.height -= this.cellSize.height;
-			this.setPositionsOfButtons();
+			this.setGridHeight();
 			this.persistSetSize();
 		}
 		else {
@@ -164,7 +152,7 @@ Grid.prototype = {
 		}
     $('.cellTable').height($('.cellTable').height() + this.cellSize.height);
 	},
-	
+
 	//remove GridCell when clicking in Edit Form
 	removeCell: function(cellToRemove){
 		//remove cell from grid
@@ -212,7 +200,7 @@ Grid.prototype = {
 		var absCellSize = this.getCellSizeAsPixels();
 		var w = absCellSize.width;
 		var h = absCellSize.height;
-		
+
 		var pathDescription = "M " + w + " 0 L 0 0 0 " + h;
 		var path = '<path d="'+ pathDescription + '" fill="none" stroke="#fff" stroke-width="1"/>';
 		var pattern = '<pattern id="gridPattern" width="'+ w +'" height="'+ h +'" patternUnits="userSpaceOnUse">' + path + '</pattern>';

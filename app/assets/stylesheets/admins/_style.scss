@@ -33,7 +33,7 @@ body{
 .bubble {
   border: 1px solid $bubbleBorderColor;
   background: $white;
-  padding: 0 $baseLineHeight $baseLineHeight;
+  padding: 0 32px $baseLineHeight;
   ul{
     list-style: none;
   }
