@@ -101,7 +101,7 @@ GridCell.prototype = {
         //check if css-z-index is there as an additional field and set it as this.z, if not set it to 3
         if("css-z-index" in data.grid_cell.canonical_cell.additional_fields){
             //console.log("z-index exists in database");
-            var zIndex = data.grid_cell.canonical_cell.additional_fields.css-z-index;
+            var zIndex = data.grid_cell.canonical_cell.additional_fields['css-z-index'];
             this.z = zIndex;
         }
         else{
