@@ -26,6 +26,6 @@ class GridCell
 
 
   def type
-    cell.type
+    cell.try(:type)
   end
 end
