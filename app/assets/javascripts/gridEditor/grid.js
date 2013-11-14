@@ -78,24 +78,38 @@ Grid.prototype = {
 		removeColumnButton.css({"left":parentContainer.width()-addColumnButton.width(), "height":parentContainer.height()/2, "padding-top":parentContainer.height()*0.16});
 		addRowButton.css({"top":parentContainer.height()-addRowButton.height(), "width":parentContainer.width()/2, "left":parentContainer.width()/2});
 		removeRowButton.css({"top":parentContainer.height()-addRowButton.height(), "width":parentContainer.width()/2});
-		
-		
-
 	},
 
 
-	addColumn: function(){
+	persistSetSize: function() {
+		var scoreId = APPLICATION.score_id;
+		var setId = APPLICATION.resource_id;
+		var columns = this.width/parseInt(this.widthStep);
+		var rows = this.height/parseInt(this.heightStep);
+
+		$.post(
+			Routes.cell_set_path(scoreId, setId),
+			{
+				cell_set: {columns: columns, rows: rows},
+				_method: "patch" // to get rails to handle this a update request
+			}
+		);
+	},
+
+
+	addColumn: function() {
 		if(this.width < this.boundsWidth){
 			this.width += this.cellSize.width;
 			this.setPositionsOfButtons();
+			this.persistSetSize();
 		}
 		else {
 			alert("Maximum Columns reached! Maximum is: " + this.boundsWidth/parseInt(this.widthStep));
 		}
 		console.log("added column");
 		$('.cellTable').width($('.cellTable').width() - this.cellSize.width);
-		
 	},
+
 
 	removeColumn: function(){
 		var cellsInColumnToRemove = 0;
@@ -109,6 +123,7 @@ Grid.prototype = {
 		if(cellsInColumnToRemove == 0){
 			this.width -= this.cellSize.width;
 			this.setPositionsOfButtons();
+			this.persistSetSize();
 		}
 		else {
 			alert("There is a cell in the column you want to remove!\nPlease delete or move this cell.");
@@ -120,6 +135,7 @@ Grid.prototype = {
 		if(this.height < this.boundsHeight){
 			this.height += this.cellSize.height;
 			this.setPositionsOfButtons();
+			this.persistSetSize();
 		}
 		else {
 			alert("Maximum Rows reached! Maximum is: " + this.boundsHeight/parseInt(this.heightStep));
@@ -141,6 +157,7 @@ Grid.prototype = {
 		if(cellsInRowToRemove == 0){
 			this.height -= this.cellSize.height;
 			this.setPositionsOfButtons();
+			this.persistSetSize();
 		}
 		else {
 			alert("There is a cell in the row you want to remove!\nPlease delete or move this cell.");

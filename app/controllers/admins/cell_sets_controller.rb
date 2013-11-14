@@ -37,7 +37,14 @@ module Admins
     # PATCH/PUT /sets/1
     def update
       if @cell_set.update(cellset_params)
-        redirect_to edit_cell_set_url(@cell_set), notice: 'Set was successfully updated.'
+        respond_to do |format|
+          format.js {
+            head(:ok, notice: 'Set was successfully updated.')
+          }
+          format.html {
+            redirect_to edit_cell_set_url(@cell_set), notice: 'Set was successfully updated.'
+          }
+        end
       else
         render action: 'edit'
       end
@@ -71,7 +78,7 @@ module Admins
 
     # Only allow a trusted parameter "white list" through.
     def cellset_params
-      params.require(:cell_set).permit(:title, :description, :poster_image, :path, :cell_width, :cell_height, :remove_poster_image)
+      params.require(:cell_set).permit(:title, :description, :poster_image, :poster_image_cache, :path, :columns, :rows, :cell_width, :cell_height, :remove_poster_image)
     end
   end
 end
