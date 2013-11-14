@@ -26,7 +26,26 @@ class CellSet
 
   validates_presence_of :title
 
+  before_validation :orphan_grid_cells_without_cells
+
   def self.gender
     :m
   end
+
+
+  private
+
+    def orphan_grid_cells_without_cells
+      grid_cells.dup.each do |grid_cell|
+        if grid_cell.cell.nil?
+          # this would lead to validation errors for the whole set, thus we orphan that grid cell -> make it a
+          # root document in the top-level (not tenanted) 'grid_cells' collection.
+          self.grid_cells.delete(grid_cell)
+
+          # use the pure ruby driver without any callbacks to save the document in the grid_cells collection
+          score_id = MultiTenancy.current_score.id
+          GridCell.collection.insert(grid_cell.attributes.merge(cell_set_id: self.id, score_id: score_id))
+        end
+      end
+    end
 end
