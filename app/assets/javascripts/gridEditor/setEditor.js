@@ -27,7 +27,7 @@ $(document).ready(function() {
 		initTableEvents();
 
 		//initiating works now with number of rows & columns
-		//new Grid ( numberOfColumns, numberOfMaxColumns, numberOfRows,  numberOfMaxRows, cellWidth, cellHeight)
+		//new Grid ( numberOfColumns, numberOfRows, numberOfMaxColumns, numberOfMaxRows, cellWidth, cellHeight)
 		//grid.js
 		var columns = APPLICATION.columns || 3;
 		var rows = APPLICATION.rows || 3;
