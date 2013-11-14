@@ -108,6 +108,10 @@ function onDrop(event){
 }
 
 function createGridCell(data) {
+	if(!data.grid_cell.canonical_cell) {
+		return;
+	}
+
 	//cell.js
 	var newGridCell = new GridCell(data);
 	theGrid.addCell(newGridCell);
