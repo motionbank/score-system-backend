@@ -64,6 +64,7 @@ module Admins
 
         # ActionController::StrongParameters#permit requires to specify all keys when permitting a hash field
         all_additional_keys = attrs[:grid_cell][:additional_fields].keys
+        all_additional_keys = [nil] if attrs[:grid_cell][:additional_fields] == {} # allow the hash to be cleared
 
         attrs.require(:grid_cell).permit(:title, :description, :poster_image, :remove_poster_image, :cell_id, :x, :y, :width, :height, additional_fields: all_additional_keys)
       end
