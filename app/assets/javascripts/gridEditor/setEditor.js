@@ -4,15 +4,15 @@ var currentCellToEdit;
 var theGrid;
 
 
-$(document).ready(function() { 
+$(document).ready(function() {
 
 	//registrate mouse position and update it in a global variable
     getMousePosition();
-   	
+
    	//initialize the components
    	initialize();
 
-	
+
 	function getMousePosition(){
 		$(document).mousemove(function(event) {
 	        currentMousePos.x = event.pageX;
@@ -20,18 +20,18 @@ $(document).ready(function() {
 	    });
 	}
 
-    
+
 	function initialize(){
 		//table.js
 		initTabs();
 		initTableEvents();
 
 		//initiating works now with number of rows & columns
-		//new Grid ( numberOfColumns, numberOfRows, numberOfMaxColumns, numberOfMaxRows, cellWidth, cellHeight)
+		//new Grid ( numberOfColumns, numberOfMaxColumns, numberOfRows,  numberOfMaxRows, cellWidth, cellHeight)
 		//grid.js
 		var columns = APPLICATION.columns || 3;
 		var rows = APPLICATION.rows || 3;
-		theGrid = new Grid( columns, rows, 25, 15, "50px", "25px");
+		theGrid = new Grid( columns, rows, 200, 25, "50px", "25px");
 
 		//edit.js
 		editBox = new EditDialog("Default Title", "text", "Default Description", "");

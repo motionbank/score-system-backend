@@ -1,7 +1,7 @@
 @import "compass/css3/box-sizing";
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
-
+@import "compass/css3/user-interface";
 /*TODO
 height boundsForGrid?
 
@@ -70,9 +70,9 @@ h2 {
   span.cell-title, .cell-content{display: none;}
 }
 
-.cell h3{ 
-  /*text-align: center;*/ 
-  padding: 5px 0px 5px 5px; 
+.cell h3{
+  /*text-align: center;*/
+  padding: 5px 0px 5px 5px;
   position: absolute;
 }
 
@@ -171,12 +171,26 @@ h2 {
   cursor: pointer;
 }
 
-#addRow, #removeRow{
+#columnButtons {
   position: absolute;
+  width: 22px;
+  right: 42px;
+  overflow: hidden;
+  @include user-select('none')
+}
+#rowButtons {
+  widht: 100%;
+  height: 20px;
+  @include user-select('none')
+}
+
+#addRow, #removeRow{
+  position: relative;
+  float:right;
   text-align: center;
   font-size: 20px;
-  width:100px;
-  height:22px;
+  width: 100px;
+  height: 22px;
   padding: 0px 0px 0px 0px;
 }
 
@@ -189,12 +203,18 @@ h2 {
 }
 
 #addColumn, #removeColumn{
-  position: absolute;
+  position: relative;
+  display: inline-table;
   text-align: center;
   font-size: 20px;
-  width:22px;
-  height:200px;
-  padding-top:2%;
+  width: 22px;
+  height: 50%;
+  span {
+    display: table-cell;
+    vertical-align: middle;
+    width: 22px;
+    height: 100%;
+  }
 }
 
 #addColumn {
@@ -239,6 +259,7 @@ svg {
 }
 #wrap{
   .ui-tabs-panel{
+    @include user-select('none');
     h3{
       display:none;
     }
@@ -253,6 +274,7 @@ svg {
     }
   }
   .ui-tabs{
+    @include user-select('none');
     margin:15px 0 0 0;
     font-size:13px;
     color:#333;
