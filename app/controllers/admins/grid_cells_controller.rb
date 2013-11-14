@@ -52,7 +52,7 @@ module Admins
 
       # Only allow a trusted parameter "white list" through.
       def grid_cell_params
-        params.require(:grid_cell).permit(:title, :description, :poster_image, :remove_poster_image, :cell_id, :x, :y, :width, :height)
+        params.require(:grid_cell).permit(:title, :description, :poster_image, :remove_poster_image, :cell_id, :x, :y, :width, :height, :additional_fields)
       end
   end
 end
