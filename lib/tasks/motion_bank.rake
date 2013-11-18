@@ -20,4 +20,23 @@ namespace :motion_bank do
     end
   end
 
+  desc 'Remove all missing.jpg poster images from db'
+  task :remove_missing_jpg_images_from_db => :environment do |t, args|
+    scores = Score.all
+    scores.each do |score|
+      MultiTenancy.current_score = score
+      cells = Cell.where(poster_image_filename: 'missing.jpg')
+      remove_missing_jpg(cells)
+      cell_sets = CellSet.where(poster_image_filename: 'missing.jpg')
+      remove_missing_jpg(cell_sets)
+    end
+  end
+
+private
+ def remove_missing_jpg(cl)
+    cl.each do |c|
+      c.remove_poster_image=true
+      c.save
+    end
+  end
 end
