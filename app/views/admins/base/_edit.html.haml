@@ -21,8 +21,8 @@
           = f.submit I18n.t('helpers.submit.update', model: model_name),
                     class: "btn btn-primary"
 
-        - if preview
-          = render "admins/shared/buttons/preview", resource: resource, preview: preview
+
+        = render "admins/shared/buttons/preview", resource: resource, preview: preview
 
         = link_to "« #{t('record.index')}", polymorphic_path(resource.class), :class => "btn"
 
