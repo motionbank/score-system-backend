@@ -15,12 +15,14 @@ class Cell
   field :title, type: String
   field :description, type: String
   field :additional_fields, type: Hash, default: {}
+  field :css_class_name, type: String, default: ->{ "cell-#{legacy_id || id}" }
 
   mount_uploader :poster_image, ImageUploader
 
 
-  validates_presence_of :title, :type
+  validates_presence_of :title, :type, :css_class_name
   validates_inclusion_of :type, in: TYPES
+  validates_uniqueness_of :css_class_name
 
   def self.dummy_poster_image
     "http://msmunited.com/wp-content/uploads/2013/02/dance1.jpg"

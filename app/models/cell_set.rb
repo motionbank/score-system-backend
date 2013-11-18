@@ -13,6 +13,7 @@ class CellSet
   mount_uploader :poster_image, ImageUploader
 
   field :path, type: String
+  field :css_class_name, type: String, default: ->{ "set-#{legacy_id || id}" }
 
   field :rows, type: Integer
   field :columns, type: Integer
@@ -25,7 +26,8 @@ class CellSet
   belongs_to :creator, class_name: 'User'
 
 
-  validates_presence_of :title
+  validates_presence_of :title, :css_class_name
+  validates_uniqueness_of :css_class_name
 
   before_validation :orphan_grid_cells_without_cells
 

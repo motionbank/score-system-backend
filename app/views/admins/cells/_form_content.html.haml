@@ -10,6 +10,7 @@
 
       .row-fluid
         = f.input :description, as: :text, input_html: {class: 'span12', rows: 4}, wrapper_html: {class: 'span6'}
+        = f.input :css_class_name, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
         = render 'admins/shared/upload_widget', form: f, method: :poster_image
 
 
