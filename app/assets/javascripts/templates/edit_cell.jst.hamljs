@@ -6,8 +6,10 @@
     .row-fluid
       .span6
         %h3 Used Cell
+        =  "ID: " + data.id
       .span6.original
         %h3 Heritage Cell
+        = "ID: " + data.canonicalCell.id
     .row-fluid
       .span6
         %label(for="editTitle") New title:
