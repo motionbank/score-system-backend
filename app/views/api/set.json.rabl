@@ -13,6 +13,7 @@ end
 attribute :columns => :grid_cols
 attribute :rows => :grid_rows
 attributes :cell_width, :cell_height
+attribute :css_class_name
 
 child locals[:object].creator do
   attributes :id, :name, :email
