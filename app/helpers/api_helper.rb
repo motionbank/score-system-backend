@@ -3,6 +3,7 @@ module ApiHelper
   # merge the values of each grid cell with those of the canonical cell of the grid cell
   def merge_grid_cells_with_cells(collection)
     collection.map do |grid_cell|
+      next nil if grid_cell.cell.nil?
       grid_cell.instance_eval do
         self.title = title.presence || cell.title
         self.description = description.presence || cell.description
@@ -14,6 +15,6 @@ module ApiHelper
         end
       end
       grid_cell
-    end
+    end.compact
   end
 end
