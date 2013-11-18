@@ -76,6 +76,11 @@ group :development do
   # gem 'capistrano'
 end
 
+
+group :production do
+  gem 'exception_notification'
+end
+
 group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
