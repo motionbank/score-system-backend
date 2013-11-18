@@ -46,6 +46,7 @@ module Admins
           }
         end
       else
+        flash[:error] = 'Set could not be saved! Please review the problems in the drop-down form.'
         render action: 'edit'
       end
     end

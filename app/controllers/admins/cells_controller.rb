@@ -33,6 +33,7 @@ module Admins
       if @cell.update(cell_params)
         redirect_to edit_cell_path(@cell), notice: 'Cell was successfully updated.'
       else
+        flash[:error] = 'Cell could not be saved! Please review the problems in the form.'
         render action: 'edit'
       end
     end
