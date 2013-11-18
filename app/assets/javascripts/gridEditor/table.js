@@ -29,6 +29,7 @@ function createUsedContentRow(id, src, title, description, type){
 									<div class='span9'>\
 										<span class='badge'></span>\
 										<h5 class='contentCellTitle'></h5>\
+										<span class='contentCellID'></span>\
 										<p class='contentCellDescription'></p>\
 									</div>\
 									<div class='span2 contentCellEditButton'>Edit Info</div>\
@@ -38,8 +39,9 @@ function createUsedContentRow(id, src, title, description, type){
 	usedContentCell.find(".contentCellPosterImage").append("<img src='" + src + "' />");
 	usedContentCell.find(".contentCellTitle").append(title);
 	usedContentCell.find(".contentCellDescription").append(description);
+  usedContentCell.find(".contentCellID").append(" [ID:&nbsp;" + id + "]");
 	usedContentCell.find(".badge").html(type);
-	$( "#usedContentCellTable div" ).hover(onMouseIn, onMouseOut); 
+	$( "#usedContentCellTable div" ).hover(onMouseIn, onMouseOut);
 }
 
 
