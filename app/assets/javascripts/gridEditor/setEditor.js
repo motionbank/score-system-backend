@@ -144,7 +144,16 @@ function onMouseOut(event){
 }
 
 function removeSelectedCell(){
-	theGrid.removeCell(currentCellToEdit);
+	var scoreId = APPLICATION.score_id;
+	var setId = APPLICATION.resource_id;
+	var gridCellId = currentCellToEdit.id;
+	$.post(
+		Routes.cell_set_grid_cell_path(scoreId, setId, gridCellId),
+		{_method: "delete"},
+		function () {
+			theGrid.removeCell(currentCellToEdit);
+		}
+	);
 }
 
 
