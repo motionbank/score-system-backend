@@ -1,5 +1,6 @@
 class CellSet
   include Mongoid::Document
+  include Mongoid::Timestamps
   include MultiTenancy
 
   set_collection_hierarchy [:score]
