@@ -17,7 +17,7 @@ If you want to import an SQL file of yours into the MongoDB of this project
 * Import your SQL file to your MySQL database
 * create a config/config.yml file providing your MySQL credentials, please match this format:
 <tt>
- legacy_db:
+ SCORE_SLUG:
    database: YOUR_MySQL_DATABASE_NAME
    username: YOUR_MySQL_USER
    password: YOUR_MySQL_PASSWORD
