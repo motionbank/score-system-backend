@@ -14,7 +14,7 @@ class LegacyImport
 
   ADDITIONAL_STEPS = {
       cells: [:get_additional_cell_fields],
-      sets: [:get_associated_cells]
+      sets: [:get_associated_cells, :get_additional_grid_cell_fields]
   }
 
   # Only columns of the legacy database that are called differently than the fields in the MongoDB
@@ -50,8 +50,9 @@ class LegacyImport
       puts "Error while connecting: #{e}"
     end
 
-    # this is for statistics
+    # these are for statistics
     @imported_cell_fields = 0
+    @imported_grid_cell_fields = 0
   end
 
 
@@ -65,7 +66,7 @@ class LegacyImport
       import(table)
     end
 
-    display_statistics
+    display_field_statistics
   end
 
 
@@ -115,7 +116,6 @@ EOL
       # get all foreign_keys from the legacy table and use these to query the fields table
       # where no connection is setup. This means that these fields are on the canonical cell itself.
       field_ids = @client.query("SELECT fields_id FROM #{table} WHERE cells_id = #{cell_id} AND connection_id = 0").map(&:values).flatten
-
       return if field_ids.empty?
 
       # get those fields from the fields table
@@ -133,6 +133,41 @@ EOL
       else
         puts "#{fields} were not imported to the cell #{cell_id} because of errors in the cell: #{doc.errors.full_messages}"
       end
+    end
+
+
+
+    def get_additional_grid_cell_fields(doc)
+      set_id = doc.legacy_id
+
+      # get all connection_id values from the legacy table and use these to query the cells_fields table
+      connection_ids = @client.query("SELECT connection_id FROM sets_cells WHERE sets_id = #{set_id}").map(&:values).flatten
+      return if connection_ids.empty?
+
+      # If we join cells_fields and fields taking only those cells_fields with connection ids from our set we get the actual fields
+      field_rows = @client.query("SELECT connection_id, name, value FROM cells_fields AS c LEFT JOIN fields AS f ON c.fields_id = f.id WHERE c.connection_id IN (#{connection_ids.join(',')})")
+      return if field_rows.count == 0
+
+      # make 'connection_id' be a hash key and 'name' and 'value' will be a hash pair
+      fields_as_hash = {}
+      field_rows.each do |row|
+        fields_as_hash[row['connection_id']] ||= {}
+        fields_as_hash[row['connection_id']][row['name']] = row['value']
+      end
+
+      field_cnt_for_this_set = 0
+      fields_as_hash.each do |connection_id, fields|
+        field_cnt_for_this_set += fields.count
+        cell = doc.grid_cells.find_by(legacy_id: connection_id) # the legacy_id of grid_cells is the connection_id in the legacy DB
+        # now add those fields to the cell
+        if cell.update(additional_fields: fields)
+          @imported_grid_cell_fields += fields.count
+        else
+          puts "#{fields} were not imported to the grid cell in the set #{set_id} because of errors in the set: #{doc.errors.full_messages}"
+        end
+      end
+
+      puts "\t#{field_cnt_for_this_set}/#{field_rows.count} fields were imported for the set #{doc.title} which has the ID: #{doc.id}"
     end
 
 
@@ -208,9 +243,9 @@ EOL
     end
 
 
-    def display_statistics
-      possible_cell_fields = @client.query("SELECT COUNT(*) FROM cells_fields WHERE connection_id = 0", as: :array)
-      possible_cell_fields = possible_cell_fields.to_a.flatten.first # get the single value from the array of arrays
+    def display_field_statistics
+      # first give feedback on imported cell fields.
+      possible_cell_fields = @client.query("SELECT COUNT(*) AS count FROM cells_fields WHERE connection_id = 0").first['count']
       puts "#{@imported_cell_fields}/#{possible_cell_fields} fields were imported directly to cells."
 
       if @imported_cell_fields != possible_cell_fields
@@ -223,6 +258,11 @@ EOL
           puts field
         end
       end
+
+      # Now give feedback on imported grid cell fields.
+      query = "SELECT COUNT(*) AS count FROM sets_cells AS s LEFT JOIN cells_fields AS c ON s.connection_id = c.connection_id WHERE c.connection_id != 0"
+      possible_grid_cell_fields = @client.query(query).first['count']
+      puts "#{@imported_grid_cell_fields}/#{possible_grid_cell_fields} fields were imported to grid cells in sets"
 
       puts "Import finished!"
     end
