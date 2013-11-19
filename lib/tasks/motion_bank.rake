@@ -16,7 +16,7 @@ namespace :motion_bank do
     rescue Errno::ENOENT => e
       puts "Config file config/config.yml not found. #{LegacyImport.config_format_message}"
     rescue KeyError => e
-      puts "Config file config/config.yml found, but missing key #{score_key}. #{LegacyImport.config_format_message}"
+      puts "Config file config/config.yml found, but missing key #{score_slug}. #{LegacyImport.config_format_message}"
     end
   end
 
