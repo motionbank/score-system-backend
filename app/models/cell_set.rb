@@ -27,7 +27,6 @@ class CellSet
 
 
   validates_presence_of :title, :css_class_name
-  validates_uniqueness_of :css_class_name
 
   before_validation :orphan_grid_cells_without_cells
 
