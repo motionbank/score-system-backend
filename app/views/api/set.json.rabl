@@ -19,12 +19,14 @@ child locals[:object].creator do
   attributes :id, :name, :email
 end
 
-merged_grid_cells = merge_grid_cells_with_cells(locals[:object].grid_cells)
-child merged_grid_cells => :cells do |cells|
-  collection cells, object_root: false
+if params[:action] != 'sets'
+	merged_grid_cells = merge_grid_cells_with_cells(locals[:object].grid_cells)
+	child merged_grid_cells => :cells do |cells|
+	  collection cells, object_root: false
 
-  extends 'shared/cell'
-  attributes :x, :y # the position in the grid
-  attributes :width, :height # the position in the grid
-  attributes :type
+	  extends 'shared/cell'
+	  attributes :x, :y # the position in the grid
+	  attributes :width, :height # the position in the grid
+	  attributes :type
+	end
 end
