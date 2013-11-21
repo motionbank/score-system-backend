@@ -168,8 +168,6 @@ header {
     border-right: 1px solid #999;
     text-align: center;
     vertical-align: baseline;
-    @include box-shadow(darken($green, 20%) -4px 0 10px -1px inset);
-
     i {
       @include text-shadow(#F4F4F4 1px 1px 0px);
       line-height: 39px;
