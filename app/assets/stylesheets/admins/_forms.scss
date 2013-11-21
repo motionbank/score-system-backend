@@ -169,3 +169,13 @@ section.publishing .publishing_dates {
 .poster-image-preview a {
   margin-top: 5px;
 }
+
+.radio {
+	label {
+	  display: inline;
+		padding: 0px 10px 0px 4px;
+	}
+	input[type="radio"] {
+	  float: none;
+  }
+}

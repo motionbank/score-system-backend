@@ -11,6 +11,7 @@ gem "mongoid-indifferent-access", require: "mongoid_indifferent_access"
 gem "mongoid_slug", github: 'digitalplaywright/mongoid-slug', ref: 'a1f9012e97825a84d8193790d1403f35a1053b6b' # prev. commit had problems with mongoid 4
 #gem "mongoid_slug", '>= 3.2.0' #TODO once 3.2.0 is out, remove comment and the other line referencing mongoid_slug from github
 gem "mongoid_rails_migrations"
+gem "publish", "~> 0.3.0"
 
 # SERIALIZATION
 gem 'rabl' # API building

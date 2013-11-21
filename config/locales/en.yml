@@ -51,6 +51,8 @@ en:
       not_updated: "%{class_name} could not be saved."
       deleted: "%{class_name} was deleted."
       not_deleted: "%{class_name} could not be deleted"
+    published: "published"
+    unpublished: "unpublished"
 
   form:
     basic_data: "Basic Data"

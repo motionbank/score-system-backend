@@ -3,7 +3,7 @@ class ApiController < ApplicationController
 
   # GET /api/sets
   def sets
-    @sets = CellSet.all
+    @sets = CellSet.published
   end
 
   # GET /api/sets/:id

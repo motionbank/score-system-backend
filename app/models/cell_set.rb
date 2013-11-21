@@ -2,6 +2,7 @@ class CellSet
   include Mongoid::Document
   include Mongoid::Timestamps
   include MultiTenancy
+  include Mongoid::Publish
 
   set_collection_hierarchy [:score]
 

@@ -22,7 +22,9 @@
             = render 'admins/shared/upload_widget', form: f, method: :poster_image
       .row-fluid
         .span4
-          = f.input :css_class_name, input_html: {class: 'span12'}, wrapper_html: {class: 'span6'}
+          = f.input :css_class_name, input_html: {class: 'span12'}, wrapper_html: {class: 'span12'}
+        .span4
+          = f.input :published, as: :radio_buttons
     .form-actions.actions
       = f.submit I18n.t('helpers.submit.update', model: f.object.model_name),
                   class: "btn btn-primary"
