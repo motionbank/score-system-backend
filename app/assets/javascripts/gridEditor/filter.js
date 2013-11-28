@@ -5,7 +5,7 @@ function initFilter() {
 	var searchIndex = {};
 	var filterType = "all";
 	var searchTerm = "";
-	var tableRowTemplate = _.template('<div id="availableContentCell_<%= id %>" class="row-fluid contentCell availableCell"><div class="contentCellPosterImage span1"><img src="<%= poster_image.url %>"></div><div class="span10"><h5 class="contentCellTitle"><span class="badge"><%= type %></span> <%= title %></h5> <span class="contentCellID">[ID:&nbsp;<%= id %>]</span><p class="contentCellDescription"><%= description %></p></div></div>');
+	var tableRowTemplate = _.template('<div id="availableContentCell_<%= id %>" class="row-fluid contentCell availableCell"><div class="contentCellPosterImage span1"><img src="<%= poster_image.url %>"></div><div class="span10"><h5 class="contentCellTitle"><span class="badge"><%= type %></span> <%= title %></h5> <span class="contentCellID">[ID:&nbsp;<%= id %>]</span><p class="contentCellDescription"><%= description %></p></div><a class="btn" href="/<%= APPLICATION["score_id"] %>/cells/<%= id %>/edit"><i class="icon-edit"></i> Edit</a></div>');
 
 
 	/* Private Functions */

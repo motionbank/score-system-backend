@@ -365,3 +365,11 @@ header {
     margin-top: -21px;
   }
 }
+
+.availableCell .btn,
+.usedCell .btn {
+		float: right;
+		margin-right: 10px;
+		font-size: 12px;
+		font-weight: normal;
+}
