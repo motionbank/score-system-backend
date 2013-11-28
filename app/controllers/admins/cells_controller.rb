@@ -72,6 +72,11 @@ module Admins
       # ActionController::StrongParameters#permit requires to specify all keys when permitting a hash field
       all_additional_keys = attrs[:cell][:additional_fields].keys
 
+      # If the additional_fields param wasn't nil, but an empty hash, then we want to clear the additional_fields
+      # We have to test using 'params' because the value from 'attrs' was overwritten.
+      # Set the keys array to one nil value allows the hash to be cleared
+      all_additional_keys = [nil] if params[:cell][:additional_fields] == {}
+
       attrs.require(:cell).permit(:type, :title, :description, :css_class_name, :poster_image, :poster_image_cache, :remove_poster_image, additional_fields: all_additional_keys)
     end
   end
