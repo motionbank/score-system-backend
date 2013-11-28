@@ -309,6 +309,7 @@ svg {
 }
 
 .ui-dialog{
+	z-index: 9999;
   .ui-dialog-titlebar{
     background:#eee;
   }

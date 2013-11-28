@@ -17,7 +17,7 @@ EditDialog.prototype = {
 
 	initDialog: function(){
 		$("#dialog-modal").dialog({
-			height: 500,
+			width: 800,
 			autoOpen: false,
 			modal:true
 		});
