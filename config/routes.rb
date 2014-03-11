@@ -18,6 +18,9 @@ MotionBank::Application.routes.draw do
         get "#{model}" => "api##{model}", as: "#{model}_api"
         get "#{model}/:id" => "api##{model.singularize}", as: "#{model.singularize}_api"
       end
+
+      post 'cell/new', to: 'api#create_cell'
+      post 'cell/:id/update', to: 'api#update_cell'
     end
   end
 
