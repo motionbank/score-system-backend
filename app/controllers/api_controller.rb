@@ -22,6 +22,7 @@ class ApiController < ApplicationController
     @cell = Cell.find(params[:id].to_s)
   end
 
+  # POST /api/cell/new
   def create_cell
     @cell = Cell.new(cell_params)
 
@@ -32,6 +33,7 @@ class ApiController < ApplicationController
     end
   end
 
+  # POST /api/cell/:id/update
   def update_cell
     @cell = Cell.find(params[:id].to_s)
     if @cell.update(cell_params)
