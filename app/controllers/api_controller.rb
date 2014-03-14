@@ -43,6 +43,17 @@ class ApiController < ApplicationController
     end
   end
 
+  # PUT /api/cell/:id/remove_poster_image
+  def remove_poster_image
+    @cell = Cell.find(params[:id].to_s)
+    @cell.remove_poster_image!
+    if @cell.save
+      render json: 'Cell was successfully updated.'
+    else
+      render json: { errors: @cell.errors }, status: 422
+    end
+  end
+
 
   private
 

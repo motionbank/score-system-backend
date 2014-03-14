@@ -21,6 +21,7 @@ MotionBank::Application.routes.draw do
 
       post 'cell/new', to: 'api#create_cell'
       post 'cell/:id/update', to: 'api#update_cell'
+      put 'cell/:id/remove_poster_image', to: 'api#remove_poster_image'
     end
   end
 
