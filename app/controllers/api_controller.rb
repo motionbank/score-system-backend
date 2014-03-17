@@ -71,6 +71,14 @@ class ApiController < ApplicationController
     # Set the keys array to one nil value allows the hash to be cleared
     all_additional_keys = [nil] if params[:cell][:additional_fields] == {}
 
-    attrs.require(:cell).permit(:type, :title, :description, :css_class_name, additional_fields: all_additional_keys)
+    if attrs[:cell][:poster_image]
+      path = attrs[:cell][:image_name] || attrs[:cell][:title].parameterize + ".jpg"
+      io = AppSpecificStringIO.new(path, Base64.decode64(attrs[:cell][:poster_image]))
+      attrs[:cell][:poster_image] = io
+    end
+
+    attrs[:cell].delete :image_name if attrs[:cell][:image_name]
+
+    attrs.require(:cell).permit(:type, :title, :description, :css_class_name, :poster_image, :image_name, additional_fields: all_additional_keys)
   end
 end
