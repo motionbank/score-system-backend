@@ -1,5 +1,15 @@
 class ApiController < ApplicationController
-  before_filter :allow_cors
+  before_action :allow_cors
+  before_action :authenticate_user_from_token!, only: [ :create_cell,
+                                                        :update_cell,
+                                                        :remove_poster_image
+                                                      ]
+  #SKIP CSRF protection for JSON POST&PUT
+  skip_before_filter :verify_authenticity_token,  only: [ :create_cell,
+                                                          :update_cell,
+                                                          :remove_poster_image
+                                                        ]
+
   respond_to :json
 
   # GET /api/sets

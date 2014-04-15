@@ -1,5 +1,9 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
+  include TokenAuthenticatable
+
+  before_save :ensure_authentication_token
 
   field :legacy_id, type: Integer # the ID in the legacy MySQL database
 
@@ -43,5 +47,5 @@ class User
   # field :locked_at,       :type => Time
 
   ## Token authenticatable
-  # field :authentication_token, :type => String
+  field :authentication_token, :type => String
 end
