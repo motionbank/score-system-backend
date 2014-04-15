@@ -76,6 +76,7 @@ group :development do
 
   # Use Capistrano for deployment
   gem 'capistrano', '~>2.15.4'
+  gem 'capistrano-deploytags'
 end
 
 
