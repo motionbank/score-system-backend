@@ -1,3 +1,4 @@
+---
 # Motion Bank API
 
 ## GET /api/cells
@@ -98,7 +99,7 @@ The  method expects a _JSON object_ with "cell" as its key
 * `image_name` String (the file name for the image, including the file extension, example: "movement.jpg")
 * `additional_fields` Object of key-value pairs
 
-### Example:
+### Example
 	 {
 		 "cell": {
 			 "title": "A new cell",
@@ -112,14 +113,14 @@ The  method expects a _JSON object_ with "cell" as its key
 	 }
 
 
-### CURL Example:
+### CURL Example
 
 	curl -X POST -H "Content-Type: application/json;" -H "user_token: [ENTER API TOKEN HERE]"
 		-d '{ "cell": { "title": "Not so new", "type": "text", "description": "This is a new cell.",
 		"css_class_name": "cell20121", "additional_fields": { "core": "yep" } } }'
 		localhost:3000/jbmf/api/cell/new
 
-#### Returned value:
+#### Returned value
 
 	{"_id":{"$oid":"533d61ef6d6d6d79fb030000"},"additional_fields":{"core":"yep"},
 	"created_at":"2014-04-03T13:28:15.588Z","css_class_name":"cell20121",
