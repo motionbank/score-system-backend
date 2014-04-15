@@ -75,7 +75,7 @@ group :development do
   gem 'quiet_assets'
 
   # Use Capistrano for deployment
-  # gem 'capistrano'
+  gem 'capistrano', '~>2.15.4'
 end
 
 
