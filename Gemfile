@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby "2.0.0"
+ruby '2.0.0'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+# Bundle edge Rails instcompasead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
 
@@ -39,7 +39,7 @@ gem 'sass-rails', '~> 4.0.0'
 
 # TWITTER BOOTSTRAP
 gem 'compass_twitter_bootstrap'
-gem "compass-rails", ">= 2.0.alpha.0"
+gem "compass-rails"
 gem 'compass-960-plugin'
 gem 'bootstrap-will_paginate'
 
