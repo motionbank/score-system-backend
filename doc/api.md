@@ -1,7 +1,7 @@
 ---
 # Motion Bank API
 
-## GET /api/cells
+## GET /[jbmf | two | deborah_hay]/api/cells
 _Returns_ a JSON object, containing an array of all cells.
 
 The cell fields returned are:
@@ -18,7 +18,7 @@ The cell fields returned are:
 
 ---
 
-## GET /api/cells/:id
+## GET /[jbmf | two | deborah_hay]/api/cells/:id
 Requests one specific cell. The id is a 24 character hexadecimal string unique to every set. So one example request could be GET /api/cells/2404da044d6f6a2520690100.
 
 This request returns a JSON Object with the following values:
@@ -37,7 +37,7 @@ The server will return a **404 response** if no cell with the specified id is fo
 
 ---
 
-## GET /api/sets
+## GET /[jbmf | two | deborah_hay]/api/sets
 _Returns_ a JSON object, containing an array of all cell sets.
 
 The values returned are:
@@ -56,7 +56,7 @@ The values returned are:
 
 ---
 
-## GET /api/sets/:id
+## GET /[jbmf | two | deborah_hay]/api/sets/:id
 Requests one specific set. The id is a 24 character hexadecimal string unique to every set. So one example request could be GET /api/sets/0104da044d6f6a2520680100.
 
 This request returns a JSON Object with the following values:
@@ -78,14 +78,14 @@ The server will return a **404 response**, if no set with that id is found.
 
 ---
 
-## POST /api/cell/new
+## POST /[jbmf | two | deborah_hay]/api/cell/new
 A POST request to create a new cell. _Returns_ a _201 status_ and the cell as a JSON object if the cell was created successfully. _Returns_ error message with a _422 status_ if the cell couldn't be created.
 
 
 ### Required Header
 
 * `Content-Type` applicaton/json
-* `user_token` the token of the API user
+* `user_token` the token of the API user (you can find your token in the 'My Account' interface)
 
 The  method expects a _JSON object_ with "cell" as its key
 
@@ -118,7 +118,7 @@ The  method expects a _JSON object_ with "cell" as its key
 	curl -X POST -H "Content-Type: application/json;" -H "user_token: [ENTER API TOKEN HERE]"
 		-d '{ "cell": { "title": "Not so new", "type": "text", "description": "This is a new cell.",
 		"css_class_name": "cell20121", "additional_fields": { "core": "yep" } } }'
-		localhost:3000/jbmf/api/cell/new
+		motinbank.meso.net/jbmf/api/cell/new
 
 #### Returned value
 
@@ -129,7 +129,7 @@ The  method expects a _JSON object_ with "cell" as its key
 
 ---
 
-## POST /api/cell/:id/update
+## POST /[jbmf | two | deborah_hay]/api/cell/:id/update
 A POST request to update an existing cell. All specified fields will be updated, omitted fields will remain the same. If the cell is successfully updated a string saying 'Cell was successfully updated.' is returned. In case the cell couldn't be updated a JSON object with the error message is returned with a status 422.
 
 The submitted JSON should be formatted the _same as_ when creating a _new cell_, with only the fields that should be changed.
@@ -137,7 +137,7 @@ The submitted JSON should be formatted the _same as_ when creating a _new cell_,
 ### Required Header
 
 * `Content-Type `applicaton/json
-* `user_token` the token of the API user
+* `user_token` the token of the API user (you can find your token in the 'My Account' interface)
 
 ### Permitted "cell" attributes are
 
@@ -151,10 +151,10 @@ The submitted JSON should be formatted the _same as_ when creating a _new cell_,
 
 ---
 
-## PUT /api/cell/:id/remove_poster_image
+## PUT /[jbmf | two | deborah_hay]/api/cell/:id/remove_poster_image
 A PUT request to remove the poster image of a specific cell. If the image was removed successfully a message 'Cell was successfully updated.' is returned. If the image couldn't be deleted a JSON object with the error message and a status 422 is returned.
 
 ### Required Header
 
 * `Content-Type `applicaton/json
-* `user_token` the token of the API user
+* `user_token` the token of the API user (you can find your token in the 'My Account' interface)
