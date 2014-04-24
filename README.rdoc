@@ -1,55 +1,19 @@
-== Ruby version
+## Ruby version
 ruby 2.0.0p247
 
-== Initial setup
-* run rails g mongoid:config
+## Initial setup
+* run `rails g mongoid:config` and adjust the `config/mongoid.yml` according to
+  your settings.
+* run `rake db:setup`
 
-== 
-
-
-
-
-
-
-
-== base Import
+## Legacy Database Import
 If you want to import an SQL file of yours into the MongoDB of this project
 * Import your SQL file to your MySQL database
-* create a config/config.yml file providing your MySQL credentials, please match this format:
-<tt>
- SCORE_SLUG:
-   database: YOUR_MySQL_DATABASE_NAME
-   username: YOUR_MySQL_USER
-   password: YOUR_MySQL_PASSWORD
-   host: localhost # optional
-</tt>
-* Run <tt>rake motion_bank:import_legacy</tt>
-
-== RAILS GENERATED README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* create a `config/config.yml` file providing your MySQL credentials,
+  please match this format:
+      SCORE_SLUG:
+        database: YOUR_MySQL_DATABASE_NAME
+        username: YOUR_MySQL_USER
+        password: YOUR_MySQL_PASSWORD
+        host: localhost # optional
+* Run `rake motion_bank:import_legacy`
