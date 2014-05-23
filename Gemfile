@@ -4,7 +4,6 @@ ruby '2.0.0'
 # Bundle edge Rails instcompasead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-
 # PERSISTENCE
 gem 'mongoid', github: 'mongoid/mongoid', ref: '2f68fccf6b45ec1576551f38ffd1dfb5bf8bf201' # prev. commit cc7a0e709066aff444bc21cd9826e1568603934d breaks the rails console and rake invocations
 #gem 'mongoid', '~> 4.0.0' #TODO once a mongoid 4.0.0 gem release is out, remove comment and the other line referencing mongoid from github
@@ -82,6 +81,7 @@ end
 
 group :production do
   gem 'exception_notification'
+  gem 'rails_12factor'
 end
 
 group :test do
