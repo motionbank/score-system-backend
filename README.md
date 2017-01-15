@@ -4,6 +4,8 @@ MoSys (Motion Bank System)
 This is the backend that we use to build the so called ["online scores"](http://scores.motionbank.org/) with.
 Developed by [MESO Web Scapes](http://www.meso.net/web%20scapes).
 
+For further information contact florian-at-motionbank-org.
+
 ## Ruby version
 ruby 2.0.0p247
 
@@ -23,3 +25,12 @@ If you want to import an SQL file of yours into the MongoDB of this project
         password: YOUR_MySQL_PASSWORD
         host: localhost # optional
 * Run `rake motion_bank:import_legacy`
+
+
+## Supporters
+
+Gefördert mit Mitteln der Kulturstiftung des Bundes, des Hessischen Ministeriums für Wissenschaft und Kunst, des Kulturfonds Frankfurt RheinMain und Frau Susanne Klatten.
+
+## License
+
+...
