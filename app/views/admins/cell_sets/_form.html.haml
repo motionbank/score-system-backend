@@ -42,7 +42,9 @@
                 %li
                   %a(href="#availableContentCells")= t('set.tabs.available_cells')
                 %li
-                  %a(href="#additionalContentCells")= "More"
+                  %a(href="#youtubeContentCells")= "YouTube"
+                %li
+                  %a(href="#pbaContentCells")= "Pina Bausch Archive"
 
 
               #usedContentCells
@@ -65,13 +67,27 @@
 
                 #availableContentCellTable.cellTable
 
-              #additionalContentCells
-                %h3= "Test"
-                #additionalContentCellTable.cellTable
+              #youtubeContentCells
+                #searchYouTube.table-header-form
+                  %form
+                    %input(type="text" id="searchTermYT" name="searchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
+                    %button= "Search"
 
+                #youtubeContentCellTable.cellTable
+              
+              #pbaContentCells
+                #navPbArchive.table-header-form
+                  %a#pieces(href="#")= "Stücke"
+                  %a#people(href="#")= "Personen"
+                  %a#locations(href="#")= "Orte"
+
+                #pbaContentCellTable.cellTable
+              
 
             = render "edit_cell"
 
             = render "delete_cell"
 
             #emptyCell.cell
+
+%script(src="https://apis.google.com/js/client.js?onload=googleApiClientReady")

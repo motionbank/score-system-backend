@@ -5,3 +5,6 @@
 //= require gridEditor/filter
 //= require gridEditor/edit
 //= require gridEditor/setEditor
+//= require gridEditor/sparql-querybuilder
+//= require gridEditor/pinaBauschArchive
+//= require gridEditor/youTubeSearch
