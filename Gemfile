@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.10'
+ruby '2.2.7'
 
 # Bundle edge Rails instcompasead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
