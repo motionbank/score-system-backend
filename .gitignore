@@ -31,7 +31,7 @@ coverage.vim
 
 # rails config
 config/config.yml
-config/mongoid.yml
+# config/mongoid.yml
 
 # carrierwave upload folder
 public/uploads
