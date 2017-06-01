@@ -69,7 +69,7 @@ gem 'unicorn'
 
 group :development do
   # LEGACY IMPORT
-  gem "mysql2"
+  # gem "mysql2"
 
   gem 'quiet_assets'
 

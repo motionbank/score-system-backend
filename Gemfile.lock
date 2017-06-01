@@ -144,7 +144,6 @@ GEM
       bson (~> 2.0.0.rc3)
       optionable (~> 0.1.1)
     multi_json (1.8.2)
-    mysql2 (0.3.14)
     net-scp (1.2.0)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -263,7 +262,6 @@ DEPENDENCIES
   mongoid-indifferent-access
   mongoid_rails_migrations
   mongoid_slug!
-  mysql2
   oj
   publish (~> 0.3.0)
   quiet_assets
