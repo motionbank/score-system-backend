@@ -1,23 +1,3 @@
-GIT
-  remote: git://github.com/digitalplaywright/mongoid-slug.git
-  revision: a1f9012e97825a84d8193790d1403f35a1053b6b
-  ref: a1f9012e97825a84d8193790d1403f35a1053b6b
-  specs:
-    mongoid_slug (3.1.2)
-      mongoid (> 3.0)
-      stringex (~> 2.0)
-
-GIT
-  remote: git://github.com/mongoid/mongoid.git
-  revision: 2f68fccf6b45ec1576551f38ffd1dfb5bf8bf201
-  ref: 2f68fccf6b45ec1576551f38ffd1dfb5bf8bf201
-  specs:
-    mongoid (4.0.0)
-      activemodel (~> 4.0.0)
-      moped (~> 2.0.beta2)
-      origin (~> 1.0)
-      tzinfo (~> 0.3.37)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -50,7 +30,7 @@ GEM
     bcrypt-ruby (3.1.2)
     bootstrap-will_paginate (0.0.10)
       will_paginate
-    bson (2.0.0.rc3)
+    bson (3.2.6)
     builder (3.1.4)
     cancan (1.6.10)
     capistrano (2.15.5)
@@ -90,6 +70,7 @@ GEM
       sprockets (<= 2.11.0)
     compass_twitter_bootstrap (2.3.1)
       compass
+    connection_pool (2.2.1)
     database_cleaner (1.2.0)
     devise (3.2.2)
       bcrypt-ruby (~> 3.0)
@@ -133,16 +114,29 @@ GEM
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
     minitest (4.7.5)
+    mongoid (4.0.2)
+      activemodel (~> 4.0)
+      moped (~> 2.0.0)
+      origin (~> 2.1)
+      tzinfo (>= 0.3.37)
+    mongoid-compatibility (0.4.1)
+      activesupport
+      mongoid (>= 2.0)
     mongoid-indifferent-access (1.0.0)
       mongoid
+    mongoid-slug (5.3.3)
+      mongoid (>= 3.0)
+      mongoid-compatibility
+      stringex (~> 2.0)
     mongoid_rails_migrations (1.0.1)
       activesupport (>= 3.2.0)
       bundler (>= 1.0.0)
       rails (>= 3.2.0)
       railties (>= 3.2.0)
-    moped (2.0.0.beta3)
-      bson (~> 2.0.0.rc3)
-      optionable (~> 0.1.1)
+    moped (2.0.7)
+      bson (~> 3.0)
+      connection_pool (~> 2.0)
+      optionable (~> 0.2.0)
     multi_json (1.8.2)
     net-scp (1.2.0)
       net-ssh (>= 2.6.5)
@@ -152,8 +146,8 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     oj (2.2.3)
-    optionable (0.1.1)
-    origin (1.1.0)
+    optionable (0.2.0)
+    origin (2.3.1)
     orm_adapter (0.5.0)
     polyglot (0.3.3)
     publish (0.3.0)
@@ -211,7 +205,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    stringex (2.1.2)
+    stringex (2.7.1)
     subexec (0.2.3)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
@@ -258,10 +252,10 @@ DEPENDENCIES
   jquery-rails
   js-routes
   mini_magick (>= 3.4)
-  mongoid!
+  mongoid (~> 4.0.0)
   mongoid-indifferent-access
+  mongoid-slug (>= 3.2.0)
   mongoid_rails_migrations
-  mongoid_slug!
   oj
   publish (~> 0.3.0)
   quiet_assets
