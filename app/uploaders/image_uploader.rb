@@ -18,6 +18,9 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   attr_accessor :width, :height
 
+  # s3 storage on heroku
+  storage :fog
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   #@override
