@@ -1,0 +1,22 @@
+{
+  "name": "mosys-js-debs",
+  "homepage": "https://github.com/motionbank/score-system-backend",
+  "authors": [
+    "Florian Jenett <fjenett@gmail.com>"
+  ],
+  "description": "MoSys JavaScript dependencies",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sparql-hollandaise": "^0.1.0",
+    "piecemaker-api-client": "^0.0.21"
+  }
+}
