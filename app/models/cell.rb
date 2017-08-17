@@ -7,7 +7,7 @@ class Cell
 
   set_collection_hierarchy [:score]
 
-  TYPES = [:html, :iframe, :image, :vimeo, :visualization, :set_link, :text, :title, :recording, :context]
+  TYPES = [:html, :iframe, :image, :vimeo, :visualization, :set_link, :text, :title, :recording, :context, :video]
 
   field :legacy_id, type: Integer # the ID in the legacy MySQL database
 
