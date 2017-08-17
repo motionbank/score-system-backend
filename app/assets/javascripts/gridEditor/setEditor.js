@@ -25,6 +25,9 @@ $(document).ready(function() {
 		// pinaBauschArchive.js
 		initPinaBauschArchive();
 
+		// piecemakerTab.js
+		initPiecemakerTab();
+
 		//table.js
 		initTabs();
 		initTableEvents();
