@@ -22,7 +22,7 @@ function initPinaBauschArchive () {
 				"PREFIX foaf:<http://xmlns.com/foaf/0.1/>" +
 				"PREFIX dc:<http://purl.org/dc/elements/1.1/>";
 
-	var endpoint = "http://yoda-proxy.local:8080/openrdf-sesame/repositories/PBA";
+	var endpoint = "https://pbproxy.herokuapp.com/repositories/PBAe";
 
 	var $tabContent = $('#pbaContentCells');
 	var $tableHeader = $('.table-header-form',$tabContent);
