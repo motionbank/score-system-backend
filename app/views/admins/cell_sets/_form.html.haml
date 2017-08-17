@@ -44,8 +44,9 @@
                 %li
                   %a(href="#youtubeContentCells")= "YouTube"
                 %li
-                  %a(href="#pbaContentCells")= "Pina Bausch Archive"
-
+                  %a(href="#pbaContentCells" title="Pina Bausch Archive")= "Pina Bausch"
+                %li
+                  %a(href="#pm2ContentCells" title="Piecemaker 2")= "Piecemaker"
 
               #usedContentCells
                 %h3= t('set.tabs.used_cells')
@@ -82,6 +83,13 @@
                   %a#locations(href="#")= "Orte"
 
                 #pbaContentCellTable.cellTable
+
+              #pm2ContentCells
+                .table-header-form
+                  %a.pm2-groups(href="#")= "Groups"
+                  %span.separator= "/"
+                .cellTable
+                  %p= "This is a test"
               
 
             = render "edit_cell"

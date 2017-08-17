@@ -46,10 +46,12 @@ function initPinaBauschArchive () {
 			$.ajax({
 				type: "POST",
 				url: Routes.cell_new_path(APPLICATION.score_id),
-				headers: {
-					'Content-Type': 'application/json',
-					'user_token': 'zBy5gjdPJWHUyKYpEtrG'
-				},
+				// headers: {
+				// 	'Content-Type': 'application/json',
+				// 	'user_token': 'zBy5gjdPJWHUyKYpEtrG'
+				// },
+                username: 'moba',
+                password: 'qXf-P78-8s7-3Qd',
 				dataType: 'json',
 				data: JSON.stringify({
 					cell: {
