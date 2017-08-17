@@ -45,3 +45,4 @@ test/output/*
 .\#**
 cache
 bundler
+bower_components
