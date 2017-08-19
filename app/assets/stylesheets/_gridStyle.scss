@@ -4,11 +4,7 @@
 @import "compass/css3/user-interface";
 /*TODO
 height boundsForGrid?
-
-
 */
-
-
 
 body {
   margin: 0;
@@ -443,11 +439,13 @@ svg {
     }
   }
 }
+
 .row-fluid{
   .cell_poster_image{
     margin:0;
   }
 }
+
 .additional_fields{
 	ul {
 		margin: 0;
@@ -475,5 +473,40 @@ svg {
         line-height:28px;
       }
     }
+  }
+}
+
+#pm2ContentCells {
+
+  .table-header-form {
+    a:before {
+      content: '/';
+      padding-right: 0.5em;
+    }
+    a {
+      padding-right: 0.5em;
+      padding-left: 0.5em;
+    }
+  }
+
+  .event-filters {
+    background: #EBF3EF;
+  }
+
+  .video-container {
+    float: left;
+    display: none;
+    width: 33%;
+    max-width: 480px;
+    min-width: 100px;
+    overflow: auto;
+  }
+
+  .loading {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
   }
 }

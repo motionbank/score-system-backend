@@ -86,10 +86,15 @@
 
               #pm2ContentCells
                 .table-header-form
-                  %a.pm2-groups(href="#")= "Groups"
-                  %span.separator= "/"
-                .cellTable
-                  %p= "This is a test"
+                  %a.pm2-groups(href="")= "Groups"
+                .video-container
+                .event-filters
+                  %form
+                    %input(type="text" id="searchEvents" name="searchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
+                    %button= "Filter"
+                .events-container.cellTable
+                  .loading
+                    %h4= "Loading Groups"
               
 
             = render "edit_cell"

@@ -7,10 +7,12 @@ let initPiecemakerTab = (function(){
         const $tab = $('#pm2ContentCells')
         const $tableHeader = $('.table-header-form',$tab)
         const $tableContent = $('.cellTable',$tab)
+        const $eventFilters = $('.event-filters',$tab)
+        const $videoContainer = $('.video-container',$tab)
 
         const groupTemplate = _.template(`
             <div id="pm2GroupCell_<%= id %>" class="row-fluid contentCell pm2GroupCell">
-                <a href="#">
+                <a href="">
                     <div class="contentCellPosterImage span1"><img src="/dev-assets/fallback/default.png"></div>
                     <div class="span10">
                         <h5 class="contentCellTitle">
@@ -23,16 +25,16 @@ let initPiecemakerTab = (function(){
         `);
 
         const loadingTemplate = _.template(`
-            <div>Loading <%= message %></div>
+            <div class="loading"><h4>Loading <%= message %></h4></div>
         `)
 
         const videoTemplate = _.template(`
             <div id="pm2VideoCell_<%= id %>" data-pm2-group-id="<%= groupId %>" data-pm2-event-id="<%= id %>" data-pm2-event-type="<%= type %>" class="row-fluid contentCell pm2VideoCell ui-draggable">
-                <a href="#">
+                <a href="">
                     <div class="contentCellPosterImage span1"><img src="/dev-assets/fallback/default.png"></div>
                     <div class="span10">
                         <h5 class="contentCellTitle">
-                            <span class="badge">video</span> <%= fields.title %></h5>
+                            <span class="badge"><%= type %></span> <%= fields.title %></h5>
                         <span class="contentCellID">[Video-ID:&nbsp;<%= id %>]</span>
                         <p class="contentCellDescription"><%= fields.description %></p>
                     </div>
@@ -40,21 +42,44 @@ let initPiecemakerTab = (function(){
             </div>
         `)
 
-        const headerTemplate = _.template(`
-            <a href="#"><%= value %></a>
+        const eventTemplate = _.template(`
+            <div id="pm2VideoCell_<%= id %>" data-pm2-group-id="<%= groupId %>" data-pm2-event-id="<%= id %>" data-pm2-event-type="<%= type %>" class="row-fluid contentCell pm2EventCell ui-draggable">
+                <a href="">
+                    <div class="contentCellPosterImage span1"><img src="/dev-assets/fallback/default.png"></div>
+                    <div class="span10">
+                        <h5 class="contentCellTitle">
+                            <span class="badge"><%= type %></span> <%= fields.title %></h5>
+                        <span class="contentCellID">[Event-ID:&nbsp;<%= id %>]</span>
+                        <p class="contentCellDescription"><%= fields.description %></p>
+                    </div>
+                </a>
+            </div>
         `)
 
+        const headerTemplate = _.template(`
+            <a href=""><%= value %></a>
+        `)
+
+        let hideVideo = () => {
+            $eventFilters.hide();
+            $videoContainer.empty().hide();
+        }
+
         let setUpHeader = function (breadcrumbs) {
-            let groupId = breadcrumbs.Groups;
-            let crumbs = _.map(breadcrumbs, (k,v) => {
-                let $crumb = $(headerTemplate({value:v}))
-                $crumb.click(() => {
-                    if (k === 'Groups') {
+            let groupId = breadcrumbs.Group
+            let crumbKeys = Object.keys(breadcrumbs)
+            let crumbs = _.map(breadcrumbs, (v,k) => {
+                let $crumb = $(headerTemplate({value:k}))
+                $crumb.click((evt) => {
+                    evt.preventDefault()
+                    if (k === 'Groups' && crumbKeys.length > 1) {
                         showGroups()
-                    } else if (k === 'Group') {
-                        showGroup(v)
+                    } else if (k === 'Group' && crumbKeys.length > 2) {
+                        showGroup({id: v})
                     } else if (k === 'Video') {
-                        showVideo(groupId,v)
+                        // showVideo({id: groupId}, {id: v})
+                    } else {
+                        console.log(k, v)
                     }
                 })
                 return $crumb
@@ -67,13 +92,15 @@ let initPiecemakerTab = (function(){
                 let groupsList = [];
                 _.each(groups,(g,i) => {
                     let $g = $(groupTemplate(g))
-                    $g.click(() => {
+                    $g.click((evt) => {
+                        evt.preventDefault()
                         showGroup(g)
                     })
                     groupsList.push($g)
                 })
                 $tableContent.empty().append(groupsList)
             });
+            hideVideo()
             $tableContent.empty().append(loadingTemplate({message:'Groups'}))
             setUpHeader({Groups: 'Groups'})
         }
@@ -84,7 +111,8 @@ let initPiecemakerTab = (function(){
                 _.each(videos,(v,i) => {
                     v.groupId = group.id
                     let $v = $(videoTemplate(v))
-                    $v.click(() => {
+                    $v.click((evt) => {
+                        evt.preventDefault()
                         showVideo(group,v)
                     })
                     $v.draggable({
@@ -101,20 +129,38 @@ let initPiecemakerTab = (function(){
                 $tableContent
                     .empty()
                     .append(videoList)
-                    .off("dragstop", ".pm2VideoCell", onDropPM2)
-                    .on("dragstop", ".pm2VideoCell", onDropPM2)
+                    .off("dragstop", ".pm2VideoCell", onDropVideoPM2)
+                    .on("dragstop", ".pm2VideoCell", onDropVideoPM2)
             })
+            hideVideo()
             $tableContent.empty().append(loadingTemplate({message:'Videos for Group'}))
             setUpHeader({Groups: 'Groups', Group: group.id})
         }
 
         let showVideo = (group, video) => {
+            PM2.listEventsForTimespan(group.id, video.utc_timestamp, (video.utc_timestamp.getTime() + (video.duration * 1000.0)), 'intersect', (events) => {
+                let eventList = []
+                _.each(events,(e,i) => {
+                    e.groupId = group.id
+                    let $e = $(eventTemplate(e))
+                    eventList.push($e)
+                })
+                $eventFilters.show()
+                $videoContainer.empty().append(`
+                    <video width="480" controls poster="https://archive.org/download/WebmVp8Vorbis/webmvp8.gif">
+                      <source src="https://archive.org/download/WebmVp8Vorbis/webmvp8.webm" type="video/webm">
+                      <source src="https://archive.org/download/WebmVp8Vorbis/webmvp8_512kb.mp4" type="video/mp4">
+                      <source src="https://archive.org/download/WebmVp8Vorbis/webmvp8.ogv" type="video/ogg">
+                      Your browser doesn't support HTML5 video tag.
+                    </video>
+                `).show()
+                $tableContent.empty().append(eventList)
+            })
             $tableContent.empty().append(loadingTemplate({message:'Video and Annotations …'}))
             setUpHeader({Groups: 'Groups', Group: group.id, Video: video.id})
         }
 
-        let onDropPM2 = (event) => {
-
+        let onDropVideoPM2 = (event) => {
             let droppedCell = $(event.target);
             let title = droppedCell.find(".contentCellTitle").html();
             let description = droppedCell.find(".contentCellDescription").html();
