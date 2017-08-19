@@ -149,7 +149,6 @@ GEM
       connection_pool (~> 2.0)
       optionable (~> 0.2.0)
     multi_json (1.12.1)
-    mysql2 (0.4.9)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -268,7 +267,6 @@ DEPENDENCIES
   mongoid-indifferent-access
   mongoid_rails_migrations
   mongoid_slug!
-  mysql2
   oj
   publish (~> 0.3.0)
   quiet_assets
