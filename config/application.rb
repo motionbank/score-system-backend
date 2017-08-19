@@ -14,6 +14,7 @@ Bundler.require(:default, Rails.env)
 
 module MotionBank
   class Application < Rails::Application
+
     config.generators do |g|
       g.test_framework  :test_unit, :fixture_replacement => :factory_girl
     end
@@ -30,5 +31,8 @@ module MotionBank
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+
   end
 end
