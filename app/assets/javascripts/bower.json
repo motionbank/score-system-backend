@@ -16,7 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "sparql-hollandaise": "^0.1.0",
-    "piecemaker-api-client": "^0.0.21"
+    "sparql-hollandaise": ">= 0.1.0",
+    "piecemaker-api-client": ">= 0.0.21"
   }
 }
