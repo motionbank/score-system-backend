@@ -1,3 +1,5 @@
+//= require piecemaker-api-client/releases/piecemaker-api-client-current
+
 let initPiecemakerTab = (function(){
     let PM2 = new PieceMakerApi({
         host: 'https://piecemaker2-api-public.herokuapp.com',

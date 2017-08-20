@@ -1,4 +1,22 @@
+//= require babel-polyfill/browser-polyfill
+//= require sparql-hollandaise/dist/web/sparql-hollandaise
+
 function initPinaBauschArchive () {
+
+    var SPH_ENDPOINT = 'https://pbproxy.herokuapp.com/repositories/PBAe';
+    var SPH_ENDPOINT_AUTH = { basic: { username: 'moba', password: 'qXf-P78-8s7-3Qd' }};
+    var SPH_ENDPOINT_METHOD = 'GET';
+    var SPH_DEFAULT_PREFIXES = ['schema:<http://schema.org/>','owl:<http://www.w3.org/2002/07/owl#>',
+        'pext:<http://proton.semanticweb.org/protonext#>','xsd:<http://www.w3.org/2001/XMLSchema#>',
+        'psys:<http://proton.semanticweb.org/protonsys#>','skos:<http://www.w3.org/2004/02/skos/core#>',
+        'rdfs:<http://www.w3.org/2000/01/rdf-schema#>','media:<http://purl.org/media#>',
+        'frbr:<http://purl.org/vocab/frbr/core#>','pba:<http://www.pinabausch.org/resource/>',
+        'geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>','places:<http://purl.org/ontology/places#>',
+        'pbao:<http://www.pinabausch.org/pbao#>','dct:<http://purl.org/dc/terms/>',
+        'rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>','xml:<http://www.w3.org/XML/1998/namespace>',
+        'tl:<http://purl.org/NET/c4dm/timeline.owl#>','gnd:<http://d-nb.info/standards/elementset/gnd#>',
+        'event:<http://purl.org/NET/c4dm/event.owl#>','foaf:<http://xmlns.com/foaf/0.1/>',
+        'dc:<http://purl.org/dc/elements/1.1/>'];
 
 	var prefix ="PREFIX schema:<http://schema.org/>" +
 				"PREFIX owl:<http://www.w3.org/2002/07/owl#>" +
@@ -27,6 +45,10 @@ function initPinaBauschArchive () {
 	var $tabContent = $('#pbaContentCells');
 	var $tableHeader = $('.table-header-form',$tabContent);
 	var $table = $('.cellTable',$tabContent);
+
+	function createQuery () {
+        return new SPH.Query(SPH_ENDPOINT, SPH_ENDPOINT_AUTH, SPH_ENDPOINT_METHOD).prefix(SPH_DEFAULT_PREFIXES);
+    }
 
 	function onDropPBA (event) {
 
@@ -122,6 +144,28 @@ function initPinaBauschArchive () {
 	});
 
 	function populatePieces () {
+        var pattern = new SPH.GraphPattern([
+            '?piece a pbao:Piece',
+            '?piece rdfs:label ?piece_label',
+            '?piece dct:created ?date'
+        ]);
+        pattern.addElement(new SPH.Filter('langMatches( lang(?piece_label), "de" )'));
+        var group = new SPH.GroupGraphPattern(pattern);
+        var query = createQuery()
+            .select('*')
+            .where(group)
+            .order('?piece_label')
+            .limit(10)
+            .offset(5);
+
+        query.exec().then(function (results) {
+            console.log(results);
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+	function _populatePieces () {
 		var query = new SQB.SparqlQuery(endpoint).prefix(prefix);
 
 		query.select('*')

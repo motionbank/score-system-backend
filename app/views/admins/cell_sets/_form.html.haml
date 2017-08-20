@@ -47,6 +47,8 @@
                   %a(href="#pbaContentCells" title="Pina Bausch Archive")= "Pina Bausch"
                 %li
                   %a(href="#pm2ContentCells" title="Piecemaker 2")= "Piecemaker"
+                %li
+                  %a(href="#vueExample" title="Vue Example")= "Vue Example"
 
               #usedContentCells
                 %h3= t('set.tabs.used_cells')
@@ -95,7 +97,8 @@
                 .events-container.cellTable
                   .loading
                     %h4= "Loading Groups"
-              
+
+              #vueExample= "Vue example app"
 
             = render "edit_cell"
 
