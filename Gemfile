@@ -46,18 +46,14 @@ gem 'bootstrap-will_paginate'
 # SIMPLE FORM
 gem 'simple_form', '>= 2.0.3'
 
-
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -66,7 +62,6 @@ end
 
 # Use unicorn as the app server
 gem 'unicorn'
-
 
 group :development do
   # LEGACY IMPORT
@@ -78,7 +73,6 @@ group :development do
   gem 'capistrano', '~>2.15.4'
   gem 'capistrano-deploytags'
 end
-
 
 group :production do
   gem 'exception_notification'
