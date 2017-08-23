@@ -26,13 +26,11 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'devise'
 gem 'cancan'
 
-
 # FRONTEND
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'ruby-haml-js'
 gem "js-routes"
-gem 'babel-transpiler'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

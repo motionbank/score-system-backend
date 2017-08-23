@@ -18,6 +18,8 @@
   "dependencies": {
     "sparql-hollandaise": ">= 0.1.0",
     "piecemaker-api-client": ">= 0.0.21",
-    "vue": "^2.4.2"
+    "vue": "^2.4.2",
+    "vuex": "^2.3.0",
+    "vue-router": "^2.7.0"
   }
 }
