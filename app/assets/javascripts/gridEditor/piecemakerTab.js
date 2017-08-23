@@ -241,3 +241,5 @@ let initPiecemakerTab = (function(){
         showGroups();
     }
 })();
+
+$(initPiecemakerTab)

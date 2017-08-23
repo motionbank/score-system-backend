@@ -46,7 +46,9 @@
                 %li
                   %a(href="#pbaContentCells" title="Pina Bausch Archive")= "Pina Bausch"
                 %li
-                  %a(href="#pm2Content" title="Piecemaker 2")= "Piecemaker"
+                  %a(href="#pm2ContentCells" title="Piecemaker 2")= "Piecemaker"
+                %li
+                  %a(href="#vueExample" title="Vue Example")= "Vue Example"
 
               #usedContentCells
                 %h3= t('set.tabs.used_cells')
@@ -84,8 +86,17 @@
 
                 #pbaContentCellTable.cellTable
 
-              #pm2Content
-
+              #pm2ContentCells
+                .table-header-form
+                  %a.pm2-groups(href="")= "Groups"
+                .video-container
+                .event-filters
+                  %form
+                    %input(type="text" id="searchEvents" name="searchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
+                    %button= "Filter"
+                .events-container.cellTable
+                  .loading
+                    %h4= "Loading Groups"
 
             = render "edit_cell"
 

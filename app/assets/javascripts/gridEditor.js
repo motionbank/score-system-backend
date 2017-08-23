@@ -8,9 +8,10 @@
 //= require gridEditor/edit
 //= require gridEditor/setEditor
 
-//= require gridEditor/pinaBauschArchive
-//= require gridEditor/piecemaker-tab-vue
-// XXX = require gridEditor/piecemakerTab
-//= require gridEditor/youTubeSearch
+// xxx = require gridEditor/pinaBauschArchive
+// xxx = require gridEditor/piecemaker-tab-vue
+//= require gridEditor/piecemakerTab
+// xxx = require gridEditor/youTubeSearch
 
-//= require_tree ./gridEditor
+// might as well just use:
+// xxx = require_tree ./gridEditor

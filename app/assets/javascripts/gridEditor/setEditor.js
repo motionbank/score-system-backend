@@ -22,12 +22,6 @@ $(document).ready(function() {
 
 	function initialize() {
 
-		// pinaBauschArchive.js
-		initPinaBauschArchive();
-
-		// piecemakerTab.js
-		initPiecemakerTab();
-
 		//table.js
 		initTabs();
 		initTableEvents();

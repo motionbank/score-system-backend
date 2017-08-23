@@ -47,3 +47,4 @@ cache
 bundler
 bower_components
 public/dev-assets/
+node_modules
