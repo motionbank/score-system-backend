@@ -1,0 +1,11 @@
+{
+  "name": "motionbank-score-system-backend",
+  "version": "0.0.2",
+  "description": "JS assets needed by the MotionBank score systems backend (editor)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
