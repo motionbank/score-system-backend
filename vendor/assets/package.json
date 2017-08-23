@@ -7,5 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0"
+  },
+  "dependencies": {
+    "piecemaker-api-client": "0.0.21",
+    "sparql-hollandaise": "^0.1.0",
+    "vue": "^2.4.2",
+    "vue-router": "^2.7.0",
+    "vuex": "^2.3.1"
+  }
 }
