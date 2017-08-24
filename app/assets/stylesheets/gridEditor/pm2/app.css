@@ -1,11 +1,23 @@
 
+.as-menu[data-v-722411b4],
+.groups[data-v-722411b4] {
+  position: relative;
+  height: 100%;
+}
+.as-menu h2[data-v-722411b4],
 .groups h2[data-v-722411b4] {
   font-weight: bold;
   margin-bottom: 1em;
 }
+.as-menu .filters[data-v-722411b4],
 .groups .filters[data-v-722411b4] {
   margin-bottom: 1em;
 }
+.as-menu .filters input[data-v-722411b4],
+.groups .filters input[data-v-722411b4] {
+  display: inline-block;
+}
+.as-menu .group-list[data-v-722411b4],
 .groups .group-list[data-v-722411b4] {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -14,10 +26,68 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
+.as-menu .group-list-container.as-menu[data-v-722411b4],
+.groups .group-list-container.as-menu[data-v-722411b4] {
+  width: 20%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.as-menu .group-list-container.as-menu .group-list[data-v-722411b4],
+.groups .group-list-container.as-menu .group-list[data-v-722411b4] {
+  display: block;
+  overflow-y: scroll;
+}
+.as-menu .group-list-container.as-menu label[data-v-722411b4],
+.groups .group-list-container.as-menu label[data-v-722411b4] {
+  display: none;
+}
+.as-menu .group-list-container.as-menu label[for=sort-reversed][data-v-722411b4],
+.groups .group-list-container.as-menu label[for=sort-reversed][data-v-722411b4] {
+  display: block;
+  float: right;
+  width: 1em;
+  overflow: hidden;
+}
+.as-menu .group-list-container.as-menu label[for=sort-reversed][data-v-722411b4]:before,
+.groups .group-list-container.as-menu label[for=sort-reversed][data-v-722411b4]:before {
+  content: "v";
+  padding-right: 1em;
+}
+.as-menu .group-list-container.as-menu label[for=sort-reversed].is-reversed[data-v-722411b4]:before,
+.groups .group-list-container.as-menu label[for=sort-reversed].is-reversed[data-v-722411b4]:before {
+  content: "^";
+}
+.as-menu .group-list-container.as-menu input#sort-reversed[data-v-722411b4],
+.groups .group-list-container.as-menu input#sort-reversed[data-v-722411b4] {
+  display: none;
+}
+.as-menu .group-list-container.as-menu input#text-filter[data-v-722411b4],
+.groups .group-list-container.as-menu input#text-filter[data-v-722411b4] {
+  width: 90%;
+  height: 1.5em;
+}
 
 .group-listing[data-v-5d26ff36] {
   -ms-flex-preferred-size: 25%;
       flex-basis: 25%;
+}
+.group-listing .router-link-exact-active[data-v-5d26ff36] {
+  color: #f00;
+}
+.group-listing.as-menu[data-v-5d26ff36] {
+  width: 100%;
+}
+.group-listing.as-menu .description[data-v-5d26ff36] {
+  display: none;
 }
 .group-listing .inner[data-v-5d26ff36] {
   border: 1px solid #d3d3d3;
@@ -42,8 +112,30 @@
   padding-bottom: 0px;
 }
 
+.group[data-v-3d5eb94f] {
+  margin-left: 20%;
+}
 .group .title[data-v-3d5eb94f] {
   font-weight: bold;
+}
+.group .no-videos[data-v-3d5eb94f] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.group .no-videos p[data-v-3d5eb94f] {
+  text-align: center;
 }
 
 
@@ -95,6 +187,16 @@
   border-bottom-width: 0px;
   padding: 0.5em;
   overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 .event-listing[data-v-3c3df56a]:last-child {
   border-bottom-width: 1px;
@@ -102,8 +204,15 @@
 .event-listing[data-v-3c3df56a]:hover {
   background-color: #eee;
 }
+.event-listing .video-thumb[data-v-3c3df56a],
+.event-listing .annot-thumb[data-v-3c3df56a] {
+  width: 90px;
+  height: 60px;
+  border: 1px solid #808080;
+  background-color: #e5e5e5;
+}
 .event-listing .labels[data-v-3c3df56a] {
-  float: left;
+  display: block;
 }
 .event-listing .label[data-v-3c3df56a] {
   float: left;
@@ -120,7 +229,7 @@
   margin-right: 0em;
 }
 .event-listing .time[data-v-3c3df56a] {
-  float: left;
+  display: inline-block;
   font-size: 0.75rem;
   background-color: #eee;
   color: #696969;
@@ -128,7 +237,6 @@
   margin-right: 0.5em;
 }
 .event-listing .title[data-v-3c3df56a] {
-  float: left;
   margin: 0 0 0 1em;
   padding: 0;
 }
