@@ -9,8 +9,8 @@
 //= require gridEditor/setEditor
 
 // xxx = require gridEditor/pinaBauschArchive
-// xxx = require gridEditor/piecemaker-tab-vue
-//= require gridEditor/piecemakerTab
+//= require gridEditor/pm2
+// xxx = require gridEditor/piecemakerTab
 // xxx = require gridEditor/youTubeSearch
 
 // might as well just use:

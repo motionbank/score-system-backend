@@ -1,5 +1,5 @@
 // http://youmightnotneedjquery.com/#ready
-const domready = (fn) => {
+var domready = function (fn) {
     if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
         fn()
     } else {

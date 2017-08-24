@@ -1,0 +1,138 @@
+
+.groups h2[data-v-722411b4] {
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+.groups .filters[data-v-722411b4] {
+  margin-bottom: 1em;
+}
+.groups .group-list[data-v-722411b4] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.group-listing[data-v-5d26ff36] {
+  -ms-flex-preferred-size: 25%;
+      flex-basis: 25%;
+}
+.group-listing .inner[data-v-5d26ff36] {
+  border: 1px solid #d3d3d3;
+  margin: 0.2em;
+  padding: 0.5em;
+}
+.group-listing .inner[data-v-5d26ff36]:hover {
+  border-color: #808080;
+  background-color: #eee;
+}
+.group-listing h3[data-v-5d26ff36] {
+  margin: 0;
+}
+.group-listing p[data-v-5d26ff36] {
+  font-size: 0.8rem;
+  color: #808080;
+}
+.group-listing p[data-v-5d26ff36]:first-child {
+  padding-top: 0px;
+}
+.group-listing p[data-v-5d26ff36]:last-child {
+  padding-bottom: 0px;
+}
+
+.group .title[data-v-3d5eb94f] {
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.event-listing[data-v-3c3df56a] {
+  border: 1px solid #d3d3d3;
+  border-bottom-width: 0px;
+  padding: 0.5em;
+  overflow: hidden;
+}
+.event-listing[data-v-3c3df56a]:last-child {
+  border-bottom-width: 1px;
+}
+.event-listing[data-v-3c3df56a]:hover {
+  background-color: #eee;
+}
+.event-listing .labels[data-v-3c3df56a] {
+  float: left;
+}
+.event-listing .label[data-v-3c3df56a] {
+  float: left;
+  border: 1px solid #1e90ff;
+  border-radius: 1em;
+  padding: 0.2em 0.75em 0.2em 0.75em;
+  color: #483d8b;
+  background-color: #87cefa;
+  font-size: 0.75rem;
+  text-align: center;
+  margin-right: 0.15em;
+}
+.event-listing .label[data-v-3c3df56a]:last-child {
+  margin-right: 0em;
+}
+.event-listing .time[data-v-3c3df56a] {
+  float: left;
+  font-size: 0.75rem;
+  background-color: #eee;
+  color: #696969;
+  padding: 0.25em 0.75em 0.25em 0.75em;
+  margin-right: 0.5em;
+}
+.event-listing .title[data-v-3c3df56a] {
+  float: left;
+  margin: 0 0 0 1em;
+  padding: 0;
+}
+
+input[data-v-2f492d39] {
+  display: block;
+}

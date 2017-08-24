@@ -10,7 +10,7 @@
 //= require gridEditor/setEditor
 
 //= require gridEditor/pinaBauschArchive
-//= require gridEditor/piecemaker-tab-vue
+//= require gridEditor/pm2
 // XXX = require gridEditor/piecemakerTab
 //= require gridEditor/youTubeSearch
 

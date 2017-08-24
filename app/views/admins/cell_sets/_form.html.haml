@@ -48,7 +48,7 @@
                 %li
                   %a(href="#pm2ContentCells" title="Piecemaker 2")= "Piecemaker"
                 %li
-                  %a(href="#vueExample" title="Vue Example")= "Vue Example"
+                  %a(href="#pm2TabContentContainer" title="Piecemaker 2")= "Piecemaker Vue"
 
               #usedContentCells
                 %h3= t('set.tabs.used_cells')
@@ -97,6 +97,10 @@
                 .events-container.cellTable
                   .loading
                     %h4= "Loading Groups"
+
+              #pm2TabContentContainer
+                #pm2TabContent
+
 
             = render "edit_cell"
 
