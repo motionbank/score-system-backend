@@ -66,15 +66,25 @@ function populateTheGrid(data) {
 	});
 }
 
-
 //create new GridCell when contentCell is dropped in grid
-function onDrop(event) {
+function onDrop(event, data) {
+
 	var droppedCell = $(event.target);
 	var id = droppedCell.attr("id");
 	var title = droppedCell.find(".contentCellTitle").html();
 	var description = droppedCell.find(".contentCellDescription").html();
 	var imageLink = droppedCell.find(".contentCellPosterImage img").attr("src");
 	var type = "text";
+	var additional_fields = {};
+
+	if ( data ) {
+        id = data.id; // droppedCell.attr("id");
+        title = data.title; // droppedCell.find(".contentCellTitle").html();
+        description = data.description; //droppedCell.find(".contentCellDescription").html();
+        imageLink = data.imageSrc; //droppedCell.find(".contentCellPosterImage img").attr("src");
+        type = data.type || "text"; // "text";
+        additional_fields = data.additional_fields || {};
+    }
 
 	var grid = theGrid.container;
 	var gridOffset = grid.offset();
@@ -94,8 +104,13 @@ function onDrop(event) {
 				currentMousePos.y - gridOffset.top);
 			var cellAttributes = {
 				cell_id: id, //this will make sure a reference to the canonical cell is kept
+                type: type,
+                title: title,
+                description: description,
 				x: gridPosition.x,
-				y: gridPosition.y
+				y: gridPosition.y,
+                css_class_name: '',
+                additional_fields: additional_fields
 			};
 			$.post(
 				Routes.cell_set_grid_cells_path(scoreId, setId), {
@@ -105,6 +120,89 @@ function onDrop(event) {
 			);
 		}
 	}
+}
+
+//create new GridCell when contentCell is dropped in grid
+function onDropJson (event, data) {
+
+    var id = data.id || undefined; // droppedCell.attr("id");
+    var title = data.title; // droppedCell.find(".contentCellTitle").html();
+    var description = data.description; //droppedCell.find(".contentCellDescription").html();
+    var imageLink = data.imageSrc; //droppedCell.find(".contentCellPosterImage img").attr("src");
+    var type = data.type || "text"; // "text";
+    var additional_fields = data.additional_fields || {};
+
+    var grid = theGrid.container;
+    var gridOffset = grid.offset();
+
+    var scoreId = APPLICATION.score_id;
+    var setId = APPLICATION.resource_id;
+
+    function createNewCell (next) {
+        $.ajax({
+            type: "POST",
+            url: Routes.cell_new_path(APPLICATION.score_id),
+            headers: {
+                'Content-Type': 'application/json',
+                'user_token': 'zBy5gjdPJWHUyKYpEtrG'
+            },
+            dataType: 'json',
+            data: JSON.stringify({
+                cell: {
+                    type: type,
+                    title: title,
+                    description: description,
+                    css_class_name: type + '_' + parseInt(Math.random((new Date()).getTime())*100000,10),
+                    // poster_image : imageBase64,
+                    // image_name : imageName,
+                    additional_fields: additional_fields
+                }
+            }),
+            success: function(cell, status) {
+                id = cell._id.$oid;
+                console.log('Cell created:', id)
+                next();
+            }
+        });
+    }
+
+    createNewCell(function () {
+        var x = event.originalEvent.pageX;
+        var y = event.originalEvent.pageY;
+
+        var gridPosition = theGrid.mapPixelsToGrid( x - gridOffset.left, y - gridOffset.top );
+
+        if ( gridOffset.left < x &&
+             x < (gridOffset.left + grid.width()) &&
+             gridOffset.top < y &&
+             y < (gridOffset.top + grid.height()) ) {
+
+                $.each(theGrid.cells, function(index, value) {
+                    if (id == value.id) {
+                        id = id + "-2";
+                    }
+                });
+                var cellAttributes = {
+                    cell_id: id, //this will make sure a reference to the canonical cell is kept
+                    x: gridPosition.x,
+                    y: gridPosition.y
+                };
+                $.post(
+                    Routes.cell_set_grid_cells_path(scoreId, setId), {
+                        grid_cell: cellAttributes
+                    },
+                    createGridCell
+                );
+
+        } else {
+            console.log( 'Dropped outside?',
+                gridOffset,
+                {x2: gridOffset.left + grid.width(), y2: gridOffset.top + grid.height()},
+                currentMousePos,
+                gridPosition,
+                event)
+        }
+    })
 }
 
 function createGridCell(data) {
@@ -118,6 +216,7 @@ function createGridCell(data) {
 
 	var title = newGridCell.title || newGridCell.canonicalCell.title;
 	var description = newGridCell.description || newGridCell.canonicalCell.description;
+
 	//table.js
 	createUsedContentRow(newGridCell.id, newGridCell.src, title, description, newGridCell.canonicalCell.type);
 }

@@ -34,6 +34,20 @@ Grid.prototype = {
 
 		this.saveCellSizeAsPixels();
 		this.container.prepend(this.drawGridMesh());
+		var jsonContentType = 'application/json';
+		var dragEnterOver = function($evt){
+            var event = $evt.originalEvent;
+            if ([...event.dataTransfer.types].includes(jsonContentType))
+                event.preventDefault()
+        }
+        this.container.on('dragenter',dragEnterOver);
+        this.container.on('dragover',dragEnterOver);
+        this.container.on('drop',function($evt){
+            var event = $evt.originalEvent;
+            var jsonStr = event.dataTransfer.getData(jsonContentType);
+        	var data = JSON.parse(jsonStr);
+            onDropJson($evt,data);
+		});
 
 		var addRowButtons = '<div id="addRow">+</div><div id="removeRow">-</div>';
 		var addColumnButtons = '<div id="removeColumn"><span>-</span></div><div id="addColumn"><span>+</span></div>';
