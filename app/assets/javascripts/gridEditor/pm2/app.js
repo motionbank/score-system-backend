@@ -529,7 +529,6 @@ if (false) {
     context: function context() {
       var _this = this;
 
-      console.log('getting context', this.contextId);
       if (this.videos) {
         return this.videos.find(function (v) {
           return v.id === _this.contextId;
@@ -690,7 +689,14 @@ if (false) {(function () {
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  props: ['event', 'context'],
+  props: {
+    event: {
+      required: true
+    },
+    context: {
+      required: false
+    }
+  },
   data: function data() {
     return {};
   },
@@ -698,6 +704,9 @@ if (false) {(function () {
   computed: {
     title: function title() {
       return this.event.fields.title || 'Untitled event';
+    },
+    description: function description() {
+      return this.event.fields.description || '';
     },
     tags: function tags() {
       var tags = this.event.fields.tags;
@@ -710,20 +719,21 @@ if (false) {(function () {
       var target = $ev.target;
       var type = target.classList[0];
       var cellData = {
-        type: 'text',
-        description: 'A cell of type: ' + type,
-        title: 'A title',
+        type: 'iframe',
+        title: this.title,
+        description: this.description,
         additional_fields: {
-          code: 'macht spaß'
+          'pm2-event-id': this.event.id,
+          'pm2-group-id': this.event.event_group_id,
+          'pm2-event-type': this.event.type,
+          'pm2-event-tags': this.event.fields.tags,
+          'pm2-user': this.$store.state.piecemaker.user.id,
+          'iframe-src': 'http://lab.motionbank.org/mosys/cells/pm2-' + this.event.type + '-cell/index.html'
         }
       };
       $ev.dataTransfer.setData('application/json', __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(cellData));
     },
-    onDragStop: function onDragStop($ev) {
-      var target = $ev.target;
-      var mousePosition = { x: $ev.pageX, y: $ev.pageY };
-      console.log(target.classList, mousePosition);
-    }
+    onDragStop: function onDragStop($ev) {}
   }
 });
 
@@ -882,7 +892,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "name-filter",
     attrs: {
       "type": "text",
-      "id": "text-filter"
+      "id": "text-filter",
+      "placeholder": "Search"
     },
     domProps: {
       "value": (_vm.textFilter)

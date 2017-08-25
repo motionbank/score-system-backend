@@ -2,5 +2,7 @@
  *= require jquery-ui/custom-theme
  *= require _gridStyle
  *
+ *= require gridEditor/_piecemaker2Tab
+ *
  *= require gridEditor/pm2/app
  */
