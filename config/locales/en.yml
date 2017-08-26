@@ -20,6 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  empty: "Empty"
+  back: "Back"
   page:
     title: "Motion Bank Scores"
   my_account: "My account"

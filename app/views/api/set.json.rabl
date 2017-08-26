@@ -8,7 +8,6 @@ node :id do
 end
 attributes :title, :description, :path
 node :poster do |set|
-  # TODO: this is currently broken, why?
   # set.poster_image_filename
 end
 attribute :columns => :grid_cols
