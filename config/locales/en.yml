@@ -37,6 +37,7 @@ en:
     index: "List"
     show: "Show"
     delete: "Delete"
+    edit: "Edit"
     with_class_name:
       all: "All %{class_name}"
       show: "Show %{class_name}"

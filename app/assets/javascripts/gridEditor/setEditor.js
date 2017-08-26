@@ -67,7 +67,7 @@ function populateTheGrid(data) {
 }
 
 //create new GridCell when contentCell is dropped in grid
-function onDrop(event, data) {
+function onDrop(event) {
 
 	var droppedCell = $(event.target);
 	var id = droppedCell.attr("id");
@@ -76,15 +76,6 @@ function onDrop(event, data) {
 	var imageLink = droppedCell.find(".contentCellPosterImage img").attr("src");
 	var type = "text";
 	var additional_fields = {};
-
-	if ( data ) {
-        id = data.id; // droppedCell.attr("id");
-        title = data.title; // droppedCell.find(".contentCellTitle").html();
-        description = data.description; //droppedCell.find(".contentCellDescription").html();
-        imageLink = data.imageSrc; //droppedCell.find(".contentCellPosterImage img").attr("src");
-        type = data.type || "text"; // "text";
-        additional_fields = data.additional_fields || {};
-    }
 
 	var grid = theGrid.container;
 	var gridOffset = grid.offset();
