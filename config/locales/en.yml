@@ -68,6 +68,6 @@ en:
       title: "Filter"
       containing: "containing"
       all_types: "All types"
-    aditional_fields:
+    additional_fields:
       key: "Key"
       value: "Value"
