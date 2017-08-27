@@ -10,6 +10,7 @@
 
 //= require gridEditor/pm2
 //= require gridEditor/youTube
+//= require gridEditor/vimeo
 // xxx = require gridEditor/pinaBauschArchive
 // xxx = require gridEditor/piecemakerTab
 

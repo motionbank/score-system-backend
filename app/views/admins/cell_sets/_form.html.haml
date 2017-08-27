@@ -46,8 +46,8 @@
                 %li
                   %a(href="#youtubeContentCells" title="Search YouTube for videos")= "YouTube"
 
-                -#%li
-                -#  %a(href="#vimeoContentCells" title="Search Vimeo for videos")= "Vimeo"
+                %li
+                  %a(href="#vimeoContentCells" title="Search Vimeo for videos")= "Vimeo"
 
                 -#%li
                 -#  %a(href="#pbaContentCells" title="Pina Bausch Foundation archive material")= "Pina Bausch Foundation"
@@ -89,6 +89,14 @@
                     %button= "Search"
 
                 #youtubeContentCellTable.cellTable
+
+              #vimeoContentCells
+                .table-header-form
+                  %form
+                    %input(type="text" id="vimeoSearchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
+                    %button= "Search"
+
+                .cellTable
               
               -##pbaContentCells
               -#  #navPbArchive.table-header-form
