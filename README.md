@@ -13,10 +13,13 @@ Depending on your local setup you might want to use rbenv and then tasks are run
 
 ## Initial setup (of a fresh installation)
 
-Start with `gem install bundler` and `bundle install` of course.
+### Macs, thinking different …
+Start with `brew` and then get GraphicsMagick: `brew install graphicsmagick`
+
+### Then
+Continue with `gem install bundler` and `bundle install` of course.
 
 ### Simple Form
-
 Simple Form wants it's own setup: run `rails generate simple_form:install`
 
 ### Database
