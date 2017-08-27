@@ -231,7 +231,8 @@ svg {
 }
 
 #filter,
-.table-header-form {
+.table-header-form,
+.filters {
   background: #d2dad6;
   padding: 10px 15px;
 
@@ -246,6 +247,7 @@ svg {
   }
 }
 
+.filters,
 .table-header-form {
   a {
     padding: 1em;
