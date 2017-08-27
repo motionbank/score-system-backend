@@ -3,8 +3,9 @@ function googleApiClientReady () {
 }
 
 var YTA_loaded = false;
+
 function onYouTubeApiLoad () {
-	gapi.client.setApiKey('AIzaSyAJbBRGqwVDfB77v71Ru7RoPmgP2VBVrbg');
+	gapi.client.setApiKey('AIzaSyCMfeZXhTec0elm19N_2TTBHNZR2hpl-5Q');
 	YTA_loaded = true;
 
 	var $input = $('#searchYouTube').find('#searchTermYT');
@@ -104,11 +105,31 @@ function onDropYT (event) {
 			success	: function ( data, status ) {
 				imageBase64 = data.base64;
 				next();
-			}
+			},
+            error: function (err) {
+			    console.log('Error generating base64 of preview image', err);
+			    next();
+            }
 		});
 	}
 
 	function createNewCell (next) {
+	    var cell = {
+            type: "iframe",
+            title: title,
+            description: description,
+            css_class_name: "youtube_" + parseInt(Math.random(100000)*100000,10),
+            image_name : imageName,
+            additional_fields: {
+                "iframe-src": "http://www.youtube.com/embed/" + video_id,
+                'attr-allowfullscreen': true
+            }
+        };
+	    if (imageBase64) {
+            cell.poster_image = imageBase64;
+        } else {
+	        cell.additional_fields.poster_image_url = imageLink; // try again later?
+        }
 		$.ajax({
 			type: "POST",
 			url: Routes.cell_new_path(APPLICATION.score_id),
@@ -118,17 +139,7 @@ function onDropYT (event) {
 			},
 			dataType: 'json',
 			data: JSON.stringify({
-				cell: {
-					type: "iframe",
-					title: title,
-					description: description,
-					css_class_name: "youtube_" + parseInt(Math.random(100000)*100000,10),
-					poster_image : imageBase64,
-					image_name : imageName,
-					additional_fields: {
-						"iframe-src": "http://www.youtube.com/embed/" + video_id
-					}
-				}
+				cell: cell
 			}),
 			success: function(cell, status) {
 				id = cell._id.$oid;

@@ -38,17 +38,31 @@
             #tabs
               %ul
                 %li
-                  %a(href="#usedContentCells")= t('set.tabs.used_cells')
+                  %a(href="#createBasicContentCells" title="Create title, image, link and other cells")= "Basic Cells"
+
                 %li
-                  %a(href="#availableContentCells")= t('set.tabs.available_cells')
+                  %a(href="#pm2TabContentContainer" title="Use videos and annotations from Piecemaker 2")= "Piecemaker 2"
+
                 %li
-                  %a(href="#youtubeContentCells")= "YouTube"
+                  %a(href="#youtubeContentCells" title="Search YouTube for videos")= "YouTube"
+
                 %li
-                  %a(href="#pbaContentCells" title="Pina Bausch Archive")= "Pina Bausch"
+                  %a(href="#vimeoContentCells" title="Search Vimeo for videos")= "Vimeo"
+
+                -#%li
+                -#  %a(href="#pbaContentCells" title="Pina Bausch Foundation archive material")= "Pina Bausch Foundation"
+
+                -#%li
+                -#  %a(href="#pm2ContentCells" title="Piecemaker 2")= "Piecemaker"
+
                 %li
-                  %a(href="#pm2ContentCells" title="Piecemaker 2")= "Piecemaker"
+                  %a(href="#usedContentCells" title="The cells that are already in this set")= "Set Cells"
+
                 %li
-                  %a(href="#pm2TabContentContainer" title="Piecemaker 2")= "Piecemaker Vue"
+                  %a(href="#availableContentCells" title="Cells that have been preconfigured")= "Preconfigured Cells"
+
+              #createBasicContentCells
+                .cellTable
 
               #usedContentCells
                 #usedContentCellTable.cellTable
@@ -75,30 +89,37 @@
                     %button= "Search"
 
                 #youtubeContentCellTable.cellTable
-              
-              #pbaContentCells
-                #navPbArchive.table-header-form
-                  %a#pieces(href="#")= "Stücke"
-                  %a#people(href="#")= "Personen"
-                  %a#locations(href="#")= "Orte"
 
-                #pbaContentCellTable.cellTable
-
-              #pm2ContentCells
+              #vimeoContentCells
                 .table-header-form
-                  %a.pm2-groups(href="")= "Groups"
-                .video-container
-                .event-filters
                   %form
-                    %input(type="text" id="searchEvents" name="searchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
-                    %button= "Filter"
-                .events-container.cellTable
-                  .loading
-                    %h4= "Loading Groups"
+                    %input(type="text" id="vimeoSearchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
+                    %button= "Search"
+
+                .cellTable
+              
+              -##pbaContentCells
+              -#  #navPbArchive.table-header-form
+              -#    %a#pieces(href="#")= "Stücke"
+              -#    %a#people(href="#")= "Personen"
+              -#    %a#locations(href="#")= "Orte"
+              -#
+              -#  #pbaContentCellTable.cellTable
+
+              -##pm2ContentCells
+              -#  .table-header-form
+              -#    %a.pm2-groups(href="")= "Groups"
+              -#  .video-container
+              -#  .event-filters
+              -#    %form
+              -#      %input(type="text" id="searchEvents" name="searchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
+              -#      %button= "Filter"
+              -#  .events-container.cellTable
+              -#    .loading
+              -#      %h4= "Loading Groups"
 
               #pm2TabContentContainer
                 #pm2TabContent
-
 
             = render "edit_cell"
 
@@ -106,4 +127,5 @@
 
             #emptyCell.cell
 
+-# This is part of the YouTube search tab
 %script(src="https://apis.google.com/js/client.js?onload=googleApiClientReady")

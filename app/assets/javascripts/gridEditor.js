@@ -8,10 +8,11 @@
 //= require gridEditor/edit
 //= require gridEditor/setEditor
 
-// xxx = require gridEditor/pinaBauschArchive
 //= require gridEditor/pm2
+//= require gridEditor/youTube
+//= require gridEditor/vimeo
+// xxx = require gridEditor/pinaBauschArchive
 // xxx = require gridEditor/piecemakerTab
-// xxx = require gridEditor/youTubeSearch
 
 // might as well just use:
 // xxx = require_tree ./gridEditor

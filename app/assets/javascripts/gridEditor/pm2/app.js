@@ -516,7 +516,10 @@ if (false) {
     contextId: Number
   },
   data: function data() {
-    return {};
+    return {
+      textFilter: '',
+      sortReversed: false
+    };
   },
 
   computed: {
@@ -547,6 +550,23 @@ if (false) {
     },
     videos: function videos() {
       return this.group.videos;
+    },
+    videosSortedAndFiltered: function videosSortedAndFiltered() {
+      if (!this.videos || this.videos.length === 0) return [];
+      var clonedVideos = this.videos.slice(0);
+      if (this.textFilter && this.textFilter.length > 1) {
+        var textFilterNoCase = this.textFilter.toLowerCase();
+        clonedVideos = clonedVideos.filter(function (v) {
+          return v.fields.title && v.fields.title.toLowerCase().indexOf(textFilterNoCase) >= 0 || v.fields.description && v.fields.description.toLowerCase().indexOf(textFilterNoCase) >= 0 || v.fields.tags && v.fields.tags.toLowerCase().indexOf(textFilterNoCase) >= 0;
+        });
+      }
+      clonedVideos.sort(function (a, b) {
+        return a.utc_timestamp.getTime() - b.utc_timestamp.getTime();
+      });
+      if (this.sortReversed) {
+        clonedVideos.reverse();
+      }
+      return clonedVideos;
     }
   },
   watch: {
@@ -562,6 +582,13 @@ if (false) {
     }
   },
 
+  methods: {
+    reloadVideos: function reloadVideos() {
+      if (this.groupId && this.group) {
+        __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.getVideos(this.groupId, function (videos) {});
+      }
+    }
+  },
   components: {
     'pm2-context': __WEBPACK_IMPORTED_MODULE_1__PM2Context__["a" /* default */],
     'pm2-event-listing': __WEBPACK_IMPORTED_MODULE_2__PM2EventListing__["a" /* default */]
@@ -728,6 +755,7 @@ if (false) {(function () {
           'pm2-event-type': this.event.type,
           'pm2-event-tags': this.event.fields.tags,
           'pm2-user': this.$store.state.piecemaker.user.id,
+          'attr-allowfullscreen': true,
           'iframe-src': 'http://localhost:8080/?gid=' + this.event.event_group_id + '&eid=' + this.event.id + '#/' + cellType
         }
       };
@@ -747,6 +775,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   return _c('div', {
     staticClass: "event-listing"
   }, [_c('div', {
+    staticClass: "inner"
+  }, [_c('div', {
     staticClass: "video-thumb",
     attrs: {
       "draggable": ""
@@ -755,7 +785,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "dragstart": _vm.onDragStart,
       "dragend": _vm.onDragStop
     }
-  }), _vm._v(" "), _c('div', {
+  }, [_c('span', [_vm._v("Video")]), _vm._v(" "), _c('img', {
+    attrs: {
+      "src": "/dev-assets/fallback/default.png",
+      "title": "Drag into Set to create a Video Cell"
+    }
+  })]), _vm._v(" "), _c('div', {
     staticClass: "annot-thumb",
     attrs: {
       "draggable": ""
@@ -764,21 +799,26 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "dragstart": _vm.onDragStart,
       "dragend": _vm.onDragStop
     }
-  }), _vm._v(" "), _c('div', {
+  }, [_c('span', [_vm._v("Annotations")]), _vm._v(" "), _c('img', {
+    attrs: {
+      "src": "/dev-assets/fallback/default.png",
+      "title": "Drag into Set to create a Annotation Cell"
+    }
+  })]), _vm._v(" "), _c('div', {
     staticClass: "info"
   }, [_c('h4', {
     staticClass: "title"
   }, [_vm._t("title", [_vm._v(_vm._s(_vm.title))])], 2), _vm._v(" "), _c('div', {
     staticClass: "time"
   }, [_vm._v(_vm._s(_vm._f("contextTime")(_vm.event.utc_timestamp, _vm.context)))]), _vm._v(" "), _c('div', {
-    staticClass: "labels"
+    staticClass: "labels badges"
   }, [_c('span', {
-    staticClass: "label"
+    staticClass: "badge"
   }, [_vm._v(_vm._s(_vm.event.type))]), _vm._v(" "), _vm._l((_vm.tags), function(tag) {
     return [_c('span', {
-      staticClass: "label"
+      staticClass: "badge"
     }, [_vm._v(_vm._s(tag))])]
-  })], 2)])])
+  })], 2)])])])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -832,26 +872,95 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "group": _vm.group,
       "context": _vm.context
     }
-  })] : (_vm.videos && _vm.videos.length > 0) ? [_vm._l((_vm.videos), function(video) {
+  })] : [_c('div', {
+    staticClass: "filters"
+  }, [_c('label', {
+    attrs: {
+      "for": "event-text-filter"
+    }
+  }, [_vm._v("Search")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.textFilter),
+      expression: "textFilter"
+    }],
+    attrs: {
+      "type": "search",
+      "id": "event-text-filter",
+      "placeholder": "Title / Description"
+    },
+    domProps: {
+      "value": (_vm.textFilter)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.textFilter = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('label', {
+    class: {
+      'is-reversed': _vm.sortReversed
+    },
+    attrs: {
+      "for": "event-sort-reversed"
+    }
+  }, [_vm._v("Reversed")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.sortReversed),
+      expression: "sortReversed"
+    }],
+    attrs: {
+      "type": "checkbox",
+      "id": "event-sort-reversed"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.sortReversed) ? _vm._i(_vm.sortReversed, null) > -1 : (_vm.sortReversed)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.sortReversed,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.sortReversed = $$a.concat($$v))
+          } else {
+            $$i > -1 && (_vm.sortReversed = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.sortReversed = $$c
+        }
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "event-list"
+  }, [(_vm.videosSortedAndFiltered && _vm.videosSortedAndFiltered.length > 0) ? [_vm._l((_vm.videosSortedAndFiltered), function(video) {
     return [_c('pm2-event-listing', {
       attrs: {
         "event": video
       }
-    }, [_c('router-link', {
-      attrs: {
-        "to": {
-          path: _vm.groupPath + '/context/' + video.id
-        }
-      },
-      slot: "title"
-    }, [_vm._v(_vm._s(video.fields.title))])], 1)]
-  })] : [_vm._m(0)]] : _vm._e()], 2)
-}
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+    })]
+  })] : [_c('div', {
     staticClass: "no-videos"
-  }, [_c('p', [_vm._v("No videos …")])])
-}]
+  }, [_c('h4', [_vm._v("No videos …")]), _vm._v(" "), (_vm.textFilter && _vm.textFilter.length > 1) ? [_c('p', [_vm._v("Try changing or removing the search query above")])] : _vm._e(), _vm._v(" "), (!_vm.videosSortedAndFiltered || _vm.videosSortedAndFiltered.length === 0) ? [_c('p', [_vm._v("Try "), _c('a', {
+    attrs: {
+      "href": ""
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.reloadVideos($event)
+      }
+    }
+  }, [_vm._v("reloading them")])])] : _vm._e()], 2)]], 2)]] : _vm._e()], 2)
+}
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -891,9 +1000,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }],
     staticClass: "name-filter",
     attrs: {
-      "type": "text",
+      "type": "search",
       "id": "text-filter",
-      "placeholder": "Search"
+      "placeholder": "Title / Description"
     },
     domProps: {
       "value": (_vm.textFilter)
