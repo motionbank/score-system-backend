@@ -1,4 +1,5 @@
 $(function(){
+
     const VIMEO_ACCESS_TOKEN = "8dbc7f72ddb834a4665dbb6989014699";
 
     const apiBase = 'https://api.vimeo.com'
@@ -82,14 +83,4 @@ $(function(){
                 })(e))
             })
     }
-
-    $.get(
-        apiBase + apiSearchVideos,
-        {
-            query: 'Forsythe',
-            access_token: VIMEO_ACCESS_TOKEN
-        },
-        function success (data) {
-            if (data) populateTable(data.data)
-        });
 });
