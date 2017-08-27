@@ -21,10 +21,18 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
 
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].config.productionTip = false;
 
-__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_3__plugins_PM2Plugin__["a" /* default */], {
+var pm2Options = {
   host: 'https://piecemaker2-api-public.herokuapp.com',
   api_key: '0310XPC6JEeF0oCy'
-});
+};
+
+if ('localStorage' in window) {
+  var storage = window.localStorage;
+  pm2Options.host = storage.getItem('piecemaker.host') || pm2Options.host;
+  pm2Options.api_key = storage.getItem('piecemaker.api_key') || pm2Options.api_key;
+}
+
+__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_3__plugins_PM2Plugin__["a" /* default */], pm2Options);
 
 var store = new __WEBPACK_IMPORTED_MODULE_4_vuex__["a" /* default */].Store({
   store: {
@@ -191,7 +199,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 });
 
 router.beforeEach(function (to, from, next) {
-  if (to.path === '/logout') {
+  if (to.path !== '/login' && !__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.isLoggedIn()) {
+    next('/login');
+  } else if (to.path === '/logout') {
     __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.logout(function () {
       next('/');
     });
@@ -1210,20 +1220,37 @@ if (false) {(function () {
   data: function data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      host: ''
     };
   },
+
+  computed: {
+    isLoggedIn: function isLoggedIn() {
+      return this.$store.state.piecemaker.user && this.$store.state.piecemaker.user.api_key;
+    }
+  },
   mounted: function mounted() {
-    if (this.$store.state.piecemaker.user && this.$store.state.piecemaker.user.email) {
-      this.email = this.$store.state.piecemaker.user.email;
+    if ('localStorage' in window) {
+      var storage = window.localStorage;
+      this.host = storage.getItem('piecemaker.host');
+      this.email = storage.getItem('piecemaker.email');
+      this.password = storage.getItem('piecemaker.password');
     }
   },
 
   methods: {
-    onSubmit: function onSubmit($event) {
+    doLogin: function doLogin() {
       var _this = this;
 
+      __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.setHost(this.host);
       __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.login(this.email, this.password, function () {
+        if ('localStorage' in window) {
+          var storage = window.localStorage;
+          storage.setItem('piecemaker.host', _this.host);
+          storage.setItem('piecemaker.email', _this.email);
+          storage.setItem('piecemaker.password', _this.password);
+        }
         _this.$router.push('/');
       });
     }
@@ -1237,7 +1264,7 @@ if (false) {(function () {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  return _c('div', [(!_vm.isLoggedIn) ? [_c('div', {
     staticClass: "login"
   }, [_c('form', {
     on: {
@@ -1246,7 +1273,41 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.onSubmit($event)
       }
     }
-  }, [_c('input', {
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.host),
+      expression: "host"
+    }],
+    attrs: {
+      "name": "host",
+      "id": "pm2-host"
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.host = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "https://piecemaker2-api-public.herokuapp.com"
+    }
+  }, [_vm._v("Piecemaker (public)")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "http://192.168.0.99:9292"
+    }
+  }, [_vm._v("Piecemaker (local @ MacMini)")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "http://192.168.99.100:9292"
+    }
+  }, [_vm._v("Piecemaker (local @ Florian)")])]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -1254,8 +1315,10 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       expression: "email"
     }],
     attrs: {
-      "type": "text",
-      "id": "pm2-email"
+      "type": "email",
+      "name": "email",
+      "placeholder": "Email",
+      "title": "Email"
     },
     domProps: {
       "value": (_vm.email)
@@ -1275,7 +1338,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }],
     attrs: {
       "type": "password",
-      "id": "pm2-password"
+      "name": "password",
+      "placeholder": "Password",
+      "title": "Password"
     },
     domProps: {
       "value": (_vm.password)
@@ -1286,12 +1351,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.password = $event.target.value
       }
     }
-  }), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "submit",
-      "value": "Submit"
+  }), _vm._v(" "), _c('button', {
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.doLogin()
+      }
     }
-  })])])
+  }, [_vm._v("Login")])])])] : [_c('router-view')]], 2)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1332,10 +1399,14 @@ if (false) {
 
 var PM2Module = {
   state: {
+    host: '',
     user: {},
     groups: []
   },
   mutations: {
+    host: function host(state, _host) {
+      state.host = _host;
+    },
     user: function user(state, _user) {
       state.user = _user;
     },
@@ -1430,7 +1501,17 @@ var PM2Service = function () {
           console.log('[pm2Service]', type);
         });
         store.registerModule('piecemaker', PM2Module);
+        if (_this.pm2 && _this.pm2.host) {
+          _this.store.commit('host', _this.pm2, { module: 'piecemaker' });
+        }
       };
+    }
+  }, {
+    key: 'setHost',
+    value: function setHost(newHost) {
+      console.log('[PM2Plugin] switching host to', newHost);
+      this.store.commit('host', newHost, { module: 'piecemaker' });
+      this.pm2.host = newHost + '/api/v1';
     }
   }, {
     key: 'isLoggedIn',

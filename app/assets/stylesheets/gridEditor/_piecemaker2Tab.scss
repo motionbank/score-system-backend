@@ -1,7 +1,5 @@
-#pm2Content {
 
-}
-
+/* old PM2 tab */
 #pm2ContentCells {
 
   .filters,
@@ -38,10 +36,10 @@
   }
 }
 
+/* new PM2 tab */
 #pm2TabContentContainer {
 
   .filters {
-
     label[for=sort-reversed]::before,
     label[for=event-sort-reversed]::before {
       font-size: 1.3em;
