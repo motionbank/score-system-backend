@@ -281,6 +281,12 @@
   font-size: 0.6rem;
   color: #7f7f7f;
 }
+.event-listing .inner .draggable-item img[data-v-2e66b85a] {
+  pointer-events: none;
+}
+.event-listing .inner .draggable-item[data-v-2e66b85a]:hover {
+  color: #222;
+}
 .event-listing .inner .labels[data-v-2e66b85a] {
   display: inline-block;
   vertical-align: middle;

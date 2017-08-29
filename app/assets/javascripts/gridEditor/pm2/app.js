@@ -787,7 +787,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('div', {
     staticClass: "inner"
   }, [_c('div', {
-    staticClass: "video-thumb video-cell",
+    staticClass: "video-thumb video-cell draggable-item",
     attrs: {
       "draggable": ""
     },
@@ -801,7 +801,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "title": "Drag into Set to create a Video Cell"
     }
   })]), _vm._v(" "), _c('div', {
-    staticClass: "annot-thumb annotations-cell",
+    staticClass: "annot-thumb annotations-cell draggable-item",
     attrs: {
       "draggable": ""
     },
