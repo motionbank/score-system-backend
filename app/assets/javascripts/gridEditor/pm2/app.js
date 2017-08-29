@@ -754,7 +754,7 @@ if (false) {(function () {
   methods: {
     onDragStart: function onDragStart($ev) {
       var target = $ev.target;
-      var cellType = target.classList[0] === 'video-thumb' ? 'player' : 'annotator';
+      var cellType = target.classList.join('').indexOf('video') >= 0 ? 'player' : 'annotator';
       var cellData = {
         type: 'iframe',
         title: this.title,
@@ -766,7 +766,7 @@ if (false) {(function () {
           'pm2-event-tags': this.event.fields.tags,
           'pm2-user': this.$store.state.piecemaker.user.id,
           'attr-allowfullscreen': true,
-          'iframe-src': 'http://localhost:8080/?gid=' + this.event.event_group_id + '&eid=' + this.event.id + '#/' + cellType
+          'iframe-src': 'http://localhost:9595/?gid=' + this.event.event_group_id + '&eid=' + this.event.id + '#/' + cellType
         }
       };
       $ev.dataTransfer.setData('application/json', __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(cellData));
@@ -787,7 +787,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('div', {
     staticClass: "inner"
   }, [_c('div', {
-    staticClass: "video-thumb",
+    staticClass: "video-thumb video-cell",
     attrs: {
       "draggable": ""
     },
@@ -801,7 +801,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "title": "Drag into Set to create a Video Cell"
     }
   })]), _vm._v(" "), _c('div', {
-    staticClass: "annot-thumb",
+    staticClass: "annot-thumb annotations-cell",
     attrs: {
       "draggable": ""
     },
