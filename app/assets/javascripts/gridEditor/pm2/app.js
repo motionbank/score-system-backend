@@ -754,7 +754,7 @@ if (false) {(function () {
   methods: {
     onDragStart: function onDragStart($ev) {
       var target = $ev.target;
-      var cellType = target.classList.join('').indexOf('video') >= 0 ? 'player' : 'annotator';
+      var cellType = target.classList.toString().indexOf('video') >= 0 ? 'player' : 'annotator';
       var cellData = {
         type: 'iframe',
         title: this.title,
