@@ -41,6 +41,9 @@
                   %a(href="#createBasicContentCells" title="Create title, image, link and other cells")= "Basic Cells"
 
                 %li
+                  %a(href="#pbaTabContentContainer" title="Pina Bausch Foundation archive material")= "Pina Bausch Foundation"
+
+                %li
                   %a(href="#pm2TabContentContainer" title="Use videos and annotations from Piecemaker 2")= "Piecemaker 2"
 
                 %li
@@ -48,12 +51,6 @@
 
                 %li
                   %a(href="#vimeoContentCells" title="Search Vimeo for videos")= "Vimeo"
-
-                -#%li
-                -#  %a(href="#pbaContentCells" title="Pina Bausch Foundation archive material")= "Pina Bausch Foundation"
-
-                -#%li
-                -#  %a(href="#pm2ContentCells" title="Piecemaker 2")= "Piecemaker"
 
                 %li
                   %a(href="#usedContentCells" title="The cells that are already in this set")= "Set Cells"
@@ -98,25 +95,13 @@
 
                 .cellTable
               
-              -##pbaContentCells
-              -#  #navPbArchive.table-header-form
-              -#    %a#pieces(href="#")= "Stücke"
-              -#    %a#people(href="#")= "Personen"
-              -#    %a#locations(href="#")= "Orte"
-              -#
-              -#  #pbaContentCellTable.cellTable
+              #pbaTabContentContainer
+                #navPbArchive.table-header-form
+                  %a#pieces(href="#")= "Stücke"
+                  %a#people(href="#")= "Personen"
+                  %a#locations(href="#")= "Orte"
 
-              -##pm2ContentCells
-              -#  .table-header-form
-              -#    %a.pm2-groups(href="")= "Groups"
-              -#  .video-container
-              -#  .event-filters
-              -#    %form
-              -#      %input(type="text" id="searchEvents" name="searchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
-              -#      %button= "Filter"
-              -#  .events-container.cellTable
-              -#    .loading
-              -#      %h4= "Loading Groups"
+                #pbaContentCellTable.cellTable
 
               #pm2TabContentContainer
                 #pm2TabContent
