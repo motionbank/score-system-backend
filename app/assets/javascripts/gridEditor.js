@@ -8,6 +8,7 @@
 //= require gridEditor/edit
 //= require gridEditor/setEditor
 
+//= require gridEditor/basics
 //= require gridEditor/pm2
 //= require gridEditor/youTube
 //= require gridEditor/vimeo

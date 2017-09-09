@@ -3,6 +3,17 @@ var currentMousePos = {
 	y: -1
 };
 var currentCellToEdit;
+var setCurrentCellToEdit = function (cell) {
+    currentCellToEdit = cell;
+	var newCellEvent = new CustomEvent('currentCellChanged',{
+		detail: {
+			cell: currentCellToEdit
+		},
+		bubbles: true,
+		cancelable: true
+	})
+    theGrid.container.get(0).dispatchEvent(newCellEvent)
+}
 var theGrid;
 
 $(document).ready(function() {

@@ -207,7 +207,7 @@ Grid.prototype = {
 	setCurrentCell: function(idOfCell) {
 		$.each(this.cells, function(index, value) {
 			if (value.id == idOfCell) {
-				currentCellToEdit = value;
+                setCurrentCellToEdit(value);
 				return false;
 			}
 		});

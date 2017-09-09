@@ -1,3 +1,4 @@
+
 function initTabs() {
 	$(function() {
 		$("#tabs").tabs();

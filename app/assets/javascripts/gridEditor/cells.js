@@ -177,12 +177,13 @@ GridCell.prototype = {
       var currentId = this.id;
       if($('div#gridCell_' + currentId).hasClass('selectedCell')){
         theGrid.cellSelected = false;
+        setCurrentCellToEdit(null)
         $('.cell').removeClass('selectedCell');
       } else {
         $('.cell').removeClass('selectedCell');
         $('div#gridCell_' + currentId).addClass('selectedCell');
         theGrid.cellSelected = true;
-        currentCellToEdit = this;
+        setCurrentCellToEdit(this);
       }
     },
 
@@ -204,7 +205,7 @@ GridCell.prototype = {
 
     openEditDialog: function(){
       editBox.openDialog(this);
-      currentCellToEdit = this;
+      setCurrentCellToEdit(this);
     },
 
     //TODO Create Templates for Cells for different types
