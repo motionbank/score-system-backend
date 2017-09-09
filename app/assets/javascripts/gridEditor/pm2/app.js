@@ -1,4 +1,5 @@
-webpackJsonp([1],{
+var liba2ba =
+webpackJsonpliba2ba([1],{
 
 /***/ 153:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -10,6 +11,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__plugins_PM2Plugin__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(236);
+
 
 
 
@@ -54,8 +56,22 @@ var startPM2VueTab = function startPM2VueTab() {
   });
 };
 
-if ('domready' in window) {
-  window.domready(startPM2VueTab);
+if ('$' in window) {
+  $(function () {
+    var routerDisabled = false;
+    $('#tabs').on('tabsbeforeactivate', function (event, ui) {
+      if (ui.oldPanel && ui.oldPanel.get(0).id === 'pm2TabContentContainer') {
+        routerDisabled = true;
+      }
+      if (ui.newPanel && ui.newPanel.get(0).id === 'pm2TabContentContainer') {
+        routerDisabled = false;
+      }
+    });
+    __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */].beforeEach(function (to, from, next) {
+      if (!routerDisabled) next();
+    });
+    startPM2VueTab();
+  });
 } else {
   startPM2VueTab();
 }
@@ -67,7 +83,7 @@ if ('domready' in window) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_PM2MoSysTab_vue__ = __webpack_require__(157);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_16db079a_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_PM2MoSysTab_vue__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_16db079a_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PM2MoSysTab_vue__ = __webpack_require__(158);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -81,12 +97,12 @@ var normalizeComponent = __webpack_require__(3)
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-16db079a"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_PM2MoSysTab_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_16db079a_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_PM2MoSysTab_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_16db079a_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_PM2MoSysTab_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
@@ -181,10 +197,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     path: '/login',
     component: __WEBPACK_IMPORTED_MODULE_5_components_PM2Login__["a" /* default */]
   }, {
-    path: '/logout'
-  }, {
     path: '/',
     component: __WEBPACK_IMPORTED_MODULE_2_components_PM2Groups__["a" /* default */]
+  }, {
+    path: '/logout'
   }, {
     path: '/group/:groupId',
     component: __WEBPACK_IMPORTED_MODULE_2_components_PM2Groups__["a" /* default */],
@@ -199,6 +215,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 });
 
 router.beforeEach(function (to, from, next) {
+  console.log(from, to, __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.isLoggedIn());
   if (to.path !== '/login' && !__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.isLoggedIn()) {
     next('/login');
   } else if (to.path === '/logout') {

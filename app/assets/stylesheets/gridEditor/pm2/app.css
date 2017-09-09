@@ -1,7 +1,16 @@
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-size: 1.1em;
+}
+
 .groups[data-v-5715c8a4] {
   position: relative;
   height: 100%;
+  min-height: 300px;
 }
 .groups h2[data-v-5715c8a4] {
   font-weight: bold;
@@ -166,6 +175,7 @@
 }
 .group .event-list[data-v-6e3b3742] {
   position: relative;
+  min-height: 100px;
 }
 .group .event-list .no-videos[data-v-6e3b3742] {
   position: absolute;
