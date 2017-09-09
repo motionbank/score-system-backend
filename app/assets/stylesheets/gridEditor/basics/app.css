@@ -1,9 +1,7 @@
 
-
-
-
-
-
+.basicCell img {
+  pointer-events: none;
+}
 
 
 
