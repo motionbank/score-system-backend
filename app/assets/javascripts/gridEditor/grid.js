@@ -205,12 +205,19 @@ Grid.prototype = {
 	},
 
 	setCurrentCell: function(idOfCell) {
-		$.each(this.cells, function(index, value) {
-			if (value.id == idOfCell) {
-                setCurrentCellToEdit(value);
-				return false;
-			}
-		});
+		var cell = this.getCellById(idOfCell)
+		if (cell) {
+			setCurrentCellToEdit(cell)
+		}
+	},
+
+	getCellById: function (idOfCell) {
+        $.each(this.cells, function(index, value) {
+            if (value.id == idOfCell) {
+                return value
+            }
+        });
+        return null
 	},
 
 	onWindowResize: function() {
