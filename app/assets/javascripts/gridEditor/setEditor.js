@@ -127,11 +127,11 @@ function onDrop(event) {
 //create new GridCell when contentCell is dropped in grid
 function onDropJson (event, data) {
 
-    var id = data.id || undefined; // droppedCell.attr("id");
-    var title = data.title; // droppedCell.find(".contentCellTitle").html();
-    var description = data.description; //droppedCell.find(".contentCellDescription").html();
-    var imageLink = data.imageSrc; //droppedCell.find(".contentCellPosterImage img").attr("src");
-    var type = data.type || "text"; // "text";
+    var id = data.id || undefined;
+    var title = data.title;
+    var description = data.description;
+    var imageLink = data.imageSrc;
+    var type = data.type || "text";
     var additional_fields = data.additional_fields || {};
 
     var grid = theGrid.container;
@@ -145,8 +145,7 @@ function onDropJson (event, data) {
             type: "POST",
             url: Routes.cell_new_path(APPLICATION.score_id),
             headers: {
-                'Content-Type': 'application/json',
-                'user_token': 'zBy5gjdPJWHUyKYpEtrG'
+                'Content-Type': 'application/json'
             },
             dataType: 'json',
             data: JSON.stringify({
@@ -253,6 +252,7 @@ function removeSelectedCell() {
 		},
 		function() {
 			theGrid.removeCell(currentCellToEdit);
+            setCurrentCellToEdit(null)
 		}
 	);
 }

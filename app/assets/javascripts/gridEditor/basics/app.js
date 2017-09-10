@@ -1,14 +1,14 @@
-var libad27 =
-webpackJsonplibad27([1],{
+var lib1076d0 =
+webpackJsonplib1076d0([1],{
 
-/***/ 10:
+/***/ 18:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MoSysBasicsTab__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MoSysBasicsTab__ = __webpack_require__(81);
 
 
 
@@ -45,15 +45,26 @@ var initBasicVueTab = function initBasicVueTab() {
 
 if ('$' in window) {
   $(function () {
-    var routerDisabled = false;
-    $('#tabs').on('tabsbeforeactivate', function (event, ui) {
+    var routerDisabled = true;
+    var handleTabEvents = function handleTabEvents(event, ui) {
       if (ui.oldPanel && ui.oldPanel.get(0).id === 'basicCellsContentContainer') {
         routerDisabled = true;
       }
-      if (ui.newPanel && ui.newPanel.get(0).id === 'basicCellsContentContainer') {
+      var panel = ui.newPanel || ui.panel;
+      if (panel && panel.get(0).id === 'basicCellsContentContainer') {
         routerDisabled = false;
+        if ('theGrid' in window) {
+          if (__WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].currentRoute.params.id) {
+            var cell = theGrid.getCellById(__WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].currentRoute.params.id);
+            if (!cell) __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].push('/');
+          } else if (currentCellToEdit) {
+            __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].push('/cell/' + currentCellToEdit.id + '/edit');
+          }
+        }
       }
-    });
+      if (ui.panel) __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].push('/');
+    };
+    $('#tabs').on('tabscreate', handleTabEvents).on('tabsbeforeactivate', handleTabEvents);
     __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].beforeEach(function (to, from, next) {
       if (!routerDisabled) next();
     });
@@ -67,14 +78,14 @@ if ('$' in window) {
 
 /***/ }),
 
-/***/ 12:
+/***/ 20:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Cells__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CellEditor__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Cells__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CellEditor__ = __webpack_require__(55);
 
 
 
@@ -95,18 +106,18 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
 
 /***/ }),
 
-/***/ 14:
+/***/ 22:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Cells_vue__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_37bfb63e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_Cells_vue__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Cells_vue__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_37bfb63e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_Cells_vue__ = __webpack_require__(54);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(15)
+  __webpack_require__(23)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 
 /* template */
@@ -149,20 +160,20 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 15:
+/***/ 23:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 17:
+/***/ 25:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_keys__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_keys__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_keys___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_keys__);
 
 
@@ -177,6 +188,10 @@ if (false) {(function () {
           title: 'Text cell',
           description: 'A text cell can display text'
         },
+        title: {
+          title: 'Title cell',
+          description: 'A title cell can display a large title'
+        },
         image: {
           title: 'Image cell',
           description: 'An image cell can display an uploaded image'
@@ -188,6 +203,11 @@ if (false) {(function () {
         video: {
           title: 'Video cell',
           description: 'A video cell can show a video player'
+        },
+
+        set_link: {
+          title: 'Set link cell',
+          description: 'A set link cell creates a link to go to (open) another set'
         }
       }
     };
@@ -197,12 +217,12 @@ if (false) {(function () {
     cellProtosFiltered: function cellProtosFiltered() {
       var _this = this;
 
-      if (this.textFilter && this.textFilter.length > 2) {
+      if (this.textFilter && this.textFilter.length >= 2) {
         var textFilter = this.textFilter.toLowerCase();
         var testFilter = function testFilter(str) {
           return str.toLowerCase().indexOf(textFilter) >= 0;
         };
-        var cellProtosFiltered = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_keys___default()(this.cellProtos).reduce(function (obj, key) {
+        var cellProtosFiltered = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_keys___default()(this.cellProtos).sort().reduce(function (obj, key) {
           var proto = _this.cellProtos[key];
           if (testFilter(key) || testFilter(proto.title) || testFilter(proto.description)) {
             obj[key] = proto;
@@ -225,11 +245,16 @@ if (false) {(function () {
       });
       var proto = this.cellProtos[cellType];
       if (proto) {
+        var additionalFields = {
+          'created-on': Date.now(),
+
+          'created-by': APPLICATION.user.id
+        };
         var cellData = {
           type: cellType,
           title: proto.title,
           description: proto.description,
-          additional_fields: {}
+          additional_fields: additionalFields
         };
         $ev.dataTransfer.setData('application/json', __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(cellData));
         var img = $ev.target.querySelector('img');
@@ -241,7 +266,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 47:
+/***/ 54:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -320,18 +345,18 @@ if (false) {
 
 /***/ }),
 
-/***/ 48:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CellEditor_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7e78965c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_CellEditor_vue__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CellEditor_vue__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7e78965c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_CellEditor_vue__ = __webpack_require__(80);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(49)
+  __webpack_require__(56)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 
 /* template */
@@ -374,34 +399,339 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 49:
+/***/ 56:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 50:
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_input_tag__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_input_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_input_tag__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_form_data__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_form_data___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_form_data__);
 
+
+
+
+
+
+
+
+var COLLAPSED = false,
+    OPEN = true;
+
+
+var cleanTag = function cleanTag(tag) {
+  tag = tag.replace(/[ ]+/ig, ' ');
+
+  tag = tag.replace(/[^-\u00C0-\u017Fa-z0-9._ ]/ig, '-');
+
+  tag = tag.replace(/([ ]*[-]+[ ]*)+/ig, '-');
+
+  tag = tag.replace(/^[^\u00C0-\u017Fa-z0-9]+/ig, '');
+
+  tag = tag.replace(/[^\u00C0-\u017Fa-z0-9]+$/ig, '');
+  return tag;
+};
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   props: ['id'],
   data: function data() {
-    return {};
+    return {
+      showDebug: true,
+      collapsibles: {
+        default: OPEN,
+        iframe: OPEN,
+        debug: OPEN
+      },
+      cell: null,
+      cellTags: []
+    };
+  },
+  mounted: function mounted() {
+    this.updateCell();
+  },
+
+  watch: {
+    id: function id() {
+      this.updateCell();
+    }
+  },
+  computed: {
+    cellPosterImageSrc: function cellPosterImageSrc() {
+      if (this.cell) {
+        if (this.cell.poster_image && this.cell.poster_image.medium) {
+          return this.cell.poster_image.medium.url;
+        } else if (this.cell.src) {
+          return this.cell.src.replace(/\/small\//, '/medium/');
+        } else if (this.cell.canonicalCell.poster_image && this.cell.canonicalCell.poster_image.medium) {
+          return this.cell.canonicalCell.poster_image.medium.url;
+        }
+      }
+      return '';
+    }
+  },
+  methods: {
+    updateCell: function updateCell() {
+      var theGrid = window['theGrid'];
+      if (theGrid) {
+        this.cell = theGrid.getCellById(this.id);
+        var tags = this.cell.additional_fields.tags || this.cell.canonicalCell.additional_fields.tags || '';
+        tags = tags.split(/[\s]*,[\s]*/);
+        tags = tags.filter(function (t) {
+          return cleanTag(t).length > 0;
+        });
+        tags.sort();
+        this.cellTags = tags;
+      }
+    },
+    saveCell: function saveCell() {
+      var _this = this;
+
+      var posterImageInput = document.querySelector('#img-file-input');
+      var data = new __WEBPACK_IMPORTED_MODULE_4_form_data___default.a();
+      data.append('grid_cell[title]', this.cell.title || this.cell.canonicalCell.title);
+      data.append('grid_cell[description]', this.cell.description || this.cell.canonicalCell.description);
+      __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default()(this.cell.canonicalCell.additional_fields).map(function (k) {
+        var val = _this.cell.canonicalCell.additional_fields[k];
+        data.append('grid_cell[additional_fields][][key]', k);
+        data.append('grid_cell[additional_fields][][value]', val);
+      });
+      __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default()(this.cell.additional_fields).map(function (k) {
+        var val = _this.cell.additional_fields[k];
+        data.append('grid_cell[additional_fields][][key]', k);
+        data.append('grid_cell[additional_fields][][value]', val);
+      });
+      if (posterImageInput && posterImageInput.files.length > 0) {
+        data.append('grid_cell[poster_image]', posterImageInput.files[0]);
+      }
+      var csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
+      __WEBPACK_IMPORTED_MODULE_3_axios___default.a.request({
+        method: 'PUT',
+
+        url: Routes.cell_set_grid_cell_path(APPLICATION.score_id, APPLICATION.resource_id, this.cell.id),
+
+        data: data,
+        headers: {
+          'Accept': '*/*',
+          'X-CSRF-Token': csrfToken,
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      }).then(function (response) {
+        var theGrid = window['theGrid'];
+        if (theGrid) {
+          var gridCell = theGrid.getCellById(_this.id);
+          gridCell.updateData(response.data);
+          gridCell.updateGridCell();
+          gridCell.updateContentCell();
+        }
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    collapse: function collapse(panel) {
+      __WEBPACK_IMPORTED_MODULE_1_vue__["a" /* default */].set(this.collapsibles, panel, !this.collapsibles[panel]);
+    },
+    cellTagsChanged: function cellTagsChanged(tags) {
+      tags = tags.map(function (t) {
+        return cleanTag(t);
+      }).filter(function (t) {
+        return t.length > 0;
+      });
+      this.cellTags = tags;
+      this.cell.additional_fields.tags = this.cellTags.join(',');
+    }
+  },
+  components: {
+    InputTag: __WEBPACK_IMPORTED_MODULE_2_vue_input_tag___default.a
   }
 });
 
 /***/ }),
 
-/***/ 51:
+/***/ 80:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._v("\n  " + _vm._s(_vm.id) + "\n")])
+  return _c('div', [(_vm.cell) ? [_c('div', {
+    staticClass: "header"
+  }, [_c('span', {
+    staticClass: "type-icon"
+  }, [_c('img', {
+    attrs: {
+      "src": '/assets/icons/' + _vm.cell.type.toLowerCase() + '.png',
+      "alt": "Icon"
+    }
+  })]), _vm._v(" "), _c('span', {
+    staticClass: "type-name"
+  }, [_c('span', {
+    staticClass: "badge"
+  }, [_vm._v(_vm._s(_vm.cell.type))])]), _vm._v(" "), _c('div', {
+    staticClass: "title"
+  }, [_c('h3', [_vm._v(_vm._s(_vm.cell.title || _vm.cell.canonicalCell.title))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.cell.description || _vm.cell.canonicalCell.description))])]), _vm._v(" "), _c('small', {
+    staticClass: "id"
+  }, [_vm._v(_vm._s(_vm.cell.id))]), _vm._v(" "), _c('div', {
+    staticClass: "submit"
+  }, [_c('input', {
+    staticClass: "btn",
+    attrs: {
+      "type": "submit",
+      "value": "Save"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.saveCell($event)
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "collapsible default-settings"
+  }, [_c('div', {
+    staticClass: "title",
+    on: {
+      "click": function($event) {
+        _vm.collapse('default')
+      }
+    }
+  }, [_c('h3', [_vm._v("Basic Cell Attributes (Title, Description, Tags, Posterimage)")])]), _vm._v(" "), _c('transition', {
+    attrs: {
+      "name": "collapse-content"
+    }
+  }, [(_vm.collapsibles['default']) ? _c('div', {
+    staticClass: "content"
+  }, [_c('div', {
+    staticClass: "poster-image"
+  }, [_c('img', {
+    attrs: {
+      "src": _vm.cellPosterImageSrc,
+      "alt": "Cell Posterimage"
+    }
+  }), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "file",
+      "id": "img-file-input"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "title-etc"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('label', {
+    attrs: {
+      "for": "cell-title-input"
+    }
+  }, [_vm._v("Title")]), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "text",
+      "id": "cell-title-input",
+      "title": "Edit cell title"
+    },
+    domProps: {
+      "value": (_vm.cell.title || _vm.cell.canonicalCell.title)
+    },
+    on: {
+      "input": function($event) {
+        _vm.cell.title = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "description"
+  }, [_c('label', {
+    attrs: {
+      "for": "cell-description-input"
+    }
+  }, [_vm._v("Description")]), _vm._v(" "), _c('textarea', {
+    attrs: {
+      "title": "Edit cell description",
+      "id": "cell-description-input",
+      "type": "text"
+    },
+    on: {
+      "input": function($event) {
+        _vm.cell.description = $event.target.value
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.cell.description || _vm.cell.canonicalCell.description))])]), _vm._v(" "), _c('div', {
+    staticClass: "tags"
+  }, [_c('label', [_vm._v("Tags")]), _vm._v(" "), _c('input-tag', {
+    attrs: {
+      "on-change": _vm.cellTagsChanged,
+      "tags": _vm.cellTags
+    }
+  })], 1)])]) : _vm._e()])], 1), _vm._v(" "), (_vm.cell.type === 'iframe') ? [_c('div', {
+    staticClass: "collapsible iframe-settings"
+  }, [_c('div', {
+    staticClass: "title",
+    on: {
+      "click": function($event) {
+        _vm.collapse('iframe')
+      }
+    }
+  }, [_c('h3', [_vm._v("Iframe Settings")])]), _vm._v(" "), _c('transition', {
+    attrs: {
+      "name": "collapse-content"
+    }
+  }, [(_vm.collapsibles['iframe']) ? _c('div', {
+    staticClass: "content"
+  }, [_c('div', [_c('label', {
+    attrs: {
+      "for": "iframe-src-input"
+    }
+  }, [_vm._v("Source URL")]), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "url",
+      "title": "Enter / edit an IFrame URL here",
+      "id": "iframe-src-input"
+    },
+    domProps: {
+      "value": (_vm.cell.additional_fields['iframe-src'] || _vm.cell.canonicalCell.additional_fields['iframe-src'])
+    },
+    on: {
+      "input": function($event) {
+        _vm.cell.additional_fields['iframe-src'] = $event.target.value
+      }
+    }
+  })])]) : _vm._e()])], 1)] : _vm._e(), _vm._v(" "), (_vm.cell.type === 'set_link') ? [_c('div', {
+    staticClass: "collapsible iframe-settings"
+  }, [_c('div', {
+    staticClass: "title",
+    on: {
+      "click": function($event) {
+        _vm.collapse('set_link')
+      }
+    }
+  }, [_c('h3', [_vm._v("Link Settings")])]), _vm._v(" "), _c('transition', {
+    attrs: {
+      "name": "collapse-content"
+    }
+  }, [(_vm.collapsibles['set_link']) ? _c('div', {
+    staticClass: "content"
+  }, [_c('div', [_vm._v("\n              " + _vm._s(_vm.cell.additional_fields['set-id']) + "\n            ")])]) : _vm._e()])], 1)] : _vm._e(), _vm._v(" "), (_vm.showDebug) ? [_c('div', {
+    staticClass: "collapsible"
+  }, [_c('div', {
+    staticClass: "title",
+    on: {
+      "click": function($event) {
+        _vm.collapse('debug')
+      }
+    }
+  }, [_c('h3', [_vm._v("Debug")])]), _vm._v(" "), _c('transition', {
+    attrs: {
+      "name": "collapse-content"
+    }
+  }, [(_vm.collapsibles['debug']) ? _c('div', {
+    staticClass: "content"
+  }, [_c('pre', [_c('code', [_vm._v("\n                  " + _vm._s(_vm.cell) + "\n                  ")])])]) : _vm._e()])], 1)] : _vm._e()] : [_c('h3', [_vm._v("No cell found with id " + _vm._s(_vm.id) + "!")])]], 2)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -416,18 +746,18 @@ if (false) {
 
 /***/ }),
 
-/***/ 52:
+/***/ 81:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_MoSysBasicsTab_vue__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7f70162b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_MoSysBasicsTab_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_MoSysBasicsTab_vue__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7f70162b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_MoSysBasicsTab_vue__ = __webpack_require__(84);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(53)
+  __webpack_require__(82)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 
 /* template */
@@ -470,14 +800,14 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 53:
+/***/ 82:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 54:
+/***/ 83:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -491,7 +821,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 55:
+/***/ 84:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -511,4 +841,4 @@ if (false) {
 
 /***/ })
 
-},[10]);
+},[18]);

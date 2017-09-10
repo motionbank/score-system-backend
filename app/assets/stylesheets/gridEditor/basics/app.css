@@ -3,24 +3,140 @@
   pointer-events: none;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 2em;
+  padding: 0.5em;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.header .type-icon {
+  border: 1px solid #d3d3d3;
+  width: 50px;
+  min-width: 50px;
+  min-height: 50px;
+  overflow: hidden;
+}
+.header .type-icon,
+.header .type-name {
+  margin-right: 0.5em;
+}
+.header .title {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.header .title h3 {
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+}
+.header .id {
+  color: #d3d3d3;
+}
+.header .submit {
+  width: 100%;
+}
+.header .submit input {
+  float: right;
+}
+.collapsible {
+  margin-bottom: 0.25em;
+}
+.collapsible label {
+  font-size: 1em;
+  color: #444;
+}
+.collapsible > .title {
+  background-color: #d2dad5;
+  overflow: auto;
+  padding: 0.5em;
+  padding-left: 0.75em;
+}
+.collapsible > .title h3 {
+  margin: 0;
+  padding: 0;
+  line-height: 2em;
+}
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  background-color: #f6f6f6;
+  padding: 0.5em;
+}
+.content input,
+.content textarea {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-bottom: 0.5em;
+}
+.content .title-etc .title input {
+  height: 2em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.content > div:first-child,
+.content .poster-image,
+.content .title-etc {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding-right: 0.5em;
+}
+.content > div:last-child {
+  padding-right: 0em;
+}
+.content .poster-image {
+  max-width: 290px;
+  position: relative;
+}
+.content .poster-image img {
+  width: 100%;
+  border: 1px solid #d3d3d3;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.content .poster-image input {
+  margin-top: 0.5em;
+}
+.vue-input-tag-wrapper .input-tag {
+  background-color: #bababa !important;
+  border-color: transparent !important;
+  padding: 0.5em !important;
+  padding-top: 0.25em !important;
+  padding-bottom: 0.25em !important;
+}
+.vue-input-tag-wrapper .input-tag,
+.vue-input-tag-wrapper .input-tag .remove {
+  color: #fff !important;
+}
+.vue-input-tag-wrapper .input-tag .remove {
+  margin-left: 0.25em !important;
+  padding: 0 !important;
+  font-weight: normal !important;
+}
+.collapse-content-enter-active,
+.collapse-content-leave-active {
+  max-height: 500px;
+  overflow: hidden;
+  -webkit-transition: max-height 0.5s;
+  transition: max-height 0.5s;
+}
+.collapse-content-enter,
+.collapse-content-leave-to {
+  max-height: 0;
+}
 
 
 

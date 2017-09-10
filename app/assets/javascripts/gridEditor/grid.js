@@ -16,6 +16,7 @@ function Grid(width, height, boundsWidth, boundsHeight, widthStep, heightStep) {
 	this.container = $('#grid');
 	this.parentContainer = $('#boundsForGrid');
 	this.cellSelected = false;
+    this.acceptKeyPress = false
 	this.init();
 }
 
@@ -48,6 +49,10 @@ Grid.prototype = {
         	var data = JSON.parse(jsonStr);
             onDropJson($evt,data);
 		});
+
+        this.container
+            .on('mouseenter',function(){theGrid.acceptKeyPress = true})
+			.on('mouseleave',function(){theGrid.acceptKeyPress = false})
 
 		var addRowButtons = '<div id="addRow">+</div><div id="removeRow">-</div>';
 		var addColumnButtons = '<div id="removeColumn"><span>-</span></div><div id="addColumn"><span>+</span></div>';
@@ -212,12 +217,13 @@ Grid.prototype = {
 	},
 
 	getCellById: function (idOfCell) {
-        $.each(this.cells, function(index, value) {
+        var cells = this.cells.filter(function(value) {
             if (value.id == idOfCell) {
                 return value
             }
+            return false
         });
-        return null
+        return cells.shift()
 	},
 
 	onWindowResize: function() {

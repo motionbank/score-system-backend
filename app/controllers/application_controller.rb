@@ -19,6 +19,17 @@ class ApplicationController < ActionController::Base
       partial: partial_name,
       request_url: request.try(:url)
     }
+    if current_user
+      @js_framework_settings.merge!({
+          user: {
+              :name => current_user.name,
+              :id => current_user.id.to_s,
+              :email => current_user.email,
+              :is_admin => current_user.admin,
+              :token => current_user.authentication_token
+          }
+      })
+    end
   end
 
   protected

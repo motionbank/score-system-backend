@@ -92,11 +92,15 @@ GridCell.prototype = {
 
 
 	updatePosterImageFromData: function(data) {
-		if (!this.defaultImageRegex.test(data.grid_cell.poster_image.small.url)) {
+		if ( !this.defaultImageRegex.test(data.grid_cell.poster_image.small.url) ) {
 			this.src = data.grid_cell.poster_image.small.url;
-		}else{
-			this.src = this.canonicalCell.poster_image.small.url;
 		}
+		else if (data.grid_cell.canonicalCell && data.grid_cell.canonicalCell.poster_image) {
+			this.src = data.grid_cell.canonicalCell.poster_image.small.url;
+		}
+		else if (this.canonicalCell && this.canonicalCell.poster_image) {
+            this.src = this.canonicalCell.poster_image.small.url;
+        }
 
         //check if css-z-index is there as an additional field and set it as this.z, if not set it to 3
         if("css-z-index" in data.grid_cell.canonical_cell.additional_fields){
@@ -104,7 +108,7 @@ GridCell.prototype = {
             var zIndex = data.grid_cell.canonical_cell.additional_fields['css-z-index'];
             this.z = zIndex;
         }
-        else{
+        else {
             //console.log("z-index exists not in database");
             this.z = 3;
         }
@@ -190,7 +194,7 @@ GridCell.prototype = {
 
     onKeyPress: function (e) {
       var keyPressed = e.keyCode || e.which;
-      if(theGrid.cellSelected) {
+      if(theGrid.cellSelected && theGrid.acceptKeyPress) {
         if(keyPressed === 8) {//backspace -> remove cell from set
           editBox.openConfirmDialog(currentCellToEdit.title);
           return false;

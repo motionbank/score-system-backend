@@ -1,5 +1,5 @@
-var liba2ba =
-webpackJsonpliba2ba([1],{
+var lib112e05 =
+webpackJsonplib112e05([1],{
 
 /***/ 153:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -59,16 +59,29 @@ var startPM2VueTab = function startPM2VueTab() {
 if ('$' in window) {
   $(function () {
     var routerDisabled = false;
-    $('#tabs').on('tabsbeforeactivate', function (event, ui) {
+    var handleTabEvents = function handleTabEvents(event, ui) {
       if (ui.oldPanel && ui.oldPanel.get(0).id === 'pm2TabContentContainer') {
         routerDisabled = true;
       }
-      if (ui.newPanel && ui.newPanel.get(0).id === 'pm2TabContentContainer') {
+      var panel = ui.newPanel || ui.panel;
+      if (panel && panel.get(0).id === 'pm2TabContentContainer') {
         routerDisabled = false;
       }
-    });
+      if (ui.panel) __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */].push('/');
+    };
+    $('#tabs').on('tabscreate', handleTabEvents).on('tabsbeforeactivate', handleTabEvents);
     __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */].beforeEach(function (to, from, next) {
-      if (!routerDisabled) next();
+      if (!routerDisabled) {
+        if (to.path !== '/login' && !__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.isLoggedIn()) {
+          next('/login');
+        } else if (to.path === '/logout') {
+          __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.logout(function () {
+            next('/');
+          });
+        } else {
+          next();
+        }
+      }
     });
     startPM2VueTab();
   });
@@ -212,19 +225,6 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       component: __WEBPACK_IMPORTED_MODULE_4_components_PM2Context__["a" /* default */]
     }]
   }]
-});
-
-router.beforeEach(function (to, from, next) {
-  console.log(from, to, __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.isLoggedIn());
-  if (to.path !== '/login' && !__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.isLoggedIn()) {
-    next('/login');
-  } else if (to.path === '/logout') {
-    __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].PM2Service.logout(function () {
-      next('/');
-    });
-  } else {
-    next();
-  }
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
@@ -1514,8 +1514,6 @@ var PM2Service = function () {
         store.subscribe(function (_ref4, state) {
           var type = _ref4.type,
               payload = _ref4.payload;
-
-          console.log('[pm2Service]', type);
         });
         store.registerModule('piecemaker', PM2Module);
         if (_this.pm2 && _this.pm2.host) {
