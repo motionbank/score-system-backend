@@ -7,19 +7,17 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 0.5em;
   min-height: 2em;
   padding: 0.5em;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-.header .type-icon {
+.header .poster-image-small {
   border: 1px solid #d3d3d3;
-  width: 50px;
-  min-width: 50px;
-  min-height: 50px;
-  overflow: hidden;
+  pointer-events: none;
 }
-.header .type-icon,
+.header .poster-image-small,
 .header .type-name {
   margin-right: 0.5em;
 }
@@ -38,9 +36,11 @@
 }
 .header .submit {
   width: 100%;
+  text-align: right;
 }
-.header .submit input {
-  float: right;
+.header .submit .spinner {
+  display: inline-block;
+  vertical-align: bottom;
 }
 .collapsible {
   margin-bottom: 0.25em;
@@ -54,11 +54,23 @@
   overflow: auto;
   padding: 0.5em;
   padding-left: 0.75em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
 }
-.collapsible > .title h3 {
+.collapsible > .title * {
   margin: 0;
   padding: 0;
-  line-height: 2em;
+  line-height: 1.2em;
+}
+.collapsible > .title p {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  margin-left: 1em;
 }
 .content {
   display: -webkit-box;
@@ -110,6 +122,34 @@
 .content .poster-image input {
   margin-top: 0.5em;
 }
+.content .html-editor {
+  background-color: #fff;
+}
+.content .html-editor svg {
+  position: static;
+}
+.content .html-editor .dashboard {
+  width: auto;
+  right: 0;
+}
+.content .html-editor div[contenteditable] h1,
+.content .html-editor div[contenteditable] h2,
+.content .html-editor div[contenteditable] h3,
+.content .html-editor div[contenteditable] h4,
+.content .html-editor div[contenteditable] h5,
+.content .html-editor div[contenteditable] h6 {
+  padding: 0;
+  margin: 0;
+  line-height: auto;
+}
+.content .html-editor div[contenteditable] h1 {
+  font-size: 160%;
+}
+.content .html-editor div[contenteditable] a,
+.content .html-editor div[contenteditable] a:hover,
+.content .html-editor div[contenteditable] a:visited {
+  text-decoration: underline;
+}
 .vue-input-tag-wrapper .input-tag {
   background-color: #bababa !important;
   border-color: transparent !important;
@@ -138,17 +178,92 @@
   max-height: 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.editr {
+  border: 1px solid #e4e4e4;
+  width: 100%;
+}
+.editr--toolbar {
+  background: #f6f6f6;
+  border-bottom: 1px solid #e4e4e4;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  height: 32px;
+}
+.editr--toolbar a {
+  display: inline-block;
+  width: 8vw;
+  max-width: 32px;
+  height: 32px;
+  color: #333;
+  fill: #333;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1;
+}
+.editr--toolbar a:hover {
+  background: rgba(0,0,0,0.1);
+}
+.editr--toolbar a:active {
+  background: rgba(0,0,0,0.2);
+}
+.editr--toolbar a svg {
+  width: 16px;
+  height: 16px;
+  margin: 8px auto;
+}
+.editr--toolbar a svg path {
+  fill: inherit;
+}
+.editr--toolbar a.vw-btn-separator {
+  width: 1px;
+  margin: 0 10px;
+}
+.editr--toolbar a.vw-btn-separator:hover {
+  background: initial;
+  cursor: default;
+}
+.editr--toolbar a.vw-btn-separator i {
+  border-left: 1px solid rgba(0,0,0,0.1);
+  height: 100%;
+  position: absolute;
+  width: 1px;
+}
+.editr--toolbar .dashboard {
+  width: 100%;
+  position: absolute;
+  top: 32px;
+  left: 0;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid #f6f6f6;
+}
+.editr--content {
+  min-height: 150px;
+  padding: 0.75rem 0.5rem;
+  line-height: 1.33;
+  font-family: inherit;
+  color: inherit;
+}
+.editr--content[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  color: rgba(0,0,0,0.3);
+  display: block; /* For Firefox */
+}
+.editr--content img {
+  max-width: 100%;
+}
+.editr--content table {
+  width: 100%;
+}
+.editr--content table th {
+  text-align: left;
+}
+.editr--content:focus {
+  outline: 0;
+}
+.editr--content ul li,
+.editr--content ol li {
+  list-style-position: inside;
+}
