@@ -1,6 +1,8 @@
 
 .basicCell img {
   pointer-events: none;
+  min-width: 80px;
+  margin-left: 0.25em;
 }
 
 .header {
