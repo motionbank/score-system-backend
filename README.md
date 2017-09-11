@@ -55,6 +55,17 @@ env RAILS_ENV=development --env MONGO_URL=mongodb://db:27017/motion_bank_develop
 'bundle install && rake db:setup && rails server --port 3000 --binding "0.0.0.0"'
 ```
 
+```
+docker run -d --name mosys-db 917819fa18fd
+```
+
+```
+# cd export directory, then …
+docker run -it --link mosys-db:mongo -v "$(pwd)":/var/local/export --rm mongo sh -c 'exec mongodump -h "$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT" -
+d "motion_bank_development" -o /var/local/export'
+```
+
+
 ## Supporters
 
 2010–2014 – Gefördert mit Mitteln der Kulturstiftung des Bundes, des Hessischen Ministeriums für Wissenschaft und Kunst, des Kulturfonds Frankfurt RheinMain und Frau Susanne Klatten.
