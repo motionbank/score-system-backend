@@ -1,26 +1,24 @@
-
-# Make sure to run this including the proper mongo-url!
-# docker run --env MONGO_URL=mongodb://db:27017/motion_bank_production
 production:
+  # Configure available database sessions. (required)
   sessions:
+    # Defines the default session. (required)
     default:
-      uri: <%= ENV['MONGO_URL'] %>
+      uri: <%= ENV['MONGOHQ_URL'] %>
 
-# development / local
+# local
 development:
   # Configure available database sessions. (required)
   sessions:
     # Defines the default session. (required)
     default:
-      uri: <%= ENV['MONGO_URL'] %>
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      #database: motion_bank_development
+      database: motion_bank_development
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
-      #hosts:
-      #  - db:27017
-      #options:
+      hosts:
+        - localhost:27017
+      options:
         # Change the default write concern. (default = { w: 1 })
         # write:
         # w: 1
@@ -78,7 +76,7 @@ test:
     default:
       database: motion_bank_test
       hosts:
-        - db:27017
+        - localhost:27017
       options:
         read: primary
         # In the test environment we lower the retries and retry interval to
