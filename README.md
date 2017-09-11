@@ -50,9 +50,8 @@ db:27017/motion_bank_production -p 9999:3000 -v "$(pwd)":/mosys-backend -w /mosy
 ```
 
 ```
-docker run --name mosys-pba --link mosys-db:db -t -d --env LANG=en_US.UTF-8 --env RACK_ENV=development --
-env RAILS_ENV=development --env MONGO_URL=mongodb://db:27017/motion_bank_development -p 9999:3000 -v "$(pwd)":/mosys-backend -w /mosys-backend ruby:2.0.0-p643 sh -c
-'bundle install && rake db:setup && rails server --port 3000 --binding "0.0.0.0"'
+# docker run --name mosys-pba --link mosys-db:db -t -d --env LANG=en_US.UTF-8 --env RACK_ENV=development --env RAILS_ENV=development --env MONGO_URL=mongodb://db:27017/motion_bank_development -p 9999:3000 -v "$(pwd)":/mosys-backend -w /mosys-backend ruby:2.0.0-p643 sh -c 'bundle install && rake db:setup && rails server --port 3000 --binding "0.0.0.0"'
+docker run --name mosys-pba-2 --link mosys-db:db -t -d --env LANG=en_US.UTF-8 --env RACK_ENV=development --env RAILS_ENV=development --env MONGO_URL=mongodb://db:27017/motion_bank_development -p 9999:3000 -v "$(pwd)":/mosys-backend -w /mosys-backend ruby:2.1 sh -c 'bundle install && rake db:setup && rails server --port 3000 --binding "0.0.0.0"'
 ```
 
 ```
