@@ -13,7 +13,7 @@ unless User.where(email: email).exists?
   puts "Created default user #{email} with password #{password}"
 end
 
-["After Care", "Codarts", "Pina Bausch", "Test"].each { |score_name|
+["Pina Bausch", "Sandbox"].each { |score_name|
   unless Score.where(name: score_name).exists?
     score = Score.create!(name: score_name)
     puts "Created default score #{score_name} with URL slug #{score.slug}"
