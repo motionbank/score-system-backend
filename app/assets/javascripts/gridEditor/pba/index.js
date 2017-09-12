@@ -6,7 +6,7 @@ $(function initPinaBauschArchive () {
     var IFRAME_SRC = 'http://lab.motionbank.org/pba/generic';
     IFRAME_SRC = 'http://localhost:9090';
     if (APPLICATION.frontend) {
-        IFRAME_SRC = APPLICATION.frontend.url
+        IFRAME_SRC = APPLICATION.frontend.url + '/cells/pba/'
     }
 
     var SPH_ENDPOINT = 'https://pbproxy.herokuapp.com/repositories/PBAe';
