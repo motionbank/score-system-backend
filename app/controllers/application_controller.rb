@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def init_js_framework_settings
+
+    score_id = MultiTenancy.current_score.to_param
+    frontend_url = FRONTEND_URL_BASE % {:score_id => score_id}
+
     @js_framework_settings ||= {}
     @js_framework_settings = {
       controller: controller_name,
@@ -19,7 +23,7 @@ class ApplicationController < ActionController::Base
       partial: partial_name,
       request_url: request.try(:url),
       frontend: {
-          :path => FRONTEND_URL_BASE
+          :url => frontend_url
       }
     }
     if current_user
