@@ -1,5 +1,5 @@
-var lib112e05 =
-webpackJsonplib112e05([1],{
+var lib1106c5 =
+webpackJsonplib1106c5([1],{
 
 /***/ 153:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -772,6 +772,11 @@ if (false) {(function () {
     onDragStart: function onDragStart($ev) {
       var target = $ev.target;
       var cellType = target.classList.toString().indexOf('video') >= 0 ? 'player' : 'annotator';
+      var frontendUrl = 'http://localhost:9595/';
+      var app = window['APPLICATION'];
+      if (app && app.frontend) {
+        frontendUrl = app.frontend.url;
+      }
       var cellData = {
         type: 'iframe',
         title: this.title,
@@ -783,7 +788,7 @@ if (false) {(function () {
           'pm2-event-tags': this.event.fields.tags,
           'pm2-user': this.$store.state.piecemaker.user.id,
           'attr-allowfullscreen': true,
-          'iframe-src': 'http://localhost:9595/?gid=' + this.event.event_group_id + '&eid=' + this.event.id + '#/' + cellType
+          'iframe-src': frontendUrl + '/cells/pm2/?gid=' + this.event.event_group_id + '&eid=' + this.event.id + '#/' + cellType
         }
       };
       $ev.dataTransfer.setData('application/json', __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(cellData));
