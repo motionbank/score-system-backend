@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
       partial: partial_name,
       request_url: request.try(:url),
       frontend: {
-          :path => FRONTEND_URL
+          :path => FRONTEND_URL_BASE
       }
     }
     if current_user
