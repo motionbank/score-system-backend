@@ -1,5 +1,5 @@
-var lib1058f4 =
-webpackJsonplib1058f4([1],{
+var lib1169f7 =
+webpackJsonplib1169f7([1],{
 
 /***/ 22:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -565,6 +565,12 @@ var cleanTag = function cleanTag(tag) {
           }
         }
       }
+
+      document.querySelectorAll('.collapsible').forEach(function (c) {
+        c.querySelectorAll('input, textarea, select').forEach(function (e) {
+          e.value = null;
+        });
+      });
     },
     saveCell: function saveCell() {
       var _this2 = this;
