@@ -3,8 +3,11 @@
 
 $(function initPinaBauschArchive () {
 
-    var IFRAME_SRC = 'http://lab.motionbank.org/pba/generic/';
+    var IFRAME_SRC = 'http://lab.motionbank.org/pba/generic';
     IFRAME_SRC = 'http://localhost:9090';
+    if (APPLICATION.frontend) {
+        IFRAME_SRC = APPLICATION.frontend.url
+    }
 
     var SPH_ENDPOINT = 'https://pbproxy.herokuapp.com/repositories/PBAe';
     var SPH_ENDPOINT_AUTH = { basic: { username: 'moba', password: 'qXf-P78-8s7-3Qd' }};
@@ -79,7 +82,7 @@ $(function initPinaBauschArchive () {
                     let title = r.piece_label.value
 					let description = ''
                     let type = 'piece'
-					let iframe_src = IFRAME_SRC + '?uri=' + uri.replace(/.+\/([a-z0-9]+)#(.+)$/ig,'$1:$2') + '&type=' + type + '&style=video'
+					let iframe_src = IFRAME_SRC + '/?uri=' + uri.replace(/.+\/([a-z0-9]+)#(.+)$/ig,'$1:$2') + '&type=' + type + '&style=video'
                     let cellData = {
                         type: 'iframe',
                         title: title,
@@ -168,7 +171,7 @@ LIMIT 10
 					var title = r.person_label.value;
                     let description = ''
                     let type = 'person'
-                    let iframe_src = IFRAME_SRC + '?uri=' + uri.replace(/.+\/([a-z0-9]+)#(.+)$/ig,'$1:$2') + '&type=' + type
+                    let iframe_src = IFRAME_SRC + '/?uri=' + uri.replace(/.+\/([a-z0-9]+)#(.+)$/ig,'$1:$2') + '&type=' + type
                     let cellData = {
                         type: 'iframe',
                         title: title,
