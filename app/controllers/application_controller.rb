@@ -17,7 +17,10 @@ class ApplicationController < ActionController::Base
       controller: controller_name,
       action: action_name,
       partial: partial_name,
-      request_url: request.try(:url)
+      request_url: request.try(:url),
+      frontend: {
+          :path => FRONTEND_URL
+      }
     }
     if current_user
       @js_framework_settings.merge!({
