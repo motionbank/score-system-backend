@@ -1,5 +1,5 @@
-var lib117a26 =
-webpackJsonplib117a26([1],{
+var lib1058f4 =
+webpackJsonplib1058f4([1],{
 
 /***/ 22:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -269,12 +269,12 @@ if (false) {(function () {
           additionalFields = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, additionalFields, {
             'iframe-src': 'https://www.youtube.com/embed/t2ByLmLnYJ8',
             'attr-allowfullscreen': '1',
-            'autoload': '0 / 1',
-            'class': 'click-through / show-info / hide-info',
-            'css-z-index': '100 (a number >= 0)',
-            'stick': '0 / 1',
-            'solo': '0 / false',
-            '?': 'https://github.com/motionbank/score-system-frontend/wiki/Basic-Concepts-Review'
+            '?': 'https://github.com/motionbank/score-system-frontend/wiki/Basic-Concepts-Review',
+            '!-autoload': '[0,1] click to load (0) or load when visible (1)',
+            '!-class': '[click-through,show-info,hide-info] disable interaction, show/hide info (= title, description)',
+            '!-css-z-index': '[>= 0] change the visible depth (what appears on top of each other)',
+            '!-stick': '[0,1] keep cell loaded when not visible (for playing audio)',
+            '!-solo': '[0,false,group] can\'t remember what this does'
           });
         } else if (cellType === 'html') {
           additionalFields = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, additionalFields, {
