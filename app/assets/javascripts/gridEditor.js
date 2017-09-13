@@ -12,7 +12,7 @@
 //= require gridEditor/pm2
 //= require gridEditor/youTube
 //= require gridEditor/vimeo
-//= require gridEditor/pba
+// xx = require gridEditor/pba
 
 // might as well just use:
 // xxx = require_tree ./gridEditor
