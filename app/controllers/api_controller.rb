@@ -32,7 +32,6 @@ class ApiController < ApplicationController
 
   # POST /api/sets/new
   def create_set
-    puts params
     @set = CellSet.new(set_params)
 
     if @set.save
@@ -60,6 +59,16 @@ class ApiController < ApplicationController
       render json: 'Set poster image was successfully removed.'
     else
       render json: { errors: @set.errors }, status: 422
+    end
+  end
+
+  # DELETE /api/set/:id/delete
+  def destroy_set
+    @set = CellSet.find(params[:id].to_s)
+    if @set.destroy
+      render json: { message: 'Set was successfully destroyed.' }, status: 200
+    else
+      render json: { errors: @set.errors }, status: 409
     end
   end
 

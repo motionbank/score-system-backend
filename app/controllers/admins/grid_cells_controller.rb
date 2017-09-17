@@ -2,7 +2,7 @@ module Admins
   class GridCellsController < BaseController
 
     before_action :set_cell_set
-    before_action :set_grid_cell, only: [:edit, :update, :destroy]
+    before_action :set_grid_cell, only: [:get, :edit, :update, :destroy]
 
     # GET /admins/cell_sets/1/grid_cells
     def index
@@ -11,6 +11,11 @@ module Admins
 
     # GET /admins/cell_sets/1/grid_cells/1/edit
     def edit
+    end
+
+    # GET /admins/cell_sets/1/grid_cells/1
+    def get
+      render json: @grid_cell, status: 201
     end
 
     # POST /admins/cell_sets/1/grid_cells
