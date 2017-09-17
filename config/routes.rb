@@ -1,12 +1,12 @@
 MotionBank::Application.routes.draw do
   devise_for :users
-  root 'admins/cells#index'
+  root 'admins/cell_sets#index'
 
   scope ':score_id' do
-    root to: 'admins/cells#index', as: :score_root
+    root to: 'admins/cell_sets#index', as: :score_root
 
     scope module: 'admins' do
-      root 'cells#index', as: :admins_root
+      root 'cell_sets#index', as: :admins_root
       resources :cells, except: :show
       resources :cell_sets, except: :show do
         resources :grid_cells, except: [:show, :new]

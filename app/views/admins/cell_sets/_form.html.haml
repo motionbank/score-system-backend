@@ -38,17 +38,30 @@
             #tabs
               %ul
                 %li
-                  %a(href="#usedContentCells")= t('set.tabs.used_cells')
-                %li
-                  %a(href="#availableContentCells")= t('set.tabs.available_cells')
+                  %a(href="#basicCellsContentContainer" title="Create title, image, link and other cells")= "Basic Cells"
 
+                %li
+                  %a(href="#pm2TabContentContainer" title="Use videos and annotations from Piecemaker 2")= "Piecemaker 2"
+
+                %li
+                  %a(href="#youtubeContentCells" title="Search YouTube for videos")= "YouTube"
+
+                %li
+                  %a(href="#vimeoContentCells" title="Search Vimeo for videos")= "Vimeo"
+
+                %li
+                  %a(href="#usedContentCells" title="The cells that are already in this set")= "Set Cells"
+
+                %li
+                  %a(href="#availableContentCells" title="Cells that have been preconfigured")= "Preconfigured Cells"
+
+              #basicCellsContentContainer
+                #basicCellsContent
 
               #usedContentCells
-                %h3= t('set.tabs.used_cells')
                 #usedContentCellTable.cellTable
 
               #availableContentCells
-                %h3= t('set.tabs.available_cells')
                 #filter
                   %label(for="searchTerm")
                     = t('grid_editor.filter.title')
@@ -63,8 +76,30 @@
 
                 #availableContentCellTable.cellTable
 
+              #youtubeContentCells
+                #searchYouTube.table-header-form
+                  %form
+                    %input(type="text" id="searchTermYT" name="searchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
+                    %button= "Search"
+
+                #youtubeContentCellTable.cellTable
+
+              #vimeoContentCells
+                .table-header-form
+                  %form
+                    %input(type="text" id="vimeoSearchTerm" spellcheck="false" autocorrect="off" value="" autocapitalize="off")
+                    %button= "Search"
+
+                .cellTable
+
+              #pm2TabContentContainer
+                #pm2TabContent
+
             = render "edit_cell"
 
             = render "delete_cell"
 
             #emptyCell.cell
+
+-# This is part of the YouTube search tab
+%script(src="https://apis.google.com/js/client.js?onload=googleApiClientReady")

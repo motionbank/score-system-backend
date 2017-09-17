@@ -1,0 +1,21 @@
+{
+  "name": "motionbank-score-system-backend",
+  "version": "0.0.2",
+  "description": "JS assets needed by the MotionBank score systems backend (editor)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0"
+  },
+  "dependencies": {
+    "piecemaker-api-client": "*",
+    "sparql-hollandaise": "^0.2.5",
+    "vue": "^2.4.2",
+    "vue-router": "^2.7.0",
+    "vuex": "^2.4.0"
+  }
+}
