@@ -19,9 +19,13 @@ MotionBank::Application.routes.draw do
         get "#{model}/:id" => "api##{model.singularize}", as: "#{model.singularize}_api"
       end
 
-      post 'cell/new', to: 'api#create_cell'
-      post 'cell/:id/update', to: 'api#update_cell'
-      put 'cell/:id/remove_poster_image', to: 'api#remove_poster_image'
+      post 'cell/new',                    to: 'api#create_cell'
+      post 'cell/:id/update',             to: 'api#update_cell'
+      put  'cell/:id/remove_poster_image',to: 'api#remove_poster_image'
+
+      post 'set/new',                     to: 'api#create_set'
+      post 'set/:id/update',              to: 'api#update_set'
+      put  'set/:id/remove_poster_image', to: 'api#remove_set_poster_image'
     end
   end
 end

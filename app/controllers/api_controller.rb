@@ -2,15 +2,23 @@ class ApiController < ApplicationController
   before_action :allow_cors
   before_action :authenticate_user_from_token!, only: [ :create_cell,
                                                         :update_cell,
-                                                        :remove_poster_image
+                                                        :remove_poster_image,
+                                                        :create_set,
+                                                        :update_set,
+                                                        :remove_set_poster_image
                                                       ]
   #SKIP CSRF protection for JSON POST&PUT
   skip_before_filter :verify_authenticity_token,  only: [ :create_cell,
                                                           :update_cell,
-                                                          :remove_poster_image
+                                                          :remove_poster_image,
+                                                          :create_set,
+                                                          :update_set,
+                                                          :remove_set_poster_image
                                                         ]
 
   respond_to :json
+
+  ## SETS
 
   # GET /api/sets
   def sets
@@ -21,6 +29,41 @@ class ApiController < ApplicationController
   def set
     @set = CellSet.find(params[:id].to_s)
   end
+
+  # POST /api/sets/new
+  def create_set
+    puts params
+    @set = CellSet.new(set_params)
+
+    if @set.save
+      render json: @set, status: 201
+    else
+      render json: { errors: @set.errors }, status: 422
+    end
+  end
+
+  # POST /api/set/:id/update
+  def update_set
+    @set = CellSet.find(params[:id].to_s)
+    if @set.update(set_params)
+      render json: 'Set was successfully updated.'
+    else
+      render json: { errors: @set.errors }, status: 422
+    end
+  end
+
+  # PUT /api/set/:id/remove_poster_image
+  def remove_set_poster_image
+    @set = CellSet.find(params[:id].to_s)
+    @set.remove_poster_image!
+    if @set.save
+      render json: 'Set poster image was successfully removed.'
+    else
+      render json: { errors: @set.errors }, status: 422
+    end
+  end
+
+  ## CELLS
 
   # GET /api/cells
   def cells
@@ -58,14 +101,30 @@ class ApiController < ApplicationController
     @cell = Cell.find(params[:id].to_s)
     @cell.remove_poster_image!
     if @cell.save
-      render json: 'Cell was successfully updated.'
+      render json: 'Cell poster image was successfully removed.'
     else
       render json: { errors: @cell.errors }, status: 422
     end
   end
 
-
   private
+
+  def set_params
+    attrs = params.dup
+    permitted_attrs = [
+        # :poster_image,
+        :title,
+        :description,
+        'css-class-name'.to_sym,
+        :cell_height,
+        :cell_width,
+        :columns,
+        :rows,
+        :path,
+        :published
+    ]
+    attrs.require(:cell_set).permit(permitted_attrs)
+  end
 
   # Only allow a trusted parameter "white list" through.
   def cell_params
