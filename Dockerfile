@@ -1,5 +1,5 @@
-
 ## Up and runnning with MoSys on Docker
+## … actually no: this Dockerfile is outdated!
 
 FROM ruby:2.0.0-p643
 
