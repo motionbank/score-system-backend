@@ -3,7 +3,7 @@ production:
   sessions:
     # Defines the default session. (required)
     default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
+      uri: <%= ENV['MONGO_URL'] %>
 
 # local
 development:
@@ -11,7 +11,7 @@ development:
   sessions:
     # Defines the default session. (required)
     default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
+      uri: <%= ENV['MONGO_URL'] %>
 
 test:
   sessions:
