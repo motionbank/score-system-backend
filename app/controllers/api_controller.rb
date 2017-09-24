@@ -123,7 +123,12 @@ class ApiController < ApplicationController
 
   # GET /api/set/:id/cells
   def grid_cells_index
-    @grid_cells = @cell_set.grid_cells
+    @cell_set = Set.find(params[:id].to_s)
+    if @cell_set
+      render json: @cell_set.grid_cells, status: 201
+    else
+      render json: { errors: 'Set not found.' }, status: 422
+    end
   end
 
   # GET /api/set/:id/cells/1/edit
@@ -132,7 +137,12 @@ class ApiController < ApplicationController
 
   # GET /api/set/:id/cells/1
   def grid_cells_get
-    render json: @grid_cell, status: 201
+    @grid_cell = GridCell.find(params[:id].to_s)
+    if @grid_cell
+      render json: @grid_cell, status: 201
+    else
+      render json: { errors: 'Cell (GridCell) not found.' }, status: 422
+    end
   end
 
   # POST /api/set/:id/cells
