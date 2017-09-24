@@ -123,7 +123,7 @@ class ApiController < ApplicationController
 
   # GET /api/set/:id/cells
   def grid_cells_index
-    @cell_set = CellSet.find(params[:cell_set_id].to_s)
+    set_cell_set
     if @cell_set
       render json: @cell_set.grid_cells, status: 201
     else
@@ -137,7 +137,8 @@ class ApiController < ApplicationController
 
   # GET /api/set/:id/cells/1
   def grid_cells_get
-    @grid_cell = GridCell.find(params[:id].to_s)
+    set_cell_set
+    set_grid_cell
     if @grid_cell
       render json: @grid_cell, status: 201
     else
@@ -147,6 +148,7 @@ class ApiController < ApplicationController
 
   # POST /api/set/:id/cells
   def grid_cells_create
+    set_cell_set
     @grid_cell = @cell_set.grid_cells.build(grid_cell_params)
     if @grid_cell.save
       render @grid_cell, notice: 'Grid cell was successfully created.'
@@ -157,6 +159,8 @@ class ApiController < ApplicationController
 
   # PATCH/PUT /api/set/:id/cells/1
   def grid_cells_update
+    set_cell_set
+    set_grid_cell
     if @grid_cell.update(grid_cell_params)
       render @grid_cell, notice: 'Grid cell was successfully updated.'
     else
@@ -166,6 +170,8 @@ class ApiController < ApplicationController
 
   # DELETE /api/set/:id/cells/1
   def grid_cells_destroy
+    set_cell_set
+    set_grid_cell
     @grid_cell.destroy
     render nothing: true, notice: 'Grid cell was successfully destroyed.'
   end
