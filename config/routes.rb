@@ -29,11 +29,11 @@ MotionBank::Application.routes.draw do
       put  'set/:id/remove_poster_image', to: 'api#remove_set_poster_image'
       delete 'set/:id/delete',            to: 'api#destroy_set'
 
-      get 'set/:cell_set_id/cells',       to: 'admins/grid_cells#index'
-      post 'set/:cell_set_id/cell/new',   to: 'admins/grid_cells#create'
-      get 'set/:cell_set_id/cell/:id',    to: 'admins/grid_cells#get'
-      post 'set/:cell_set_id/cell/:id',   to: 'admins/grid_cells#update'
-      delete 'set/:cell_set_id/cell/:id', to: 'admins/grid_cells#destroy'
+      get 'set/:cell_set_id/cells',       to: 'api#grid_cells_index'
+      post 'set/:cell_set_id/cell/new',   to: 'api#grid_cells_create'
+      get 'set/:cell_set_id/cell/:id',    to: 'api#grid_cells_get'
+      post 'set/:cell_set_id/cell/:id',   to: 'api#grid_cells_update'
+      delete 'set/:cell_set_id/cell/:id', to: 'api#grid_cells_destroy'
     end
   end
 end
