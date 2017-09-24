@@ -36,7 +36,8 @@ class ApiController < ApplicationController
 
   respond_to :json
 
-  ## SETS
+  ### SETS
+  ### ----
 
   # GET /api/sets
   def sets
@@ -63,7 +64,7 @@ class ApiController < ApplicationController
   def update_set
     @set = CellSet.find(params[:id].to_s)
     if @set.update(set_params)
-      render json: 'Set was successfully updated.'
+      render json: { message: 'Set was successfully updated.' }
     else
       render json: { errors: @set.errors }, status: 422
     end
@@ -74,7 +75,7 @@ class ApiController < ApplicationController
     @set = CellSet.find(params[:id].to_s)
     @set.remove_poster_image!
     if @set.save
-      render json: 'Set poster image was successfully removed.'
+      render json: { message: 'Set poster image was successfully removed.' }
     else
       render json: { errors: @set.errors }, status: 422
     end
@@ -90,7 +91,8 @@ class ApiController < ApplicationController
     end
   end
 
-  ## CELLS
+  ### CELLS
+  ### -----
 
   # GET /api/cells
   def cells
@@ -117,7 +119,7 @@ class ApiController < ApplicationController
   def update_cell
     @cell = Cell.find(params[:id].to_s)
     if @cell.update(cell_params)
-      render json: 'Cell was successfully updated.'
+      render json: { message: 'Cell was successfully updated.' }
     else
       render json: { errors: @cell.errors }, status: :unprocessable_entity
     end
@@ -128,13 +130,14 @@ class ApiController < ApplicationController
     @cell = Cell.find(params[:id].to_s)
     @cell.remove_poster_image!
     if @cell.save
-      render json: 'Cell poster image was successfully removed.'
+      render json: { message: 'Cell poster image was successfully removed.' }
     else
       render json: { errors: @cell.errors }, status: :unprocessable_entity
     end
   end
 
   ### GRID CELLS
+  ### ----------
 
   # GET /api/set/:id/cells
   def grid_cells_index
@@ -187,7 +190,7 @@ class ApiController < ApplicationController
     set_cell_set
     set_grid_cell
     @grid_cell.destroy
-    render json: {notice: 'Grid cell destroyed'}, status: 201
+    render json: {message: 'Grid cell destroyed'}, status: 201
   end
 
   private
