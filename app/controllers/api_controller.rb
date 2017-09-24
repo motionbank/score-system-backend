@@ -123,7 +123,7 @@ class ApiController < ApplicationController
 
   # GET /api/set/:id/cells
   def grid_cells_index
-    @cell_set = Set.find(params[:id].to_s)
+    @cell_set = CellSet.find(params[:id].to_s)
     if @cell_set
       render json: @cell_set.grid_cells, status: 201
     else
