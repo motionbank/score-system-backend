@@ -4,6 +4,20 @@ module Admins
     before_action :set_cell_set
     before_action :set_grid_cell, only: [:get, :edit, :update, :destroy]
 
+    ## API only
+    api_routes = [
+        :api_index, :api_get, :api_create, :api_update, :api_destroy
+    ]
+    before_action :allow_cors, only: api_routes
+    before_action :authenticate_user_from_token!, only: api_routes
+    #SKIP CSRF protection for JSON POST&PUT
+    skip_before_filter :verify_authenticity_token,  only: api_routes
+
+    # GET /admins/cell_sets/1/grid_cells
+    def api_index
+      index()
+    end
+
     # GET /admins/cell_sets/1/grid_cells
     def index
       @grid_cells = @cell_set.grid_cells
@@ -14,8 +28,18 @@ module Admins
     end
 
     # GET /admins/cell_sets/1/grid_cells/1
+    def api_get
+      get()
+    end
+
+    # GET /admins/cell_sets/1/grid_cells/1
     def get
       render json: @grid_cell, status: 201
+    end
+
+    # POST /admins/cell_sets/1/grid_cells
+    def api_create
+      create()
     end
 
     # POST /admins/cell_sets/1/grid_cells
@@ -29,12 +53,22 @@ module Admins
     end
 
     # PATCH/PUT /admins/cell_sets/1/grid_cells/1
+    def api_update
+      update()
+    end
+
+    # PATCH/PUT /admins/cell_sets/1/grid_cells/1
     def update
       if @grid_cell.update(grid_cell_params)
         render @grid_cell, notice: 'Grid cell was successfully updated.'
       else
         render json: {errors: @grid_cell.errors.full_messages}, status: :unprocessable_entity
       end
+    end
+
+    # DELETE /admins/cell_sets/1/grid_cells/1
+    def api_destroy
+      destroy()
     end
 
     # DELETE /admins/cell_sets/1/grid_cells/1
