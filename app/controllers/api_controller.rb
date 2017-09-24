@@ -235,10 +235,10 @@ class ApiController < ApplicationController
     attrs[:grid_cell][:additional_fields] ||= {}
 
     # pre-process additional_fields to be a standard hash, instead of an array containing {key: KEY, value: VALUE} hashes
-    attrs[:grid_cell][:additional_fields] = attrs[:grid_cell][:additional_fields].inject({}) do |result, element|
-      result[element[:key]] = element[:value] if element[:key].present? && element[:value].present?
-      result
-    end
+    # attrs[:grid_cell][:additional_fields] = attrs[:grid_cell][:additional_fields].inject({}) do |result, element|
+    #   result[element[:key]] = element[:value] if element[:key].present? && element[:value].present?
+    #   result
+    # end
 
     # ActionController::StrongParameters#permit requires to specify all keys when permitting a hash field
     all_additional_keys = attrs[:grid_cell][:additional_fields].keys
