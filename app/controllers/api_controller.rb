@@ -14,7 +14,22 @@ class ApiController < ApplicationController
       :grid_cells_destroy
   ]
 
+  grid_cell_routes = [
+      :grid_cells_index,
+      :grid_cells_get,
+      :grid_cells_create,
+      :grid_cells_update,
+      :grid_cells_destroy
+  ]
+
   before_action :allow_cors
+  before_action :set_cell_set, only: grid_cell_routes
+  before_action :set_grid_cell, only: [
+      :grid_cells_get,
+      :grid_cells_update,
+      :grid_cells_destroy
+  ]
+
   before_action :authenticate_user_from_token!, only: token_routes
   #SKIP CSRF protection for JSON POST&PUT
   skip_before_filter :verify_authenticity_token,  only: token_routes
@@ -94,7 +109,7 @@ class ApiController < ApplicationController
     if @cell.save
       render json: @cell, status: 201
     else
-      render json: { errors: @cell.errors }, status: 422
+      render json: { errors: @cell.errors }, status: :unprocessable_entity
     end
   end
 
@@ -104,7 +119,7 @@ class ApiController < ApplicationController
     if @cell.update(cell_params)
       render json: 'Cell was successfully updated.'
     else
-      render json: { errors: @cell.errors }, status: 422
+      render json: { errors: @cell.errors }, status: :unprocessable_entity
     end
   end
 
@@ -115,7 +130,7 @@ class ApiController < ApplicationController
     if @cell.save
       render json: 'Cell poster image was successfully removed.'
     else
-      render json: { errors: @cell.errors }, status: 422
+      render json: { errors: @cell.errors }, status: :unprocessable_entity
     end
   end
 
@@ -123,11 +138,10 @@ class ApiController < ApplicationController
 
   # GET /api/set/:id/cells
   def grid_cells_index
-    set_cell_set
     if @cell_set
-      render json: @cell_set.grid_cells, status: 201
+      render json: @cell_set.grid_cells, :template => 'api/cells', status: 201
     else
-      render json: { errors: 'Set not found.' }, status: 422
+      render json: { errors: 'Set not found.' }, status: :unprocessable_entity
     end
   end
 
@@ -140,9 +154,9 @@ class ApiController < ApplicationController
     set_cell_set
     set_grid_cell
     if @grid_cell
-      render json: @grid_cell, status: 201
+      render json: @grid_cell, :template => 'api/cell', status: 201
     else
-      render json: { errors: 'Cell (GridCell) not found.' }, status: 422
+      render json: { errors: 'Cell (GridCell) not found.' }, status: :unprocessable_entity
     end
   end
 
@@ -151,7 +165,7 @@ class ApiController < ApplicationController
     set_cell_set
     @grid_cell = @cell_set.grid_cells.build(grid_cell_params)
     if @grid_cell.save
-      render @grid_cell, notice: 'Grid cell was successfully created.'
+      render json: @grid_cell, :template => 'api/cell', status: 201
     else
       render json: {errors: @grid_cell.errors.full_messages}, status: :unprocessable_entity
     end
@@ -162,7 +176,7 @@ class ApiController < ApplicationController
     set_cell_set
     set_grid_cell
     if @grid_cell.update(grid_cell_params)
-      render @grid_cell, notice: 'Grid cell was successfully updated.'
+      render json: @grid_cell, :template => 'api/cell', status: 201
     else
       render json: {errors: @grid_cell.errors.full_messages}, status: :unprocessable_entity
     end
@@ -173,7 +187,7 @@ class ApiController < ApplicationController
     set_cell_set
     set_grid_cell
     @grid_cell.destroy
-    render nothing: true, notice: 'Grid cell was successfully destroyed.'
+    render json: {notice: 'Grid cell destroyed'}, status: 201
   end
 
   private
