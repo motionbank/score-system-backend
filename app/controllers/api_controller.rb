@@ -137,7 +137,8 @@ class ApiController < ApplicationController
 
   # GET /api/set/:id/cells/1
   def grid_cells_get
-    @grid_cell = GridCell.find(params[:id].to_s)
+    set_cell_set
+    set_grid_cell
     if @grid_cell
       render json: @grid_cell, status: 201
     else
