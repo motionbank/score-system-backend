@@ -21,7 +21,6 @@ gem 'mini_magick', '>= 3.4'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 # file uploads on heroku
-gem 'fog'
 gem 'fog-aws'
 
 # AUTH
