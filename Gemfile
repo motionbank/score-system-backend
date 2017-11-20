@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.10'
+ruby '~> 2.3.0'
 
 # Bundle edge Rails instcompasead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
@@ -21,7 +21,6 @@ gem 'mini_magick', '>= 3.4'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 # file uploads on heroku
-gem 'fog'
 gem 'fog-aws'
 
 # AUTH
@@ -51,6 +50,8 @@ gem 'uglifier', '>= 1.3.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
+
+gem 'bigdecimal', '~> 1.3.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'
