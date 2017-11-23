@@ -1329,6 +1329,10 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "value": "http://192.168.99.100:9292"
     }
+  }, [_vm._v("Piecemaker (local @ VBox)")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "http://127.0.0.1:8282"
+    }
   }, [_vm._v("Piecemaker (local @ Florian)")])]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
