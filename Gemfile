@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '~> 2.3.0'
 
 # Bundle edge Rails instcompasead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '~> 4.2.0'
 
 # PERSISTENCE
 gem 'mongoid', '~> 4.0.0'
