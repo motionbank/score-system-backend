@@ -12,13 +12,31 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def init_js_framework_settings
+
+    score_id = MultiTenancy.current_score.to_param
+    frontend_url = FRONTEND_URL_BASE % {:score_id => score_id}
+
     @js_framework_settings ||= {}
     @js_framework_settings = {
       controller: controller_name,
       action: action_name,
       partial: partial_name,
-      request_url: request.try(:url)
+      request_url: request.try(:url),
+      frontend: {
+          :url => frontend_url
+      }
     }
+    if current_user
+      @js_framework_settings.merge!({
+          user: {
+              :name => current_user.name,
+              :id => current_user.id.to_s,
+              :email => current_user.email,
+              :is_admin => current_user.admin,
+              :token => current_user.authentication_token
+          }
+      })
+    end
   end
 
   protected

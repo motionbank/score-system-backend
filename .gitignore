@@ -31,7 +31,7 @@ coverage.vim
 
 # rails config
 config/config.yml
-config/mongoid.yml
+# config/mongoid.yml
 
 # carrierwave upload folder
 public/uploads
@@ -45,3 +45,7 @@ test/output/*
 .\#**
 cache
 bundler
+bower_components
+public/dev-assets/
+node_modules
+config/mongoid.yml

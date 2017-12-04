@@ -8,7 +8,7 @@ module Admins
     # the base views include resource_class helpers and such
     include Concerns::ResourceControllerAccessors
 
-    PER_PAGE = 80
+    PER_PAGE = 20
 
     layout 'admins'
 

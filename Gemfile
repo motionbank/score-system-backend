@@ -1,15 +1,13 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.1.10'
 
 # Bundle edge Rails instcompasead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
 # PERSISTENCE
-gem 'mongoid', github: 'mongoid/mongoid', ref: '2f68fccf6b45ec1576551f38ffd1dfb5bf8bf201' # prev. commit cc7a0e709066aff444bc21cd9826e1568603934d breaks the rails console and rake invocations
-#gem 'mongoid', '~> 4.0.0' #TODO once a mongoid 4.0.0 gem release is out, remove comment and the other line referencing mongoid from github
+gem 'mongoid', '~> 4.0.0'
 gem "mongoid-indifferent-access", require: "mongoid_indifferent_access"
-gem "mongoid_slug", github: 'digitalplaywright/mongoid-slug', ref: 'a1f9012e97825a84d8193790d1403f35a1053b6b' # prev. commit had problems with mongoid 4
-#gem "mongoid_slug", '>= 3.2.0' #TODO once 3.2.0 is out, remove comment and the other line referencing mongoid_slug from github
+gem "mongoid-slug", '>= 3.2.0'
 gem "mongoid_rails_migrations"
 gem "publish", "~> 0.3.0"
 
@@ -22,10 +20,12 @@ gem 'carrierwave'
 gem 'mini_magick', '>= 3.4'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
+# file uploads on heroku
+gem 'fog-aws'
+
 # AUTH
 gem 'devise'
 gem 'cancan'
-
 
 # FRONTEND
 gem 'jquery-rails'
@@ -45,16 +45,14 @@ gem 'bootstrap-will_paginate'
 # SIMPLE FORM
 gem 'simple_form', '>= 2.0.3'
 
-
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+# gem 'turbolinks'
 gem 'turbolinks'
 
 # Add CORS headers
@@ -68,10 +66,9 @@ end
 # Use unicorn as the app server
 gem 'unicorn'
 
-
 group :development do
   # LEGACY IMPORT
-  gem "mysql2"
+  # gem "mysql2"
 
   gem 'quiet_assets'
 
@@ -79,7 +76,6 @@ group :development do
   gem 'capistrano', '~>2.15.4'
   gem 'capistrano-deploytags'
 end
-
 
 group :production do
   gem 'exception_notification'

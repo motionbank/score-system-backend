@@ -6,15 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-email = "mosys@motionbank.org"
-password = SecureRandom.hex(8)
-unless User.where(email: email).exists?
-  User.create!(email: email, password: password, password_confirmation: password, admin: true)
-  puts "Created default user #{email} with password #{password}"
-end
+# email = "mosys@motionbank.org"
+# password = SecureRandom.hex(8)
+# unless User.where(email: email).exists?
+#   User.create!(email: email, password: password, password_confirmation: password, admin: true)
+#   puts "Created default user #{email} with password #{password}"
+# end
 
-score_name = "Example Score"
-unless Score.where(name: score_name).exists?
-  score = Score.create!(name: score_name)
-  puts "Created default score #{score_name} with URL slug #{score.slug}"
-end
+["Example Score", "Sandbox"].each { |score_name|
+  unless Score.where(name: score_name).exists?
+    score = Score.create!(name: score_name)
+    puts "Created default score #{score_name} with URL slug #{score.slug}"
+  end
+}

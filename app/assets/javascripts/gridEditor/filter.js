@@ -7,14 +7,13 @@ function initFilter() {
 	var searchTerm = "";
 	var tableRowTemplate = _.template('<div id="availableContentCell_<%= id %>" class="row-fluid contentCell availableCell"><div class="contentCellPosterImage span1"><img src="<%= poster_image.url %>"></div><div class="span10"><h5 class="contentCellTitle"><span class="badge"><%= type %></span> <%= title %></h5> <span class="contentCellID">[ID:&nbsp;<%= id %>]</span><p class="contentCellDescription"><%= description %></p></div><a class="btn" href="/<%= APPLICATION["score_id"] %>/cells/<%= id %>/edit"><i class="icon-edit"></i> Edit</a></div>');
 
-
 	/* Private Functions */
 
 	function search(term) {
 		var regex = new RegExp(term, 'i');
 		var items = [];
-		_.each(searchIndex, function (value, key) {
-			if(value.match(regex)) {
+		_.each(searchIndex, function(value, key) {
+			if (value.match(regex)) {
 				items.push(dictionary[key]);
 			}
 		});
@@ -29,7 +28,7 @@ function initFilter() {
 		}
 
 		if (filterType !== "all") {
-			updatedCells = _.filter(updatedCells, function (cell) {
+			updatedCells = _.filter(updatedCells, function(cell) {
 				return cell.type == filterType;
 			});
 		}
@@ -39,10 +38,9 @@ function initFilter() {
 
 	function generateHtml() {
 		var html = "";
-		$.each(filter(), function (index, element) {
+		$.each(filter(), function(index, element) {
 			html += tableRowTemplate(element);
 		});
-
 		return html;
 	}
 
@@ -54,7 +52,10 @@ function initFilter() {
 			.find(".availableCell").draggable({
 				opacity: 0.7,
 				helper: createDraggableCellHelper,
-				cursorAt: { left: 5, top: 5 },
+				cursorAt: {
+					left: 5,
+					top: 5
+				},
 				revert: false
 			});
 	}
@@ -62,12 +63,12 @@ function initFilter() {
 
 	/* Event Listeners */
 
-	inputField.on('keyup change', _.debounce(function (event) {
+	inputField.on('keyup change', _.debounce(function(event) {
 		searchTerm = event.target.value;
 		updateView();
 	}, 150));
 
-	selectBox.on('change', function (event) {
+	selectBox.on('change', function(event) {
 		filterType = selectBox.find('option:selected').val();
 		updateView();
 	});
@@ -75,7 +76,7 @@ function initFilter() {
 
 	/* Initialization */
 
-	$.each(APPLICATION.cells, function (index, cell) {
+	$.each(APPLICATION.cells, function(index, cell) {
 		dictionary[cell.id] = cell;
 		searchIndex[cell.id] = JSON.stringify(cell);
 	});

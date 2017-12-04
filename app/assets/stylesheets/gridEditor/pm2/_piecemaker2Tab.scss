@@ -1,0 +1,132 @@
+
+/* THIS FILE IS PROBABLY DEFUNCT … DELETE SOME TIME SOON */
+
+/* old PM2 tab */
+#pm2ContentCells {
+
+  .filters,
+  .table-header-form {
+    a:before {
+      content: '/';
+      padding-right: 0.5em;
+    }
+    a {
+      padding-right: 0.5em;
+      padding-left: 0.5em;
+    }
+  }
+
+  .event-filters {
+    background: #EBF3EF;
+  }
+
+  .video-container {
+    float: left;
+    display: none;
+    width: 33%;
+    max-width: 480px;
+    min-width: 100px;
+    overflow: auto;
+  }
+
+  .loading {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* new PM2 tab */
+#pm2TabContentContainer {
+
+  .filters {
+    label[for=sort-reversed]::before,
+    label[for=event-sort-reversed]::before {
+      font-size: 1.3em;
+      color: #444;
+    }
+  }
+
+  .group-list-container.as-menu,
+  .group {
+    .filters {
+      padding: 0.5em 0.75em 0.75em 0.5em;
+    }
+  }
+
+  .group {
+    .filters {
+      background-color: #a7b8b0;
+    }
+  }
+
+  .group-list-container:not(.as-menu) {
+    .filters {
+      margin-bottom: 0.5em;
+
+      label[for=sort-reversed]::before {
+        padding-top: 0px;
+      }
+    }
+  }
+
+  .group-listing {
+    h3 {
+      font-size: 1.1em;
+      line-height: inherit;
+      margin: 0px;
+      padding: 0px;
+    }
+  }
+
+  .group-listing:not(.as-menu) {
+
+    &:nth-child(4n) {
+      .inner {
+        border-right: 0px;
+      }
+    }
+
+    &:nth-last-child(-n+4) {
+      .inner {
+        border-bottom: 0px;
+      }
+    }
+
+    .inner {
+      border-top: 0px;
+      border-left: 0px;
+      margin: 0px;
+      padding: 0.5em;
+      a {
+        padding: 0.5em;
+        display: block;
+      }
+    }
+
+    .inner:hover {
+      background-color: transparent;
+      border-color: #d3d3d3;
+      a {
+        background-color: #f6f6f6;
+      }
+    }
+  }
+
+  .groups {
+    .group {
+      .event-list {
+        position: relative;
+        min-height: 33vh;
+        max-height: 50vh;
+        overflow-y: scroll;
+      }
+    }
+  }
+}
+
+a:hover {
+  text-decoration: none;
+}
