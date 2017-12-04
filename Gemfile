@@ -55,6 +55,10 @@ gem 'bigdecimal', '~> 1.3.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'
+gem 'turbolinks'
+
+# Add CORS headers
+gem 'rack-cors', :require => 'rack/cors'
 
 # HTTP server
 gem 'puma'

@@ -82,4 +82,9 @@ MotionBank::Application.configure do
   # had to add the add following due to problems with js-routes, see https://github.com/railsware/js-routes/issues/79
   config.assets.initialize_on_precompile = true
 
+  # Allow configuration of an external asset host (e.g. CloudFront)
+  unless ENV['ASSET_HOST'].nil?
+    config.action_controller.asset_host = ENV['ASSET_HOST']
+  end
+
 end
