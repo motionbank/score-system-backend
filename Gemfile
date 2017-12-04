@@ -57,6 +57,8 @@ gem 'therubyracer', platforms: :ruby
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
+# Add CORS headers
+gem 'rack-cors', :require => 'rack/cors'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
