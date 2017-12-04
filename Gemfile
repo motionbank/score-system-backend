@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.1.10'
+ruby '~> 2.3.0'
 
 # Bundle edge Rails instcompasead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '~> 4.2.0'
 
 # PERSISTENCE
 gem 'mongoid', '~> 4.0.0'
@@ -51,12 +51,17 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
+gem 'bigdecimal', '~> 1.3.0'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'
 gem 'turbolinks'
 
 # Add CORS headers
 gem 'rack-cors', :require => 'rack/cors'
+
+# HTTP server
+gem 'puma'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -83,6 +88,7 @@ group :production do
 end
 
 group :test do
+  # TODO: update to factory_bot
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
