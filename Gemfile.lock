@@ -172,6 +172,7 @@ GEM
     polyglot (0.3.5)
     publish (0.3.0)
       mongoid (>= 3.1.0)
+    puma (3.11.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rabl (0.13.1)
@@ -275,6 +276,7 @@ DEPENDENCIES
   mongoid_rails_migrations
   oj
   publish (~> 0.3.0)
+  puma
   quiet_assets
   rabl
   rails (= 4.0.0)
