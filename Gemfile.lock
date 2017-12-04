@@ -277,14 +277,11 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (1.4.1)
-    tzinfo (1.2.4)
-      thread_safe (~> 0.1)
-    treetop (1.4.15)
-      polyglot
-      polyglot (>= 0.3.1)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
+    tzinfo (1.2.4)
+      thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     unicorn (5.3.1)
@@ -326,8 +323,8 @@ DEPENDENCIES
   puma
   quiet_assets
   rabl
-  rails (~> 4.2.0)
   rack-cors
+  rails (~> 4.2.0)
   rails_12factor
   ruby-haml-js
   sass-rails (~> 4.0.0)
