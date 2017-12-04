@@ -84,6 +84,7 @@ group :production do
 end
 
 group :test do
+  # TODO: update to factory_bot
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
