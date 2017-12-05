@@ -7,7 +7,7 @@ Rails version initially developed at [MESO Web Scapes](http://www.meso.net/web%2
 For further information please contact florian-at-motionbank-org
 
 ## Ruby version
-Currently Ruby 2.1
+Currently Ruby 2.3.x
 
 Depending on your local setup you might want to use rbenv and then tasks are run with `rbenv exec ...` prefixed.
 
@@ -52,7 +52,7 @@ docker pull mongo:latest
 docker run -d --name mosys-db mongo:latest
 ```
 
-Now create an instance of Ruby (2.1) bound to this app directory, first:
+Now create an instance of Ruby (2.3.x) bound to this app directory, first:
 ```
 cd </insert/path/to/this/directory/here>
 ```
