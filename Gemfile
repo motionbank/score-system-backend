@@ -16,12 +16,12 @@ gem 'rabl' # API building
 gem 'oj' # JSON-Parser, faster than `yajl-ruby`
 
 # file uploads
-gem 'carrierwave'
+gem 'carrierwave', '0.11.2'
 gem 'mini_magick', '>= 3.4'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
-# file uploads on heroku
-gem 'fog-aws'
+# file uploads to s3
+gem 'fog-aws', '1.4.1'
 
 # AUTH
 gem 'devise'
