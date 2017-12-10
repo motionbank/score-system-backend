@@ -38,7 +38,7 @@ Grid.prototype = {
 		var jsonContentType = 'application/json';
 		var dragEnterOver = function($evt){
             var event = $evt.originalEvent;
-            if ([...event.dataTransfer.types].includes(jsonContentType))
+            if (event.dataTransfer.types.includes(jsonContentType))
                 event.preventDefault()
         }
         this.container.on('dragenter',dragEnterOver);
@@ -227,7 +227,7 @@ Grid.prototype = {
 	},
 
 	onWindowResize: function() {
-		console.log($(window).width());
+
 		$("boundsForGrid").css({
 			"width": $("boundsForGrid").parent().width(),
 			"height": this.boundsHeight

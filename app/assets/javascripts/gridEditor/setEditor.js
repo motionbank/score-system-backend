@@ -16,7 +16,7 @@ var setCurrentCellToEdit = function (cell) {
 }
 var theGrid;
 
-$(document).ready(function() {
+$(function() {
 
 	//registrate mouse position and update it in a global variable
 	getMousePosition();
