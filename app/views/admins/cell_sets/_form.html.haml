@@ -101,10 +101,14 @@
 
             #emptyCell.cell
 
-%script(src="/assets/javascripts/gridEditor/basics/index.js")
-%script(src="/assets/javascripts/gridEditor/pm2/index.js")
-%script(src="/assets/javascripts/gridEditor/vimeo/index.js")
-%script(src="/assets/javascripts/gridEditor/youTube/index.js")
+%script(src="/assets/javascripts/gridEditor/basics/vendor.js")
+%script(src="/assets/javascripts/gridEditor/basics/manifest.js")
+%script(src="/assets/javascripts/gridEditor/basics/app.js")
+%script(src="/assets/javascripts/gridEditor/pm2/vendor.js")
+%script(src="/assets/javascripts/gridEditor/pm2/manifest.js")
+%script(src="/assets/javascripts/gridEditor/pm2/app.js")
+%script(src="/assets/javascripts/gridEditor/vimeo/vimeoSearch.js")
+%script(src="/assets/javascripts/gridEditor/youTube/youTubeSearch.js")
 
 -# This is part of the YouTube search tab
 %script(src="https://apis.google.com/js/client.js?onload=googleApiClientReady")
