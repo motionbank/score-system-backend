@@ -101,14 +101,19 @@
 
             #emptyCell.cell
 
-%script(src="/assets/javascripts/gridEditor/basics/manifest.js")
-%script(src="/assets/javascripts/gridEditor/basics/vendor.js")
-%script(src="/assets/javascripts/gridEditor/basics/app.js")
-%script(src="/assets/javascripts/gridEditor/pm2/manifestgi.js")
-%script(src="/assets/javascripts/gridEditor/pm2/vendor.js")
-%script(src="/assets/javascripts/gridEditor/pm2/app.js")
-%script(src="/assets/javascripts/gridEditor/vimeo/vimeoSearch.js")
-%script(src="/assets/javascripts/gridEditor/youTube/youTubeSearch.js")
+// basic cells
+%script(src="/assets/javascripts/gridEditor/basics/manifest.js" defer="defer")
+%script(src="/assets/javascripts/gridEditor/basics/vendor.js" defer="defer")
+%script(src="/assets/javascripts/gridEditor/basics/app.js" defer="defer")
 
--# This is part of the YouTube search tab
-%script(src="https://apis.google.com/js/client.js?onload=googleApiClientReady")
+// piecemaker2 cells
+%script(src="/assets/javascripts/gridEditor/pm2/manifestgi.js" defer="defer")
+%script(src="/assets/javascripts/gridEditor/pm2/vendor.js" defer="defer")
+%script(src="/assets/javascripts/gridEditor/pm2/app.js" defer="defer")
+
+// vimeo search
+%script(src="/assets/javascripts/gridEditor/vimeo/vimeoSearch.js" defer="defer")
+
+// youtube search
+%script(src="/assets/javascripts/gridEditor/youTube/youTubeSearch.js" defer="defer")
+%script(src="https://apis.google.com/js/client.js?onload=googleApiClientReady" defer="defer")
