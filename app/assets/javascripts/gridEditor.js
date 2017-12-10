@@ -8,10 +8,11 @@
 //= require gridEditor/edit
 //= require gridEditor/setEditor
 
-//= require gridEditor/basics
-//= require gridEditor/pm2
-//= require gridEditor/youTube
-//= require gridEditor/vimeo
+// moved these into assets
+// xx = require gridEditor/basics
+// xx = require gridEditor/pm2
+// xx = require gridEditor/youTube
+// xx = require gridEditor/vimeo
 // xx = require gridEditor/pba
 
 // might as well just use:
