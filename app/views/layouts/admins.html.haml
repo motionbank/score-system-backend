@@ -12,6 +12,10 @@
     = javascript_include_tag yield(:custom_script), "data-turbolinks-track" => true if content_for?(:custom_script)
     = javascript_tag yield(:custom_javascript) if content_for?(:custom_javascript)
 
+    %link(href="/assets/stylesheets/gridEditor/basics/app.css" rel="stylesheet")
+    %link(href="/assets/stylesheets/gridEditor/pba/app.css" rel="stylesheet")
+    %link(href="/assets/stylesheets/gridEditor/pm2/app.css" rel="stylesheet")
+
     :plain
       <!--[if lt IE 9]>
         #{ javascript_include_tag "/vendor/custom-html5shiv.js" }
