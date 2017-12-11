@@ -5,7 +5,7 @@
     %meta(charset="utf-8")
     = stylesheet_link_tag "admins", media: "all", "data-turbolinks-track" => true
     - if content_for?(:custom_style)
-      = stylesheet_link_tag yield(:custom_style), media: "all", "data-turbolinks-track" => true 
+      = stylesheet_link_tag yield(:custom_style), media: "all", "data-turbolinks-track" => true
 
     = js_framework_settings
     = javascript_include_tag "admins", "data-turbolinks-track" => true
