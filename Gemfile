@@ -16,7 +16,7 @@ gem 'rabl' # API building
 gem 'oj' # JSON-Parser, faster than `yajl-ruby`
 
 # file uploads
-gem 'carrierwave', '0.11.2'
+gem 'carrierwave', '1.0.0'
 gem 'mini_magick', '>= 3.4'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
